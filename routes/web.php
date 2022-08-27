@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/policies',\App\Http\Controllers\PolicyController::class);
+    Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
 });
 
 Route::get('/', function () {

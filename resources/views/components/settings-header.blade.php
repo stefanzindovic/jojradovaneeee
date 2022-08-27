@@ -14,7 +14,8 @@
        class="inline @if(Route::current()->getName() == 'settings.policies.index') active-book-nav @endif">
         Polisa
     </a>
-    <a href="settingsKategorije.php" class="inline ml-[70px] hover:text-blue-800 active-book-nav">
+    <a href="{{route('settings.categories.index')}}"
+       class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.categories.index') active-book-nav @endif">
         Kategorije
     </a>
     <a href="settingsZanrovi.php" class="inline ml-[70px] hover:text-blue-800">
