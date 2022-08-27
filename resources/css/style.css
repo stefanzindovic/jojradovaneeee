@@ -2665,6 +2665,18 @@ h4 {
   --tw-text-opacity: 1;
   color: rgba(37, 99, 235, var(--tw-text-opacity));
 }
+.dataTables_paginate {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+.dataTables_info {
+    margin-top: 32px;
+    margin-bottom: 16px;
+}
+.dataTables_length {
+    margin-top: 16px;
+    margin-bottom: 32px;
+}
 @media (max-width: 1023px){
 
   .small\:block{

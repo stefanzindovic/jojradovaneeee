@@ -1,128 +1,128 @@
 //open and close hamburger menu
-$(function () {
-  var hamburger = $('#hamburger');
-  var sidebar = $('.sidebar');
+jQuery(function () {
+  var hamburger = jQuery('#hamburger');
+  var sidebar = jQuery('.sidebar');
 
   hamburger.on('click', function () {
     if (sidebar.hasClass('sidebar-active')) { // if menu is opened
       //close menu by removing active class
       sidebar.removeClass('sidebar-active');
-      //make hamburger shape change 
+      //make hamburger shape change
       hamburger.removeClass('fa-times');
       hamburger.addClass('fa-bars');
       //hide text and arrow
-      $(".sidebar-item").addClass("hidden");
-      $(".sidebar-item").removeClass("inline");
+      jQuery(".sidebar-item").addClass("hidden");
+      jQuery(".sidebar-item").removeClass("inline");
       //hide/close all opened submenues
-      $('.aside-item').hide();
-      //change all arrows which are up to down 
-      $('.arrow').removeClass('fa-angle-up');
-      $('.arrow').addClass('fa-angle-down');
+      jQuery('.aside-item').hide();
+      //change all arrows which are up to down
+      jQuery('.arrow').removeClass('fa-angle-up');
+      jQuery('.arrow').addClass('fa-angle-down');
     } else {
       //open menu
       sidebar.addClass('sidebar-active');
       //make hamburger shape change
       hamburger.addClass('fa-times');
       hamburger.removeClass('fa-bars');
-      //show text and arrow 
-      $(".sidebar-item").removeClass("hidden");
-      $(".sidebar-item").addClass("inline");
+      //show text and arrow
+      jQuery(".sidebar-item").removeClass("hidden");
+      jQuery(".sidebar-item").addClass("inline");
     }
   });
 });
 
 //open close submenu
-$(function () {
-  var asideArrow = $('.asideArrow');
+jQuery(function () {
+  var asideArrow = jQuery('.asideArrow');
   asideArrow.on('click', function () {
     //find on which arrow is clicked
     var num = this.id.match(/\d+/)[0];
     //toggle submenu on click
-    $('#aside-item_' + num).slideToggle();
+    jQuery('#aside-item_' + num).slideToggle();
     //change arrow on up or down
-    if ($('#arrow-collapse_' + num).hasClass('fa-angle-down')) {
-      $('#arrow-collapse_' + num).addClass('fa-angle-up');
-      $('#arrow-collapse_' + num).removeClass('fa-angle-down');
+    if (jQuery('#arrow-collapse_' + num).hasClass('fa-angle-down')) {
+      jQuery('#arrow-collapse_' + num).addClass('fa-angle-up');
+      jQuery('#arrow-collapse_' + num).removeClass('fa-angle-down');
     } else {
-      $('#arrow-collapse_' + num).addClass('fa-angle-down');
-      $('#arrow-collapse_' + num).removeClass('fa-angle-up');
+      jQuery('#arrow-collapse_' + num).addClass('fa-angle-down');
+      jQuery('#arrow-collapse_' + num).removeClass('fa-angle-up');
     }
   });
 });
 
 
 //when chekbox is cheked button is enabled, otherwise it is disabled
-$(function () {
-  $('.form-checkbox').click(function () {
-    if ($('.form-checkbox:checked').length > 0) {
-      $('.disabled-btn').removeAttr('disabled');
+jQuery(function () {
+  jQuery('.form-checkbox').click(function () {
+    if (jQuery('.form-checkbox:checked').length > 0) {
+      jQuery('.disabled-btn').removeAttr('disabled');
     } else {
-      $('.disabled-btn').attr('disabled', 'disabled');
+      jQuery('.disabled-btn').attr('disabled', 'disabled');
     }
   });
 });
 
-$(document).ready(function () {
+jQuery(document).ready(function () {
   //this will execute on page load(to be more specific when document ready event occurs)
-  if ($('.activity-card').length > 6) {
-    $('.activity-card:gt(6)').hide();
-    $('.activity-showMore').show();
-    $(this).text('Show more');
+  if (jQuery('.activity-card').length > 6) {
+    jQuery('.activity-card:gt(6)').hide();
+    jQuery('.activity-showMore').show();
+    jQuery(this).text('Show more');
   }
 
-  $('.activity-showMore').on('click', function () {
+  jQuery('.activity-showMore').on('click', function () {
     //toggle elements with class .ty-compact-list that their index is bigger than 2
-    $('.activity-card:gt(6)').toggle();
+    jQuery('.activity-card:gt(6)').toggle();
     //change text of show more element just for demonstration purposes to this demo
-    if ($(this).text() == 'Show less') {
-      $(this).text('Show more')
+    if (jQuery(this).text() == 'Show less') {
+      jQuery(this).text('Show more')
     } else {
-      $(this).text('Show less');
+      jQuery(this).text('Show less');
     }
   });
 
   // Form
-  $(".forma").submit(function (e) {
+  jQuery(".forma").submit(function (e) {
     e.preventDefault();
   });
 
   // Open Modal
-  modal = $(".modal");
-  $(".show-modal").on('click', function () {
+  modal = jQuery(".modal");
+  jQuery(".show-modal").on('click', function () {
     modal.removeClass('hidden');
   })
   // Close Modal
-  $(".close-modal").on('click', function () {
+  jQuery(".close-modal").on('click', function () {
     modal.addClass('hidden');
   })
 
   // Vrati Knjigu Modal
-  vratiModal = $(".vrati-modal");
-  $(".show-vratiModal").on('click', function () {
+  vratiModal = jQuery(".vrati-modal");
+  jQuery(".show-vratiModal").on('click', function () {
     vratiModal.removeClass('hidden');
   })
   // Close Modal
-  $(".close-modal").on('click', function () {
+  jQuery(".close-modal").on('click', function () {
     vratiModal.addClass('hidden');
   })
 
   // Otpisi Knjigu Modal
-  otpisiModal = $(".otpisi-modal");
-  $(".show-otpisiModal").on('click', function () {
+  otpisiModal = jQuery(".otpisi-modal");
+  jQuery(".show-otpisiModal").on('click', function () {
     otpisiModal.removeClass('hidden');
   })
   // Close Modal
-  $(".otpisi-modal").on('click', function () {
+  jQuery(".otpisi-modal").on('click', function () {
     otpisiModal.addClass('hidden');
   })
 
   // Izbrisi Zapis Modal
-  izbrisiModal = $(".izbrisi-modal");
-  $(".show-izbrisiModal").on('click', function () {
+  izbrisiModal = jQuery(".izbrisi-modal");
+  jQuery(".show-izbrisiModal").on('click', function () {
     izbrisiModal.removeClass('hidden');
   })
   // Close Modal
-  $(".izbrisi-modal").on('click', function () {
+  jQuery(".izbrisi-modal").on('click', function () {
     izbrisiModal.addClass('hidden');
   })
 });
@@ -137,26 +137,26 @@ function AddReadMore() {
 
 
   //Traverse all selectors with this class and manupulate HTML part to show Read More
-  $(".addReadMore").each(function () {
-    if ($(this).find(".firstSec").length)
+  jQuery(".addReadMore").each(function () {
+    if (jQuery(this).find(".firstSec").length)
       return;
 
-    var allstr = $(this).text();
+    var allstr = jQuery(this).text();
     if (allstr.length > carLmt) {
       var firstSet = allstr.substring(0, carLmt);
       var secdHalf = allstr.substring(carLmt, allstr.length);
       var strtoadd = firstSet + "<span class='SecSec'>" + secdHalf + "</span><span class='readMore'  title='Click to Show More'>" + readMoreTxt + "</span><span class='readLess' title='Click to Show Less'>" + readLessTxt + "</span>";
-      $(this).html(strtoadd);
+      jQuery(this).html(strtoadd);
     }
 
   });
   //Read More and Read Less Click Event binding
-  $(document).on("click", ".readMore,.readLess", function () {
-    $(this).closest(".addReadMore").toggleClass("showlesscontent showmorecontent");
+  jQuery(document).on("click", ".readMore,.readLess", function () {
+    jQuery(this).closest(".addReadMore").toggleClass("showlesscontent showmorecontent");
   });
 }
 
-$(function () {
+jQuery(function () {
   //Calling function after Page Load
   AddReadMore();
 });
@@ -238,8 +238,8 @@ var loadFileLibrarian = function (event) {
 };
 
 // Category icon upload
-$("#icon-upload").change(function () {
-  $("#icon-output").text(this.files[0].name);
+jQuery("#icon-upload").change(function () {
+  jQuery("#icon-output").text(this.files[0].name);
 });
 
 function sortTable() {
@@ -296,7 +296,7 @@ function sortTable() {
   }
 }
 //rezervacije promjena statusa
-let rezervacije = $('.rezervacije');
+let rezervacije = jQuery('.rezervacije');
 rezervacije.on('click', (event) => {
   if (event.target.classList.contains('reservedStatus')) {
     event.target.closest('.changeStatus').classList.add('hidden');
@@ -313,8 +313,8 @@ rezervacije.on('click', (event) => {
 
 })
 //ucenikEvidencija, evidencijaIznajmljivanja - funkcija promjene statusa
-$(".reservedBook").click(function () {
-  var checkMark = $(this);
+jQuery(".reservedBook").click(function () {
+  var checkMark = jQuery(this);
   var changeColorStatus = checkMark.closest("tr").find(".borderColor")
   var changeTextStatus = checkMark.closest("tr").find(".borderText")
   changeColorStatus.removeClass('border-yellow-500')
@@ -329,8 +329,8 @@ $(".reservedBook").click(function () {
   backgroundRowChange.removeClass('bg-gray-200')
 })
 
-$(".deniedBook").click(function () {
-  var checkMark = $(this);
+jQuery(".deniedBook").click(function () {
+  var checkMark = jQuery(this);
   var changeColorStatus = checkMark.closest("tr").find(".borderColor")
   var changeTextStatus = checkMark.closest("tr").find(".borderText")
   changeColorStatus.removeClass('border-yellow-500')
@@ -348,71 +348,71 @@ $(".deniedBook").click(function () {
 // Form validation for new librarian
 function validacijaBibliotekar() {
 
-  $("#validateNameBibliotekar").empty();
-  $("#validateJmbgBibliotekar").empty();
-  $("#validateEmailBibliotekar").empty();
-  $("#validateUsernameBibliotekar").empty();
-  $("#validatePwBibliotekar").empty();
-  $("#validatePw2Bibliotekar").empty();
+  jQuery("#validateNameBibliotekar").empty();
+  jQuery("#validateJmbgBibliotekar").empty();
+  jQuery("#validateEmailBibliotekar").empty();
+  jQuery("#validateUsernameBibliotekar").empty();
+  jQuery("#validatePwBibliotekar").empty();
+  jQuery("#validatePw2Bibliotekar").empty();
 
 
-  let nameBibliotekar = $("#imePrezimeBibliotekar").val();
-  let jmbgBibliotekar = $("#jmbgBibliotekar").val();
-  let emailBibliotekar = $("#emailBibliotekar").val();
-  let usernameBibliotekar = $("#usernameBibliotekar").val();
-  let pwBibliotekar = $("#pwBibliotekar").val();
-  let pw2Bibliotekar = $("#pw2Bibliotekar").val();
+  let nameBibliotekar = jQuery("#imePrezimeBibliotekar").val();
+  let jmbgBibliotekar = jQuery("#jmbgBibliotekar").val();
+  let emailBibliotekar = jQuery("#emailBibliotekar").val();
+  let usernameBibliotekar = jQuery("#usernameBibliotekar").val();
+  let pwBibliotekar = jQuery("#pwBibliotekar").val();
+  let pw2Bibliotekar = jQuery("#pw2Bibliotekar").val();
 
   if (nameBibliotekar.length == 0) {
-    $('#validateNameBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
+    jQuery('#validateNameBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
   }
 
   if (jmbgBibliotekar.length == 0) {
-    $('#validateJmbgBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
+    jQuery('#validateJmbgBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
   }
 
   if (emailBibliotekar.length == 0) {
-    $('#validateEmailBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
+    jQuery('#validateEmailBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
   }
 
   if (usernameBibliotekar.length == 0) {
-    $('#validateUsernameBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
+    jQuery('#validateUsernameBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
   }
 
   if (pwBibliotekar.length == 0) {
-    $('#validatePwBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2Bibliotekar.length == 0) {
-    $('#validatePw2Bibliotekar').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2Bibliotekar').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsNameBibliotekar() {
-  $("#validateNameBibliotekar").empty();
+  jQuery("#validateNameBibliotekar").empty();
 }
 
 function clearErrorsJmbgBibliotekar() {
-  $("#validateJmbgBibliotekar").empty();
+  jQuery("#validateJmbgBibliotekar").empty();
 }
 
 function clearErrorsEmailBibliotekar() {
-  $("#validateEmailBibliotekar").empty();
+  jQuery("#validateEmailBibliotekar").empty();
 }
 
 function clearErrorsUsernameBibliotekar() {
-  $("#validateUsernameBibliotekar").empty();
+  jQuery("#validateUsernameBibliotekar").empty();
 }
 
 function clearErrorsPwBibliotekar() {
-  $("#validatePwBibliotekar").empty();
+  jQuery("#validatePwBibliotekar").empty();
 }
 
 function clearErrorsPw2Bibliotekar() {
-  $("#validatePw2Bibliotekar").empty();
+  jQuery("#validatePw2Bibliotekar").empty();
 }
 
-$("#sacuvajBibliotekara").keypress(function (e) {
+jQuery("#sacuvajBibliotekara").keypress(function (e) {
   if (e.which == 13) {
     validacijaBibliotekar();
     return false;
@@ -422,71 +422,71 @@ $("#sacuvajBibliotekara").keypress(function (e) {
 // Form validation for editing librarian info
 function validacijaBibliotekarEdit() {
 
-  $("#validateNameBibliotekarEdit").empty();
-  $("#validateJmbgBibliotekarEdit").empty();
-  $("#validateEmailBibliotekarEdit").empty();
-  $("#validateUsernameBibliotekarEdit").empty();
-  $("#validatePwBibliotekarEdit").empty();
-  $("#validatePw2BibliotekarEdit").empty();
+  jQuery("#validateNameBibliotekarEdit").empty();
+  jQuery("#validateJmbgBibliotekarEdit").empty();
+  jQuery("#validateEmailBibliotekarEdit").empty();
+  jQuery("#validateUsernameBibliotekarEdit").empty();
+  jQuery("#validatePwBibliotekarEdit").empty();
+  jQuery("#validatePw2BibliotekarEdit").empty();
 
 
-  let nameBibliotekarEdit = $("#imePrezimeBibliotekarEdit").val();
-  let jmbgBibliotekarEdit = $("#jmbgBibliotekarEdit").val();
-  let emailBibliotekarEdit = $("#emailBibliotekarEdit").val();
-  let usernameBibliotekarEdit = $("#usernameBibliotekarEdit").val();
-  let pwBibliotekarEdit = $("#pwBibliotekarEdit").val();
-  let pw2BibliotekarEdit = $("#pw2BibliotekarEdit").val();
+  let nameBibliotekarEdit = jQuery("#imePrezimeBibliotekarEdit").val();
+  let jmbgBibliotekarEdit = jQuery("#jmbgBibliotekarEdit").val();
+  let emailBibliotekarEdit = jQuery("#emailBibliotekarEdit").val();
+  let usernameBibliotekarEdit = jQuery("#usernameBibliotekarEdit").val();
+  let pwBibliotekarEdit = jQuery("#pwBibliotekarEdit").val();
+  let pw2BibliotekarEdit = jQuery("#pw2BibliotekarEdit").val();
 
   if (nameBibliotekarEdit.length == 0) {
-    $('#validateNameBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
+    jQuery('#validateNameBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
   }
 
   if (jmbgBibliotekarEdit.length == 0) {
-    $('#validateJmbgBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
+    jQuery('#validateJmbgBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
   }
 
   if (emailBibliotekarEdit.length == 0) {
-    $('#validateEmailBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
+    jQuery('#validateEmailBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
   }
 
   if (usernameBibliotekarEdit.length == 0) {
-    $('#validateUsernameBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
+    jQuery('#validateUsernameBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
   }
 
   if (pwBibliotekarEdit.length == 0) {
-    $('#validatePwBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwBibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2BibliotekarEdit.length == 0) {
-    $('#validatePw2BibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2BibliotekarEdit').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsNameBibliotekarEdit() {
-  $("#validateNameBibliotekarEdit").empty();
+  jQuery("#validateNameBibliotekarEdit").empty();
 }
 
 function clearErrorsJmbgBibliotekarEdit() {
-  $("#validateJmbgBibliotekarEdit").empty();
+  jQuery("#validateJmbgBibliotekarEdit").empty();
 }
 
 function clearErrorsEmailBibliotekarEdit() {
-  $("#validateEmailBibliotekarEdit").empty();
+  jQuery("#validateEmailBibliotekarEdit").empty();
 }
 
 function clearErrorsUsernameBibliotekarEdit() {
-  $("#validateUsernameBibliotekarEdit").empty();
+  jQuery("#validateUsernameBibliotekarEdit").empty();
 }
 
 function clearErrorsPwBibliotekarEdit() {
-  $("#validatePwBibliotekarEdit").empty();
+  jQuery("#validatePwBibliotekarEdit").empty();
 }
 
 function clearErrorsPw2BibliotekarEdit() {
-  $("#validatePw2BibliotekarEdit").empty();
+  jQuery("#validatePw2BibliotekarEdit").empty();
 }
 
-$("#sacuvajBibliotekaraEdit").keypress(function (e) {
+jQuery("#sacuvajBibliotekaraEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaBibliotekarEdit();
     return false;
@@ -496,71 +496,71 @@ $("#sacuvajBibliotekaraEdit").keypress(function (e) {
 // Form validation for new student
 function validacijaUcenik() {
 
-  $("#validateNameUcenik").empty();
-  $("#validateJmbgUcenik").empty();
-  $("#validateEmailUcenik").empty();
-  $("#validateUsernameUcenik").empty();
-  $("#validatePwUcenik").empty();
-  $("#validatePw2Ucenik").empty();
+  jQuery("#validateNameUcenik").empty();
+  jQuery("#validateJmbgUcenik").empty();
+  jQuery("#validateEmailUcenik").empty();
+  jQuery("#validateUsernameUcenik").empty();
+  jQuery("#validatePwUcenik").empty();
+  jQuery("#validatePw2Ucenik").empty();
 
 
-  let nameUcenik = $("#imePrezimeUcenik").val();
-  let jmbgUcenik = $("#jmbgUcenik").val();
-  let emailUcenik = $("#emailUcenik").val();
-  let usernameUcenik = $("#usernameUcenik").val();
-  let pwUcenik = $("#pwUcenik").val();
-  let pw2Ucenik = $("#pw2Ucenik").val();
+  let nameUcenik = jQuery("#imePrezimeUcenik").val();
+  let jmbgUcenik = jQuery("#jmbgUcenik").val();
+  let emailUcenik = jQuery("#emailUcenik").val();
+  let usernameUcenik = jQuery("#usernameUcenik").val();
+  let pwUcenik = jQuery("#pwUcenik").val();
+  let pw2Ucenik = jQuery("#pw2Ucenik").val();
 
   if (nameUcenik.length == 0) {
-    $('#validateNameUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
+    jQuery('#validateNameUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
   }
 
   if (jmbgUcenik.length == 0) {
-    $('#validateJmbgUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
+    jQuery('#validateJmbgUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
   }
 
   if (emailUcenik.length == 0) {
-    $('#validateEmailUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
+    jQuery('#validateEmailUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
   }
 
   if (usernameUcenik.length == 0) {
-    $('#validateUsernameUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
+    jQuery('#validateUsernameUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
   }
 
   if (pwUcenik.length == 0) {
-    $('#validatePwUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2Ucenik.length == 0) {
-    $('#validatePw2Ucenik').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2Ucenik').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsNameUcenik() {
-  $("#validateNameUcenik").empty();
+  jQuery("#validateNameUcenik").empty();
 }
 
 function clearErrorsJmbgUcenik() {
-  $("#validateJmbgUcenik").empty();
+  jQuery("#validateJmbgUcenik").empty();
 }
 
 function clearErrorsEmailUcenik() {
-  $("#validateEmailUcenik").empty();
+  jQuery("#validateEmailUcenik").empty();
 }
 
 function clearErrorsUsernameUcenik() {
-  $("#validateUsernameUcenik").empty();
+  jQuery("#validateUsernameUcenik").empty();
 }
 
 function clearErrorsPwUcenik() {
-  $("#validatePwUcenik").empty();
+  jQuery("#validatePwUcenik").empty();
 }
 
 function clearErrorsPw2Ucenik() {
-  $("#validatePw2Ucenik").empty();
+  jQuery("#validatePw2Ucenik").empty();
 }
 
-$("#sacuvajUcenika").keypress(function (e) {
+jQuery("#sacuvajUcenika").keypress(function (e) {
   if (e.which == 13) {
     validacijaUcenik();
     return false;
@@ -570,71 +570,71 @@ $("#sacuvajUcenika").keypress(function (e) {
 // Form validation for editing student info
 function validacijaUcenikEdit() {
 
-  $("#validateNameUcenikEdit").empty();
-  $("#validateJmbgUcenikEdit").empty();
-  $("#validateEmailUcenikEdit").empty();
-  $("#validateUsernameUcenikEdit").empty();
-  $("#validatePwUcenikEdit").empty();
-  $("#validatePw2UcenikEdit").empty();
+  jQuery("#validateNameUcenikEdit").empty();
+  jQuery("#validateJmbgUcenikEdit").empty();
+  jQuery("#validateEmailUcenikEdit").empty();
+  jQuery("#validateUsernameUcenikEdit").empty();
+  jQuery("#validatePwUcenikEdit").empty();
+  jQuery("#validatePw2UcenikEdit").empty();
 
 
-  let nameUcenikEdit = $("#imePrezimeUcenikEdit").val();
-  let jmbgUcenikEdit = $("#jmbgUcenikEdit").val();
-  let emailUcenikEdit = $("#emailUcenikEdit").val();
-  let usernameUcenikEdit = $("#usernameUcenikEdit").val();
-  let pwUcenikEdit = $("#pwUcenikEdit").val();
-  let pw2UcenikEdit = $("#pw2UcenikEdit").val();
+  let nameUcenikEdit = jQuery("#imePrezimeUcenikEdit").val();
+  let jmbgUcenikEdit = jQuery("#jmbgUcenikEdit").val();
+  let emailUcenikEdit = jQuery("#emailUcenikEdit").val();
+  let usernameUcenikEdit = jQuery("#usernameUcenikEdit").val();
+  let pwUcenikEdit = jQuery("#pwUcenikEdit").val();
+  let pw2UcenikEdit = jQuery("#pw2UcenikEdit").val();
 
   if (nameUcenikEdit.length == 0) {
-    $('#validateNameUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
+    jQuery('#validateNameUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime!</p>');
   }
 
   if (jmbgUcenikEdit.length == 0) {
-    $('#validateJmbgUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
+    jQuery('#validateJmbgUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti JMBG!</p>');
   }
 
   if (emailUcenikEdit.length == 0) {
-    $('#validateEmailUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
+    jQuery('#validateEmailUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti validnu e-mail adresu!</p>');
   }
 
   if (usernameUcenikEdit.length == 0) {
-    $('#validateUsernameUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
+    jQuery('#validateUsernameUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti korisnicko ime!</p>');
   }
 
   if (pwUcenikEdit.length == 0) {
-    $('#validatePwUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwUcenikEdit').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2UcenikEdit.length == 0) {
-    $('#validatePw2UcenikEdit').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2UcenikEdit').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsNameUcenikEdit() {
-  $("#validateNameUcenikEdit").empty();
+  jQuery("#validateNameUcenikEdit").empty();
 }
 
 function clearErrorsJmbgUcenikEdit() {
-  $("#validateJmbgUcenikEdit").empty();
+  jQuery("#validateJmbgUcenikEdit").empty();
 }
 
 function clearErrorsEmailUcenikEdit() {
-  $("#validateEmailUcenikEdit").empty();
+  jQuery("#validateEmailUcenikEdit").empty();
 }
 
 function clearErrorsUsernameUcenikEdit() {
-  $("#validateUsernameUcenikEdit").empty();
+  jQuery("#validateUsernameUcenikEdit").empty();
 }
 
 function clearErrorsPwUcenikEdit() {
-  $("#validatePwUcenikEdit").empty();
+  jQuery("#validatePwUcenikEdit").empty();
 }
 
 function clearErrorsPw2UcenikEdit() {
-  $("#validatePw2UcenikEdit").empty();
+  jQuery("#validatePw2UcenikEdit").empty();
 }
 
-$("#sacuvajUcenikaEdit").keypress(function (e) {
+jQuery("#sacuvajUcenikaEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaUcenikEdit();
     return false;
@@ -644,81 +644,81 @@ $("#sacuvajUcenikaEdit").keypress(function (e) {
 // Form validation for new book
 function validacijaKnjiga() {
 
-  $("#validateNazivKnjiga").empty();
-  $("#validateKategorija").empty();
-  $("#validateZanr").empty();
-  $("#validateAutori").empty();
-  $("#validateIzdavac").empty();
-  $("#validateGodinaIzdavanja").empty();
-  $("#validateKnjigaKolicina").empty();
+  jQuery("#validateNazivKnjiga").empty();
+  jQuery("#validateKategorija").empty();
+  jQuery("#validateZanr").empty();
+  jQuery("#validateAutori").empty();
+  jQuery("#validateIzdavac").empty();
+  jQuery("#validateGodinaIzdavanja").empty();
+  jQuery("#validateKnjigaKolicina").empty();
 
 
-  let nazivKnjiga = $("#nazivKnjiga").val();
-  let kategorija = $("#kategorijaInput").val();
-  let zanr = $("#zanroviInput").val();
-  let autori = $("#autoriInput").val();
-  let izdavac = $("#izdavac").val();
-  let godinaIzdavanja = $("#godinaIzdavanja").val();
-  let knjigaKolicina = $("#knjigaKolicina").val();
+  let nazivKnjiga = jQuery("#nazivKnjiga").val();
+  let kategorija = jQuery("#kategorijaInput").val();
+  let zanr = jQuery("#zanroviInput").val();
+  let autori = jQuery("#autoriInput").val();
+  let izdavac = jQuery("#izdavac").val();
+  let godinaIzdavanja = jQuery("#godinaIzdavanja").val();
+  let knjigaKolicina = jQuery("#knjigaKolicina").val();
 
   if (nazivKnjiga.length == 0) {
-    $('#validateNazivKnjiga').append('<p style="color:red;font-size:13px;">Morate unijeti naziv knjige!</p>');
+    jQuery('#validateNazivKnjiga').append('<p style="color:red;font-size:13px;">Morate unijeti naziv knjige!</p>');
   }
 
   if (kategorija.length == 0) {
-    $('#validateKategorija').append('<p style="color:red;font-size:13px;">Morate selektovati kategoriju!</p>');
+    jQuery('#validateKategorija').append('<p style="color:red;font-size:13px;">Morate selektovati kategoriju!</p>');
   }
 
   if (zanr.length == 0) {
-    $('#validateZanr').append('<p style="color:red;font-size:13px;">Morate selektovati zanr!</p>');
+    jQuery('#validateZanr').append('<p style="color:red;font-size:13px;">Morate selektovati zanr!</p>');
   }
 
   if (autori.length == 0) {
-    $('#validateAutori').append('<p style="color:red;font-size:13px;">Morate odabrati autore!</p>');
+    jQuery('#validateAutori').append('<p style="color:red;font-size:13px;">Morate odabrati autore!</p>');
   }
 
   if (izdavac == null) {
-    $('#validateIzdavac').append('<p style="color:red;font-size:13px;">Morate selektovati izdavaca!</p>');
+    jQuery('#validateIzdavac').append('<p style="color:red;font-size:13px;">Morate selektovati izdavaca!</p>');
   }
 
   if (godinaIzdavanja == null) {
-    $('#validateGodinaIzdavanja').append('<p style="color:red;font-size:13px;">Morate selektovati godinu izdavanja!</p>');
+    jQuery('#validateGodinaIzdavanja').append('<p style="color:red;font-size:13px;">Morate selektovati godinu izdavanja!</p>');
   }
 
   if (knjigaKolicina.length == 0) {
-    $('#validateKnjigaKolicina').append('<p style="color:red;font-size:13px;">Morate unijeti kolicinu!</p>');
+    jQuery('#validateKnjigaKolicina').append('<p style="color:red;font-size:13px;">Morate unijeti kolicinu!</p>');
   }
 }
 
 function clearErrorsNazivKnjiga() {
-  $("#validateNazivKnjiga").empty();
+  jQuery("#validateNazivKnjiga").empty();
 }
 
 function clearErrorsKategorija() {
-  $("#validateKategorija").empty();
+  jQuery("#validateKategorija").empty();
 }
 
 function clearErrorsZanr() {
-  $("#validateZanr").empty();
+  jQuery("#validateZanr").empty();
 }
 
 function clearErrorsAutori() {
-  $("#validateAutori").empty();
+  jQuery("#validateAutori").empty();
 }
 
 function clearErrorsIzdavac() {
-  $("#validateIzdavac").empty();
+  jQuery("#validateIzdavac").empty();
 }
 
 function clearErrorsGodinaIzdavanja() {
-  $("#validateGodinaIzdavanja").empty();
+  jQuery("#validateGodinaIzdavanja").empty();
 }
 
 function clearErrorsKnjigaKolicina() {
-  $("#validateKnjigaKolicina").empty();
+  jQuery("#validateKnjigaKolicina").empty();
 }
 
-$("#sacuvajKnjigu").keypress(function (e) {
+jQuery("#sacuvajKnjigu").keypress(function (e) {
   if (e.which == 13) {
     validacijaKnjiga();
     return false;
@@ -728,81 +728,81 @@ $("#sacuvajKnjigu").keypress(function (e) {
 // Form validation for editing book info
 function validacijaKnjigaEdit() {
 
-  $("#validateNazivKnjigaEdit").empty();
-  $("#validateKategorijaEdit").empty();
-  $("#validateZanrEdit").empty();
-  $("#validateAutoriEdit").empty();
-  $("#validateIzdavacEdit").empty();
-  $("#validateGodinaIzdavanjaEdit").empty();
-  $("#validateKnjigaKolicinaEdit").empty();
+  jQuery("#validateNazivKnjigaEdit").empty();
+  jQuery("#validateKategorijaEdit").empty();
+  jQuery("#validateZanrEdit").empty();
+  jQuery("#validateAutoriEdit").empty();
+  jQuery("#validateIzdavacEdit").empty();
+  jQuery("#validateGodinaIzdavanjaEdit").empty();
+  jQuery("#validateKnjigaKolicinaEdit").empty();
 
 
-  let nazivKnjigaEdit = $("#nazivKnjigaEdit").val();
-  let kategorijaInputEdit = $("#kategorijaInputEdit").val();
-  let zanroviInputEdit = $("#zanroviInputEdit").val();
-  let autoriInputEdit = $("#autoriInputEdit").val();
-  let izdavacEdit = $("#izdavacEdit").val();
-  let godinaIzdavanjaEdit = $("#godinaIzdavanjaEdit").val();
-  let knjigaKolicinaEdit = $("#knjigaKolicinaEdit").val();
+  let nazivKnjigaEdit = jQuery("#nazivKnjigaEdit").val();
+  let kategorijaInputEdit = jQuery("#kategorijaInputEdit").val();
+  let zanroviInputEdit = jQuery("#zanroviInputEdit").val();
+  let autoriInputEdit = jQuery("#autoriInputEdit").val();
+  let izdavacEdit = jQuery("#izdavacEdit").val();
+  let godinaIzdavanjaEdit = jQuery("#godinaIzdavanjaEdit").val();
+  let knjigaKolicinaEdit = jQuery("#knjigaKolicinaEdit").val();
 
   if (nazivKnjigaEdit.length == 0) {
-    $('#validateNazivKnjigaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv knjige!</p>');
+    jQuery('#validateNazivKnjigaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv knjige!</p>');
   }
 
   if (kategorijaInputEdit.length == 0) {
-    $('#validateKategorijaEdit').append('<p style="color:red;font-size:13px;">Morate selektovati kategoriju!</p>');
+    jQuery('#validateKategorijaEdit').append('<p style="color:red;font-size:13px;">Morate selektovati kategoriju!</p>');
   }
 
   if (zanroviInputEdit.length == 0) {
-    $('#validateZanrEdit').append('<p style="color:red;font-size:13px;">Morate selektovati zanr!</p>');
+    jQuery('#validateZanrEdit').append('<p style="color:red;font-size:13px;">Morate selektovati zanr!</p>');
   }
 
   if (autoriInputEdit.length == 0) {
-    $('#validateAutoriEdit').append('<p style="color:red;font-size:13px;">Morate odabrati autore!</p>');
+    jQuery('#validateAutoriEdit').append('<p style="color:red;font-size:13px;">Morate odabrati autore!</p>');
   }
 
   if (izdavacEdit == null) {
-    $('#validateIzdavacEdit').append('<p style="color:red;font-size:13px;">Morate selektovati izdavaca!</p>');
+    jQuery('#validateIzdavacEdit').append('<p style="color:red;font-size:13px;">Morate selektovati izdavaca!</p>');
   }
 
   if (godinaIzdavanjaEdit == null) {
-    $('#validateGodinaIzdavanjaEdit').append('<p style="color:red;font-size:13px;">Morate selektovati godinu izdavanja!</p>');
+    jQuery('#validateGodinaIzdavanjaEdit').append('<p style="color:red;font-size:13px;">Morate selektovati godinu izdavanja!</p>');
   }
 
   if (knjigaKolicinaEdit.length == 0) {
-    $('#validateKnjigaKolicinaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti kolicinu!</p>');
+    jQuery('#validateKnjigaKolicinaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti kolicinu!</p>');
   }
 }
 
 function clearErrorsNazivKnjigaEdit() {
-  $("#validateNazivKnjigaEdit").empty();
+  jQuery("#validateNazivKnjigaEdit").empty();
 }
 
 function clearErrorsKategorijaEdit() {
-  $("#validateKategorijaEdit").empty();
+  jQuery("#validateKategorijaEdit").empty();
 }
 
 function clearErrorsZanrEdit() {
-  $("#validateZanrEdit").empty();
+  jQuery("#validateZanrEdit").empty();
 }
 
 function clearErrorsAutoriEdit() {
-  $("#validateAutoriEdit").empty();
+  jQuery("#validateAutoriEdit").empty();
 }
 
 function clearErrorsIzdavacEdit() {
-  $("#validateIzdavacEdit").empty();
+  jQuery("#validateIzdavacEdit").empty();
 }
 
 function clearErrorsGodinaIzdavanjaEdit() {
-  $("#validateGodinaIzdavanjaEdit").empty();
+  jQuery("#validateGodinaIzdavanjaEdit").empty();
 }
 
 function clearErrorsKnjigaKolicinaEdit() {
-  $("#validateKnjigaKolicinaEdit").empty();
+  jQuery("#validateKnjigaKolicinaEdit").empty();
 }
 
-$("#sacuvajKnjiguEdit").keypress(function (e) {
+jQuery("#sacuvajKnjiguEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaKnjigaEdit();
     return false;
@@ -812,60 +812,60 @@ $("#sacuvajKnjiguEdit").keypress(function (e) {
 // Form validation for new specification of the book
 function validacijaSpecifikacija() {
 
-  $("#validateBrStrana").empty();
-  $("#validatePismo").empty();
-  $("#validatePovez").empty();
-  $("#validateFormat").empty();
-  $("#validateIsbn").empty();
+  jQuery("#validateBrStrana").empty();
+  jQuery("#validatePismo").empty();
+  jQuery("#validatePovez").empty();
+  jQuery("#validateFormat").empty();
+  jQuery("#validateIsbn").empty();
 
-  let brStrana = $("#brStrana").val();
-  let pismo = $("#pismo").val();
-  let povez = $("#povez").val();
-  let format = $("#format").val();
-  let isbn = $("#isbn").val();
+  let brStrana = jQuery("#brStrana").val();
+  let pismo = jQuery("#pismo").val();
+  let povez = jQuery("#povez").val();
+  let format = jQuery("#format").val();
+  let isbn = jQuery("#isbn").val();
 
   if (brStrana.length == 0) {
-    $('#validateBrStrana').append('<p style="color:red;font-size:13px;">Morate unijeti broj strana!</p>');
+    jQuery('#validateBrStrana').append('<p style="color:red;font-size:13px;">Morate unijeti broj strana!</p>');
   }
 
   if (pismo == null) {
-    $('#validatePismo').append('<p style="color:red;font-size:13px;">Morate selektovati pismo!</p>');
+    jQuery('#validatePismo').append('<p style="color:red;font-size:13px;">Morate selektovati pismo!</p>');
   }
 
   if (povez == null) {
-    $('#validatePovez').append('<p style="color:red;font-size:13px;">Morate selektovati povez!</p>');
+    jQuery('#validatePovez').append('<p style="color:red;font-size:13px;">Morate selektovati povez!</p>');
   }
 
   if (format == null) {
-    $('#validateFormat').append('<p style="color:red;font-size:13px;">Morate selektovati format!</p>');
+    jQuery('#validateFormat').append('<p style="color:red;font-size:13px;">Morate selektovati format!</p>');
   }
 
   if (isbn.length == 0) {
-    $('#validateIsbn').append('<p style="color:red;font-size:13px;">Morate unijeti ISBN!</p>');
+    jQuery('#validateIsbn').append('<p style="color:red;font-size:13px;">Morate unijeti ISBN!</p>');
   }
 }
 
 function clearErrorsBrStrana() {
-  $("#validateBrStrana").empty();
+  jQuery("#validateBrStrana").empty();
 }
 
 function clearErrorsPismo() {
-  $("#validatePismo").empty();
+  jQuery("#validatePismo").empty();
 }
 
 function clearErrorsPovez() {
-  $("#validatePovez").empty();
+  jQuery("#validatePovez").empty();
 }
 
 function clearErrorsFormat() {
-  $("#validateFormat").empty();
+  jQuery("#validateFormat").empty();
 }
 
 function clearErrorsIsbn() {
-  $("#validateIsbn").empty();
+  jQuery("#validateIsbn").empty();
 }
 
-$("#sacuvajSpecifikaciju").keypress(function (e) {
+jQuery("#sacuvajSpecifikaciju").keypress(function (e) {
   if (e.which == 13) {
     validacijaSpecifikacija();
     return false;
@@ -875,60 +875,60 @@ $("#sacuvajSpecifikaciju").keypress(function (e) {
 // Form validation for editing specification of the book
 function validacijaSpecifikacijaEdit() {
 
-  $("#validateBrStranaEdit").empty();
-  $("#validatePismoEdit").empty();
-  $("#validatePovezEdit").empty();
-  $("#validateFormatEdit").empty();
-  $("#validateIsbnEdit").empty();
+  jQuery("#validateBrStranaEdit").empty();
+  jQuery("#validatePismoEdit").empty();
+  jQuery("#validatePovezEdit").empty();
+  jQuery("#validateFormatEdit").empty();
+  jQuery("#validateIsbnEdit").empty();
 
-  let brStranaEdit = $("#brStranaEdit").val();
-  let pismoEdit = $("#pismoEdit").val();
-  let povezEdit = $("#povezEdit").val();
-  let formatEdit = $("#formatEdit").val();
-  let isbnEdit = $("#isbnEdit").val();
+  let brStranaEdit = jQuery("#brStranaEdit").val();
+  let pismoEdit = jQuery("#pismoEdit").val();
+  let povezEdit = jQuery("#povezEdit").val();
+  let formatEdit = jQuery("#formatEdit").val();
+  let isbnEdit = jQuery("#isbnEdit").val();
 
   if (brStranaEdit.length == 0) {
-    $('#validateBrStranaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti broj strana!</p>');
+    jQuery('#validateBrStranaEdit').append('<p style="color:red;font-size:13px;">Morate unijeti broj strana!</p>');
   }
 
   if (pismoEdit == null) {
-    $('#validatePismoEdit').append('<p style="color:red;font-size:13px;">Morate selektovati pismo!</p>');
+    jQuery('#validatePismoEdit').append('<p style="color:red;font-size:13px;">Morate selektovati pismo!</p>');
   }
 
   if (povezEdit == null) {
-    $('#validatePovezEdit').append('<p style="color:red;font-size:13px;">Morate selektovati povez!</p>');
+    jQuery('#validatePovezEdit').append('<p style="color:red;font-size:13px;">Morate selektovati povez!</p>');
   }
 
   if (formatEdit == null) {
-    $('#validateFormatEdit').append('<p style="color:red;font-size:13px;">Morate selektovati format!</p>');
+    jQuery('#validateFormatEdit').append('<p style="color:red;font-size:13px;">Morate selektovati format!</p>');
   }
 
   if (isbnEdit.length == 0) {
-    $('#validateIsbnEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ISBN!</p>');
+    jQuery('#validateIsbnEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ISBN!</p>');
   }
 }
 
 function clearErrorsBrStranaEdit() {
-  $("#validateBrStranaEdit").empty();
+  jQuery("#validateBrStranaEdit").empty();
 }
 
 function clearErrorsPismoEdit() {
-  $("#validatePismoEdit").empty();
+  jQuery("#validatePismoEdit").empty();
 }
 
 function clearErrorsPovezEdit() {
-  $("#validatePovezEdit").empty();
+  jQuery("#validatePovezEdit").empty();
 }
 
 function clearErrorsFormatEdit() {
-  $("#validateFormatEdit").empty();
+  jQuery("#validateFormatEdit").empty();
 }
 
 function clearErrorsIsbnEdit() {
-  $("#validateIsbnEdit").empty();
+  jQuery("#validateIsbnEdit").empty();
 }
 
-$("#sacuvajSpecifikacijuEdit").keypress(function (e) {
+jQuery("#sacuvajSpecifikacijuEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaSpecifikacijaEdit();
     return false;
@@ -938,30 +938,30 @@ $("#sacuvajSpecifikacijuEdit").keypress(function (e) {
 // Form validation for renting books
 function validacijaIzdavanje() {
 
-  $("#validateUcenikIzdavanje").empty();
-  $("#validateDatumIzdavanja").empty();
+  jQuery("#validateUcenikIzdavanje").empty();
+  jQuery("#validateDatumIzdavanja").empty();
 
-  let ucenikIzdavanje = $("#ucenikIzdavanje").val();
-  let datumIzdavanja = $("#datumIzdavanja").val();
+  let ucenikIzdavanje = jQuery("#ucenikIzdavanje").val();
+  let datumIzdavanja = jQuery("#datumIzdavanja").val();
 
   if (ucenikIzdavanje == null) {
-    $('#validateUcenikIzdavanje').append('<p style="color:red;font-size:13px;">Morate selektovati ucenika!</p>');
+    jQuery('#validateUcenikIzdavanje').append('<p style="color:red;font-size:13px;">Morate selektovati ucenika!</p>');
   }
 
   if (datumIzdavanja.length == 0) {
-    $('#validateDatumIzdavanja').append('<p style="color:red;font-size:13px;">Morate selektovati datum izdavanja!</p>');
+    jQuery('#validateDatumIzdavanja').append('<p style="color:red;font-size:13px;">Morate selektovati datum izdavanja!</p>');
   }
 }
 
 function clearErrorsUcenikIzdavanje() {
-  $("#validateUcenikIzdavanje").empty();
+  jQuery("#validateUcenikIzdavanje").empty();
 }
 
 function clearErrorsDatumIzdavanja() {
-  $("#validateDatumIzdavanja").empty();
+  jQuery("#validateDatumIzdavanja").empty();
 }
 
-$("#izdajKnjigu").keypress(function (e) {
+jQuery("#izdajKnjigu").keypress(function (e) {
   if (e.which == 13) {
     validacijaIzdavanje();
     return false;
@@ -971,30 +971,30 @@ $("#izdajKnjigu").keypress(function (e) {
 // Form validation for making reservations
 function validacijaRezervisanje() {
 
-  $("#validateUcenikRezervisanje").empty();
-  $("#validateDatumRezervisanja").empty();
+  jQuery("#validateUcenikRezervisanje").empty();
+  jQuery("#validateDatumRezervisanja").empty();
 
-  let ucenikRezervisanje = $("#ucenikRezervisanje").val();
-  let datumRezervisanja = $("#datumRezervisanja").val();
+  let ucenikRezervisanje = jQuery("#ucenikRezervisanje").val();
+  let datumRezervisanja = jQuery("#datumRezervisanja").val();
 
   if (ucenikRezervisanje == null) {
-    $('#validateUcenikRezervisanje').append('<p style="color:red;font-size:13px;">Morate selektovati ucenika!</p>');
+    jQuery('#validateUcenikRezervisanje').append('<p style="color:red;font-size:13px;">Morate selektovati ucenika!</p>');
   }
 
   if (datumRezervisanja.length == 0) {
-    $('#validateDatumRezervisanja').append('<p style="color:red;font-size:13px;">Morate selektovati datum rezervisanja!</p>');
+    jQuery('#validateDatumRezervisanja').append('<p style="color:red;font-size:13px;">Morate selektovati datum rezervisanja!</p>');
   }
 }
 
 function clearErrorsUcenikRezervisanje() {
-  $("#validateUcenikRezervisanje").empty();
+  jQuery("#validateUcenikRezervisanje").empty();
 }
 
 function clearErrorsDatumRezervisanja() {
-  $("#validateDatumRezervisanja").empty();
+  jQuery("#validateDatumRezervisanja").empty();
 }
 
-$("#rezervisiKnjigu").keypress(function (e) {
+jQuery("#rezervisiKnjigu").keypress(function (e) {
   if (e.which == 13) {
     validacijaRezervisanje();
     return false;
@@ -1004,20 +1004,20 @@ $("#rezervisiKnjigu").keypress(function (e) {
 // Form validation for new category
 function validacijaKategorija() {
 
-  $("#validateNazivKategorije").empty();
+  jQuery("#validateNazivKategorije").empty();
 
-  let nazivKategorije = $("#nazivKategorije").val();
+  let nazivKategorije = jQuery("#nazivKategorije").val();
 
   if (nazivKategorije.length == 0) {
-    $('#validateNazivKategorije').append('<p style="color:red;font-size:13px;">Morate unijeti naziv kategorije!</p>');
+    jQuery('#validateNazivKategorije').append('<p style="color:red;font-size:13px;">Morate unijeti naziv kategorije!</p>');
   }
 }
 
 function clearErrorsNazivKategorije() {
-  $("#validateNazivKategorije").empty();
+  jQuery("#validateNazivKategorije").empty();
 }
 
-$("#sacuvajKategoriju").keypress(function (e) {
+jQuery("#sacuvajKategoriju").keypress(function (e) {
   if (e.which == 13) {
     validacijaKategorija();
     return false;
@@ -1027,20 +1027,20 @@ $("#sacuvajKategoriju").keypress(function (e) {
 // Form validation for editing category info
 function validacijaKategorijaEdit() {
 
-  $("#validateNazivKategorijeEdit").empty();
+  jQuery("#validateNazivKategorijeEdit").empty();
 
-  let nazivKategorijeEdit = $("#nazivKategorijeEdit").val();
+  let nazivKategorijeEdit = jQuery("#nazivKategorijeEdit").val();
 
   if (nazivKategorijeEdit.length == 0) {
-    $('#validateNazivKategorijeEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv kategorije!</p>');
+    jQuery('#validateNazivKategorijeEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv kategorije!</p>');
   }
 }
 
 function clearErrorsNazivKategorijeEdit() {
-  $("#validateNazivKategorijeEdit").empty();
+  jQuery("#validateNazivKategorijeEdit").empty();
 }
 
-$("#sacuvajKategorijuEdit").keypress(function (e) {
+jQuery("#sacuvajKategorijuEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaKategorijaEdit();
     return false;
@@ -1050,20 +1050,20 @@ $("#sacuvajKategorijuEdit").keypress(function (e) {
 // Form validation for new author
 function validacijaAutor() {
 
-  $("#validateImePrezimeAutor").empty();
+  jQuery("#validateImePrezimeAutor").empty();
 
-  let imePrezimeAutor = $("#imePrezimeAutor").val();
+  let imePrezimeAutor = jQuery("#imePrezimeAutor").val();
 
   if (imePrezimeAutor.length == 0) {
-    $('#validateImePrezimeAutor').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime autora!</p>');
+    jQuery('#validateImePrezimeAutor').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime autora!</p>');
   }
 }
 
 function clearErrorsImePrezimeAutor() {
-  $("#validateImePrezimeAutor").empty();
+  jQuery("#validateImePrezimeAutor").empty();
 }
 
-$("#sacuvajAutora").keypress(function (e) {
+jQuery("#sacuvajAutora").keypress(function (e) {
   if (e.which == 13) {
     validacijaAutor();
     return false;
@@ -1073,20 +1073,20 @@ $("#sacuvajAutora").keypress(function (e) {
 // Form validation for editing author info
 function validacijaAutorEdit() {
 
-  $("#validateImePrezimeAutorEdit").empty();
+  jQuery("#validateImePrezimeAutorEdit").empty();
 
-  let imePrezimeAutorEdit = $("#imePrezimeAutorEdit").val();
+  let imePrezimeAutorEdit = jQuery("#imePrezimeAutorEdit").val();
 
   if (imePrezimeAutorEdit.length == 0) {
-    $('#validateImePrezimeAutorEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime autora!</p>');
+    jQuery('#validateImePrezimeAutorEdit').append('<p style="color:red;font-size:13px;">Morate unijeti ime i prezime autora!</p>');
   }
 }
 
 function clearErrorsImePrezimeAutorEdit() {
-  $("#validateImePrezimeAutorEdit").empty();
+  jQuery("#validateImePrezimeAutorEdit").empty();
 }
 
-$("#sacuvajAutoraEdit").keypress(function (e) {
+jQuery("#sacuvajAutoraEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaAutorEdit();
     return false;
@@ -1096,20 +1096,20 @@ $("#sacuvajAutoraEdit").keypress(function (e) {
 // Form validation for new genre
 function validacijaZanr() {
 
-  $("#validateNazivZanra").empty();
+  jQuery("#validateNazivZanra").empty();
 
-  let nazivZanra = $("#nazivZanra").val();
+  let nazivZanra = jQuery("#nazivZanra").val();
 
   if (nazivZanra.length == 0) {
-    $('#validateNazivZanra').append('<p style="color:red;font-size:13px;">Morate unijeti naziv zanra!</p>');
+    jQuery('#validateNazivZanra').append('<p style="color:red;font-size:13px;">Morate unijeti naziv zanra!</p>');
   }
 }
 
 function clearErrorsNazivZanra() {
-  $("#validateNazivZanra").empty();
+  jQuery("#validateNazivZanra").empty();
 }
 
-$("#sacuvajZanr").keypress(function (e) {
+jQuery("#sacuvajZanr").keypress(function (e) {
   if (e.which == 13) {
     validacijaZanr();
     return false;
@@ -1119,20 +1119,20 @@ $("#sacuvajZanr").keypress(function (e) {
 // Form validation for editing genre info
 function validacijaZanrEdit() {
 
-  $("#validateNazivZanraEdit").empty();
+  jQuery("#validateNazivZanraEdit").empty();
 
-  let nazivZanraEdit = $("#nazivZanraEdit").val();
+  let nazivZanraEdit = jQuery("#nazivZanraEdit").val();
 
   if (nazivZanraEdit.length == 0) {
-    $('#validateNazivZanraEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv zanra!</p>');
+    jQuery('#validateNazivZanraEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv zanra!</p>');
   }
 }
 
 function clearErrorsNazivZanraEdit() {
-  $("#validateNazivZanraEdit").empty();
+  jQuery("#validateNazivZanraEdit").empty();
 }
 
-$("#sacuvajZanrEdit").keypress(function (e) {
+jQuery("#sacuvajZanrEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaZanrEdit();
     return false;
@@ -1142,20 +1142,20 @@ $("#sacuvajZanrEdit").keypress(function (e) {
 // Form validation for new publisher
 function validacijaIzdavac() {
 
-  $("#validateNazivIzdavac").empty();
+  jQuery("#validateNazivIzdavac").empty();
 
-  let nazivIzdavac = $("#nazivIzdavac").val();
+  let nazivIzdavac = jQuery("#nazivIzdavac").val();
 
   if (nazivIzdavac.length == 0) {
-    $('#validateNazivIzdavac').append('<p style="color:red;font-size:13px;">Morate unijeti naziv izdavaca!</p>');
+    jQuery('#validateNazivIzdavac').append('<p style="color:red;font-size:13px;">Morate unijeti naziv izdavaca!</p>');
   }
 }
 
 function clearErrorsNazivIzdavac() {
-  $("#validateNazivIzdavac").empty();
+  jQuery("#validateNazivIzdavac").empty();
 }
 
-$("#sacuvajIzdavac").keypress(function (e) {
+jQuery("#sacuvajIzdavac").keypress(function (e) {
   if (e.which == 13) {
     validacijaIzdavac();
     return false;
@@ -1165,20 +1165,20 @@ $("#sacuvajIzdavac").keypress(function (e) {
 // Form validation for editing publisher info
 function validacijaIzdavacEdit() {
 
-  $("#validateNazivIzdavacEdit").empty();
+  jQuery("#validateNazivIzdavacEdit").empty();
 
-  let nazivIzdavacEdit = $("#nazivIzdavacEdit").val();
+  let nazivIzdavacEdit = jQuery("#nazivIzdavacEdit").val();
 
   if (nazivIzdavacEdit.length == 0) {
-    $('#validateNazivIzdavacEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv izdavaca!</p>');
+    jQuery('#validateNazivIzdavacEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv izdavaca!</p>');
   }
 }
 
 function clearErrorsNazivIzdavacEdit() {
-  $("#validateNazivIzdavacEdit").empty();
+  jQuery("#validateNazivIzdavacEdit").empty();
 }
 
-$("#sacuvajIzdavacEdit").keypress(function (e) {
+jQuery("#sacuvajIzdavacEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaIzdavacEdit();
     return false;
@@ -1188,20 +1188,20 @@ $("#sacuvajIzdavacEdit").keypress(function (e) {
 // Form validation for new book bind
 function validacijaPovez() {
 
-  $("#validateNazivPovez").empty();
+  jQuery("#validateNazivPovez").empty();
 
-  let nazivPovez = $("#nazivPovez").val();
+  let nazivPovez = jQuery("#nazivPovez").val();
 
   if (nazivPovez.length == 0) {
-    $('#validateNazivPovez').append('<p style="color:red;font-size:13px;">Morate unijeti naziv poveza!</p>');
+    jQuery('#validateNazivPovez').append('<p style="color:red;font-size:13px;">Morate unijeti naziv poveza!</p>');
   }
 }
 
 function clearErrorsNazivPovez() {
-  $("#validateNazivPovez").empty();
+  jQuery("#validateNazivPovez").empty();
 }
 
-$("#sacuvajPovez").keypress(function (e) {
+jQuery("#sacuvajPovez").keypress(function (e) {
   if (e.which == 13) {
     validacijaPovez();
     return false;
@@ -1211,20 +1211,20 @@ $("#sacuvajPovez").keypress(function (e) {
 // Form validation for editing book bind info
 function validacijaPovezEdit() {
 
-  $("#validateNazivPovezEdit").empty();
+  jQuery("#validateNazivPovezEdit").empty();
 
-  let nazivPovezEdit = $("#nazivPovezEdit").val();
+  let nazivPovezEdit = jQuery("#nazivPovezEdit").val();
 
   if (nazivPovezEdit.length == 0) {
-    $('#validateNazivPovezEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv poveza!</p>');
+    jQuery('#validateNazivPovezEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv poveza!</p>');
   }
 }
 
 function clearErrorsNazivPovezEdit() {
-  $("#validateNazivPovezEdit").empty();
+  jQuery("#validateNazivPovezEdit").empty();
 }
 
-$("#sacuvajPovezEdit").keypress(function (e) {
+jQuery("#sacuvajPovezEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaPovezEdit();
     return false;
@@ -1234,20 +1234,20 @@ $("#sacuvajPovezEdit").keypress(function (e) {
 // Form validation for new book format
 function validacijaFormat() {
 
-  $("#validateNazivFormat").empty();
+  jQuery("#validateNazivFormat").empty();
 
-  let nazivFormat = $("#nazivFormat").val();
+  let nazivFormat = jQuery("#nazivFormat").val();
 
   if (nazivFormat.length == 0) {
-    $('#validateNazivFormat').append('<p style="color:red;font-size:13px;">Morate unijeti naziv formata!</p>');
+    jQuery('#validateNazivFormat').append('<p style="color:red;font-size:13px;">Morate unijeti naziv formata!</p>');
   }
 }
 
 function clearErrorsNazivFormat() {
-  $("#validateNazivFormat").empty();
+  jQuery("#validateNazivFormat").empty();
 }
 
-$("#sacuvajFormat").keypress(function (e) {
+jQuery("#sacuvajFormat").keypress(function (e) {
   if (e.which == 13) {
     validacijaFormat();
     return false;
@@ -1257,20 +1257,20 @@ $("#sacuvajFormat").keypress(function (e) {
 // Form validation for editing book format info
 function validacijaFormatEdit() {
 
-  $("#validateNazivFormatEdit").empty();
+  jQuery("#validateNazivFormatEdit").empty();
 
-  let nazivFormatEdit = $("#nazivFormatEdit").val();
+  let nazivFormatEdit = jQuery("#nazivFormatEdit").val();
 
   if (nazivFormatEdit.length == 0) {
-    $('#validateNazivFormatEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv formata!</p>');
+    jQuery('#validateNazivFormatEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv formata!</p>');
   }
 }
 
 function clearErrorsNazivFormatEdit() {
-  $("#validateNazivFormatEdit").empty();
+  jQuery("#validateNazivFormatEdit").empty();
 }
 
-$("#sacuvajFormatEdit").keypress(function (e) {
+jQuery("#sacuvajFormatEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaFormatEdit();
     return false;
@@ -1280,20 +1280,20 @@ $("#sacuvajFormatEdit").keypress(function (e) {
 // Form validation for new book script
 function validacijaPismo() {
 
-  $("#validateNazivPismo").empty();
+  jQuery("#validateNazivPismo").empty();
 
-  let nazivPismo = $("#nazivPismo").val();
+  let nazivPismo = jQuery("#nazivPismo").val();
 
   if (nazivPismo.length == 0) {
-    $('#validateNazivPismo').append('<p style="color:red;font-size:13px;">Morate unijeti naziv pisma!</p>');
+    jQuery('#validateNazivPismo').append('<p style="color:red;font-size:13px;">Morate unijeti naziv pisma!</p>');
   }
 }
 
 function clearErrorsNazivPismo() {
-  $("#validateNazivPismo").empty();
+  jQuery("#validateNazivPismo").empty();
 }
 
-$("#sacuvajPismo").keypress(function (e) {
+jQuery("#sacuvajPismo").keypress(function (e) {
   if (e.which == 13) {
     validacijaPismo();
     return false;
@@ -1303,20 +1303,20 @@ $("#sacuvajPismo").keypress(function (e) {
 // Form validation for new book script
 function validacijaPismoEdit() {
 
-  $("#validateNazivPismoEdit").empty();
+  jQuery("#validateNazivPismoEdit").empty();
 
-  let nazivPismoEdit = $("#nazivPismoEdit").val();
+  let nazivPismoEdit = jQuery("#nazivPismoEdit").val();
 
   if (nazivPismoEdit.length == 0) {
-    $('#validateNazivPismoEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv pisma!</p>');
+    jQuery('#validateNazivPismoEdit').append('<p style="color:red;font-size:13px;">Morate unijeti naziv pisma!</p>');
   }
 }
 
 function clearErrorsNazivPismoEdit() {
-  $("#validateNazivPismoEdit").empty();
+  jQuery("#validateNazivPismoEdit").empty();
 }
 
-$("#sacuvajPismoEdit").keypress(function (e) {
+jQuery("#sacuvajPismoEdit").keypress(function (e) {
   if (e.which == 13) {
     validacijaPismoEdit();
     return false;
@@ -1326,30 +1326,30 @@ $("#sacuvajPismoEdit").keypress(function (e) {
 // Form validation for reseting password - student
 function validacijaSifraUcenik() {
 
-  $("#validatePwResetUcenik").empty();
-  $("#validatePw2ResetUcenik").empty();
+  jQuery("#validatePwResetUcenik").empty();
+  jQuery("#validatePw2ResetUcenik").empty();
 
-  let pwResetUcenik = $("#pwResetUcenik").val();
-  let pw2ResetUcenik = $("#pw2ResetUcenik").val();
+  let pwResetUcenik = jQuery("#pwResetUcenik").val();
+  let pw2ResetUcenik = jQuery("#pw2ResetUcenik").val();
 
   if (pwResetUcenik.length == 0) {
-    $('#validatePwResetUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwResetUcenik').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2ResetUcenik.length == 0) {
-    $('#validatePw2ResetUcenik').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2ResetUcenik').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsPwResetUcenik() {
-  $("#validatePwResetUcenik").empty();
+  jQuery("#validatePwResetUcenik").empty();
 }
 
 function clearErrorsPw2ResetUcenik() {
-  $("#validatePw2ResetUcenik").empty();
+  jQuery("#validatePw2ResetUcenik").empty();
 }
 
-$("#resetujSifruUcenik").keypress(function (e) {
+jQuery("#resetujSifruUcenik").keypress(function (e) {
   if (e.which == 13) {
     validacijaSifraUcenik();
     return false;
@@ -1359,30 +1359,30 @@ $("#resetujSifruUcenik").keypress(function (e) {
 // Form validation for reseting password - librarian
 function validacijaSifraBibliotekar() {
 
-  $("#validatePwResetBibliotekar").empty();
-  $("#validatePw2ResetBibliotekar").empty();
+  jQuery("#validatePwResetBibliotekar").empty();
+  jQuery("#validatePw2ResetBibliotekar").empty();
 
-  let pwResetBibliotekar = $("#pwResetBibliotekar").val();
-  let pw2ResetBibliotekar = $("#pw2ResetBibliotekar").val();
+  let pwResetBibliotekar = jQuery("#pwResetBibliotekar").val();
+  let pw2ResetBibliotekar = jQuery("#pw2ResetBibliotekar").val();
 
   if (pwResetBibliotekar.length == 0) {
-    $('#validatePwResetBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
+    jQuery('#validatePwResetBibliotekar').append('<p style="color:red;font-size:13px;">Morate unijeti sifru!</p>');
   }
 
   if (pw2ResetBibliotekar.length == 0) {
-    $('#validatePw2ResetBibliotekar').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
+    jQuery('#validatePw2ResetBibliotekar').append('<p style="color:red;font-size:13px;">Morate ponoviti sifru!</p>');
   }
 }
 
 function clearErrorsPwResetBibliotekar() {
-  $("#validatePwResetBibliotekar").empty();
+  jQuery("#validatePwResetBibliotekar").empty();
 }
 
 function clearErrorsPw2ResetBibliotekar() {
-  $("#validatePw2ResetBibliotekar").empty();
+  jQuery("#validatePw2ResetBibliotekar").empty();
 }
 
-$("#resetujSifruBibliotekar").keypress(function (e) {
+jQuery("#resetujSifruBibliotekar").keypress(function (e) {
   if (e.which == 13) {
     validacijaSifraBibliotekar();
     return false;
@@ -1391,7 +1391,7 @@ $("#resetujSifruBibliotekar").keypress(function (e) {
 
 function sortTableDate(row) {
   var table, rows, switching, i, x, y, shouldSwitch;
-  table = $(".sortTableDate");
+  table = jQuery(".sortTableDate");
   switching = true;
   /*Make a loop that will continue until
   no switching has been done:*/
@@ -1408,9 +1408,9 @@ function sortTableDate(row) {
       one from current row and one from the next:*/
       x = rows[i].getElementsByTagName("TD")[row];
       y = rows[i + 1].getElementsByTagName("TD")[row];
-      let first = $(x).text().split('.')
+      let first = jQuery(x).text().split('.')
       let [d1, m1, y1] = [parseInt(first[0]), parseInt(first[1]), parseInt(first[2])]
-      let second = $(y).text().split('.')
+      let second = jQuery(y).text().split('.')
       let [d2, m2, y2] = [parseInt(second[0]), parseInt(second[1]), parseInt(second[2])]
       //check if the two rows should switch place:
       if (y1 > y2) {
@@ -1435,133 +1435,133 @@ function sortTableDate(row) {
 }
 
 
-$('#autoriMenu').on('click', function () {
-  $('.autoriMenu').toggle();
+jQuery('#autoriMenu').on('click', function () {
+  jQuery('.autoriMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var autoriMenu = $(".autoriMenu");
+jQuery(document).on('mouseup', function (e) {
+  var autoriMenu = jQuery(".autoriMenu");
   if (!autoriMenu.is(e.target) &&
     autoriMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.autoriMenu')) {
+    !jQuery(e.target).is('.autoriMenu')) {
     autoriMenu.slideUp();
   }
 });
 
-$('#kategorijeMenu').on('click', function () {
-  $('.kategorijeMenu').toggle();
+jQuery('#kategorijeMenu').on('click', function () {
+  jQuery('.kategorijeMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var kategorijeMenu = $(".kategorijeMenu");
+jQuery(document).on('mouseup', function (e) {
+  var kategorijeMenu = jQuery(".kategorijeMenu");
   if (!kategorijeMenu.is(e.target) &&
     kategorijeMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.kategorijeMenu')) {
+    !jQuery(e.target).is('.kategorijeMenu')) {
     kategorijeMenu.slideUp();
   }
 });
 
 
-$('.uceniciDrop-toggle').on('click', function () {
-  $('.uceniciMenu').toggle();
+jQuery('.uceniciDrop-toggle').on('click', function () {
+  jQuery('.uceniciMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var uceniciMenu = $(".uceniciMenu");
+jQuery(document).on('mouseup', function (e) {
+  var uceniciMenu = jQuery(".uceniciMenu");
   if (!uceniciMenu.is(e.target) &&
     uceniciMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.uceniciMenu')) {
+    !jQuery(e.target).is('.uceniciMenu')) {
     uceniciMenu.slideUp();
   }
 });
 
-$('.bibliotekariDrop-toggle').on('click', function () {
-  $('.bibliotekariMenu').toggle();
+jQuery('.bibliotekariDrop-toggle').on('click', function () {
+  jQuery('.bibliotekariMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var bibliotekariMenu = $(".bibliotekariMenu");
+jQuery(document).on('mouseup', function (e) {
+  var bibliotekariMenu = jQuery(".bibliotekariMenu");
   if (!bibliotekariMenu.is(e.target) &&
     bibliotekariMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.bibliotekariMenu')) {
+    !jQuery(e.target).is('.bibliotekariMenu')) {
     bibliotekariMenu.slideUp();
   }
 });
 
-$('#knjigeMenu').on('click', function () {
-  $('.knjigeMenu').toggle();
+jQuery('#knjigeMenu').on('click', function () {
+  jQuery('.knjigeMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var knjigeMenu = $(".knjigeMenu");
+jQuery(document).on('mouseup', function (e) {
+  var knjigeMenu = jQuery(".knjigeMenu");
   if (!knjigeMenu.is(e.target) &&
     knjigeMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.knjigeMenu')) {
+    !jQuery(e.target).is('.knjigeMenu')) {
     knjigeMenu.slideUp();
   }
 });
 
-$('#transakcijeMenu').on('click', function () {
-  $('.transakcijeMenu').toggle();
+jQuery('#transakcijeMenu').on('click', function () {
+  jQuery('.transakcijeMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var transakcijeMenu = $(".transakcijeMenu");
+jQuery(document).on('mouseup', function (e) {
+  var transakcijeMenu = jQuery(".transakcijeMenu");
   if (!transakcijeMenu.is(e.target) &&
     transakcijeMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.transakcijeMenu')) {
+    !jQuery(e.target).is('.transakcijeMenu')) {
     transakcijeMenu.slideUp();
   }
 });
 
-$('.datumDrop-toggle').on('click', function () {
-  $('.datumMenu').toggle();
+jQuery('.datumDrop-toggle').on('click', function () {
+  jQuery('.datumMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var datumMenu = $(".datumMenu");
+jQuery(document).on('mouseup', function (e) {
+  var datumMenu = jQuery(".datumMenu");
   if (!datumMenu.is(e.target) &&
     datumMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.datumMenu')) {
+    !jQuery(e.target).is('.datumMenu')) {
     datumMenu.slideUp();
   }
 });
 
-$('.zadrzavanjeDrop-toggle').on('click', function () {
-  $('.zadrzavanjeMenu').toggle();
+jQuery('.zadrzavanjeDrop-toggle').on('click', function () {
+  jQuery('.zadrzavanjeMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var datumMenu = $(".zadrzavanjeMenu");
+jQuery(document).on('mouseup', function (e) {
+  var datumMenu = jQuery(".zadrzavanjeMenu");
   if (!datumMenu.is(e.target) &&
     datumMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.zadrzavanjeMenu')) {
+    !jQuery(e.target).is('.zadrzavanjeMenu')) {
     datumMenu.slideUp();
   }
 });
 
-$('.vracanjeDrop-toggle').on('click', function () {
-  $('.vracanjeMenu').toggle();
+jQuery('.vracanjeDrop-toggle').on('click', function () {
+  jQuery('.vracanjeMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var vracanjeMenu = $(".vracanjeMenu");
+jQuery(document).on('mouseup', function (e) {
+  var vracanjeMenu = jQuery(".vracanjeMenu");
   if (!vracanjeMenu.is(e.target) &&
     vracanjeMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.vracanjeMenu')) {
+    !jQuery(e.target).is('.vracanjeMenu')) {
     vracanjeMenu.slideUp();
   }
 });
 
-$('.statusDrop-toggle').on('click', function () {
-  $('.statusMenu').toggle();
+jQuery('.statusDrop-toggle').on('click', function () {
+  jQuery('.statusMenu').toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var statusMenu = $(".statusMenu");
+jQuery(document).on('mouseup', function (e) {
+  var statusMenu = jQuery(".statusMenu");
   if (!statusMenu.is(e.target) &&
     statusMenu.has(e.target).length === 0 &&
-    !$(e.target).is('.statusMenu')) {
+    !jQuery(e.target).is('.statusMenu')) {
     statusMenu.slideUp();
   }
 });
@@ -1698,7 +1698,7 @@ function dropdown() {
 }
 
 function funkcijaDatumVracanja() {
-  var selectedDate = new Date($('#datumIzdavanja').val());
+  var selectedDate = new Date(jQuery('#datumIzdavanja').val());
   var numberOfDaysToAdd = 20;
 
   selectedDate.setDate(selectedDate.getDate() + numberOfDaysToAdd);
@@ -1713,70 +1713,70 @@ function funkcijaDatumVracanja() {
 }
 
 //click on one and check all checkboxes (vratiKnjigu.php)
-$('.select-all').click(function () {
-  if ($(this).is(':checked')) {
-    $('.form-checkbox').prop('checked', true);
-    $('tr').addClass('bg-gray-200');
+jQuery('.select-all').click(function () {
+  if (jQuery(this).is(':checked')) {
+    jQuery('.form-checkbox').prop('checked', true);
+    jQuery('tr').addClass('bg-gray-200');
   } else {
-    $('.form-checkbox').prop('checked', false);
-    $('tr').removeClass('bg-gray-200');
+    jQuery('.form-checkbox').prop('checked', false);
+    jQuery('tr').removeClass('bg-gray-200');
   }
 });
 
-$('.form-checkbox').click(function () {
-  if ($(this).is(':checked')) {
-    $(this).closest('tr').addClass('bg-gray-200');
+jQuery('.form-checkbox').click(function () {
+  if (jQuery(this).is(':checked')) {
+    jQuery(this).closest('tr').addClass('bg-gray-200');
   } else {
-    $(this).closest('tr').removeClass('bg-gray-200');
+    jQuery(this).closest('tr').removeClass('bg-gray-200');
   }
 })
 
 // Edit book multimedia - delete (hide) image
-$('#hide-image1').click(function () {
-  $('.hiddenImage1').hide();
+jQuery('#hide-image1').click(function () {
+  jQuery('.hiddenImage1').hide();
 });
 
-$('#hide-image2').click(function () {
-  $('.hiddenImage2').hide();
+jQuery('#hide-image2').click(function () {
+  jQuery('.hiddenImage2').hide();
 });
 
 // Header - dropdown for create button
-$('#dropdownCreate').click(function () {
-  $('.dropdown-create').toggle();
+jQuery('#dropdownCreate').click(function () {
+  jQuery('.dropdown-create').toggle();
 });
 
-$(document).on('mouseup', function (e) {
-  var dropdownCreate = $(".dropdown-create");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownCreate = jQuery(".dropdown-create");
   if (!dropdownCreate.is(e.target) &&
     dropdownCreate.has(e.target).length === 0 &&
-    !$(e.target).is('.dropdownCreate')) {
+    !jQuery(e.target).is('.dropdownCreate')) {
     dropdownCreate.slideUp();
   }
 });
 
 // Header - dropdown for profile button
-$('#dropdownProfile').click(function () {
-  $('.dropdown-profile').toggle();
+jQuery('#dropdownProfile').click(function () {
+  jQuery('.dropdown-profile').toggle();
 });
 
-$(document).on('mouseup', function (e) {
-  var dropdownProfile = $(".dropdown-profile");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownProfile = jQuery(".dropdown-profile");
   if (!dropdownProfile.is(e.target) &&
     dropdownProfile.has(e.target).length === 0 &&
-    !$(e.target).is('.dropdownProfile')) {
+    !jQuery(e.target).is('.dropdownProfile')) {
     dropdownProfile.slideUp();
   }
 });
 
 // Category - table - dropdown
-$(".dotsCategory").click(function () {
-  var dotsCategory = $(this);
+jQuery(".dotsCategory").click(function () {
+  var dotsCategory = jQuery(this);
   var dropdownCategory = dotsCategory.closest("td").find(".dropdown-category");
   dropdownCategory.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownCategory = $(".dropdown-category");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownCategory = jQuery(".dropdown-category");
   if (!dropdownCategory.is(e.target) &&
     dropdownCategory.has(e.target).length === 0) {
     dropdownCategory.slideUp();
@@ -1784,14 +1784,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Genre - table - dropdown
-$(".dotsGenre").click(function () {
-  var dotsGenre = $(this);
+jQuery(".dotsGenre").click(function () {
+  var dotsGenre = jQuery(this);
   var dropdownGenre = dotsGenre.closest("td").find(".dropdown-genre");
   dropdownGenre.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownGenre = $(".dropdown-genre");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownGenre = jQuery(".dropdown-genre");
   if (!dropdownGenre.is(e.target) &&
     dropdownGenre.has(e.target).length === 0) {
     dropdownGenre.slideUp();
@@ -1799,14 +1799,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Publisher - table - dropdown
-$(".dotsPublisher").click(function () {
-  var dotsPublisher = $(this);
+jQuery(".dotsPublisher").click(function () {
+  var dotsPublisher = jQuery(this);
   var dropdownPublisher = dotsPublisher.closest("td").find(".dropdown-publisher");
   dropdownPublisher.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownPublisher = $(".dropdown-publisher");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownPublisher = jQuery(".dropdown-publisher");
   if (!dropdownPublisher.is(e.target) &&
     dropdownPublisher.has(e.target).length === 0) {
     dropdownPublisher.slideUp();
@@ -1814,14 +1814,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Book bind - table - dropdown
-$(".dotsBookBind").click(function () {
-  var dotsBookBind = $(this);
+jQuery(".dotsBookBind").click(function () {
+  var dotsBookBind = jQuery(this);
   var dropdownBookBind = dotsBookBind.closest("td").find(".dropdown-book-bind");
   dropdownBookBind.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownBookBind = $(".dropdown-book-bind");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownBookBind = jQuery(".dropdown-book-bind");
   if (!dropdownBookBind.is(e.target) &&
     dropdownBookBind.has(e.target).length === 0) {
     dropdownBookBind.slideUp();
@@ -1829,14 +1829,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Format - table - dropdown
-$(".dotsFormat").click(function () {
-  var dotsFormat = $(this);
+jQuery(".dotsFormat").click(function () {
+  var dotsFormat = jQuery(this);
   var dropdownFormat = dotsFormat.closest("td").find(".dropdown-format");
   dropdownFormat.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownFormat = $(".dropdown-format");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownFormat = jQuery(".dropdown-format");
   if (!dropdownFormat.is(e.target) &&
     dropdownFormat.has(e.target).length === 0) {
     dropdownFormat.slideUp();
@@ -1844,14 +1844,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Script - table - dropdown
-$(".dotsScript").click(function () {
-  var dotsScript = $(this);
+jQuery(".dotsScript").click(function () {
+  var dotsScript = jQuery(this);
   var dropdownScript = dotsScript.closest("td").find(".dropdown-script");
   dropdownScript.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownScript = $(".dropdown-script");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownScript = jQuery(".dropdown-script");
   if (!dropdownScript.is(e.target) &&
     dropdownScript.has(e.target).length === 0) {
     dropdownScript.slideUp();
@@ -1859,14 +1859,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Librarian - table - dropdown
-$(".dotsLibrarian").click(function () {
-  var dotsLibrarian = $(this);
+jQuery(".dotsLibrarian").click(function () {
+  var dotsLibrarian = jQuery(this);
   var dropdownLibrarian = dotsLibrarian.closest("td").find(".dropdown-librarian");
   dropdownLibrarian.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownLibrarian = $(".dropdown-librarian");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownLibrarian = jQuery(".dropdown-librarian");
   if (!dropdownLibrarian.is(e.target) &&
     dropdownLibrarian.has(e.target).length === 0) {
     dropdownLibrarian.slideUp();
@@ -1874,14 +1874,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - table - dropdown
-$(".dotsStudent").click(function () {
-  var dotsStudent = $(this);
+jQuery(".dotsStudent").click(function () {
+  var dotsStudent = jQuery(this);
   var dropdownStudent = dotsStudent.closest("td").find(".dropdown-student");
   dropdownStudent.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownStudent = $(".dropdown-student");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownStudent = jQuery(".dropdown-student");
   if (!dropdownStudent.is(e.target) &&
     dropdownStudent.has(e.target).length === 0) {
     dropdownStudent.slideUp();
@@ -1889,98 +1889,98 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - profile - dropdown
-$(".dotsStudentProfile").click(function () {
-  $(".dropdown-student-profile").toggle();
+jQuery(".dotsStudentProfile").click(function () {
+  jQuery(".dropdown-student-profile").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownStudentProfile = $(".dropdown-student-profile");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownStudentProfile = jQuery(".dropdown-student-profile");
   if (!dropdownStudentProfile.is(e.target) &&
     dropdownStudentProfile.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsStudentProfile')) {
+    !jQuery(e.target).is('.dotsStudentProfile')) {
     dropdownStudentProfile.slideUp();
   }
 });
 
 // Student - profile - record - dropdown
-$(".dotsStudentProfileEvidencija").click(function () {
-  $(".dropdown-student-profile-evidencija").toggle();
+jQuery(".dotsStudentProfileEvidencija").click(function () {
+  jQuery(".dropdown-student-profile-evidencija").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownStudentProfileEvidencija = $(".dropdown-student-profile-evidencija");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownStudentProfileEvidencija = jQuery(".dropdown-student-profile-evidencija");
   if (!dropdownStudentProfileEvidencija.is(e.target) &&
     dropdownStudentProfileEvidencija.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsStudentProfileEvidencija')) {
+    !jQuery(e.target).is('.dotsStudentProfileEvidencija')) {
     dropdownStudentProfileEvidencija.slideUp();
   }
 });
 
 // Student - profile - vracene knjige - dropdown
-$(".dotsUcenikVraceneKnjige").click(function () {
-  $(".ucenik-vracene-knjige").toggle();
+jQuery(".dotsUcenikVraceneKnjige").click(function () {
+  jQuery(".ucenik-vracene-knjige").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownUcenikVraceneKnjige = $(".ucenik-vracene-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownUcenikVraceneKnjige = jQuery(".ucenik-vracene-knjige");
   if (!dropdownUcenikVraceneKnjige.is(e.target) &&
     dropdownUcenikVraceneKnjige.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsUcenikVraceneKnjige')) {
+    !jQuery(e.target).is('.dotsUcenikVraceneKnjige')) {
     dropdownUcenikVraceneKnjige.slideUp();
   }
 });
 
 // Student - profile - knjige u prekoracenju - dropdown
-$(".dotsUcenikKnjigePrekoracenje").click(function () {
-  $(".ucenik-prekoracenje-knjige").toggle();
+jQuery(".dotsUcenikKnjigePrekoracenje").click(function () {
+  jQuery(".ucenik-prekoracenje-knjige").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownUcenikKnjigePrekoracenje = $(".ucenik-prekoracenje-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownUcenikKnjigePrekoracenje = jQuery(".ucenik-prekoracenje-knjige");
   if (!dropdownUcenikKnjigePrekoracenje.is(e.target) &&
     dropdownUcenikKnjigePrekoracenje.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsUcenikKnjigePrekoracenje')) {
+    !jQuery(e.target).is('.dotsUcenikKnjigePrekoracenje')) {
     dropdownUcenikKnjigePrekoracenje.slideUp();
   }
 });
 
 // Student - profile - aktivne knjige - dropdown
-$(".dotsUcenikKnjigeAktivne").click(function () {
-  $(".ucenik-aktivne-knjige").toggle();
+jQuery(".dotsUcenikKnjigeAktivne").click(function () {
+  jQuery(".ucenik-aktivne-knjige").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownUcenikKnjigeAktivne = $(".ucenik-aktivne-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownUcenikKnjigeAktivne = jQuery(".ucenik-aktivne-knjige");
   if (!dropdownUcenikKnjigeAktivne.is(e.target) &&
     dropdownUcenikKnjigeAktivne.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsUcenikKnjigeAktivne')) {
+    !jQuery(e.target).is('.dotsUcenikKnjigeAktivne')) {
     dropdownUcenikKnjigeAktivne.slideUp();
   }
 });
 
 // Student - profile - arhivirane knjige - dropdown
-$(".dotsUcenikKnjigeArhivirane").click(function () {
-  $(".ucenik-arhivirane-knjige").toggle();
+jQuery(".dotsUcenikKnjigeArhivirane").click(function () {
+  jQuery(".ucenik-arhivirane-knjige").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownUcenikKnjigeArhivirane = $(".ucenik-arhivirane-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownUcenikKnjigeArhivirane = jQuery(".ucenik-arhivirane-knjige");
   if (!dropdownUcenikKnjigeArhivirane.is(e.target) &&
     dropdownUcenikKnjigeArhivirane.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsUcenikKnjigeArhivirane')) {
+    !jQuery(e.target).is('.dotsUcenikKnjigeArhivirane')) {
     dropdownUcenikKnjigeArhivirane.slideUp();
   }
 });
 
 // Student - profile - book record - dropdown
-$(".dotsStudentProfileBookRecord").click(function () {
-  var dotsStudentProfileBookRecord = $(this);
+jQuery(".dotsStudentProfileBookRecord").click(function () {
+  var dotsStudentProfileBookRecord = jQuery(this);
   var dropdownStudentProfileEvidencijaKnjige = dotsStudentProfileBookRecord.closest("td").find(".dropdown-student-profile-evidencija-knjige");
   dropdownStudentProfileEvidencijaKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownStudentProfileEvidencijaKnjige = $(".dropdown-student-profile-evidencija-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownStudentProfileEvidencijaKnjige = jQuery(".dropdown-student-profile-evidencija-knjige");
   if (!dropdownStudentProfileEvidencijaKnjige.is(e.target) &&
     dropdownStudentProfileEvidencijaKnjige.has(e.target).length === 0) {
     dropdownStudentProfileEvidencijaKnjige.slideUp();
@@ -1988,14 +1988,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - profile - vracene knjige tabela - dropdown
-$(".dotsUcenikVraceneKnjigeTabela").click(function () {
-  var dotsUcenikVraceneKnjigeTabela = $(this);
+jQuery(".dotsUcenikVraceneKnjigeTabela").click(function () {
+  var dotsUcenikVraceneKnjigeTabela = jQuery(this);
   var dropdownUcenikVraceneKnjigeTabela = dotsUcenikVraceneKnjigeTabela.closest("td").find(".ucenik-vracene-knjige-tabela");
   dropdownUcenikVraceneKnjigeTabela.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownUcenikVraceneKnjigeTabela = $(".ucenik-vracene-knjige-tabela");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownUcenikVraceneKnjigeTabela = jQuery(".ucenik-vracene-knjige-tabela");
   if (!dropdownUcenikVraceneKnjigeTabela.is(e.target) &&
     dropdownUcenikVraceneKnjigeTabela.has(e.target).length === 0) {
     dropdownUcenikVraceneKnjigeTabela.slideUp();
@@ -2003,14 +2003,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - profile - knjige u prekoracenju tabela - dropdown
-$(".dotsUcenikPrekoracenjeKnjige").click(function () {
-  var dotsUcenikPrekoracenjeKnjige = $(this);
+jQuery(".dotsUcenikPrekoracenjeKnjige").click(function () {
+  var dotsUcenikPrekoracenjeKnjige = jQuery(this);
   var dropdownPrekoracenjeKnjige = dotsUcenikPrekoracenjeKnjige.closest("td").find(".ucenik-prekoracenje-knjige-tabela");
   dropdownPrekoracenjeKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownPrekoracenjeKnjige = $(".ucenik-prekoracenje-knjige-tabela");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownPrekoracenjeKnjige = jQuery(".ucenik-prekoracenje-knjige-tabela");
   if (!dropdownPrekoracenjeKnjige.is(e.target) &&
     dropdownPrekoracenjeKnjige.has(e.target).length === 0) {
     dropdownPrekoracenjeKnjige.slideUp();
@@ -2018,14 +2018,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - profile - aktivne knjige tabela - dropdown
-$(".dotsUcenikAktivneKnjige").click(function () {
-  var dotsUcenikAktivneKnjige = $(this);
+jQuery(".dotsUcenikAktivneKnjige").click(function () {
+  var dotsUcenikAktivneKnjige = jQuery(this);
   var dropdownAktivneKnjige = dotsUcenikAktivneKnjige.closest("td").find(".ucenik-aktivne-knjige-tabela");
   dropdownAktivneKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownAktivneKnjige = $(".ucenik-aktivne-knjige-tabela");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownAktivneKnjige = jQuery(".ucenik-aktivne-knjige-tabela");
   if (!dropdownAktivneKnjige.is(e.target) &&
     dropdownAktivneKnjige.has(e.target).length === 0) {
     dropdownAktivneKnjige.slideUp();
@@ -2033,14 +2033,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Student - profile - arhivirane knjige tabela - dropdown
-$(".dotsUcenikArhiviraneKnjige").click(function () {
-  var dotsUcenikArhiviraneKnjige = $(this);
+jQuery(".dotsUcenikArhiviraneKnjige").click(function () {
+  var dotsUcenikArhiviraneKnjige = jQuery(this);
   var dropdownArhiviraneKnjige = dotsUcenikArhiviraneKnjige.closest("td").find(".ucenik-arhivirane-knjige-tabela");
   dropdownArhiviraneKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownArhiviraneKnjige = $(".ucenik-arhivirane-knjige-tabela");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownArhiviraneKnjige = jQuery(".ucenik-arhivirane-knjige-tabela");
   if (!dropdownArhiviraneKnjige.is(e.target) &&
     dropdownArhiviraneKnjige.has(e.target).length === 0) {
     dropdownArhiviraneKnjige.slideUp();
@@ -2048,28 +2048,28 @@ $(document).on('mouseup', function (e) {
 });
 
 // Librarian - profile - dropdown
-$(".dotsLibrarianProfile").click(function () {
-  $(".dropdown-librarian-profile").toggle();
+jQuery(".dotsLibrarianProfile").click(function () {
+  jQuery(".dropdown-librarian-profile").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownLibrarianProfile = $(".dropdown-librarian-profile");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownLibrarianProfile = jQuery(".dropdown-librarian-profile");
   if (!dropdownLibrarianProfile.is(e.target) &&
     dropdownLibrarianProfile.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsLibrarianProfile')) {
+    !jQuery(e.target).is('.dotsLibrarianProfile')) {
     dropdownLibrarianProfile.slideUp();
   }
 });
 
 // Izdate knjige - dropdown
-$(".dotsIzdateKnjige").click(function () {
-  var dotsIzdateKnjige = $(this);
+jQuery(".dotsIzdateKnjige").click(function () {
+  var dotsIzdateKnjige = jQuery(this);
   var dropdownIzdateKnjige = dotsIzdateKnjige.closest("td").find(".izdate-knjige");
   dropdownIzdateKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIzdateKnjige = $(".izdate-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIzdateKnjige = jQuery(".izdate-knjige");
   if (!dropdownIzdateKnjige.is(e.target) &&
     dropdownIzdateKnjige.has(e.target).length === 0) {
     dropdownIzdateKnjige.slideUp();
@@ -2077,14 +2077,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Vracene knjige - dropdown
-$(".dotsVraceneKnjige").click(function () {
-  var dotsVraceneKnjige = $(this);
+jQuery(".dotsVraceneKnjige").click(function () {
+  var dotsVraceneKnjige = jQuery(this);
   var dropdownVraceneKnjige = dotsVraceneKnjige.closest("td").find(".vracene-knjige");
   dropdownVraceneKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownVraceneKnjige = $(".vracene-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownVraceneKnjige = jQuery(".vracene-knjige");
   if (!dropdownVraceneKnjige.is(e.target) &&
     dropdownVraceneKnjige.has(e.target).length === 0) {
     dropdownVraceneKnjige.slideUp();
@@ -2092,14 +2092,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Knjige u prekoracenju - dropdown
-$(".dotsKnjigePrekoracenje").click(function () {
-  var dotsKnjigePrekoracenje = $(this);
+jQuery(".dotsKnjigePrekoracenje").click(function () {
+  var dotsKnjigePrekoracenje = jQuery(this);
   var dropdownKnjigePrekoracenje = dotsKnjigePrekoracenje.closest("td").find(".knjige-prekoracenje");
   dropdownKnjigePrekoracenje.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownKnjigePrekoracenje = $(".knjige-prekoracenje");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownKnjigePrekoracenje = jQuery(".knjige-prekoracenje");
   if (!dropdownKnjigePrekoracenje.is(e.target) &&
     dropdownKnjigePrekoracenje.has(e.target).length === 0) {
     dropdownKnjigePrekoracenje.slideUp();
@@ -2107,14 +2107,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Aktivne rezervacije - dropdown
-$(".dotsAktivneRezervacije").click(function () {
-  var dotsAktivneRezervacije = $(this);
+jQuery(".dotsAktivneRezervacije").click(function () {
+  var dotsAktivneRezervacije = jQuery(this);
   var dropdownAktivneRezervacije = dotsAktivneRezervacije.closest("td").find(".aktivne-rezervacije");
   dropdownAktivneRezervacije.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownAktivneRezervacije = $(".aktivne-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownAktivneRezervacije = jQuery(".aktivne-rezervacije");
   if (!dropdownAktivneRezervacije.is(e.target) &&
     dropdownAktivneRezervacije.has(e.target).length === 0) {
     dropdownAktivneRezervacije.slideUp();
@@ -2122,14 +2122,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Arhivirane rezervacije - dropdown
-$(".dotsArhiviraneRezervacije").click(function () {
-  var dotsArhiviraneRezervacije = $(this);
+jQuery(".dotsArhiviraneRezervacije").click(function () {
+  var dotsArhiviraneRezervacije = jQuery(this);
   var dropdownArhiviraneRezervacije = dotsArhiviraneRezervacije.closest("td").find(".arhivirane-rezervacije");
   dropdownArhiviraneRezervacije.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownArhiviraneRezervacije = $(".arhivirane-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownArhiviraneRezervacije = jQuery(".arhivirane-rezervacije");
   if (!dropdownArhiviraneRezervacije.is(e.target) &&
     dropdownArhiviraneRezervacije.has(e.target).length === 0) {
     dropdownArhiviraneRezervacije.slideUp();
@@ -2137,14 +2137,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Autori - dropdown
-$(".dotsAutori").click(function () {
-  var dotsAutori = $(this);
+jQuery(".dotsAutori").click(function () {
+  var dotsAutori = jQuery(this);
   var dropdownAutori = dotsAutori.closest("td").find(".dropdown-autori");
   dropdownAutori.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownAutori = $(".dropdown-autori");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownAutori = jQuery(".dropdown-autori");
   if (!dropdownAutori.is(e.target) &&
     dropdownAutori.has(e.target).length === 0) {
     dropdownAutori.slideUp();
@@ -2152,28 +2152,28 @@ $(document).on('mouseup', function (e) {
 });
 
 // Autori - profile - dropdown
-$(".dotsAutor").click(function () {
-  $(".dropdown-autor").toggle();
+jQuery(".dotsAutor").click(function () {
+  jQuery(".dropdown-autor").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownAutor = $(".dropdown-autor");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownAutor = jQuery(".dropdown-autor");
   if (!dropdownAutor.is(e.target) &&
     dropdownAutor.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsAutor')) {
+    !jQuery(e.target).is('.dotsAutor')) {
     dropdownAutor.slideUp();
   }
 });
 
 // Knjige - dropdown
-$(".dotsKnjige").click(function () {
-  var dotsKnjige = $(this);
+jQuery(".dotsKnjige").click(function () {
+  var dotsKnjige = jQuery(this);
   var dropdownKnjige = dotsKnjige.closest("td").find(".dropdown-knjige");
   dropdownKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownKnjige = $(".dropdown-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownKnjige = jQuery(".dropdown-knjige");
   if (!dropdownKnjige.is(e.target) &&
     dropdownKnjige.has(e.target).length === 0) {
     dropdownKnjige.slideUp();
@@ -2181,210 +2181,210 @@ $(document).on('mouseup', function (e) {
 });
 
 // Knjiga - osnovni detalji - dropdown
-$(".dotsKnjigaOsnovniDetalji").click(function () {
-  $(".dropdown-knjiga-osnovni-detalji").toggle();
+jQuery(".dotsKnjigaOsnovniDetalji").click(function () {
+  jQuery(".dropdown-knjiga-osnovni-detalji").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownKnjigaOsnovniDetalji = $(".dropdown-knjiga-osnovni-detalji");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownKnjigaOsnovniDetalji = jQuery(".dropdown-knjiga-osnovni-detalji");
   if (!dropdownKnjigaOsnovniDetalji.is(e.target) &&
     dropdownKnjigaOsnovniDetalji.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsKnjigaOsnovniDetalji')) {
+    !jQuery(e.target).is('.dotsKnjigaOsnovniDetalji')) {
     dropdownKnjigaOsnovniDetalji.slideUp();
   }
 });
 
 // Izdaj knjigu - dropdown
-$(".dotsIzdajKnjigu").click(function () {
-  $(".dropdown-izdaj-knjigu").toggle();
+jQuery(".dotsIzdajKnjigu").click(function () {
+  jQuery(".dropdown-izdaj-knjigu").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIzdajKnjigu = $(".dropdown-izdaj-knjigu");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIzdajKnjigu = jQuery(".dropdown-izdaj-knjigu");
   if (!dropdownIzdajKnjigu.is(e.target) &&
     dropdownIzdajKnjigu.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIzdajKnjigu')) {
+    !jQuery(e.target).is('.dotsIzdajKnjigu')) {
     dropdownIzdajKnjigu.slideUp();
   }
 });
 
 // Izdaj knjigu error - dropdown
-$(".dotsIzdajKnjiguError").click(function () {
-  $(".dropdown-izdaj-knjigu-error").toggle();
+jQuery(".dotsIzdajKnjiguError").click(function () {
+  jQuery(".dropdown-izdaj-knjigu-error").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIzdajKnjiguError = $(".dropdown-izdaj-knjigu-error");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIzdajKnjiguError = jQuery(".dropdown-izdaj-knjigu-error");
   if (!dropdownIzdajKnjiguError.is(e.target) &&
     dropdownIzdajKnjiguError.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIzdajKnjiguError')) {
+    !jQuery(e.target).is('.dotsIzdajKnjiguError')) {
     dropdownIzdajKnjiguError.slideUp();
   }
 });
 
 // Vrati knjigu - dropdown
-$(".dotsVratiKnjigu").click(function () {
-  $(".dropdown-vrati-knjigu").toggle();
+jQuery(".dotsVratiKnjigu").click(function () {
+  jQuery(".dropdown-vrati-knjigu").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownVratiKnjigu = $(".dropdown-vrati-knjigu");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownVratiKnjigu = jQuery(".dropdown-vrati-knjigu");
   if (!dropdownVratiKnjigu.is(e.target) &&
     dropdownVratiKnjigu.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsVratiKnjigu')) {
+    !jQuery(e.target).is('.dotsVratiKnjigu')) {
     dropdownVratiKnjigu.slideUp();
   }
 });
 
 // Rezervisi knjigu - dropdown
-$(".dotsRezervisiKnjigu").click(function () {
-  $(".dropdown-rezervisi-knjigu").toggle();
+jQuery(".dotsRezervisiKnjigu").click(function () {
+  jQuery(".dropdown-rezervisi-knjigu").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownRezervisiKnjigu = $(".dropdown-rezervisi-knjigu");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownRezervisiKnjigu = jQuery(".dropdown-rezervisi-knjigu");
   if (!dropdownRezervisiKnjigu.is(e.target) &&
     dropdownRezervisiKnjigu.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsRezervisiKnjigu')) {
+    !jQuery(e.target).is('.dotsRezervisiKnjigu')) {
     dropdownRezervisiKnjigu.slideUp();
   }
 });
 
 // Otpisi knjigu - dropdown
-$(".dotsOtpisiKnjigu").click(function () {
-  $(".dropdown-otpisi-knjigu").toggle();
+jQuery(".dotsOtpisiKnjigu").click(function () {
+  jQuery(".dropdown-otpisi-knjigu").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownOtpisiKnjigu = $(".dropdown-otpisi-knjigu");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownOtpisiKnjigu = jQuery(".dropdown-otpisi-knjigu");
   if (!dropdownOtpisiKnjigu.is(e.target) &&
     dropdownOtpisiKnjigu.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsOtpisiKnjigu')) {
+    !jQuery(e.target).is('.dotsOtpisiKnjigu')) {
     dropdownOtpisiKnjigu.slideUp();
   }
 });
 
 // Knjiga - specifikacija - dropdown
-$(".dotsKnjigaSpecifikacija").click(function () {
-  $(".dropdown-knjiga-specifikacija").toggle();
+jQuery(".dotsKnjigaSpecifikacija").click(function () {
+  jQuery(".dropdown-knjiga-specifikacija").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownKnjigaSpecifikacija = $(".dropdown-knjiga-specifikacija");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownKnjigaSpecifikacija = jQuery(".dropdown-knjiga-specifikacija");
   if (!dropdownKnjigaSpecifikacija.is(e.target) &&
     dropdownKnjigaSpecifikacija.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsKnjigaSpecifikacija')) {
+    !jQuery(e.target).is('.dotsKnjigaSpecifikacija')) {
     dropdownKnjigaSpecifikacija.slideUp();
   }
 });
 
 // Knjiga - multimedija - dropdown
-$(".dotsKnjigaMultimedija").click(function () {
-  $(".dropdown-knjiga-multimedija").toggle();
+jQuery(".dotsKnjigaMultimedija").click(function () {
+  jQuery(".dropdown-knjiga-multimedija").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownKnjigaMultimedija = $(".dropdown-knjiga-multimedija");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownKnjigaMultimedija = jQuery(".dropdown-knjiga-multimedija");
   if (!dropdownKnjigaMultimedija.is(e.target) &&
     dropdownKnjigaMultimedija.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsKnjigaMultimedija')) {
+    !jQuery(e.target).is('.dotsKnjigaMultimedija')) {
     dropdownKnjigaMultimedija.slideUp();
   }
 });
 
 // Iznajmljivanje - izdate - dropdown
-$(".dotsIznajmljivanjeIzdate").click(function () {
-  $(".dropdown-iznajmljivanje-izdate").toggle();
+jQuery(".dotsIznajmljivanjeIzdate").click(function () {
+  jQuery(".dropdown-iznajmljivanje-izdate").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeIzdate = $(".dropdown-iznajmljivanje-izdate");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeIzdate = jQuery(".dropdown-iznajmljivanje-izdate");
   if (!dropdownIznajmljivanjeIzdate.is(e.target) &&
     dropdownIznajmljivanjeIzdate.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIznajmljivanjeIzdate')) {
+    !jQuery(e.target).is('.dotsIznajmljivanjeIzdate')) {
     dropdownIznajmljivanjeIzdate.slideUp();
   }
 });
 
 // Iznajmljivanje - vracene - dropdown
-$(".dotsIznajmljivanjeVracene").click(function () {
-  $(".dropdown-iznajmljivanje-vracene").toggle();
+jQuery(".dotsIznajmljivanjeVracene").click(function () {
+  jQuery(".dropdown-iznajmljivanje-vracene").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeVracene = $(".dropdown-iznajmljivanje-vracene");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeVracene = jQuery(".dropdown-iznajmljivanje-vracene");
   if (!dropdownIznajmljivanjeVracene.is(e.target) &&
     dropdownIznajmljivanjeVracene.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIznajmljivanjeVracene')) {
+    !jQuery(e.target).is('.dotsIznajmljivanjeVracene')) {
     dropdownIznajmljivanjeVracene.slideUp();
   }
 });
 
 // Iznajmljivanje - prekoracenje - dropdown
-$(".dotsIznajmljivanjePrekoracenje").click(function () {
-  $(".dropdown-iznajmljivanje-prekoracenje").toggle();
+jQuery(".dotsIznajmljivanjePrekoracenje").click(function () {
+  jQuery(".dropdown-iznajmljivanje-prekoracenje").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjePrekoracenje = $(".dropdown-iznajmljivanje-prekoracenje");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjePrekoracenje = jQuery(".dropdown-iznajmljivanje-prekoracenje");
   if (!dropdownIznajmljivanjePrekoracenje.is(e.target) &&
     dropdownIznajmljivanjePrekoracenje.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIznajmljivanjePrekoracenje')) {
+    !jQuery(e.target).is('.dotsIznajmljivanjePrekoracenje')) {
     dropdownIznajmljivanjePrekoracenje.slideUp();
   }
 });
 
 // Iznajmljivanje - aktivne rezervacije - dropdown
-$(".dotsIznajmljivanjeAktivneRezervacije").click(function () {
-  $(".dropdown-iznajmljivanje-aktivne-rezervacije").toggle();
+jQuery(".dotsIznajmljivanjeAktivneRezervacije").click(function () {
+  jQuery(".dropdown-iznajmljivanje-aktivne-rezervacije").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeAktivneRezervacije = $(".dropdown-iznajmljivanje-aktivne-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeAktivneRezervacije = jQuery(".dropdown-iznajmljivanje-aktivne-rezervacije");
   if (!dropdownIznajmljivanjeAktivneRezervacije.is(e.target) &&
     dropdownIznajmljivanjeAktivneRezervacije.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIznajmljivanjeAktivneRezervacije')) {
+    !jQuery(e.target).is('.dotsIznajmljivanjeAktivneRezervacije')) {
     dropdownIznajmljivanjeAktivneRezervacije.slideUp();
   }
 });
 
 // Iznajmljivanje - arhivirane rezervacije - dropdown
-$(".dotsIznajmljivanjeArhiviraneRezervacije").click(function () {
-  $(".dropdown-iznajmljivanje-arhivirane-rezervacije").toggle();
+jQuery(".dotsIznajmljivanjeArhiviraneRezervacije").click(function () {
+  jQuery(".dropdown-iznajmljivanje-arhivirane-rezervacije").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeArhiviraneRezervacije = $(".dropdown-iznajmljivanje-arhivirane-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeArhiviraneRezervacije = jQuery(".dropdown-iznajmljivanje-arhivirane-rezervacije");
   if (!dropdownIznajmljivanjeArhiviraneRezervacije.is(e.target) &&
     dropdownIznajmljivanjeArhiviraneRezervacije.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIznajmljivanjeArhiviraneRezervacije')) {
+    !jQuery(e.target).is('.dotsIznajmljivanjeArhiviraneRezervacije')) {
     dropdownIznajmljivanjeArhiviraneRezervacije.slideUp();
   }
 });
 
 // Izdavanje - detalji - dropdown
-$(".dotsIzdavanjeDetalji").click(function () {
-  $(".dropdown-izdavanje-detalji").toggle();
+jQuery(".dotsIzdavanjeDetalji").click(function () {
+  jQuery(".dropdown-izdavanje-detalji").toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIzdavanjeDetalji = $(".dropdown-izdavanje-detalji");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIzdavanjeDetalji = jQuery(".dropdown-izdavanje-detalji");
   if (!dropdownIzdavanjeDetalji.is(e.target) &&
     dropdownIzdavanjeDetalji.has(e.target).length === 0 &&
-    !$(e.target).is('.dotsIzdavanjeDetalji')) {
+    !jQuery(e.target).is('.dotsIzdavanjeDetalji')) {
     dropdownIzdavanjeDetalji.slideUp();
   }
 });
 
 // Iznajmljivanje - izdate knjige - tabela - dropdown
-$(".dotsIznajmljivanjeIzdateKnjige").click(function () {
-  var dotsIznajmljivanjeIzdateKnjige = $(this);
+jQuery(".dotsIznajmljivanjeIzdateKnjige").click(function () {
+  var dotsIznajmljivanjeIzdateKnjige = jQuery(this);
   var dropdownIznajmljivanjeIzdateKnjige = dotsIznajmljivanjeIzdateKnjige.closest("td").find(".iznajmljivanje-izdate-knjige");
   dropdownIznajmljivanjeIzdateKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeIzdateKnjige = $(".iznajmljivanje-izdate-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeIzdateKnjige = jQuery(".iznajmljivanje-izdate-knjige");
   if (!dropdownIznajmljivanjeIzdateKnjige.is(e.target) &&
     dropdownIznajmljivanjeIzdateKnjige.has(e.target).length === 0) {
     dropdownIznajmljivanjeIzdateKnjige.slideUp();
@@ -2392,14 +2392,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Iznajmljivanje - vracene knjige - tabela - dropdown
-$(".dotsIznajmljivanjeVraceneKnjige").click(function () {
-  var dotsIznajmljivanjeVraceneKnjige = $(this);
+jQuery(".dotsIznajmljivanjeVraceneKnjige").click(function () {
+  var dotsIznajmljivanjeVraceneKnjige = jQuery(this);
   var dropdownIznajmljivanjeVraceneKnjige = dotsIznajmljivanjeVraceneKnjige.closest("td").find(".iznajmljivanje-vracene-knjige");
   dropdownIznajmljivanjeVraceneKnjige.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeVraceneKnjige = $(".iznajmljivanje-vracene-knjige");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeVraceneKnjige = jQuery(".iznajmljivanje-vracene-knjige");
   if (!dropdownIznajmljivanjeVraceneKnjige.is(e.target) &&
     dropdownIznajmljivanjeVraceneKnjige.has(e.target).length === 0) {
     dropdownIznajmljivanjeVraceneKnjige.slideUp();
@@ -2407,14 +2407,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Iznajmljivanje - knjige u prekoracenju - tabela - dropdown
-$(".dotsIznajmljivanjeKnjigePrekoracenje").click(function () {
-  var dotsIznajmljivanjeKnjigePrekoracenje = $(this);
+jQuery(".dotsIznajmljivanjeKnjigePrekoracenje").click(function () {
+  var dotsIznajmljivanjeKnjigePrekoracenje = jQuery(this);
   var dropdownIznajmljivanjeKnjigePrekoracenje = dotsIznajmljivanjeKnjigePrekoracenje.closest("td").find(".iznajmljivanje-knjige-prekoracenje");
   dropdownIznajmljivanjeKnjigePrekoracenje.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeKnjigePrekoracenje = $(".iznajmljivanje-knjige-prekoracenje");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeKnjigePrekoracenje = jQuery(".iznajmljivanje-knjige-prekoracenje");
   if (!dropdownIznajmljivanjeKnjigePrekoracenje.is(e.target) &&
     dropdownIznajmljivanjeKnjigePrekoracenje.has(e.target).length === 0) {
     dropdownIznajmljivanjeKnjigePrekoracenje.slideUp();
@@ -2422,14 +2422,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Iznajmljivanje - aktivne rezervacije - tabela - dropdown
-$(".dotsIznajmljivanjeAktivneRezervacijeTabela").click(function () {
-  var dotsIznajmljivanjeAktivneRezervacijeTabela = $(this);
+jQuery(".dotsIznajmljivanjeAktivneRezervacijeTabela").click(function () {
+  var dotsIznajmljivanjeAktivneRezervacijeTabela = jQuery(this);
   var dropdownIznajmljivanjeAktivneRezervacijeTabela = dotsIznajmljivanjeAktivneRezervacijeTabela.closest("td").find(".iznajmljivanje-aktivne-rezervacije");
   dropdownIznajmljivanjeAktivneRezervacijeTabela.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeAktivneRezervacijeTabela = $(".iznajmljivanje-aktivne-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeAktivneRezervacijeTabela = jQuery(".iznajmljivanje-aktivne-rezervacije");
   if (!dropdownIznajmljivanjeAktivneRezervacijeTabela.is(e.target) &&
     dropdownIznajmljivanjeAktivneRezervacijeTabela.has(e.target).length === 0) {
     dropdownIznajmljivanjeAktivneRezervacijeTabela.slideUp();
@@ -2437,14 +2437,14 @@ $(document).on('mouseup', function (e) {
 });
 
 // Iznajmljivanje - aktivne rezervacije - tabela - dropdown
-$(".dotsIznajmljivanjeArhiviraneRezervacijeTabela").click(function () {
-  var dotsIznajmljivanjeArhiviraneRezervacijeTabela = $(this);
+jQuery(".dotsIznajmljivanjeArhiviraneRezervacijeTabela").click(function () {
+  var dotsIznajmljivanjeArhiviraneRezervacijeTabela = jQuery(this);
   var dropdownIznajmljivanjeArhiviraneRezervacijeTabela = dotsIznajmljivanjeArhiviraneRezervacijeTabela.closest("td").find(".iznajmljivanje-arhivirane-rezervacije");
   dropdownIznajmljivanjeArhiviraneRezervacijeTabela.toggle();
 })
 
-$(document).on('mouseup', function (e) {
-  var dropdownIznajmljivanjeArhiviraneRezervacijeTabela = $(".iznajmljivanje-arhivirane-rezervacije");
+jQuery(document).on('mouseup', function (e) {
+  var dropdownIznajmljivanjeArhiviraneRezervacijeTabela = jQuery(".iznajmljivanje-arhivirane-rezervacije");
   if (!dropdownIznajmljivanjeArhiviraneRezervacijeTabela.is(e.target) &&
     dropdownIznajmljivanjeArhiviraneRezervacijeTabela.has(e.target).length === 0) {
     dropdownIznajmljivanjeArhiviraneRezervacijeTabela.slideUp();
@@ -2452,63 +2452,63 @@ $(document).on('mouseup', function (e) {
 });
 
 //click on one and check all checkboxes(evidencijaKnjiga.php)
-$('.checkAll').click(function () {
-  if ($(this).is(':checked')) {
-    $('.form-checkbox').prop('checked', true);
-    $('tr').addClass('bg-gray-200');
-    $('tr').children().eq(1).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
-    $('tr').children().eq(2).html('')
-    $('tr').children().eq(3).html('')
-    $('tr').children().eq(4).html('')
-    $('tr').children().eq(5).html('')
-    $('tr').children().eq(6).html('')
-    $('tr').children().eq(7).html('')
-    $('tr').children().eq(8).html('')
+jQuery('.checkAll').click(function () {
+  if (jQuery(this).is(':checked')) {
+    jQuery('.form-checkbox').prop('checked', true);
+    jQuery('tr').addClass('bg-gray-200');
+    jQuery('tr').children().eq(1).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
+    jQuery('tr').children().eq(2).html('')
+    jQuery('tr').children().eq(3).html('')
+    jQuery('tr').children().eq(4).html('')
+    jQuery('tr').children().eq(5).html('')
+    jQuery('tr').children().eq(6).html('')
+    jQuery('tr').children().eq(7).html('')
+    jQuery('tr').children().eq(8).html('')
   } else {
-    $('.form-checkbox').prop('checked', false);
-    $('tr').removeClass('bg-gray-200');
-    $('tr').children().eq(1).html('Naziv knjige<a href="#"><i class="ml-2 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>')
-    $('tr').children().eq(2).html('Autor<i class="ml-2 fas fa-filter"></i><div id="autoriDropdown" class="autoriMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset"><li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"><input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search" onkeyup="filterFunction(" searchAutori ", "autoriDropdown ")" id="searchAutori"><br> <button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900"><i class="fas fa-search"></i></button></li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 2 </p>  </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg>  </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 3  </p> </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic 4  </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /></svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 5 </p> </li><li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"><input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 6 </p> </li> </div></ul><div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">  Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a> <a href="#"  class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"> Ponisti <i class="fas fa-times ml-[4px]"></i> </a> </div></div>')
-    $('tr').children().eq(3).html('Kategorija<i class="ml-2 fas fa-filter"></i><div id="kategorijeDropdown" class="kategorijeMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset">  <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"> <input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search"  onkeyup="filterFunction("searchKategorije", "kategorijeDropdown")"  id="searchKategorije"><br><button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">  <i class="fas fa-search"></i> </button> </li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />   </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romani </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Udzbenici </p></li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Drame </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg>  </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Naucna fantastika </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romedije  </p>  </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"   viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Trileri </p> </li> </div> </ul> <div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]"> Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a>  <a href="#" class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">  Ponisti <i class="fas fa-times ml-[4px]"></i> </a></div></div>')
-    $('tr').children().eq(4).html('Na raspolaganju')
-    $('tr').children().eq(5).html('Rezervisano')
-    $('tr').children().eq(6).html('Izdato')
-    $('tr').children().eq(7).html('U prekoracenju')
-    $('tr').children().eq(8).html('Ukupna kolicina')
+    jQuery('.form-checkbox').prop('checked', false);
+    jQuery('tr').removeClass('bg-gray-200');
+    jQuery('tr').children().eq(1).html('Naziv knjige<a href="#"><i class="ml-2 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>')
+    jQuery('tr').children().eq(2).html('Autor<i class="ml-2 fas fa-filter"></i><div id="autoriDropdown" class="autoriMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset"><li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"><input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search" onkeyup="filterFunction(" searchAutori ", "autoriDropdown ")" id="searchAutori"><br> <button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900"><i class="fas fa-search"></i></button></li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 2 </p>  </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg>  </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 3  </p> </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic 4  </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /></svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 5 </p> </li><li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"><input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 6 </p> </li> </div></ul><div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">  Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a> <a href="#"  class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"> Ponisti <i class="fas fa-times ml-[4px]"></i> </a> </div></div>')
+    jQuery('tr').children().eq(3).html('Kategorija<i class="ml-2 fas fa-filter"></i><div id="kategorijeDropdown" class="kategorijeMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset">  <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"> <input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search"  onkeyup="filterFunction("searchKategorije", "kategorijeDropdown")"  id="searchKategorije"><br><button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">  <i class="fas fa-search"></i> </button> </li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />   </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romani </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Udzbenici </p></li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Drame </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg>  </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Naucna fantastika </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romedije  </p>  </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"   viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Trileri </p> </li> </div> </ul> <div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]"> Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a>  <a href="#" class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">  Ponisti <i class="fas fa-times ml-[4px]"></i> </a></div></div>')
+    jQuery('tr').children().eq(4).html('Na raspolaganju')
+    jQuery('tr').children().eq(5).html('Rezervisano')
+    jQuery('tr').children().eq(6).html('Izdato')
+    jQuery('tr').children().eq(7).html('U prekoracenju')
+    jQuery('tr').children().eq(8).html('Ukupna kolicina')
   }
 });
-$('.checkOthers').change(function () {
-  var checked = $('#myTable').find(':checked').length;
+jQuery('.checkOthers').change(function () {
+  var checked = jQuery('#myTable').find(':checked').length;
   if (checked == 1) {
-    $(this).addClass('bg-gray-200');
-    $('tr').children().eq(1).html('<a class="text-blue-800" href="knjigaOsnovniDetalji.php"><i class="far fa-copy"></i>  Pogledaj detalje</a>')
-    $('tr').children().eq(2).html('<a class="text-blue-800" href="editKnjiga.php.php"><i class="far fa-copy"></i>  Izmjeni knjigu</a>')
-    $('tr').children().eq(3).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fas fa-level-up-alt ml-4"></i>  Otpisi knjigu</a>')
-    $('tr').children().eq(4).html('<a class="text-blue-800" href="izdajKnjigu.php"><i class="far fa-hand-scissors"></i>  Izdaj knjigu</a>')
-    $('tr').children().eq(5).html('<a class="text-blue-800" href="vratiKnjigu.php"><i class="fas fa-redo-alt"></i>  Vrati knjigu</a>')
-    $('tr').children().eq(6).html('<a class="text-blue-800" href="otpisiKnjigu.php"><i class="far fa-calendar-check"></i>  Rezervisi knjigu</a>')
-    $('tr').children().eq(7).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
-    $('tr').children().eq(8).html('')
+    jQuery(this).addClass('bg-gray-200');
+    jQuery('tr').children().eq(1).html('<a class="text-blue-800" href="knjigaOsnovniDetalji.php"><i class="far fa-copy"></i>  Pogledaj detalje</a>')
+    jQuery('tr').children().eq(2).html('<a class="text-blue-800" href="editKnjiga.php.php"><i class="far fa-copy"></i>  Izmjeni knjigu</a>')
+    jQuery('tr').children().eq(3).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fas fa-level-up-alt ml-4"></i>  Otpisi knjigu</a>')
+    jQuery('tr').children().eq(4).html('<a class="text-blue-800" href="izdajKnjigu.php"><i class="far fa-hand-scissors"></i>  Izdaj knjigu</a>')
+    jQuery('tr').children().eq(5).html('<a class="text-blue-800" href="vratiKnjigu.php"><i class="fas fa-redo-alt"></i>  Vrati knjigu</a>')
+    jQuery('tr').children().eq(6).html('<a class="text-blue-800" href="otpisiKnjigu.php"><i class="far fa-calendar-check"></i>  Rezervisi knjigu</a>')
+    jQuery('tr').children().eq(7).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
+    jQuery('tr').children().eq(8).html('')
   } else if (checked >= 2) {
-    $(this).addClass('bg-gray-200');
-    $('tr').children().eq(1).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
-    $('tr').children().eq(2).html('')
-    $('tr').children().eq(3).html('')
-    $('tr').children().eq(4).html('')
-    $('tr').children().eq(5).html('')
-    $('tr').children().eq(6).html('')
-    $('tr').children().eq(7).html('')
-    $('tr').children().eq(8).html('')
+    jQuery(this).addClass('bg-gray-200');
+    jQuery('tr').children().eq(1).html('<a class="text-blue-800 border-l-2 border-gray-200" href="otpisiKnjigu.php"><i class="fa fa-trash ml-4"></i>  Izbrisi knjigu</a>')
+    jQuery('tr').children().eq(2).html('')
+    jQuery('tr').children().eq(3).html('')
+    jQuery('tr').children().eq(4).html('')
+    jQuery('tr').children().eq(5).html('')
+    jQuery('tr').children().eq(6).html('')
+    jQuery('tr').children().eq(7).html('')
+    jQuery('tr').children().eq(8).html('')
   } else {
-    $('.form-checkbox').prop('checked', false);
-    $('tr').removeClass('bg-gray-200');
-    $('tr').children().eq(1).html('Naziv knjige<a href="#"><i class="ml-2 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>')
-    $('tr').children().eq(2).html('Autor<i class="ml-2 fas fa-filter"></i><div id="autoriDropdown" class="autoriMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset"><li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"><input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search" onkeyup="filterFunction(" searchAutori ", "autoriDropdown ")" id="searchAutori"><br> <button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900"><i class="fas fa-search"></i></button></li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 2 </p>  </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg>  </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 3  </p> </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic 4  </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /></svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 5 </p> </li><li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"><input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 6 </p> </li> </div></ul><div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">  Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a> <a href="#"  class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"> Ponisti <i class="fas fa-times ml-[4px]"></i> </a> </div></div>')
-    $('tr').children().eq(3).html('Kategorija<i class="ml-2 fas fa-filter"></i><div id="kategorijeDropdown" class="kategorijeMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset">  <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"> <input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search"  onkeyup="filterFunction("searchKategorije", "kategorijeDropdown")"  id="searchKategorije"><br><button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">  <i class="fas fa-search"></i> </button> </li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />   </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romani </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Udzbenici </p></li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Drame </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg>  </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Naucna fantastika </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romedije  </p>  </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"   viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Trileri </p> </li> </div> </ul> <div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]"> Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a>  <a href="#" class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">  Ponisti <i class="fas fa-times ml-[4px]"></i> </a></div></div>')
-    $('tr').children().eq(4).html('Na raspolaganju')
-    $('tr').children().eq(5).html('Rezervisano')
-    $('tr').children().eq(6).html('Izdato')
-    $('tr').children().eq(7).html('U prekoracenju')
-    $('tr').children().eq(8).html('Ukupna kolicina')
+    jQuery('.form-checkbox').prop('checked', false);
+    jQuery('tr').removeClass('bg-gray-200');
+    jQuery('tr').children().eq(1).html('Naziv knjige<a href="#"><i class="ml-2 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>')
+    jQuery('tr').children().eq(2).html('Autor<i class="ml-2 fas fa-filter"></i><div id="autoriDropdown" class="autoriMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset"><li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"><input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search" onkeyup="filterFunction(" searchAutori ", "autoriDropdown ")" id="searchAutori"><br> <button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900"><i class="fas fa-search"></i></button></li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 2 </p>  </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg>  </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 3  </p> </li>  <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Autor Autorovic 4  </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /></svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 5 </p> </li><li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"><input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg> </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Autor Autorovic 6 </p> </li> </div></ul><div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">  Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a> <a href="#"  class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]"> Ponisti <i class="fas fa-times ml-[4px]"></i> </a> </div></div>')
+    jQuery('tr').children().eq(3).html('Kategorija<i class="ml-2 fas fa-filter"></i><div id="kategorijeDropdown" class="kategorijeMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-t pin-l border-2 border-gray-300"><ul class="border-b-2 border-gray-300 list-reset">  <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300"> <input class="w-full h-10 px-2 border-2 rounded focus:outline-none" placeholder="Search"  onkeyup="filterFunction("searchKategorije", "kategorijeDropdown")"  id="searchKategorije"><br><button class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">  <i class="fas fa-search"></i> </button> </li><div class="h-[200px] scroll font-normal"> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />   </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romani </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div  class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current" viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Udzbenici </p></li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0"> <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label>  <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Drame </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200"> <label class="flex items-center justify-start">  <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />  </svg>  </div> </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600"> Naucna fantastika </p> </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500"> <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"  viewBox="0 0 20 20">  <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div> </label> <p class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Romedije  </p>  </li> <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">  <label class="flex items-center justify-start"> <div   class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">  <input type="checkbox" class="absolute opacity-0">  <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"   viewBox="0 0 20 20"> <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" /> </svg> </div>  </label> <p  class="block p-2 text-black cursor-pointer group-hover:text-blue-600">  Trileri </p> </li> </div> </ul> <div class="flex pt-[10px] text-white "> <a href="#" class="py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]"> Sacuvaj <i class="fas fa-check ml-[4px]"></i> </a>  <a href="#" class="ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">  Ponisti <i class="fas fa-times ml-[4px]"></i> </a></div></div>')
+    jQuery('tr').children().eq(4).html('Na raspolaganju')
+    jQuery('tr').children().eq(5).html('Rezervisano')
+    jQuery('tr').children().eq(6).html('Izdato')
+    jQuery('tr').children().eq(7).html('U prekoracenju')
+    jQuery('tr').children().eq(8).html('Ukupna kolicina')
   }
 });

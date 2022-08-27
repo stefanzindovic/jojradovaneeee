@@ -1,7 +1,4 @@
-@vite('./resources/js/jquery.min.js')
-@vite('./resources/js/autoUpdatePolicy.js')
-@vite('./resources/js/validations/policyInputsRestrictions.js')
-@vite('./resources/js/app.js')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <!-- File upload -->
@@ -10,3 +7,9 @@
 
 <!-- Datatables -->
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+<!-- Local -->
+@vite('./resources/js/autoUpdatePolicy.js')
+@vite('./resources/js/validations/policyInputsRestrictions.js')
+@vite('./resources/js/dataTables.js')
+@vite('./resources/js/app.js')

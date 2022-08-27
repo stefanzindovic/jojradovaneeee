@@ -23,16 +23,15 @@
                     <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
                         <thead class="bg-[#EFF3F6]">
                         <tr class="border-b-[1px] border-[#e4dfdf]">
-                            <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
+                            <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500" data-orderable="false">
                                 <label class="inline-flex items-center">
                                     <input type="checkbox" class="form-checkbox">
                                 </label>
                             </th>
-                            <th style="min-width: 75%; max-width: 75%;" class="px-4 py-4 leading-4 tracking-wider text-left">Naziv kategorije<a href="#"><i
-                                        class="ml-3 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a>
+                            <th style="min-width: 75%; max-width: 75%;" class="px-4 py-4 leading-4 tracking-wider text-left">Naziv kategorije<a href="#"></a>
                             </th>
                             <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Opis</th>
-                            <th class="px-4 py-4"> </th>
+                            <th class="px-4 py-4" data-orderable="false"> </th>
                         </tr>
                         </thead>
                         <tbody class="bg-white">
@@ -47,7 +46,9 @@
                                     <div style="width: 45px; height: 45px;" class="rounded-full">
                                         <img style="border-radius: 100%" class="w-full h-full" src="{{asset($category->icon)}}" alt="Ikonica">
                                     </div>
-                                    <p class="ml-4 text-center">{{ $category->title }}</p>
+                                    <a class="flex" href="{{ route('settings.categories.show', $category->id) }}">
+                                        <p class="ml-4 text-center">{{ $category->title }}</p>
+                                    </a>
                                 </td>
                                 <td style="width: 75%; height: 75%;" class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $category->description }}</td>
                                 <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
@@ -79,67 +80,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
-                    <div class="flex flex-row items-center justify-end mt-2">
-                        <div>
-                            <p class="inline text-md">
-                                Rows per page:
-                            </p>
-                            <select
-                                class=" text-gray-700 bg-white rounded-md w-[46px] focus:outline-none focus:ring-primary-500 focus:border-primary-500 text-md"
-                                name="ucenici">
-                                <option value="">
-                                    20
-                                </option>
-                                <option value="">
-                                    Option1
-                                </option>
-                                <option value="">
-                                    Option2
-                                </option>
-                                <option value="">
-                                    Option3
-                                </option>
-                                <option value="">
-                                    Option4
-                                </option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <nav class="relative z-0 inline-flex">
-                                <div>
-                                    <a href="#"
-                                       class="relative inline-flex items-center px-4 py-2 -ml-px font-medium leading-5 transition duration-150 ease-in-out bg-white text-md focus:z-10 focus:outline-none">
-                                        1 of 1
-                                    </a>
-                                </div>
-                                <div>
-                                    <a href="#"
-                                       class="relative inline-flex items-center px-2 py-2 font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white text-md rounded-l-md hover:text-gray-400 focus:z-10 focus:outline-none"
-                                       aria-label="Previous"
-                                       v-on:click.prevent="changePage(pagination.current_page - 1)">
-                                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                  d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                                  clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div v-if="pagination.current_page < pagination.last_page">
-                                    <a href="#"
-                                       class="relative inline-flex items-center px-2 py-2 -ml-px font-medium leading-5 text-gray-500 transition duration-150 ease-in-out bg-white text-md rounded-r-md hover:text-gray-400 focus:z-10 focus:outline-none"
-                                       aria-label="Next">
-                                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                                            <path fill-rule="evenodd"
-                                                  d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                                  clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </div>
-                            </nav>
-                        </div>
-                    </div>
                 @else
                     <p class="px-4 py-4 text-sm leading-5 whitespace-no-wrap text-center">Nema dostupnih kategorija</p>
                 @endif
