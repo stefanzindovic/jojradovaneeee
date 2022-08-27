@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('id', 'DESC')->get();
         return view('..pages.settings.category', compact('categories'));
     }
 
