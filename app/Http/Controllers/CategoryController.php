@@ -8,6 +8,8 @@ use App\Http\Requests\UpdateCategoryRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
@@ -35,19 +37,27 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCategoryRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreCategoryRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'title' => 'required|regex: /([A-Za-z0-9\s])\w+/g|min:4|max:18',
+            'description' =>'required|min:10|max:512',
+            'icon' => 'nullable|file|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+        // upload image if image exists
+
+        return back()->with('successMessage', 'Nova kategorija je uspješno kreirana.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Category $category)
     {
@@ -58,7 +68,7 @@ class CategoryController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Category $category)
     {
@@ -70,7 +80,7 @@ class CategoryController extends Controller
      *
      * @param  \App\Http\Requests\UpdateCategoryRequest  $request
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UpdateCategoryRequest $request, Category $category)
     {
@@ -81,7 +91,7 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Category $category)
     {
