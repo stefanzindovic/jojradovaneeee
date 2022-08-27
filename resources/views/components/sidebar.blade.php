@@ -128,7 +128,7 @@
                     class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[22px] text-[#707070] fas fa-cog"></i>
                 <div class="hidden sidebar-item">
                     <p class="transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                        Settings</p>
+                        Podešavanja</p>
                 </div>
             </span>
         </a>
