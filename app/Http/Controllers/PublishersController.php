@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePublishersRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class PublishersController extends Controller
@@ -37,9 +38,9 @@ class PublishersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StorePublishersRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(StorePublishersRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(StorePublishersRequest $request): RedirectResponse
     {
         $input = $request->validate([
             'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
@@ -55,7 +56,7 @@ class PublishersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Publishers  $publishers
+     * @param Publishers $publishers
      * @return Response
      */
     public function show(Publishers $publishers)
@@ -66,30 +67,37 @@ class PublishersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Publishers  $publishers
-     * @return Response
+     * @param Publishers $publisher
+     * @return Application|Factory|View
      */
-    public function edit(Publishers $publishers)
+    public function edit(Publishers $publisher): Application|Factory|View
     {
-        //
+        return view('..pages.settings.editPublisher', compact('publisher'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdatePublishersRequest  $request
-     * @param  \App\Models\Publishers  $publishers
-     * @return Response
+     * @param UpdatePublishersRequest $request
+     * @param Publishers $publisher
+     * @return RedirectResponse
      */
-    public function update(UpdatePublishersRequest $request, Publishers $publishers)
+    public function update(UpdatePublishersRequest $request, Publishers $publisher): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+        ]);
+
+        $publisher->name = $input['name'];
+        $publisher->update();
+
+        return to_route('settings.publishers.index')->with('successMessage', 'Informacije o izdavaču su uspješno izmijenjene.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Publishers  $publishers
+     * @param Publishers $publishers
      * @return Response
      */
     public function destroy(Publishers $publishers)
