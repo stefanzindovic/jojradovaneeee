@@ -109,7 +109,7 @@ class FormatController extends Controller
      * @param Format $format
      * @return RedirectResponse
      */
-    public function destroy(Format $format)
+    public function destroy(Format $format): RedirectResponse
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
 
