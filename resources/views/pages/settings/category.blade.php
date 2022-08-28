@@ -22,7 +22,7 @@
                 @if($categories->isNotEmpty())
                     <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]" id="myTable">
                         <thead class="bg-[#EFF3F6] w-full">
-                            <tr class="border-b-[1px] border-[#e4dfdf]">
+                            <tr class="border-b-[1px] border-[#e4dfdf]" >
                                 <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500" data-orderable="false">
                                     <label class="inline-flex items-center">
                                         <input type="checkbox" class="form-checkbox">
@@ -46,9 +46,7 @@
                                     <div style="width: 45px; height: 45px;" class="rounded-full">
                                         <img style="border-radius: 100%" class="w-full h-full" src="{{$category->icon !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/categories/' . $category->icon) : asset('imgs/' . $category->icon)}}" alt="Ikonica">
                                     </div>
-                                    <a class="flex" href="{{ route('settings.categories.show', $category->id) }}">
-                                        <p class="ml-4 text-center">{{ $category->title }}</p>
-                                    </a>
+                                    <p class="ml-4 text-center">{{ $category->title }}</p>
                                 </td>
                                 <td style="width: 75%; height: 75%;" class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $category->description }}</td>
                                 <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
