@@ -27,7 +27,7 @@
     <a href="{{ route('settings.covers.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.covers.index') active-book-nav @endif">
         Povezi
     </a>
-    <a href="settingsFormat.php" class="inline ml-[70px] hover:text-blue-800">
+    <a href="{{ route('settings.formats.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.formats.index') active-book-nav @endif">
         Formati
     </a>
     <a href="settingsPismo.php" class="inline ml-[70px] hover:text-blue-800">
