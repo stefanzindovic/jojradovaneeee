@@ -149,10 +149,14 @@ class CategoryController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Category $category
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category): RedirectResponse
     {
-        //
+        //TODO: Add check if this category is used in some of existing books before delete action (if exists, return error message)
+
+        $category->delete();
+
+        return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
     }
 }

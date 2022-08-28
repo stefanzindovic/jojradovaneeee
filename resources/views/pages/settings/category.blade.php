@@ -66,12 +66,17 @@
                                                     <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                                     <span class="px-4 py-0">Izmijeni</span>
                                                 </a>
-                                                <a href="{{ route('settings.categories.destroy', $category->id) }}" tabindex="0"
-                                                   class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                   role="menuitem">
-                                                    <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izbrisi</span>
-                                                </a>
+                                                <form method="POST" action="{{route('settings.categories.destroy', $category->id)}}">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" tabindex="0"
+                                                       class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                       role="menuitem" onclick="alert('Da li ste sigurni da želite da obrišete ovu kategoriju?');">
+                                                        <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Izbriši</span>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
