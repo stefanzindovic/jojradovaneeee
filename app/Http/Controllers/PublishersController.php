@@ -46,11 +46,15 @@ class PublishersController extends Controller
             'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
         ]);
 
-        $model = new Publishers();
-        $model->name = $input['name'];
-        $model->save();
+        try {
+            $model = new Publishers();
+            $model->name = $input['name'];
+            $model->save();
 
-        return to_route('settings.publishers.index')->with('successMessage', 'Novi izdavač je dodan na spisak.');
+            return to_route('settings.publishers.index')->with('successMessage', 'Novi izdavač je dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -88,10 +92,14 @@ class PublishersController extends Controller
             'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
         ]);
 
-        $publisher->name = $input['name'];
-        $publisher->update();
+        try {
+            $publisher->name = $input['name'];
+            $publisher->update();
 
-        return to_route('settings.publishers.index')->with('successMessage', 'Informacije o izdavaču su uspješno izmijenjene.');
+            return to_route('settings.publishers.index')->with('successMessage', 'Informacije o izdavaču su uspješno izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -104,8 +112,12 @@ class PublishersController extends Controller
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
 
-        $publisher->delete();
+        try {
+            $publisher->delete();
 
-        return to_route('settings.publishers.index')->with('successMessage', 'Izdavač je uspješno obrisan.');
+            return to_route('settings.publishers.index')->with('successMessage', 'Izdavač je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }

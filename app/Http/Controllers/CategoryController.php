@@ -75,7 +75,7 @@ class CategoryController extends Controller
             return to_route('settings.categories.index')->with('successMessage', 'Nova kategorija je uspješno kreirana.')->with('successMessage', 'Nova kategorija je dodana na spisak.');
 
         } catch (\Exception $e) {
-            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
@@ -149,7 +149,7 @@ class CategoryController extends Controller
 
             return to_route('settings.categories.index')->with('successMessage', 'Informacije o kategoriji su uspješno izmijenjene.');
         } catch (\Exception $e) {
-            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
@@ -168,7 +168,7 @@ class CategoryController extends Controller
 
             return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
         } catch (\Exception $e) {
-            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 }
