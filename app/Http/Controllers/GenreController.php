@@ -101,10 +101,14 @@ class GenreController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Genre $genre
-     * @return Response
+     * @return RedirectResponse
      */
-    public function destroy(Genre $genre)
+    public function destroy(Genre $genre): RedirectResponse
     {
-        //
+        //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+
+        $genre->delete();
+
+        return to_route('settings.genres.index')->with('successMessage', 'Žanr je uspješno obrisan.');
     }
 }
