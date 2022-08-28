@@ -82,11 +82,11 @@ class FormatController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateFormatRequest  $request
+     * @param UpdateFormatRequest $request
      * @param Format $format
      * @return RedirectResponse
      */
-    public function update(UpdateFormatRequest $request, Format $format)
+    public function update(UpdateFormatRequest $request, Format $format): RedirectResponse
     {
         $input = $request->validate([
             'name' => 'required|regex: /^([A-Za-z0-9-_.\s])+$/|min:2|max:25'
