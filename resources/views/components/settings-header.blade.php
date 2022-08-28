@@ -19,18 +19,18 @@
         Kategorije
     </a>
     <a href="{{ route('settings.genres.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.genres.index') active-book-nav @endif">
-        Zanrovi
+        Žanrovi
     </a>
-    <a href="settingsIzdavac.php" class="inline ml-[70px] hover:text-blue-800">
-        Izdavac
+    <a href="{{ route('settings.publishers.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.publishers.index') active-book-nav @endif">
+        Izdavači
     </a>
     <a href="settingsPovez.php" class="inline ml-[70px] hover:text-blue-800">
-        Povez
+        Povezi
     </a>
     <a href="settingsFormat.php" class="inline ml-[70px] hover:text-blue-800">
-        Format
+        Formati
     </a>
     <a href="settingsPismo.php" class="inline ml-[70px] hover:text-blue-800">
-        Pismo
+        Pisma
     </a>
 </div>
