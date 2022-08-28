@@ -35,12 +35,24 @@ class CoverController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreCoverRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreCoverRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StoreCoverRequest $request)
+    public function store(StoreCoverRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+            $model = new Cover();
+            $model->name = $input['name'];
+            $model->save();
+
+            return to_route('settings.covers.index')->with('successMessage', 'Novi povez je dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('successMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**

@@ -8,11 +8,13 @@
 <!-- Datatables -->
 <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
-<!-- Local -->
-@vite('./resources/js/autoUpdatePolicy.js')
+<!-- Validations -->
 @vite('./resources/js/validations/policyInputsRestrictions.js')
 @vite('./resources/js/validations/categoriesValidation.js')
 @vite('./resources/js/validations/genresValidation.js')
 @vite('./resources/js/validations/publishersValidations.js')
+@vite('./resources/js/validations/coversValidation.js')
+<!-- Custom -->
+@vite('./resources/js/autoUpdatePolicy.js')
 @vite('./resources/js/dataTables.js')
 @vite('./resources/js/app.js')
