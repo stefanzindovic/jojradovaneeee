@@ -53,7 +53,7 @@ class GenreController extends Controller
 
         $model->save();
 
-        return to_route('settings.genres.index');
+        return to_route('settings.genres.index')->with('successMessage', 'Novi žanr je uspješno dodan na spisak.');
     }
 
     /**
@@ -94,7 +94,7 @@ class GenreController extends Controller
         $genre->title = $input['title'];
         $genre->update();
 
-        return to_route('settings.genres.index');
+        return to_route('settings.genres.index')->with('successMessage', 'Informacije o žanru su uspješno izmijenjene.');
     }
 
     /**
