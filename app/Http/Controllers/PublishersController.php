@@ -97,11 +97,15 @@ class PublishersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param Publishers $publishers
-     * @return Response
+     * @param Publishers $publisher
+     * @return RedirectResponse
      */
-    public function destroy(Publishers $publishers)
+    public function destroy(Publishers $publisher): RedirectResponse
     {
-        //
+        //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+
+        $publisher->delete();
+
+        return to_route('settings.publishers.index')->with('successMessage', 'Izdavač je uspješno obrisan.');
     }
 }
