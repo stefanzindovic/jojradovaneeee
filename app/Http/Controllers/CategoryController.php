@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use TheSeer\Tokenizer\Exception;
 
 class CategoryController extends Controller
 {
@@ -63,16 +64,19 @@ class CategoryController extends Controller
             );
         }
 
-        // Generate new category model
-        $model = new Category();
+        try {
+            // Generate new category model
+            $model = new Category();
+            $model->title = $input['title'];
+            $model->description = $input['description'];
+            $model->icon = $genericName;
+            $model->save();
 
-        $model->title = $input['title'];
-        $model->description = $input['description'];
-        $model->icon = $genericName;
+            return to_route('settings.categories.index')->with('successMessage', 'Nova kategorija je uspješno kreirana.')->with('successMessage', 'Nova kategorija je dodana na spisak.');
 
-        $model->save();
-
-        return to_route('settings.categories.index')->with('successMessage', 'Nova kategorija je uspješno kreirana.');
+        } catch (\Exception $e) {
+            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -112,37 +116,41 @@ class CategoryController extends Controller
             'icon' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
-        $genericName = $category->icon;
-        if($request->hasFile('icon')) {
-            $uploadPath = 'uploads/categories/';
-
-            // remove old icon from storage
-            $oldIconPath = $uploadPath . $category->icon;
-            if(Storage::disk('public')->exists($oldIconPath)) {
-                Storage::disk('public')->delete($oldIconPath);
-            }
-
-            // upload new icon
+        try {
+            $genericName = $category->icon;
             if($request->hasFile('icon')) {
-                $uploadedFile = $request->file('icon');
-                $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+                $uploadPath = 'uploads/categories/';
 
-                Storage::disk('public')->putFileAs(
-                    $uploadPath,
-                    $uploadedFile,
-                    $genericName
-                );
+                // remove old icon from storage
+                $oldIconPath = $uploadPath . $category->icon;
+                if(Storage::disk('public')->exists($oldIconPath)) {
+                    Storage::disk('public')->delete($oldIconPath);
+                }
+
+                // upload new icon
+                if($request->hasFile('icon')) {
+                    $uploadedFile = $request->file('icon');
+                    $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadPath,
+                        $uploadedFile,
+                        $genericName
+                    );
+                }
             }
+
+            // update category in db
+            $category->title = $input['title'];
+            $category->description = $input['description'];
+            $category->icon = $genericName;
+
+            $category->update();
+
+            return to_route('settings.categories.index')->with('successMessage', 'Informacije o kategoriji su uspješno izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
-
-        // update category in db
-        $category->title = $input['title'];
-        $category->description = $input['description'];
-        $category->icon = $genericName;
-
-        $category->update();
-
-        return to_route('settings.categories.index');
     }
 
     /**
@@ -155,8 +163,12 @@ class CategoryController extends Controller
     {
         //TODO: Add check if this category is used in some of existing books before delete action (if exists, return error message)
 
-        $category->delete();
+        try {
+            $category->delete();
 
-        return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
+            return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
+        } catch (\Exception $e) {
+            return back()->with('successMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }
