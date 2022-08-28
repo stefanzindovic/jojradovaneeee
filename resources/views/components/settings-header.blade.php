@@ -24,7 +24,7 @@
     <a href="{{ route('settings.publishers.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.publishers.index') active-book-nav @endif">
         Izdavači
     </a>
-    <a href="settingsPovez.php" class="inline ml-[70px] hover:text-blue-800">
+    <a href="{{ route('settings.covers.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.covers.index') active-book-nav @endif">
         Povezi
     </a>
     <a href="settingsFormat.php" class="inline ml-[70px] hover:text-blue-800">
