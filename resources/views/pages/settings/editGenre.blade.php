@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    Novi žanr
+    Izmjena žanra
 @endsection
 
 @section('page_content')
@@ -37,7 +37,7 @@
                                 </li>
                                 <li>
                                     <p class="text-gray-400">
-                                        Novi zanr
+                                        Izmijeni podatke
                                     </p>
                                 </li>
                             </ol>
@@ -49,17 +49,18 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('settings.genres.store')}}">
+            <form method="POST" action="{{route('settings.genres.update', $genre->id)}}">
                 @csrf
+                @method('PATCH')
 
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
                             <p>Naziv zanra <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('title')}}" minlength="4" maxlength="50" name="title" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNazivZanra()"/>
+                            <input type="text" value="{{old('title', $genre->title)}}" minlength="4" maxlength="50" name="title" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
                         @error('title')
-                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
                         <div id="genreTitleValidationMessageByJs"></div>
                     </div>

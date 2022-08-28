@@ -59,7 +59,7 @@ class GenreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Genre  $genre
+     * @param Genre $genre
      * @return Response
      */
     public function show(Genre $genre)
@@ -70,30 +70,37 @@ class GenreController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Genre  $genre
-     * @return Response
+     * @param Genre $genre
+     * @return Application|Factory|View
      */
-    public function edit(Genre $genre)
+    public function edit(Genre $genre): View|Factory|Application
     {
-        //
+        return view('..pages.settings.editGenre', compact('genre'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateGenreRequest  $request
-     * @param  \App\Models\Genre  $genre
-     * @return Response
+     * @param UpdateGenreRequest $request
+     * @param Genre $genre
+     * @return RedirectResponse
      */
-    public function update(UpdateGenreRequest $request, Genre $genre)
+    public function update(UpdateGenreRequest $request, Genre $genre): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50'
+        ]);
+
+        $genre->title = $input['title'];
+        $genre->update();
+
+        return to_route('settings.genres.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Genre  $genre
+     * @param Genre $genre
      * @return Response
      */
     public function destroy(Genre $genre)
