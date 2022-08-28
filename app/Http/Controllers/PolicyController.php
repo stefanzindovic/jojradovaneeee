@@ -80,9 +80,14 @@ class PolicyController extends Controller
            'value' . $policy->id => 'required|integer|min:1|max:100'
         ]);
 
-        $policy->update(['value' => $input['value' . $policy->id]]);
-        $request->session()->flash('Polje je uspješno izmijenjeno.');
-        return back();
+        try {
+            $policy->update(['value' => $input['value' . $policy->id]]);
+            $request->session()->flash('Polje je uspješno izmijenjeno.');
+
+            return back();
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
