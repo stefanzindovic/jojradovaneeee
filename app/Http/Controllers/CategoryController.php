@@ -100,13 +100,49 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCategoryRequest  $request
+     * @param UpdateCategoryRequest $request
      * @param Category $category
-     * @return Response
+     * @return RedirectResponse
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
+            'description' =>'required|min:10|max:512',
+            'icon' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+        $genericName = $category->icon;
+        if($request->hasFile('icon')) {
+            $uploadPath = 'uploads/categories/';
+
+            // remove old icon from storage
+            $oldIconPath = $uploadPath . $category->icon;
+            if(Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            // upload new icon
+            if($request->hasFile('icon')) {
+                $uploadedFile = $request->file('icon');
+                $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                Storage::disk('public')->putFileAs(
+                    $uploadPath,
+                    $uploadedFile,
+                    $genericName
+                );
+            }
+        }
+
+        // update category in db
+        $category->title = $input['title'];
+        $category->description = $input['description'];
+        $category->icon = $genericName;
+
+        $category->update();
+
+        return to_route('settings.categories.index');
     }
 
     /**
