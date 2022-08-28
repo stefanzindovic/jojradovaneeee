@@ -19,6 +19,7 @@ Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/genres', \App\Http\Controllers\GenreController::class);
     Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
     Route::resource('/covers', \App\Http\Controllers\CoverController::class);
+    Route::resource('/formats', \App\Http\Controllers\FormatController::class);
 });
 
 Route::get('/', function () {
