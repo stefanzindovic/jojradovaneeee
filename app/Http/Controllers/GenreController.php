@@ -47,13 +47,16 @@ class GenreController extends Controller
             'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50'
         ]);
 
-        $model = new Genre();
+        try {
+            // Generate new category model
+            $model = new Genre();
+            $model->title = $input['title'];
+            $model->save();
 
-        $model->title = $input['title'];
-
-        $model->save();
-
-        return to_route('settings.genres.index')->with('successMessage', 'Novi žanr je uspješno dodan na spisak.');
+            return to_route('settings.genres.index')->with('successMessage', 'Novi žanr je uspješno dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -91,10 +94,14 @@ class GenreController extends Controller
             'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50'
         ]);
 
-        $genre->title = $input['title'];
-        $genre->update();
+        try {
+            $genre->title = $input['title'];
+            $genre->update();
 
-        return to_route('settings.genres.index')->with('successMessage', 'Informacije o žanru su uspješno izmijenjene.');
+            return to_route('settings.genres.index')->with('successMessage', 'Informacije o žanru su uspješno izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -107,8 +114,12 @@ class GenreController extends Controller
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
 
-        $genre->delete();
+        try {
+            $genre->delete();
 
-        return to_route('settings.genres.index')->with('successMessage', 'Žanr je uspješno obrisan.');
+            return to_route('settings.genres.index')->with('successMessage', 'Žanr je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }

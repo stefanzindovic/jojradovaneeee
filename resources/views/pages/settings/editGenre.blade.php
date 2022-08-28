@@ -13,7 +13,7 @@
                 <div class="pl-[30px] py-[10px] flex flex-col">
                     <div>
                         <h1>
-                            Novi zanr
+                            Novi žanr
                         </h1>
                     </div>
                     <div>
@@ -56,7 +56,7 @@
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
-                            <p>Naziv zanra <span class="text-red-500">*</span></p>
+                            <p>Naziv žanra <span class="text-red-500">*</span></p>
                             <input type="text" value="{{old('title', $genre->title)}}" minlength="4" maxlength="50" name="title" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
                         @error('title')
