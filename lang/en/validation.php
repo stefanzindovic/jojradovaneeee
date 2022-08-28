@@ -91,7 +91,7 @@ return [
         'string' => 'Sadržaj polja ne može biti duži od :max karaktera.',
     ],
     'max_digits' => 'The :attribute must not have more than :max digits.',
-    'mimes' => 'The :attribute must be a file of type: :values.',
+    'mimes' => 'Odabrani fajl mora biti tipa: :values.',
     'mimetypes' => 'The :attribute must be a file of type: :values.',
     'min' => [
         'array' => 'Polje mora sadržati najmanje :min članova.',
@@ -116,7 +116,7 @@ return [
     'prohibited_if' => 'The :attribute field is prohibited when :other is :value.',
     'prohibited_unless' => 'The :attribute field is prohibited unless :other is in :values.',
     'prohibits' => 'The :attribute field prohibits :other from being present.',
-    'regex' => 'The :attribute format is invalid.',
+    'regex' => 'Unešena vrijednost nije pravilnog formata.',
     'required' => 'Ovo polje je obavezno.',
     'required_array_keys' => 'The :attribute field must contain entries for: :values.',
     'required_if' => 'The :attribute field is required when :other is :value.',

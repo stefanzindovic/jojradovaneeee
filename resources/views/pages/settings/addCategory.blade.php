@@ -56,14 +56,14 @@
                     <div class="w-[50%] mb-[100px]">
                         <div class="mt-[20px]">
                             <p>Naziv kategorije <span class="text-red-500">*</span></p>
-                            <input value="{{ old('title') }}" type="text" name="title" id="categoryTitle"
+                            <input id="categoryTitle" required minlength="4" maxlength="50" value="{{ old('title') }}" type="text" name="title"
                                    class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                             />
-                            <div id="validateNazivKategorije"></div>
                         </div>
                         @error("title")
                             <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
+                        <div id="categoryTitleValidationMessage"></div>
 
                         <div class="mt-[20px]">
                             <p>Uploaduj ikonicu </p>
@@ -72,7 +72,7 @@
                                 <div class="bg-gray-300 h-[40px] w-[102px] px-[20px] pt-[10px]">
                                     <label class="cursor-pointer">
                                         <p class="leading-normal">Browse...</p>
-                                        <input name="icon" id="icon-upload" type='file' class="hidden"/>
+                                        <input name="icon" id="categoryIcon" type='file' class="hidden" accept="image/png,image/gif,image/jpg,image/jpeg,image/bim,image/webp,image/svg"/>
                                     </label>
                                 </div>
                                 <div id="icon-output" class="h-[40px] px-[20px] pt-[7px]"></div>
@@ -81,15 +81,17 @@
                         @error("icon")
                             <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
+                        <div id="categoryIconValidationMessage"></div>
 
                         <div class="mt-[20px]">
                             <p class="inline-block">Opis</p>
-                            <textarea name="description" rows="10"
+                            <textarea required minlength="10" maxlength="512" id="categoryDescription" name="description" rows="10"
                                       class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{old('description')}}</textarea>
                         </div>
                         @error("description")
                             <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
+                        <div id="categoryDescriptionValidationMessage"></div>
                     </div>
                 </div>
                 <div class="absolute bottom-0 w-full">
