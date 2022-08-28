@@ -18,7 +18,7 @@
        class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.categories.index') active-book-nav @endif">
         Kategorije
     </a>
-    <a href="{{ route('settings.genres.index') }}" class="inline ml-[70px] hover:text-blue-800">
+    <a href="{{ route('settings.genres.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.genres.index') active-book-nav @endif">
         Zanrovi
     </a>
     <a href="settingsIzdavac.php" class="inline ml-[70px] hover:text-blue-800">
