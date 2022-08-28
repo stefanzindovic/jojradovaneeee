@@ -29,7 +29,7 @@
                                 </li>
                                 <li>
                                     <a href="{{ route('settings.formats.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        žanrovi
+                                        Formati
                                     </a>
                                 </li>
                                 <li>
@@ -56,7 +56,7 @@
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
                             <p>Naziv formata <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('name')}}" minlength="4" maxlength="50" name="name" id="formatName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
+                            <input type="text" value="{{old('name')}}" required minlength="4" maxlength="50" name="name" id="formatName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
                         @error('name')
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
