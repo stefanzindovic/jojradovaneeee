@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Format;
 use App\Http\Requests\StoreFormatRequest;
 use App\Http\Requests\UpdateFormatRequest;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 
 class FormatController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index(): View|Factory|Application
     {
-        //
+        $formats = Format::orderBy('id', 'DESC')->get();
+        return view('..pages.settings.formats', compact('formats'));
     }
 
     /**
