@@ -56,9 +56,9 @@
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
                             <p>Naziv izdavača <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('name')}}" minlength="4" maxlength="50" name="name" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
+                            <input type="text" value="{{old('name')}}" minlength="4" maxlength="50" name="name" id="publisherName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
-                        @error('title')
+                        @error('name')
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
                         <div id="publisherNameValidationMessageByJs"></div>
@@ -71,8 +71,8 @@
                                     class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                                 Ponisti <i class="fas fa-times ml-[4px]"></i>
                             </button>
-                            <button id="saveGenreBtn" type="submit"
-                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]" onclick="validacijaZanr()">
+                            <button id="savePublisherBtn" type="submit"
+                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
                                 Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                             </button>
                         </div>

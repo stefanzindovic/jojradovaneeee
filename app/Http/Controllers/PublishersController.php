@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePublishersRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Response;
 
 class PublishersController extends Controller
 {
@@ -35,19 +36,27 @@ class PublishersController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorePublishersRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StorePublishersRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(StorePublishersRequest $request)
+    public function store(StorePublishersRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+        ]);
+
+        $model = new Publishers();
+        $model->name = $input['name'];
+        $model->save();
+
+        return to_route('settings.publishers.index')->with('successMessage', 'Novi izdavač je dodan na spisak.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Publishers  $publishers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show(Publishers $publishers)
     {
@@ -58,7 +67,7 @@ class PublishersController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Publishers  $publishers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit(Publishers $publishers)
     {
@@ -70,7 +79,7 @@ class PublishersController extends Controller
      *
      * @param  \App\Http\Requests\UpdatePublishersRequest  $request
      * @param  \App\Models\Publishers  $publishers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(UpdatePublishersRequest $request, Publishers $publishers)
     {
@@ -81,7 +90,7 @@ class PublishersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Publishers  $publishers
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(Publishers $publishers)
     {
