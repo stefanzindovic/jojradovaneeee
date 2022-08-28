@@ -11,10 +11,12 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('scripts', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
