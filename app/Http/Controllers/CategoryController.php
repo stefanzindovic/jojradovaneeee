@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -43,14 +44,35 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'title' => 'required|regex: /([A-Za-z0-9\s])\w+/g|min:4|max:18',
+            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
             'description' =>'required|min:10|max:512',
-            'icon' => 'nullable|file|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+            'icon' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
         // upload image if image exists
+        $genericName = 'profile-picture-placeholder.jpg';
+        if($request->hasFile('icon')) {
+            $uploadedFile = $request->file('icon');
+            $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+            $uploadsPath = 'uploads/categories/';
 
-        return back()->with('successMessage', 'Nova kategorija je uspješno kreirana.');
+            Storage::disk('public')->putFileAs(
+                $uploadsPath,
+                $uploadedFile,
+                $genericName
+            );
+        }
+
+        // Generate new category model
+        $model = new Category();
+
+        $model->title = $input['title'];
+        $model->description = $input['description'];
+        $model->icon = $genericName;
+
+        $model->save();
+
+        return to_route('settings.categories.index')->with('successMessage', 'Nova kategorija je uspješno kreirana.');
     }
 
     /**

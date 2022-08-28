@@ -49,16 +49,21 @@
         </div>
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form class="text-gray-700 forma">
+            <form method="POST" action="{{ route('settings.categories.store') }}" enctype="multipart/form-data">
+                @csrf
+
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[100px]">
                         <div class="mt-[20px]">
                             <p>Naziv kategorije <span class="text-red-500">*</span></p>
-                            <input type="text" name="title" id="categoryTitle"
+                            <input value="{{ old('title') }}" type="text" name="title" id="categoryTitle"
                                    class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                             />
                             <div id="validateNazivKategorije"></div>
                         </div>
+                        @error("title")
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                        @enderror
 
                         <div class="mt-[20px]">
                             <p>Uploaduj ikonicu </p>
@@ -73,21 +78,27 @@
                                 <div id="icon-output" class="h-[40px] px-[20px] pt-[7px]"></div>
                             </div>
                         </div>
+                        @error("icon")
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                        @enderror
 
                         <div class="mt-[20px]">
                             <p class="inline-block">Opis</p>
                             <textarea name="description" rows="10"
-                                      class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"></textarea>
+                                      class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{old('description')}}</textarea>
                         </div>
+                        @error("description")
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="absolute bottom-0 w-full">
                     <div class="flex flex-row">
                         <div class="inline-block w-full text-white text-right py-[7px] mr-[100px]">
-                                <button type="reset"
-                                        class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                    Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                </button>
+                            <button type="reset"
+                                    class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
+                                Ponisti <i class="fas fa-times ml-[4px]"></i>
+                            </button>
                             <button id="saveCategory" type="submit"
                                     class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
                                 Sacuvaj <i class="fas fa-check ml-[4px]"></i>
