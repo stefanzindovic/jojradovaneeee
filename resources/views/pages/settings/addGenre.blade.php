@@ -61,7 +61,7 @@
                         @error('title')
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
-                        <div id="genreTitleValdiationMessageByJs"></div>
+                        <div id="genreTitleValidationMessageByJs"></div>
                     </div>
                 </div>
                 <div class="absolute bottom-0 w-full">
