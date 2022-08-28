@@ -60,7 +60,7 @@ class FormatController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Format  $format
+     * @param Format $format
      * @return \Illuminate\Http\Response
      */
     public function show(Format $format)
@@ -71,30 +71,42 @@ class FormatController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Format  $format
-     * @return \Illuminate\Http\Response
+     * @param Format $format
+     * @return Application|Factory|View
      */
-    public function edit(Format $format)
+    public function edit(Format $format): View|Factory|Application
     {
-        //
+        return view('..pages.settings.editFormat', compact('format'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateFormatRequest  $request
-     * @param  \App\Models\Format  $format
-     * @return \Illuminate\Http\Response
+     * @param Format $format
+     * @return RedirectResponse
      */
     public function update(UpdateFormatRequest $request, Format $format)
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z0-9-_.\s])+$/|min:2|max:25'
+        ]);
+
+        try {
+            // Generate new category model
+            $format->name = $input['name'];
+            $format->update();
+
+            return to_route('settings.formats.index')->with('successMessage', 'Informacije o formatu su uspješno izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Format  $format
+     * @param Format $format
      * @return \Illuminate\Http\Response
      */
     public function destroy(Format $format)
