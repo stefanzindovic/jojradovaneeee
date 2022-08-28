@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
                 nameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>');
             }, 200);
             e.preventDefault();
-        } else if (!/^([a-zA-Z\s])+$/.test(nameInput.val())) {
+        } else if (!/^([a-zA-Z0-9\s])+$/.test(nameInput.val())) {
             setTimeout(function () {
                 nameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja nije u korektnom formatu.</p>');
             }, 200);

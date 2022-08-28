@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    Izmjena žanra
+    Izmjena poveza
 @endsection
 
 @section('page_content')
@@ -28,8 +28,8 @@
                                     <span class="mx-2">/</span>
                                 </li>
                                 <li>
-                                    <a href="{{ route('settings.genres.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Žanrovi
+                                    <a href="{{ route('settings.covers.index') }}" class="text-[#2196f3] hover:text-blue-600">
+                                        Povezi
                                     </a>
                                 </li>
                                 <li>
@@ -49,20 +49,20 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('settings.genres.update', $genre->id)}}">
+            <form method="POST" action="{{route('settings.covers.update', $cover->id)}}">
                 @csrf
                 @method('PATCH')
 
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
-                            <p>Naziv žanra <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('title', $genre->title)}}" minlength="4" maxlength="50" name="title" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
+                            <p>Naziv poveza <span class="text-red-500">*</span></p>
+                            <input type="text" value="{{old('name', $cover->name)}}" minlength="4" maxlength="50" name="name" id="coverName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
-                        @error('title')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                        @error('name')
+                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
-                        <div id="genreTitleValidationMessageByJs"></div>
+                        <div id="coverNameValidationMessageByJs"></div>
                     </div>
                 </div>
                 <div class="absolute bottom-0 w-full">
@@ -72,8 +72,8 @@
                                     class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                                 Ponisti <i class="fas fa-times ml-[4px]"></i>
                             </button>
-                            <button id="saveGenreBtn" type="submit"
-                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]" onclick="validacijaZanr()">
+                            <button id="saveCoverBtn" type="submit"
+                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
                                 Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                             </button>
                         </div>

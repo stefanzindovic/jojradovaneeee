@@ -59,7 +59,9 @@
                                                 <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                                 <span class="px-4 py-0">Izmijeni</span>
                                             </a>
-                                            <form onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovaj povez?')){return false;}" method="POST" action="{{route('settings.covers.destroy', $cover->id)}}">
+                                            <form
+                                                onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovaj povez?')){return false;}"
+                                                method="POST" action="{{route('settings.covers.destroy', $cover->id)}}">
                                                 @csrf
                                                 @method('DELETE')
 

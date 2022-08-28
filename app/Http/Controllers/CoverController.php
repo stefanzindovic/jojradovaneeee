@@ -42,7 +42,7 @@ class CoverController extends Controller
     public function store(StoreCoverRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z0-9\s])+$/|min:4|max:50',
         ]);
 
         try {
@@ -71,23 +71,34 @@ class CoverController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Cover $cover
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function edit(Cover $cover)
+    public function edit(Cover $cover): View|Factory|Application
     {
-        //
+        return view('..pages.settings.editCover', compact('cover'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateCoverRequest  $request
+     * @param UpdateCoverRequest $request
      * @param Cover $cover
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(UpdateCoverRequest $request, Cover $cover)
+    public function update(UpdateCoverRequest $request, Cover $cover): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z0-9\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+            $cover->name = $input['name'];
+            $cover->update();
+
+            return to_route('settings.covers.index')->with('successMessage', 'Informacije o povezu su izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
