@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Script;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,6 +15,6 @@ class ScriptSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Script::factory(10)->create();
     }
 }
