@@ -12,7 +12,7 @@ jQuery(document).ready(function () {
             e.preventDefault();
         } else if(titleInput.val().length < 4 || titleInput.val().length > 50) {
             setTimeout(function () {
-                titleValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 10 do 50 karaktera.</p>');
+                titleValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>');
             }, 200);
             e.preventDefault();
         } else if (!/^([a-zA-Z0-9-,\s])+$/.test(titleInput.val())) {
