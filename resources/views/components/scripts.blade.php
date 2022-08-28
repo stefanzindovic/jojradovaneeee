@@ -11,6 +11,7 @@
 <!-- Local -->
 @vite('./resources/js/autoUpdatePolicy.js')
 @vite('./resources/js/validations/policyInputsRestrictions.js')
-@vite('./resources/js/dataTables.js')
 @vite('./resources/js/validations/categoriesValidation.js')
+@vite('./resources/js/validations/genresValidation.js')
+@vite('./resources/js/dataTables.js')
 @vite('./resources/js/app.js')
