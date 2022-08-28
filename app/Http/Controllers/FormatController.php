@@ -107,10 +107,18 @@ class FormatController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Format $format
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
     public function destroy(Format $format)
     {
-        //
+        //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+
+        try {
+            $format->delete();
+
+            return to_route('settings.formats.index')->with('successMessage', 'Format je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }
