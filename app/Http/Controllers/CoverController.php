@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateCoverRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class CoverController extends Controller
 {
@@ -36,9 +37,9 @@ class CoverController extends Controller
      * Store a newly created resource in storage.
      *
      * @param StoreCoverRequest $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function store(StoreCoverRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreCoverRequest $request): RedirectResponse
     {
         $input = $request->validate([
             'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
@@ -51,14 +52,14 @@ class CoverController extends Controller
 
             return to_route('settings.covers.index')->with('successMessage', 'Novi povez je dodan na spisak.');
         } catch (\Exception $e) {
-            return back()->with('successMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cover  $cover
+     * @param Cover $cover
      * @return \Illuminate\Http\Response
      */
     public function show(Cover $cover)
@@ -69,7 +70,7 @@ class CoverController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Cover  $cover
+     * @param Cover $cover
      * @return \Illuminate\Http\Response
      */
     public function edit(Cover $cover)
@@ -81,7 +82,7 @@ class CoverController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateCoverRequest  $request
-     * @param  \App\Models\Cover  $cover
+     * @param Cover $cover
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateCoverRequest $request, Cover $cover)
@@ -92,11 +93,17 @@ class CoverController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cover  $cover
-     * @return \Illuminate\Http\Response
+     * @param Cover $cover
+     * @return RedirectResponse
      */
-    public function destroy(Cover $cover)
+    public function destroy(Cover $cover): RedirectResponse
     {
-        //
+        try {
+            $cover->delete();
+
+            return to_route('settings.covers.index')->with('successMessage', 'Povez je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 }
