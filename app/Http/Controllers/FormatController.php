@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateFormatRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class FormatController extends Controller
 {
@@ -35,12 +36,25 @@ class FormatController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreFormatRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreFormatRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreFormatRequest $request)
+    public function store(StoreFormatRequest $request): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z0-9-_.\s])+$/|min:2|max:25'
+        ]);
+
+        try {
+            // Generate new category model
+            $model = new Format();
+            $model->name = $input['name'];
+            $model->save();
+
+            return to_route('settings.formats.index')->with('successMessage', 'Novi format je uspješno dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
