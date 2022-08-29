@@ -44,7 +44,7 @@
                                 </td>
                                 <td class="flex flex-row items-center px-4 py-4">
                                     <div style="width: 45px; height: 45px;" class="rounded-full">
-                                        <img style="border-radius: 100%" class="w-full h-full" src="{{$category->icon !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/categories/' . $category->icon) : asset('imgs/' . $category->icon)}}" alt="Ikonica">
+                                        <img style="border-radius: 100%" class="w-full h-full" src="{{$category->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/categories/' . $category->picture) : asset('imgs/' . $category->picture)}}" alt="Ikonica">
                                     </div>
                                     <p class="ml-4 text-center">{{ $category->title }}</p>
                                 </td>

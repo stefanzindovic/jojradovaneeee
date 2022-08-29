@@ -74,13 +74,13 @@
                                 <div class="bg-gray-300 h-[40px] w-[102px] px-[20px] pt-[10px]">
                                     <label class="cursor-pointer">
                                         <p class="leading-normal">Browse...</p>
-                                        <input name="icon" id="categoryIcon" type='file' class="hidden" accept="image/png,image/gif,image/jpg,image/jpeg,image/bim,image/webp,image/svg"/>
+                                        <input name="picture" id="categoryIcon" type='file' class="hidden" accept="image/png,image/gif,image/jpg,image/jpeg,image/bim,image/webp,image/svg"/>
                                     </label>
                                 </div>
-                                <div id="icon-output" class="h-[40px] px-[20px] pt-[7px]">{{$category->icon}}</div>
+                                <div id="icon-output" class="h-[40px] px-[20px] pt-[7px]">{{$category->picture}}</div>
                             </div>
                         </div>
-                        @error("icon")
+                        @error("picture")
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
                         <div id="categoryIconValidationMessage"></div>
