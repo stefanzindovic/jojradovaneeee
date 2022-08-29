@@ -24,6 +24,8 @@ Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
 });
 
+Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
