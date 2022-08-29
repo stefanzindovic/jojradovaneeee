@@ -5,6 +5,7 @@
 @endsection
 
 @section('page_content')
+    <x-cropper-frame></x-cropper-frame>
     <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
         <!-- Heading of content -->
         <div class="heading">
@@ -93,6 +94,7 @@
                                     >
                                 Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                             </button>
+                        </div>
                         </div>
                     </div>
                 </div>
