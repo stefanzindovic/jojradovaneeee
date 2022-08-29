@@ -79,6 +79,7 @@
                             <div id="authorBioValidationMessageByJs"></div>
                         </div>
                     </div>
+                    <x-cropper picture="{{ $author->picture }}" stage="authors"></x-cropper>
                 </div>
                 <div class="absolute bottom-0 w-full">
                     <div class="flex flex-row">
