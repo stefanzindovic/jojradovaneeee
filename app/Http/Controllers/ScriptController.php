@@ -83,21 +83,41 @@ class ScriptController extends Controller
      *
      * @param  \App\Http\Requests\UpdateScriptRequest  $request
      * @param Script $script
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(UpdateScriptRequest $request, Script $script)
+    public function update(UpdateScriptRequest $request, Script $script): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z0-9-_.,\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+
+            $script->name = $input['name'];
+            $script->update();
+
+            return to_route('settings.scripts.index')->with('successMessage', 'Informacije o pismu su izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param Script $script
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(Script $script)
+    public function destroy(Script $script): RedirectResponse
     {
-        //
+        //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+
+        try {
+            $script->delete();
+
+            return to_route('settings.scripts.index')->with('successMessage', 'Pismo je uspješno obrisano.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }
