@@ -21,6 +21,7 @@ Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/covers', \App\Http\Controllers\CoverController::class);
     Route::resource('/formats', \App\Http\Controllers\FormatController::class);
     Route::resource('/scripts', \App\Http\Controllers\ScriptController::class);
+    Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
 });
 
 Route::get('/', function () {
