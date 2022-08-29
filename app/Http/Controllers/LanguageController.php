@@ -71,11 +71,11 @@ class LanguageController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Language $language
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function edit(Language $language)
+    public function edit(Language $language): View|Factory|Application
     {
-        //
+        return view('..pages.settings.editLanguage', compact('language'));
     }
 
     /**
