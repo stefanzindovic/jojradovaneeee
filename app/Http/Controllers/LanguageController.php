@@ -36,11 +36,23 @@ class LanguageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreLanguageRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreLanguageRequest $request)
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+            $model = new Language();
+            $model->name = $input['name'];
+            $model->save();
+
+            return to_route('settings.languages.index')->with('successMessage', 'Novi jezik je dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
