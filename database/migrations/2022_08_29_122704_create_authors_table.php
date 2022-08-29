@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('authors', function (Blueprint $table) {
             $table->id();
+            $table->string('full_name');
+            $table->text('bio');
+            $table->string('picture')->default('profile-picture-placeholder.jpg');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
