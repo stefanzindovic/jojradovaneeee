@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateLanguageRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class LanguageController extends Controller
 {
@@ -35,10 +36,10 @@ class LanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreLanguageRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param StoreLanguageRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreLanguageRequest $request)
+    public function store(StoreLanguageRequest $request): RedirectResponse
     {
         $input = $request->validate([
             'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
