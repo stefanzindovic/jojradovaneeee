@@ -18,7 +18,8 @@ class AuthorController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('..pages.authors.authors');
+        $authors = Author::orderBy('id', 'DESC')->get();
+        return view('..pages.authors.index', compact('authors'));
     }
 
     /**
