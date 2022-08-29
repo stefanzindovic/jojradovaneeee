@@ -5,6 +5,7 @@
 @endsection
 
 @section('page_content')
+    <x-cropper-frame></x-cropper-frame>
     <!-- Content -->
     <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
         <!-- Heading of content -->

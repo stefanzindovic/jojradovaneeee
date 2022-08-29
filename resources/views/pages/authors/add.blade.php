@@ -5,6 +5,7 @@
 @endsection
 
 @section('page_content')
+    <x-cropper-frame></x-cropper-frame>
     <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
         <!-- Heading of content -->
         <div class="heading">
@@ -40,7 +41,7 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('authors.store')}}" enctype="multipart/form-data">
+            <form id="myForm" method="POST" action="{{route('authors.store')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="flex flex-row ml-[30px]">

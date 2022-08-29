@@ -7,11 +7,11 @@
         <div class="relative mt-[50px] right-0 bottom-0 w-full">
             <div class="flex flex-row">
                 <div class="inline-block w-full text-white text-right py-[7px]">
-                    <button type="button" id="canelCropperBtn"
+                    <button type="button" id="cancelCropperBtn"
                             class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                          <i class="fas fa-times ml-[4px]"></i>
                     </button>
-                    <button id="confirmCropBtn" type="button"
+                    <button id="confirmCropperBtn" type="button"
                             class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
                     >
                          <i class="fas fa-check ml-[4px]"></i>
