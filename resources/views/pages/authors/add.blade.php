@@ -1,11 +1,10 @@
 @extends('app')
 
 @section('page_title')
-    Novi žanr
+    Novi autor
 @endsection
 
 @section('page_content')
-    <!-- Content -->
     <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
         <!-- Heading of content -->
         <div class="heading">
@@ -13,23 +12,15 @@
                 <div class="pl-[30px] py-[10px] flex flex-col">
                     <div>
                         <h1>
-                            Novi žanr
+                            Izmijeni podatke
                         </h1>
                     </div>
                     <div>
                         <nav class="w-full rounded">
                             <ol class="flex list-reset">
                                 <li>
-                                    <a href="{{ route('settings.policies.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Podešavanja
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <a href="{{ route('settings.genres.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Žanrovi
+                                    <a href="{{route('authors.index')}}" class="text-[#2196f3] hover:text-blue-600">
+                                        Evidencija autora
                                     </a>
                                 </li>
                                 <li>
@@ -37,7 +28,7 @@
                                 </li>
                                 <li>
                                     <p class="text-gray-400">
-                                        Novi žanr
+                                        Novi autor
                                     </p>
                                 </li>
                             </ol>
@@ -49,19 +40,34 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('settings.genres.store')}}">
+            <form method="POST" action="{{route('authors.store')}}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
-                            <p>Naziv žanra <span class="text-red-500">*</span></p>
-                            <input required type="text" value="{{old('title')}}" minlength="4" maxlength="50" name="title" id="genreTitle" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNazivžanra()"/>
+                            <p>Ime i prezime <span class="text-red-500">*</span></p>
+                            <input required minlength="4" maxlength="50" type="text" name="full_name" id="authorName"
+                                   value="{{old('full_name')}}"
+                                   class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
+                            />
+                            @error('full_name')
+                            <p style="color:red;" id="errorMessageByLaravel"><i
+                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                            @enderror
+                            <div id="authorNameValidationMessageByJs"></div>
                         </div>
-                        @error('title')
-                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
-                        @enderror
-                        <div id="genreTitleValidationMessageByJs"></div>
+
+                        <div class="mt-[20px]">
+                            <p class="inline-block mb-2">Opis</p>
+                            <textarea required minlength="10" maxlength="500" name="bio" id="authorBio"
+                                      class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{old('bio')}}</textarea>
+                            @error('bio')
+                            <p style="color:red;" id="errorMessageByLaravel"><i
+                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                            @enderror
+                            <div id="authorBioValidationMessageByJs"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="absolute bottom-0 w-full">
@@ -71,8 +77,9 @@
                                     class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                                 Ponisti <i class="fas fa-times ml-[4px]"></i>
                             </button>
-                            <button id="saveGenreBtn" type="submit"
-                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]" onclick="validacijažanr()">
+                            <button id="saveAuthorBtn" type="submit"
+                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
+                            >
                                 Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                             </button>
                         </div>
