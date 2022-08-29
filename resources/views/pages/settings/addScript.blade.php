@@ -13,7 +13,7 @@
                 <div class="pl-[30px] py-[10px] flex flex-col">
                     <div>
                         <h1>
-                            Novi izdavač
+                            Novo pismo
                         </h1>
                     </div>
                     <div>
