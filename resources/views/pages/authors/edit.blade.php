@@ -49,7 +49,10 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form class="text-gray-700 forma">
+            <form method="POST" action="{{route('authors.update', $author->id)}}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
