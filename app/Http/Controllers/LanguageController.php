@@ -81,13 +81,24 @@ class LanguageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateLanguageRequest  $request
+     * @param UpdateLanguageRequest $request
      * @param Language $language
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(UpdateLanguageRequest $request, Language $language)
+    public function update(UpdateLanguageRequest $request, Language $language): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+            $language->name = $input['name'];
+            $language->update();
+
+            return to_route('settings.languages.index')->with('successMessage', 'Informacije o jeziku su izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
