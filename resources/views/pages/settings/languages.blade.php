@@ -32,7 +32,7 @@
                     </tr>
                     </thead>
                     <tbody class="bg-white">
-                    @foreach($lanuages as $language)
+                    @foreach($languages as $language)
                         <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                             <td class="px-4 py-4 whitespace-no-wrap">
                                 <label class="inline-flex items-center">

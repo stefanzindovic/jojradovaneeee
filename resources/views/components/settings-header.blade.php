@@ -33,4 +33,7 @@
     <a href="{{ route('settings.scripts.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.scripts.index') active-book-nav @endif">
         Pisma
     </a>
+    <a href="{{ route('settings.languages.index') }}" class="inline ml-[70px] hover:text-blue-800 @if(Route::current()->getName() == 'settings.languages.index') active-book-nav @endif">
+        Jezici
+    </a>
 </div>
