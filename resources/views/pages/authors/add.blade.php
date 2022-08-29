@@ -12,7 +12,7 @@
                 <div class="pl-[30px] py-[10px] flex flex-col">
                     <div>
                         <h1>
-                            Izmijeni podatke
+                            Novi autor
                         </h1>
                     </div>
                     <div>

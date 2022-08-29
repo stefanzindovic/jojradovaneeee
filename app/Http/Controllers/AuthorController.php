@@ -39,11 +39,46 @@ class AuthorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreAuthorRequest  $request
-     * @return Response
+     * @return RedirectResponse
      */
-    public function store(StoreAuthorRequest $request)
+    public function store(StoreAuthorRequest $request): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
+            'bio' =>'required|min:10|max:500',
+            'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+        try {
+            $genericName = 'profile-picture-placeholder.jpg';
+            if($request->hasFile('picture')) {
+                $uploadPath = 'uploads/authors/';
+
+                // upload new icon
+                if($request->hasFile('picture')) {
+                    $uploadedFile = $request->file('picture');
+                    $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadPath,
+                        $uploadedFile,
+                        $genericName
+                    );
+                }
+            }
+
+            // update category in db
+            $model = new Author();
+            $model->full_name = $input['full_name'];
+            $model->bio = $input['bio'];
+            $model->picture = $genericName;
+
+            $model->save();
+
+            return to_route('authors.index')->with('successMessage', 'Autor je dodan na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -114,7 +149,7 @@ class AuthorController extends Controller
 
             $author->update();
 
-            return to_route('authors.index')->with('successMessage', 'Informacije o autoru su uspješno izmijenjene.');
+            return to_route('authors.index')->with('successMessage', 'Informacije o autoru su izmijenjene.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
@@ -133,7 +168,7 @@ class AuthorController extends Controller
         try {
             $author->delete();
 
-            return to_route('authors.index')->with('successMessage', 'Autor je uspješno obrisan.');
+            return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
         }
