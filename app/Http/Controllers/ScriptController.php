@@ -19,7 +19,7 @@ class ScriptController extends Controller
     public function index(): View|Factory|Application
     {
         $scripts = Script::orderBy('id', 'DESC')->get();
-        return view('..pages.settings.index', compact('scripts'));
+        return view('..pages.settings.scripts', compact('scripts'));
     }
 
     /**
