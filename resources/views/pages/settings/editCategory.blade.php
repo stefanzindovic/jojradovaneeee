@@ -50,7 +50,7 @@
         </div>
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{ route('settings.categories.update', $category->id) }}" enctype="multipart/form-data">
+            <form id="myForm" method="POST" action="{{ route('settings.categories.update', $category->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
@@ -66,7 +66,6 @@
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                         @enderror
                         <div id="categoryTitleValidationMessage"></div>
-                        <div id="categoryIconValidationMessage"></div>
 
                         <div class="mt-[20px]">
                             <p class="inline-block">Opis</p>

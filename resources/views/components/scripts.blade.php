@@ -19,6 +19,9 @@
 @vite('./resources/js/validations/languageValidation.js')
 @vite('./resources/js/validations/authorsValidation.js')
 
+<!-- Cropper -->
+@vite('./resources/js/cropper.js')
+
 <!-- Custom -->
 @vite('./resources/js/autoUpdatePolicy.js')
 @vite('./resources/js/dataTables.js')

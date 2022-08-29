@@ -49,7 +49,7 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('authors.update', $author->id)}}" enctype="multipart/form-data">
+            <form id="myForm" method="POST" action="{{route('authors.update', $author->id)}}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
 
