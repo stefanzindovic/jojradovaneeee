@@ -59,7 +59,7 @@ class LanguageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Language  $language
+     * @param Language $language
      * @return \Illuminate\Http\Response
      */
     public function show(Language $language)
@@ -70,7 +70,7 @@ class LanguageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Language  $language
+     * @param Language $language
      * @return \Illuminate\Http\Response
      */
     public function edit(Language $language)
@@ -82,7 +82,7 @@ class LanguageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateLanguageRequest  $request
-     * @param  \App\Models\Language  $language
+     * @param Language $language
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateLanguageRequest $request, Language $language)
@@ -93,11 +93,17 @@ class LanguageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Language  $language
-     * @return \Illuminate\Http\Response
+     * @param Language $language
+     * @return RedirectResponse
      */
-    public function destroy(Language $language)
+    public function destroy(Language $language): RedirectResponse
     {
-        //
+        try {
+            $language->delete();
+
+            return to_route('settings.language.index')->with('successMessage', 'Jezik je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
     }
 }
