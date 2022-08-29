@@ -84,7 +84,7 @@
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap">
                             <div>
-                                <a href="autori.php" aria-label="Autori">
+                                <a href="{{ route('authors.index') }}" aria-label="Autori">
                                     <i
                                         class="text-[25px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] far fa-address-book"></i>
                                     <div class="hidden sidebar-item">

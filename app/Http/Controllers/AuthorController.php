@@ -18,7 +18,7 @@ class AuthorController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        return view('..pages.acuthors.authors');
+        return view('..pages.authors.authors');
     }
 
     /**
