@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    Novo pismo
+    Izmjena pisma
 @endsection
 
 @section('page_content')
@@ -13,7 +13,7 @@
                 <div class="pl-[30px] py-[10px] flex flex-col">
                     <div>
                         <h1>
-                            Novo pismo
+                            Izmjena informacija
                         </h1>
                     </div>
                     <div>
@@ -37,7 +37,7 @@
                                 </li>
                                 <li>
                                     <p class="text-gray-400">
-                                        Novo pismo
+                                        Izmjena informacija
                                     </p>
                                 </li>
                             </ol>
@@ -49,14 +49,15 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('settings.scripts.store')}}">
+            <form method="POST" action="{{route('settings.scripts.update', $script->id)}}">
                 @csrf
+                @method('PATCH')
 
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[150px]">
                         <div class="mt-[20px]">
                             <p>Naziv pisma <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('name')}}" required minlength="4" maxlength="50" name="name" id="scriptName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
+                            <input type="text" value="{{old('name', $script->name)}}" required minlength="4" maxlength="50" name="name" id="scriptName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
                         </div>
                         @error('name')
                         <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>

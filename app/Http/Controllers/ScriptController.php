@@ -59,7 +59,7 @@ class ScriptController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Script  $script
+     * @param Script $script
      * @return \Illuminate\Http\Response
      */
     public function show(Script $script)
@@ -70,19 +70,19 @@ class ScriptController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Script  $script
-     * @return \Illuminate\Http\Response
+     * @param Script $script
+     * @return Application|Factory|View
      */
-    public function edit(Script $script)
+    public function edit(Script $script): View|Factory|Application
     {
-        //
+        return view('..pages.settings.editScript', compact('script'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateScriptRequest  $request
-     * @param  \App\Models\Script  $script
+     * @param Script $script
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateScriptRequest $request, Script $script)
@@ -93,7 +93,7 @@ class ScriptController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Script  $script
+     * @param Script $script
      * @return \Illuminate\Http\Response
      */
     public function destroy(Script $script)
