@@ -46,18 +46,18 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Author  $author
-     * @return \Illuminate\Http\Response
+     * @param Author $author
+     * @return Application|Factory|View
      */
-    public function show(Author $author)
+    public function show(Author $author): View|Factory|Application
     {
-        //
+        return view('..pages.authors.profile', compact('author'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Author  $author
+     * @param Author $author
      * @return \Illuminate\Http\Response
      */
     public function edit(Author $author)
@@ -69,7 +69,7 @@ class AuthorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateAuthorRequest  $request
-     * @param  \App\Models\Author  $author
+     * @param Author $author
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateAuthorRequest $request, Author $author)
@@ -80,7 +80,7 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Author  $author
+     * @param Author $author
      * @return \Illuminate\Http\Response
      */
     public function destroy(Author $author)
