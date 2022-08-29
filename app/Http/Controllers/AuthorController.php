@@ -9,6 +9,8 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class AuthorController extends Controller
 {
@@ -26,7 +28,7 @@ class AuthorController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -37,7 +39,7 @@ class AuthorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \App\Http\Requests\StoreAuthorRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(StoreAuthorRequest $request)
     {
@@ -69,13 +71,53 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateAuthorRequest  $request
+     * @param UpdateAuthorRequest $request
      * @param Author $author
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(UpdateAuthorRequest $request, Author $author)
+    public function update(UpdateAuthorRequest $request, Author $author): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
+            'bio' =>'required|min:10|max:500',
+            'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+        try {
+            $genericName = $author->picture;
+            if($request->hasFile('picture')) {
+                $uploadPath = 'uploads/authors/';
+
+                // remove old icon from storage
+                $oldIconPath = $uploadPath . $author->picture;
+                if(Storage::disk('public')->exists($oldIconPath)) {
+                    Storage::disk('public')->delete($oldIconPath);
+                }
+
+                // upload new icon
+                if($request->hasFile('picture')) {
+                    $uploadedFile = $request->file('picture');
+                    $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadPath,
+                        $uploadedFile,
+                        $genericName
+                    );
+                }
+            }
+
+            // update category in db
+            $author->full_name = $input['full_name'];
+            $author->bio = $input['bio'];
+            $author->picture = $genericName;
+
+            $author->update();
+
+            return to_route('authors.index')->with('successMessage', 'Informacije o autoru su uspješno izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
