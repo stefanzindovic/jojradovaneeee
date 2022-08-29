@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAuthorRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class AuthorController extends Controller
 {
@@ -81,10 +82,18 @@ class AuthorController extends Controller
      * Remove the specified resource from storage.
      *
      * @param Author $author
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy(Author $author)
+    public function destroy(Author $author): RedirectResponse
     {
-        //
+        //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
+
+        try {
+            $author->delete();
+
+            return to_route('authors.index')->with('successMessage', 'Autor je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+        }
     }
 }
