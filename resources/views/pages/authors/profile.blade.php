@@ -72,18 +72,30 @@
         </div>
 
         <!-- Space for content -->
-        <div class="pl-[30px] height-profile pb-[30px] scroll mt-[20px]">
-            <div class="mr-[30px]">
-                <div class="mt-[20px]">
-                    <span class="text-gray-500">Ime i prezime</span>
-                    <p class="font-medium">{{ $author->full_name }}</p>
+        <div class="flex flex-row ml-[30px]">
+            <div class="pl-[4px] mr-[70px] height-profile pb-[30px] scroll mt-[20px]">
+                <div class="mr-[30px]">
+                    <div class="mt-[20px]">
+                        <span class="text-gray-500">Ime i prezime</span>
+                        <p class="font-medium">{{ $author->full_name }}</p>
+                    </div>
+                    <div class="mt-[40px]">
+                        <span class="text-gray-500">Opis</span>
+                        <p class="font-medium max-w-[550px]">
+                            {!! $author->bio !!}
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-[40px]">
-                    <span class="text-gray-500">Opis</span>
-                    <p class="font-medium max-w-[550px]">
-                        {!! $author->bio !!}
-                    </p>
-                </div>
+            </div>
+            <div class="flex flex-col">
+                <label class="mt-6">
+                    <div style="width: 220px; height: 220px;" id="empty-cover-art"
+                         class="relative py-[48px] text-center border-2 border-gray-300 border-solid">
+                        <div class="py-4">
+                            <img id="imageOutput" class="absolute w-full h-full bottom-0" @if($author->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}} @else src="{{asset('storage/uploads/authors/' . $author->picture)}} @endif">
+                        </div>
+                    </div>
+                </label>
             </div>
         </div>
     </section>
