@@ -17,6 +17,7 @@
 @vite('./resources/js/validations/formatsValidation.js')
 @vite('./resources/js/validations/scriptsValidation.js')
 @vite('./resources/js/validations/languageValidation.js')
+@vite('./resources/js/validations/authorsValidation.js')
 
 <!-- Custom -->
 @vite('./resources/js/autoUpdatePolicy.js')

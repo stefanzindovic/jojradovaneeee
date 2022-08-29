@@ -59,11 +59,11 @@ class AuthorController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param Author $author
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function edit(Author $author)
+    public function edit(Author $author): View|Factory|Application
     {
-        //
+        return view('..pages.authors.edit', compact('author'));
     }
 
     /**
