@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             FormatSeeder::class,
             ScriptSeeder::class,
             LanguageSeeder::class,
+            AuthorSeeder::class,
         ]);
     }
 }
