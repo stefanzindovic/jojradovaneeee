@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateScriptRequest;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ScriptController extends Controller
 {
@@ -35,12 +36,24 @@ class ScriptController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreScriptRequest  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreScriptRequest $request
+     * @return RedirectResponse
      */
-    public function store(StoreScriptRequest $request)
+    public function store(StoreScriptRequest $request): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([A-Za-z0-9-_.,\s])+$/|min:4|max:50',
+        ]);
+
+        try {
+            $model = new Script();
+            $model->name = $input['name'];
+            $model->save();
+
+            return to_route('settings.scripts.index')->with('successMessage', 'Novo pismo je dodano na spisak.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
