@@ -115,7 +115,7 @@
 
                         </div>
                         <div class="ml-[100px]  mt-[20px]">
-                            <img class="p-2 border-2 border-gray-300" width="300px" @if($student->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}}" @else src="{{asset('storage/uploads/students/' . $author->picture)}}" @endif alt="Ikonica">
+                            <img class="p-2 border-2 border-gray-300" width="300px" @if($student->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}}" @else src="{{asset('storage/uploads/students/' . $student->picture)}}" @endif alt="Ikonica">
                         </div>
                     </div>
                 </div>

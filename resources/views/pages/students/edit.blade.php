@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    {{ $student->full_name }}
+    {{ $student->full_name }} | Izmijeni podatke
 @endsection
 
 @section('page_content')
@@ -20,7 +20,7 @@
                             <nav class="w-full rounded">
                                 <ol class="flex list-reset">
                                     <li>
-                                        <a href="ucenik.php" class="text-[#2196f3] hover:text-blue-600">
+                                        <a href="{{route('students.index')}}" class="text-[#2196f3] hover:text-blue-600">
                                             Svi ucenici
                                         </a>
                                     </li>
@@ -28,9 +28,9 @@
                                         <span class="mx-2">/</span>
                                     </li>
                                     <li>
-                                        <a href="#" class="text-gray-400 hover:text-blue-600">
+                                        <p class="text-gray-400">
                                             Izmijeni podatke
-                                        </a>
+                                        </p>
                                     </li>
                                 </ol>
                             </nav>

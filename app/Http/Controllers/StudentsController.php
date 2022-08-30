@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use JetBrains\PhpStorm\NoReturn;
@@ -29,22 +30,64 @@ class StudentsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function create()
+    public function create(): Application|Factory|View
     {
-        //
+        return view('pages.students.add');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return Response
+     * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
+            'jmbg' => ['required', 'numeric', 'digits:13', 'unique:users,jmbg'],
+            'username' => ['required', 'alpha_num', 'min:4', 'max:18', 'unique:users,username'],
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
+            'password' => ['required', 'min:8', 'max:24'],
+            'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+        try {
+            $genericName = 'profile-picture-placeholder.jpg';
+            if($request->hasFile('picture')) {
+                $uploadPath = 'uploads/students/';
+
+                // upload new icon
+                if($request->hasFile('picture')) {
+                    $uploadedFile = $request->file('picture');
+                    $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadPath,
+                        $uploadedFile,
+                        $genericName
+                    );
+                }
+            }
+
+            // update category in db
+            $model = new User();
+            $model->name = $input['name'];
+            $model->email = $input['email'];
+            $model->username = $input['username'];
+            $model->jmbg = $input['jmbg'];
+            $model->picture = $genericName;
+            $model->role_id = 3;
+            $model->password = Hash::make($input['password']);
+            $model->save();
+
+            return to_route('students.index')->with('successMessage', 'Novi učenik je dodan na spisak.');
+        } catch (\Exception $e) {
+            dd($e);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
@@ -76,13 +119,13 @@ class StudentsController extends Controller
      * @param User $student
      * @return RedirectResponse
      */
-    #[NoReturn] public function update(Request $request, User $student)
+    public function update(Request $request, User $student): RedirectResponse
     {
         $input = $request->validate([
             'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', Rule::unique('users', 'jmbg')->ignore($student->id)],
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', Rule::unique('users', 'username')->ignore($student->id)],
-            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($student->id)],
+            'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($student->id)],
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
