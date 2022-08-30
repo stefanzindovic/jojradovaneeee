@@ -2,17 +2,18 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends Factory<User>
  */
 class UserFactory extends Factory
 {
 
-    function generateJmbgString()
+    function generateJmbgString(): string
     {
         $characters = '0123456789';
         $charactersLength = strlen($characters);
@@ -46,7 +47,7 @@ class UserFactory extends Factory
      *
      * @return static
      */
-    public function unverified()
+    public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
