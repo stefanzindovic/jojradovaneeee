@@ -22,7 +22,7 @@ class LibrarianController extends Controller
      */
     public function index(): View|Factory|Application
     {
-        $librarians = User::with(['role', 'logins'])->orderBy('id', 'DESC')->where('is_active', true)->where('role_id', 1)->orWhere('role_id', 2)->get();
+        $librarians = User::with(['role', 'logins'])->orderBy('id', 'DESC')->where('is_active', true)->whereNot('role_id', 3)->get();
         return view('..pages.librarians.index', compact('librarians'));
     }
 
@@ -85,7 +85,6 @@ class LibrarianController extends Controller
 
             return to_route('librarians.index')->with('successMessage', 'Novi bibliographer je dodan na spisak.');
         } catch (\Exception $e) {
-            dd($e);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -180,12 +179,25 @@ class LibrarianController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $librarian
+     * @return RedirectResponse
      */
-    public function destroy(User $librarian)
+    public function destroy(User $librarian): RedirectResponse
     {
         if($librarian->role->id == 3) return abort(404);
         if(!$librarian->is_active) return abort(404);
+
+        if($librarian->role->id == 1) {
+            return back()->with('errorMessage', 'Ne možete obrisati administratora.');
+        }
+
+        try {
+            $librarian->is_active = false;
+            $librarian->update();
+
+            return to_route('librarians.index')->with('successMessage', 'Bibliotekar je obrisan.');
+        }catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }
