@@ -85,7 +85,6 @@ class StudentsController extends Controller
 
             return to_route('students.index')->with('successMessage', 'Novi učenik je dodan na spisak.');
         } catch (\Exception $e) {
-            dd($e);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
