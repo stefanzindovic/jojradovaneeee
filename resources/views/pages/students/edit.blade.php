@@ -48,7 +48,7 @@
                         <div class="w-[50%] mb-[100px]">
                             <div class="mt-[20px]">
                                 <span>Ime i prezime <span class="text-red-500">*</span></span>
-                                <input type="text" name="name" id="studentName" value="{{ old('name', $student->name) }}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNameUcenikEdit()"/>
+                                <input minlength="4" maxlength="50" required type="text" name="name" id="studentName" value="{{ old('name', $student->name) }}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsNameUcenikEdit()"/>
                                 @error('name')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
@@ -59,7 +59,7 @@
                             <div class="mt-[20px]">
                                 <span>Tip korisnika</span>
                                 <select class="flex w-[90%] mt-2 px-2 py-2 border bg-gray-300 border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]" name="tip_korisnika" disabled>
-                                    <option value="3">
+                                    <option value="3" selected>
                                         Učnik
                                     </option>
                                 </select>
@@ -67,7 +67,7 @@
 
                             <div class="mt-[20px]">
                                 <span>JMBG <span class="text-red-500">*</span></span>
-                                <input type="text" name="jmbg" id="studentJmbg" value="{{old('jmbg', $student->jmbg)}}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsJmbgUcenikEdit()"/>
+                                <input minlength="13" maxlength="13" required type="text" name="jmbg" id="studentJmbg" value="{{old('jmbg', $student->jmbg)}}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsJmbgUcenikEdit()"/>
                                 @error('jmbg')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
@@ -77,7 +77,7 @@
 
                             <div class="mt-[20px]">
                                 <span>E-mail <span class="text-red-500">*</span></span>
-                                <input type="email" name="email" id="studentEmail" value="{{ old('email', $student->email) }}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsEmailUcenikEdit()"/>
+                                <input required type="email" name="email" id="studentEmail" value="{{ old('email', $student->email) }}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsEmailUcenikEdit()"/>
                                 @error('email')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
@@ -87,7 +87,7 @@
 
                             <div class="mt-[20px]">
                                 <span>Korisnicko ime <span class="text-red-500">*</span></span>
-                                <input type="text" name="username" id="studentUsername" value="{{old('username', $student->username)}}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsUsernameUcenikEdit()"/>
+                                <input minlength="4" maxlength="18" required type="text" name="username" id="studentUsername" value="{{old('username', $student->username)}}" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsUsernameUcenikEdit()"/>
                                 @error('username')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>

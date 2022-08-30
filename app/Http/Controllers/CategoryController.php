@@ -164,6 +164,14 @@ class CategoryController extends Controller
         //TODO: Add check if this category is used in some of existing books before delete action (if exists, return error message)
 
         try {
+            $uploadPath = 'uploads/categories/';
+
+            // remove old picture from storage
+            $oldpicturePath = $uploadPath . $category->picture;
+            if(Storage::disk('public')->exists($oldpicturePath)) {
+                Storage::disk('public')->delete($oldpicturePath);
+            }
+
             $category->delete();
 
             return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');

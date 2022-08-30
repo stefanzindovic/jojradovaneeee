@@ -166,6 +166,14 @@ class AuthorController extends Controller
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
 
         try {
+            $uploadPath = 'uploads/authors/';
+
+            // remove old icon from storage
+            $oldIconPath = $uploadPath . $author->picture;
+            if(Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
             $author->delete();
 
             return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');

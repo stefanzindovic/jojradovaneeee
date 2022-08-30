@@ -48,7 +48,7 @@ class StudentsController extends Controller
         $input = $request->validate([
             'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', 'unique:users,jmbg'],
-            'username' => ['required', 'alpha_num', 'min:4', 'max:18', 'unique:users,username'],
+            'username' => ['required', 'regex:/^([a-z0-9])+$/', 'min:4', 'max:18', 'unique:users,username'],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
             'password' => ['required', 'min:8', 'max:24', 'confirmed'],
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
@@ -173,11 +173,20 @@ class StudentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return Response
+     * @param User $student
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(User $student): RedirectResponse
     {
-        //
+        //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
+
+        try {
+            $student->is_active = false;
+            $student->update();
+
+            return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+        }
     }
 }

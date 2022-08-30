@@ -95,7 +95,7 @@
                         </div>
                         <div class="mt-[20px]">
                             <span>Sifra <span class="text-red-500">*</span></span>
-                            <input type="password" name="password" id="studentPassword" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPwUcenikEdit()"/>
+                            <input minlength="8" maxlength="24" required type="password" name="password" id="studentPassword" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPwUcenikEdit()"/>
                             @error('password')
                             <p style="color:red;" id="errorMessageByLaravel"><i
                                     class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
@@ -105,7 +105,7 @@
 
                         <div class="mt-[20px]">
                             <span>Ponovi sifru <span class="text-red-500">*</span></span>
-                            <input type="password" name="password_confirmation" id="studentPasswordConfirm" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2UcenikEdit()"/>
+                            <input minlength="8" maxlength="24" required type="password" name="password_confirmation" id="studentPasswordConfirm" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2UcenikEdit()"/>
                         </div>
                     </div>
 
