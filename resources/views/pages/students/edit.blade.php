@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    {{ $student->full_name }} | Izmijeni podatke
+    {{ $student->name }} | Izmijeni podatke
 @endsection
 
 @section('page_content')

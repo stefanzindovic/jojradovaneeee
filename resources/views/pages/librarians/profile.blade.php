@@ -18,7 +18,7 @@
                     <div class="pl-[30px] py-[10px] flex flex-col">
                         <div>
                             <h1>
-                                Valentina Kascelan
+                                {{$librarian->name}}
                             </h1>
                         </div>
                         <div>
@@ -115,7 +115,7 @@
 
                     </div>
                     <div class="ml-[100px]  mt-[20px]">
-                        <img class="p-2 border-2 border-gray-300" width="300px" @if($librarian->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}}" @else src="{{asset('storage/uploads/students/' . $librarian->picture)}}" @endif alt="Profilna fotografija">
+                        <img class="p-2 border-2 border-gray-300" width="300px" @if($librarian->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}}" @else src="{{asset('storage/uploads/librarians/' . $librarian->picture)}}" @endif alt="Profilna fotografija">
                     </div>
                 </div>
             </div>
@@ -128,7 +128,7 @@
         <div class="w-[500px] bg-white rounded shadow-lg md:w-1/3">
             <!-- Modal Header -->
             <div class="flex items-center justify-between px-[30px] py-[20px] border-b">
-                <h3>Resetuj sifru: Valentina Kascelan</h3>
+                <h3>Resetuj sifru: {{$librarian->name}}</h3>
                 <button class="text-black close-modal">&cross;</button>
             </div>
             <!-- Modal Body -->
