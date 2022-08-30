@@ -25,7 +25,6 @@ class User extends Authenticatable
         'jmbg',
         'picture',
         'is_active',
-
     ];
 
     /**
@@ -46,4 +45,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // relation between user roles and users
+    function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo('role_id', UserRole::class);
+    }
 }
