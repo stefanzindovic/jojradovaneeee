@@ -98,6 +98,7 @@ class StudentsController extends Controller
      */
     public function show(User $student): View|Factory|Application
     {
+        if(!$student->is_active) return abort(404);
         return view('..pages.students.profile', compact('student'));
     }
 
@@ -109,6 +110,7 @@ class StudentsController extends Controller
      */
     public function edit(User $student)
     {
+        if(!$student->is_active) return abort(404);
         return view('..pages.students.edit', compact('student'));
     }
 
@@ -121,6 +123,8 @@ class StudentsController extends Controller
      */
     public function update(Request $request, User $student): RedirectResponse
     {
+        if(!$student->is_active) return abort(404);
+
         $input = $request->validate([
             'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', Rule::unique('users', 'jmbg')->ignore($student->id)],
@@ -178,6 +182,7 @@ class StudentsController extends Controller
      */
     public function destroy(User $student): RedirectResponse
     {
+        if(!$student->is_active) return abort(404);
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
 
         try {
