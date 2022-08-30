@@ -31,6 +31,9 @@ Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 // Students
 Route::resource('/students', \App\Http\Controllers\StudentsController::class);
 
+// Librarians
+Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
+
 Route::get('/', function () {
     return view('welcome');
 });
