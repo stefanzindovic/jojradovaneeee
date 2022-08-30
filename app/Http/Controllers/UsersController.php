@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -17,7 +18,8 @@ class UsersController extends Controller
      */
     public function indexStudents(): View|Factory|Application
     {
-        return view('..pages.students.index');
+        $students = User::with(['role'])->where('is_active', true)->where('role_id', 3)->get();
+        return view('..pages.students.index', compact('students'));
     }
 
     /**
