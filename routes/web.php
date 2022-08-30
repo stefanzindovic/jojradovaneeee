@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Settings
 Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/policies',\App\Http\Controllers\PolicyController::class);
     Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
@@ -24,7 +25,13 @@ Route::prefix('settings')->name('settings.')->group(function() {
     Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
 });
 
+// Authors
 Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
+
+// Users
+Route::prefix('users')->name('users.')->group(function() {
+    Route::get('/students', '\App\Http\Controllers\UsersController@indexStudents')->name('students.index');
+});
 
 Route::get('/', function () {
     return view('welcome');
