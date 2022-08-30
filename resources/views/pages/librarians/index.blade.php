@@ -58,7 +58,7 @@
                             <img class="object-cover w-8 h-8 mr-2 rounded-full"
                                  src="{{$librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $librarian->picture) : asset('imgs/' . $librarian->picture)}}"
                                  alt=""/>
-                            <a href="{{ route('librarians.create') }}">
+                            <a href="{{ route('librarians.show', $librarian->id) }}">
                                 <span class="font-medium text-center">{{ $librarian->name }}</span>
                             </a>
                         </td>
@@ -95,7 +95,7 @@
                                         </a>
                                         <form
                                             onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovog bibliotekara?')){return false;}"
-                                            method="POST" action="{{route('students.destroy', $librarian->id)}}">
+                                            method="POST" action="{{route('librarians.destroy', $librarian->id)}}">
                                             @csrf
                                             @method('DELETE')
 

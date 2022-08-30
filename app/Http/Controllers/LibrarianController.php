@@ -7,6 +7,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LibrarianController extends Controller
 {
@@ -18,7 +19,7 @@ class LibrarianController extends Controller
     public function index(): View|Factory|Application
     {
         $librarians = User::with(['role', 'logins'])->orderBy('id', 'DESC')->where('is_active', true)->where('role_id', 1)->orWhere('role_id', 2)->get();
-        return view('pages.librarians.index', compact('librarians'));
+        return view('..pages.librarians.index', compact('librarians'));
     }
 
     /**
@@ -45,12 +46,12 @@ class LibrarianController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param User $librarian
+     * @return Application|Factory|View
      */
-    public function show($id)
+    public function show(User $librarian): View|Factory|Application
     {
-        //
+        return view('..pages.librarians.profile', compact('librarian'));
     }
 
     /**
