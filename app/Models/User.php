@@ -51,4 +51,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo( UserRole::class, 'role_id');
     }
+
+    // relation between user logins and users
+    function logins(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany( UserLogins::class);
+    }
 }
