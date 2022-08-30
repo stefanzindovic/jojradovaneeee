@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 /**
@@ -10,6 +11,17 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+
+    function generateJmbgString()
+    {
+        $characters = '0123456789';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < 13; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
     /**
      * Define the model's default state.
      *
@@ -18,11 +30,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+        'name' => fake()->name(),
+        'email' => fake()->safeEmail(),
+        'jmbg' => $this->generateJmbgString(),
+        'username' => fake()->userName(),
+        'role_id' => Arr::random([2, 3]),
+        'email_verified_at' => now(),
+        'password' => \Illuminate\Support\Facades\Hash::make(Str::random(10)),
+        'remember_token' => Str::random(10),
         ];
     }
 

@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ScriptSeeder::class,
             LanguageSeeder::class,
             AuthorSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
