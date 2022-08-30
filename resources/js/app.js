@@ -107,7 +107,7 @@ jQuery(document).ready(function () {
   })
 
   // Otpisi Knjigu Modal
-  otpisiModal = jQuery(".otpisi-modal");
+  const otpisiModal = jQuery(".otpisi-modal");
   jQuery(".show-otpisiModal").on('click', function () {
     otpisiModal.removeClass('hidden');
   })
@@ -117,7 +117,7 @@ jQuery(document).ready(function () {
   })
 
   // Izbrisi Zapis Modal
-  izbrisiModal = jQuery(".izbrisi-modal");
+  const izbrisiModal = jQuery(".izbrisi-modal");
   jQuery(".show-izbrisiModal").on('click', function () {
     izbrisiModal.removeClass('hidden');
   })

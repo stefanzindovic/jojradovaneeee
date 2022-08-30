@@ -9,27 +9,17 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class UsersController extends Controller
+class StudentsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return Application|Factory|View
      */
-    public function indexStudents(): View|Factory|Application
+    public function index(): View|Factory|Application
     {
         $students = User::with(['role', 'logins'])->where('is_active', true)->where('role_id', 3)->get();
         return view('..pages.students.index', compact('students'));
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function indexLibrarians()
-    {
-        //
     }
 
     /**
@@ -59,7 +49,7 @@ class UsersController extends Controller
      * @param User $student
      * @return Application|Factory|View
      */
-    public function showStudent(User $student): View|Factory|Application
+    public function show(User $student): View|Factory|Application
     {
         return view('..pages.students.profile', compact('student'));
     }
@@ -67,12 +57,12 @@ class UsersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param User $student
+     * @return Application|Factory|View
      */
-    public function edit($id)
+    public function edit(User $student)
     {
-        //
+        return view('..pages.students.edit', compact('student'));
     }
 
     /**

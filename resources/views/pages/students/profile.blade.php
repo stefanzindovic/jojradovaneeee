@@ -25,7 +25,7 @@
                             <nav class="w-full rounded">
                                 <ol class="flex list-reset">
                                     <li>
-                                        <a href="{{ route('users.students.index') }}" class="text-[#2196f3] hover:text-blue-600">
+                                        <a href="{{ route('students.index') }}" class="text-[#2196f3] hover:text-blue-600">
                                             Svi ucenici
                                         </a>
                                     </li>
@@ -46,7 +46,7 @@
                             <i class="fas fa-redo-alt mr-[3px]"></i>
                             Resetuj sifru
                         </a>
-                        <a href="editUcenik.php" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
+                        <a href="{{ route('students.edit', $student->id) }}" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
                             <i class="fas fa-edit mr-[3px] "></i>
                             Izmjeni
                         </a>
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div class="border-b-[1px] py-4 text-gray-500 border-[#e4dfdf] pl-[30px]">
-                <a href="ucenikProfile.php" class="inline active-book-nav">
+                <a href="{{ route('students.show', $student->id) }}" class="inline active-book-nav">
                     Osnovni detalji
                 </a>
                 <a href="ucenikIzdate.php" class="inline ml-[70px] hover:text-blue-800">
@@ -129,7 +129,7 @@
         <div class="w-[500px] bg-white rounded shadow-lg md:w-1/3">
             <!-- Modal Header -->
             <div class="flex items-center justify-between px-[30px] py-[20px] border-b">
-                <h3>Resetuj sifru: Pero Perovic</h3>
+                <h3>Resetuj sifru: {{ $student->name }}</h3>
                 <button class="text-black close-modal">&cross;</button>
             </div>
             <!-- Modal Body -->
@@ -147,13 +147,13 @@
                     </div>
                 </div>
                 <div class="flex items-center justify-end px-[30px] py-[20px] border-t w-100 text-white">
-                    <button type="button"
+                    <button type="reset"
                         class="shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                         Ponisti <i class="fas fa-times ml-[4px]"></i>
                     </button>
-                    <button id="resetujSifruUcenik" type="submit"
+                    <button id="resetStudentPasswordBtn" type="submit"
                         class="shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
-                        onclick="validacijaSifraUcenik()">
+>
                         Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                     </button>
                 </div>
