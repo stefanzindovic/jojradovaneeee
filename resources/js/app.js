@@ -87,7 +87,7 @@ jQuery(document).ready(function () {
   });
 
   // Open Modal
-  modal = jQuery(".modal");
+  const modal = jQuery(".modal");
   jQuery(".show-modal").on('click', function () {
     modal.removeClass('hidden');
   })
@@ -97,7 +97,7 @@ jQuery(document).ready(function () {
   })
 
   // Vrati Knjigu Modal
-  vratiModal = jQuery(".vrati-modal");
+  const vratiModal = jQuery(".vrati-modal");
   jQuery(".show-vratiModal").on('click', function () {
     vratiModal.removeClass('hidden');
   })

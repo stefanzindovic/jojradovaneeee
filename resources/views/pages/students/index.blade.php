@@ -15,7 +15,7 @@
         <!-- Heading of content -->
         <div class="heading mt-[7px]">
             <h1 class="pl-[50px] pb-[21px]  border-b-[1px] border-[#e4dfdf] ">
-                Ucenici
+                Učenici
             </h1>
         </div>
         <!-- Space for content -->
@@ -56,7 +56,7 @@
                             <td class="flex flex-row items-center px-4 py-4">
                                 <img class="object-cover w-8 h-8 mr-2 rounded-full" src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $student->picture) : asset('imgs/' . $student->picture)}}"
                                      alt="Profilna fotografija"/>
-                                <a href="ucenikProfile.php">
+                                <a href="{{ route('users.students.profile', $student->id) }}">
                                     <span class="font-medium text-center">{{ $student->name }}</span>
                                 </a>
                             </td>

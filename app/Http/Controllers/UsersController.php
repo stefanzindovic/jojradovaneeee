@@ -56,12 +56,12 @@ class UsersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param User $student
+     * @return Application|Factory|View
      */
-    public function show($id)
+    public function showStudent(User $student): View|Factory|Application
     {
-        //
+        return view('..pages.students.profile', compact('student'));
     }
 
     /**

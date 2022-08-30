@@ -31,6 +31,7 @@ Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 // Users
 Route::prefix('users')->name('users.')->group(function() {
     Route::get('/students', '\App\Http\Controllers\UsersController@indexStudents')->name('students.index');
+    Route::get('/students/{student}', '\App\Http\Controllers\UsersController@showStudent')->name('students.profile');
 });
 
 Route::get('/', function () {
