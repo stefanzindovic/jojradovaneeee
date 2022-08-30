@@ -17,9 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->string('jmbg', 13)->unique();
+            $table->string('username', 18)->unique();
+            $table->string('picture')->default('profile-picture-placeholder.jpg');
+            $table->foreign('role_id')->references('id')->on('user_roles');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
