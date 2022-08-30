@@ -1,20 +1,20 @@
 jQuery(document).ready(function() {
-    const nameInput = jQuery('#studentName');
-    const jmbgInput = jQuery('#studentJmbg');
-    const usernameInput = jQuery('#studentUsername');
-    const emailInput = jQuery('#studentEmail');
-    const passwordInput = jQuery('#studentPassword');
-    const passwordInputConfirm = jQuery('#studentPasswordConfirm');
+    const nameInput = jQuery('#librarianName');
+    const jmbgInput = jQuery('#librarianJmbg');
+    const usernameInput = jQuery('#librarianUsername');
+    const emailInput = jQuery('#librarianEmail');
+    const passwordInput = jQuery('#librarianPassword');
+    const passwordInputConfirm = jQuery('#librarianPasswordConfirm');
 
-    const nameValidationMessage = jQuery('#studentNameValidationMessage');
-    const jmbgValidationMessage = jQuery('#studentJmbgValidationMessage');
-    const usernameValidationMessage = jQuery('#studentUsernameValidationMessage');
-    const passwordValidationMessage = jQuery('#studentPasswordValidationMessage');
-    const emailValidationMessage = jQuery('#studentEmailValidationMessage');
+    const nameValidationMessage = jQuery('#librarianNameValidationMessage');
+    const jmbgValidationMessage = jQuery('#librarianJmbgValidationMessage');
+    const usernameValidationMessage = jQuery('#librarianUsernameValidationMessage');
+    const passwordValidationMessage = jQuery('#librarianPasswordValidationMessage');
+    const emailValidationMessage = jQuery('#librarianEmailValidationMessage');
 
-    const studentSubmitBtn = jQuery('#saveStudentBtn');
+    const librarianSubmitBtn = jQuery('#savelibrarianBtn');
 
-    studentSubmitBtn.on('click', function(e) {
+    librarianSubmitBtn.on('click', function(e) {
         // Name validation
         if(nameInput.val() === null || nameInput.val() === undefined ||nameInput.val() === false || nameInput.val() === '') {
             setTimeout(function () {
