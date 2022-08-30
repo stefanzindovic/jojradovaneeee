@@ -57,7 +57,7 @@
                             </td>
                             <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $student->email }}</td>
                             <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $student->role->name }}</td>
-                            <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">Prije 10 sati</td>
+                            <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">@if($student->logins->isNotEmpty()) {{ $student->logins[$student->logins->count() - 1]->created_at->diffForHumans() }} @else Nikada se nije ulogovao @endif</td>
                             <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
                                 <p class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsStudent hover:text-[#606FC7]">
                                     <i class="fas fa-ellipsis-v"></i>

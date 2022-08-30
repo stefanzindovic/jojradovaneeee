@@ -18,7 +18,7 @@ class UsersController extends Controller
      */
     public function indexStudents(): View|Factory|Application
     {
-        $students = User::with(['role'])->where('is_active', true)->where('role_id', 3)->get();
+        $students = User::with(['role', 'logins'])->where('is_active', true)->where('role_id', 3)->get();
         return view('..pages.students.index', compact('students'));
     }
 
