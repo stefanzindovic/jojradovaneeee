@@ -105,7 +105,7 @@
 
                         <div class="mt-[20px]">
                             <span>Ponovi sifru <span class="text-red-500">*</span></span>
-                            <input type="password" name="password_confirm" id="studentPasswordConfirm" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2UcenikEdit()"/>
+                            <input type="password" name="password_confirmation" id="studentPasswordConfirm" required minlength="8" maxlength="24" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" onkeydown="clearErrorsPw2UcenikEdit()"/>
                         </div>
                     </div>
 

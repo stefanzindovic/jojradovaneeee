@@ -50,7 +50,7 @@ class StudentsController extends Controller
             'jmbg' => ['required', 'numeric', 'digits:13', 'unique:users,jmbg'],
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', 'unique:users,username'],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
-            'password' => ['required', 'min:8', 'max:24'],
+            'password' => ['required', 'min:8', 'max:24', 'confirmed'],
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
