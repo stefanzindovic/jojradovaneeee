@@ -40,7 +40,7 @@
             </div>
             <!-- Space for content -->
             <div class="scroll height-content section-content">
-                <form action="{{ route('students.update', $student->id) }}" method="POST">
+                <form id="myForm" action="{{ route('students.update', $student->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PATCH')
 

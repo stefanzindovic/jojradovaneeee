@@ -6,8 +6,12 @@ use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
+use JetBrains\PhpStorm\NoReturn;
 
 class StudentsController extends Controller
 {
@@ -68,13 +72,59 @@ class StudentsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param Request $request
+     * @param User $student
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    #[NoReturn] public function update(Request $request, User $student)
     {
-        //
+        $input = $request->validate([
+            'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
+            'jmbg' => ['required', 'numeric', 'digits:13', Rule::unique('users', 'jmbg')->ignore($student->id)],
+            'username' => ['required', 'alpha_num', 'min:4', 'max:18', Rule::unique('users', 'username')->ignore($student->id)],
+            'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($student->id)],
+            'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
+        ]);
+
+
+
+        try {
+            $genericName = $student->picture;
+            if($request->hasFile('picture')) {
+                $uploadPath = 'uploads/students/';
+
+                // remove old icon from storage
+                $oldIconPath = $uploadPath . $student->picture;
+                if(Storage::disk('public')->exists($oldIconPath)) {
+                    Storage::disk('public')->delete($oldIconPath);
+                }
+
+                // upload new icon
+                if($request->hasFile('picture')) {
+                    $uploadedFile = $request->file('picture');
+                    $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadPath,
+                        $uploadedFile,
+                        $genericName
+                    );
+                }
+            }
+
+            // update category in db
+            $student->name = $input['name'];
+            $student->email = $input['email'];
+            $student->username = $input['username'];
+            $student->jmbg = $input['jmbg'];
+            $student->picture = $genericName;
+
+            $student->update();
+
+            return to_route('students.index')->with('successMessage', 'Informacije o učeniku su izmijenjene.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
