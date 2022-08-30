@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Facade;
 
 return [
 
+    'Date' => Jenssegers\Date\Date::class,
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -181,6 +183,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Jenssegers\Date\DateServiceProvider::class,
 
         /*
          * Package Service Providers...
