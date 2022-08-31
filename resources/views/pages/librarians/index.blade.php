@@ -90,13 +90,15 @@
                                                 <i class="far fa-file mr-[5px] ml-[5px] py-1"></i>
                                                 <span class="px-4 py-0">Pogledaj</span>
                                             </a>
-                                            @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
+                                            @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1 || \Illuminate\Support\Facades\Auth::user()->id == $librarian->id)
                                                 <a href="{{route('librarians.edit', $librarian->id)}}" tabindex="0"
                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                    role="menuitem">
                                                     <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                                     <span class="px-4 py-0">Izmijeni</span>
                                                 </a>
+                                            @endif
+                                            @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1 && $librarian->role_id != 1)
                                                 <form
                                                     onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovog bibliotekara?')){return false;}"
                                                     method="POST"
