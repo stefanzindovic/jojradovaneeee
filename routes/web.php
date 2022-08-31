@@ -13,27 +13,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Settings
-Route::prefix('settings')->name('settings.')->group(function() {
-    Route::resource('/policies',\App\Http\Controllers\PolicyController::class);
-    Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
-    Route::resource('/genres', \App\Http\Controllers\GenreController::class);
-    Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
-    Route::resource('/covers', \App\Http\Controllers\CoverController::class);
-    Route::resource('/formats', \App\Http\Controllers\FormatController::class);
-    Route::resource('/scripts', \App\Http\Controllers\ScriptController::class);
-    Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
-});
+Route::middleware(['auth'])->group(function() {
+    // Settings
+    Route::prefix('settings')->name('settings.')->group(function() {
+        Route::resource('/policies',\App\Http\Controllers\PolicyController::class);
+        Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+        Route::resource('/genres', \App\Http\Controllers\GenreController::class);
+        Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
+        Route::resource('/covers', \App\Http\Controllers\CoverController::class);
+        Route::resource('/formats', \App\Http\Controllers\FormatController::class);
+        Route::resource('/scripts', \App\Http\Controllers\ScriptController::class);
+        Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
+    });
 
 // Authors
-Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
+    Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 
 // Students
-Route::resource('/students', \App\Http\Controllers\StudentsController::class);
+    Route::resource('/students', \App\Http\Controllers\StudentsController::class);
 
 // Librarians
-Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
-
-Route::get('/', function () {
-    return view('welcome');
+    Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
 });
+
+require __DIR__.'/auth.php';
