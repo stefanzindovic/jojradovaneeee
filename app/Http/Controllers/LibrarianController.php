@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -106,12 +107,17 @@ class LibrarianController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param User $librarian
-     * @return Application|Factory|View
+     * @return Application|Factory|View|RedirectResponse
      */
-    public function edit(User $librarian): View|Factory|Application
+    public function edit(User $librarian): View|Factory|RedirectResponse|Application
     {
         if($librarian->role->id == 3) return abort(404);
         if(!$librarian->is_active) return abort(404);
+
+        if($librarian->role->id == 1 && Auth::user()->id != $librarian->id) {
+            return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
+        }
+
         return view('..pages.librarians.edit', compact('librarian'));
     }
 
@@ -126,6 +132,10 @@ class LibrarianController extends Controller
     {
         if(!$librarian->is_active) return abort(404);
         if($librarian->role->id == 3) return abort(404);
+
+        if($librarian->role->id == 1 && Auth::user()->id == $librarian->id) {
+            return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
+        }
 
         $input = $request->validate([
             'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
@@ -189,6 +199,10 @@ class LibrarianController extends Controller
 
         if($librarian->role->id == 1) {
             return back()->with('errorMessage', 'Ne možete obrisati administratora.');
+        }
+
+        if($librarian->id == Auth::user()->id) {
+            return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
         }
 
         try {

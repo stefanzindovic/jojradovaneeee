@@ -82,7 +82,7 @@
                         aria-label="User profile">
                         <div class="flex items-center h-5">
                             <div style="width: 45px; height: 45px;" class="mt-[15px]">
-                                <img class="rounded-full w-full h-full" src="{{\Illuminate\Support\Facades\Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . \Illuminate\Support\Facades\Auth::user()->picture) : asset('imgs/' . \Illuminate\Support\Facades\Auth::user()->picture)}}" alt="Profilna fotografija">
+                                <img class="rounded-full w-full h-full" src="{{\Illuminate\Support\Facades\Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? \Illuminate\Support\Facades\Auth::user()->role_id == 1 ? asset('storage/uploads/librarians/' . \Illuminate\Support\Facades\Auth::user()->picture) : asset('storage/uploads/students/' . \Illuminate\Support\Facades\Auth::user()->picture) : asset('imgs/' . \Illuminate\Support\Facades\Auth::user()->picture)}}" alt="Profilna fotografija">
                             </div>
                         </div>
                     </a>

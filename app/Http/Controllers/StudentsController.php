@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
@@ -186,6 +187,10 @@ class StudentsController extends Controller
     {
         if(!$student->is_active) return abort(404);
         if($student->role->id != 3) return abort(404);
+
+        if($student->id == Auth::user()->id) {
+            return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
+        }
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
 
         try {
