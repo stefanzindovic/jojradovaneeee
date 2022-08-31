@@ -189,8 +189,7 @@ class StudentsController extends Controller
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
 
         try {
-            $student->is_active = false;
-            $student->update();
+            $student->delete();
 
             return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
         } catch (\Exception $e) {

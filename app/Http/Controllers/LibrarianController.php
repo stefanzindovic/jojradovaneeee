@@ -192,8 +192,7 @@ class LibrarianController extends Controller
         }
 
         try {
-            $librarian->is_active = false;
-            $librarian->update();
+            $librarian->delete();
 
             return to_route('librarians.index')->with('successMessage', 'Bibliotekar je obrisan.');
         }catch (\Exception $e) {
