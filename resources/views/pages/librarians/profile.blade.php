@@ -53,7 +53,7 @@
                             Izmjeni podatke
                         </a>
                     @endif
-                    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1)
+                    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 1 && $librarian->id != \Illuminate\Support\Facades\Auth::user()->id)
                         <p class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsLibrarianProfile hover:text-[#606FC7]"
                            id="dropdownStudent">
                             <i
