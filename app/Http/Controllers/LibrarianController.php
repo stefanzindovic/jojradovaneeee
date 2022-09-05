@@ -218,7 +218,7 @@ class LibrarianController extends Controller
         }
 
         if(Auth::user()->role_id != 1) {
-            return back()->with('errorMessage', 'Nemate dozvolu za izvršenje ove akcije.');
+            return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
         }
 
         try {
@@ -226,6 +226,27 @@ class LibrarianController extends Controller
 
             return to_route('librarians.index')->with('successMessage', 'Bibliotekar je obrisan.');
         }catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function resetPassword(Request $request, User $librarian) {
+        $input = $request->validate([
+            'password' => 'required|min:8|max:24,confirmed',
+        ]);
+
+
+        if($librarian->id != Auth::user()->id && Auth::user()->role_id !== 1) {
+            return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
+        }
+
+        try {
+            $hashedPassword = Hash::make($input['password']);
+            $librarian->password = $hashedPassword;
+            $librarian->update();
+            return back()->with('successMessage', 'Lozinka je uspješno izmijenjena.');
+        } catch (\Throwable $th) {
+            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }

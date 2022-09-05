@@ -26,14 +26,16 @@ Route::middleware(['auth'])->group(function() {
         Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
     });
 
-// Authors
+    // Authors
     Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 
-// Students
+    // Students
     Route::resource('/students', \App\Http\Controllers\StudentsController::class);
+    Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
 
-// Librarians
+    // Librarians
     Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
+    Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
 });
 
 require __DIR__.'/auth.php';

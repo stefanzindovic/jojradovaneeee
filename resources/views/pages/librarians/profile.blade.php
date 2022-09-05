@@ -146,7 +146,9 @@
             <button class="text-black close-modal">&cross;</button>
         </div>
         <!-- Modal Body -->
-        <form class="forma">
+        <form method="POST" action="{{ route('librarians.password', $librarian->id) }}">
+            @csrf
+            @method('PATCH')
             <div class="flex flex-col px-[30px] py-[30px]">
                 <div class="flex flex-col pb-[30px]">
                     <span>Unesi novu šifru <span class="text-red-500">*</span></span>
