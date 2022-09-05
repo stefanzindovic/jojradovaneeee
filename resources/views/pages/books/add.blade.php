@@ -60,26 +60,26 @@
                             <div class="w-[50%]">
                                 <div class="mt-[20px]">
                                     <p>Naziv knjige <span class="text-red-500">*</span></p>
-                                    <input type="text" name="nazivKnjiga" id="nazivKnjiga"
+                                    <input required minlength="1" maxlength="50" type="text" name="nazivKnjiga"
+                                        id="nazivKnjiga"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsNazivKnjiga()" />
                                     <div id="validateNazivKnjiga"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
-                                    <p class="inline-block mb-2">Kratki sadrzaj</p>
-                                    <textarea name="kratki_sadrzaj"
-                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
-        
-                                        </textarea>
+                                    <p class="inline-block mb-2">Kratki sadržaj</p>
+                                    <textarea required minlength="10" maxlength="500" name="kratki_sadrzaj"
+                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"></textarea>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Izaberite kategorije <span class="text-red-500">*</span></p>
-                                    <select id="categories" name="categories[]" multiple="multiple"
+                                    <select required id="categories" name="categories[]" multiple="multiple"
                                         class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
-                                        <option value="1">Udzbenici</option>
-                                        <option value="2">Romani</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                        @endforeach
                                     </select>
 
                                     <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
@@ -152,11 +152,12 @@
                             </div>
 
                             <div class="mt-[20px]">
-                                <p>Izaberite zanrove <span class="text-red-500">*</span></p>
-                                <select id="genres" name="genres[]" multiple="multiple"
+                                <p>Izaberite žanrove <span class="text-red-500">*</span></p>
+                                <select required id="genres" name="genres[]" multiple="multiple"
                                     class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
-                                    <option value="1">Udzbenici</option>
-                                    <option value="2">Romani</option>
+                                    @foreach ($genres as $genre)
+                                        <option value="{{ $genre->id }}">{{ $genre->title }}</option>
+                                    @endforeach
                                 </select>
 
                                 <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
@@ -234,8 +235,9 @@
                             <p>Izaberite autore <span class="text-red-500">*</span></p>
                             <select id="authors" name="authors[]" multiple="multiple"
                                 class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
-                                <option value="1">Udzbenici</option>
-                                <option value="2">Romani</option>
+                                @foreach ($authors as $author)
+                                    <option value="{{ $author->id }}">{{ $author->full_name }}</option>
+                                @endforeach
                             </select>
 
                             <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
@@ -307,34 +309,31 @@
                     </div>
 
                     <div class="mt-[20px]">
-                        <p>Izdavac <span class="text-red-500">*</span></p>
-                        <select
+                        <p>Izdavač <span class="text-red-500">*</span></p>
+                        <select required
                             class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                             name="izdavac" id="izdavac" onclick="clearErrorsIzdavac()">
-                            <option disabled selected></option>
-                            <option value="">
-                                Izdavac 1
-                            </option>
+                            <option selected></option>
+                            @foreach ($publishers as $publisher)
+                                <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
+                            @endforeach
                         </select>
                         <div id="validateIzdavac"></div>
                     </div>
 
                     <div class="mt-[20px]">
                         <p>Godina izdavanja <span class="text-red-500">*</span></p>
-                        <select
+                        <input
                             class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                            name="godinaIzdavanja" id="godinaIzdavanja" onclick="clearErrorsGodinaIzdavanja()">
-                            <option disabled selected></option>
-                            <option value="">
-                                Godina izdavanja 1
-                            </option>
-                        </select>
+                            type="number" required name="published_at" min="1800" max="2022" value="2022"
+                            id="">
                         <div id="validateGodinaIzdavanja"></div>
                     </div>
 
                     <div class="mt-[20px]">
                         <p>Kolicina <span class="text-red-500">*</span></p>
-                        <input type="text" name="knjigaKolicina" id="knjigaKolicina"
+                        <input required min="1" max="999" value="1" type="number"
+                            name="knjigaKolicina" id="knjigaKolicina"
                             class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                             onkeydown="clearErrorsKnjigaKolicina()" />
                         <div id="validateKnjigaKolicina"></div>
@@ -346,7 +345,8 @@
                             <div class="w-[50%] mb-[150px]">
                                 <div class="mt-[20px]">
                                     <p>Broj strana <span class="text-red-500">*</span></p>
-                                    <input type="text" name="brStrana" id="brStrana"
+                                    <input type="text" minlength="1" maxlength="4" value="10" name="brStrana"
+                                        id="brStrana"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsBrStrana()" />
                                     <div id="validateBrStrana"></div>
@@ -354,61 +354,47 @@
 
                                 <div class="mt-[20px]">
                                     <p>Pismo <span class="text-red-500">*</span></p>
-                                    <select
+                                    <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="pismo" id="pismo" onclick="clearErrorsPismo()">
                                         <option disabled selected></option>
-                                        <option value="">
-                                            Cirilica
-                                        </option>
-                                        <option value="">
-                                            Latinica
-                                        </option>
-                                        <option value="">
-                                            Arapsko
-                                        </option>
-                                        <option value="">
-                                            Kinesko
-                                        </option>
+                                        @foreach ($scripts as $script)
+                                            <option value="{{ $script->id }}">{{ $script->name }}</option>
+                                        @endforeach
                                     </select>
                                     <div id="validatePismo"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Povez <span class="text-red-500">*</span></p>
-                                    <select
+                                    <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="povez" id="povez" onclick="clearErrorsPovez()">
                                         <option disabled selected></option>
-                                        <option value="">
-                                            Tvrdi
-                                        </option>
-                                        <option value="">
-                                            Meki
-                                        </option>
+                                        @foreach ($covers as $cover)
+                                            <option value="{{ $cover->id }}">{{ $cover->name }}</option>
+                                        @endforeach
                                     </select>
                                     <div id="validatePovez"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Format <span class="text-red-500">*</span></p>
-                                    <select
+                                    <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="format" id="format" onclick="clearErrorsFormat()">
                                         <option disabled selected></option>
-                                        <option value="">
-                                            A1
-                                        </option>
-                                        <option value="">
-                                            A2
-                                        </option>
+                                        @foreach ($formats as $format)
+                                            <option value="{{ $format->id }}">{{ $format->name }}</option>
+                                        @endforeach
                                     </select>
                                     <div id="validateFormat"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>International Standard Book Num <span class="text-red-500">*</span></p>
-                                    <input type="text" name="isbn" id="isbn"
+                                    <input required minlength="13" maxlength="13" type="text" name="isbn"
+                                        id="isbn"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsIsbn()" />
                                     <div id="validateIsbn"></div>
