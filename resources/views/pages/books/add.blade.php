@@ -75,12 +75,13 @@
 
                             <div class="mt-[20px]">
                                 <p>Izaberite kategorije <span class="text-red-500">*</span></p>
-                                <select x-cloak id="kategorija">
+                                <select id="categories" name="categories[]" multiple="multiple"
+                                    class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
                                     <option value="1">Udzbenici</option>
                                     <option value="2">Romani</option>
                                 </select>
 
-                                <div x-init="loadOptions()" class="flex flex-col w-[90%]">
+                                <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
                                     <input name="values" id="kategorijaInput" type="hidden"
                                         x-bind:value="selectedValues()">
                                     <div class="relative inline-block w-[100%]">
@@ -151,18 +152,19 @@
 
                         <div class="mt-[20px]">
                             <p>Izaberite zanrove <span class="text-red-500">*</span></p>
-                            <select x-cloak id="zanr">
-                                <option value="1">Poezija</option>
-                                <option value="2">Strucna literatura</option>
+                            <select id="genres" name="genres[]" multiple="multiple"
+                                class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
+                                <option value="1">Udzbenici</option>
+                                <option value="2">Romani</option>
                             </select>
 
-                            <div x-init="loadOptionsZanrovi()" class="flex flex-col w-[90%]">
-                                <input name="values" id="zanroviInput" type="hidden" x-bind:value="selectedValues()">
+                            <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
+                                <input name="values" id="kategorijaInput" type="hidden" x-bind:value="selectedValues()">
                                 <div class="relative inline-block w-[100%]">
                                     <div class="relative flex flex-col items-center">
                                         <div x-on:click="open" class="w-full svelte-1l8159u">
                                             <div class="flex p-1 my-2 bg-white border border-gray-300 shadow-sm svelte-1l8159u focus-within:ring-2 focus-within:ring-[#576cdf]"
-                                                onclick="clearErrorsZanr()">
+                                                onclick="clearErrorsKategorija()">
                                                 <div class="flex flex-wrap flex-auto">
                                                     <template x-for="(option,index) in selected"
                                                         :key="options[option].value">
@@ -187,7 +189,6 @@
                                             <div class="flex items-center w-8 py-1 pl-2 pr-1 text-gray-300 svelte-1l8159u">
                                                 <button type="button" x-show="isOpen() === true" x-on:click="open"
                                                     class="w-6 h-6 text-gray-600 outline-none cursor-pointer focus:outline-none">
-
                                                 </button>
                                                 <button type="button" x-show="isOpen() === false" @click="close"
                                                     class="w-6 h-6 text-gray-600 outline-none cursor-pointer focus:outline-none">
@@ -228,18 +229,19 @@
                 <div class="w-[50%]">
                     <div class="mt-[20px]">
                         <p>Izaberite autore <span class="text-red-500">*</span></p>
-                        <select x-cloak id="autori">
-                            <option value="1">Mark Twain</option>
-                            <option value="2">Pero Peric</option>
+                        <select id="authors" name="authors[]" multiple="multiple"
+                            class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
+                            <option value="1">Udzbenici</option>
+                            <option value="2">Romani</option>
                         </select>
 
-                        <div x-init="loadOptionsAutori()" class="flex flex-col w-[90%]">
-                            <input name="values" id="autoriInput" type="hidden" x-bind:value="selectedValues()">
+                        <div x-init="loadOptions()" class="flex flex-col w-[90%]" style="display: none">
+                            <input name="values" id="kategorijaInput" type="hidden" x-bind:value="selectedValues()">
                             <div class="relative inline-block w-[100%]">
                                 <div class="relative flex flex-col items-center">
                                     <div x-on:click="open" class="w-full svelte-1l8159u">
                                         <div class="flex p-1 my-2 bg-white border border-gray-300 shadow-sm svelte-1l8159u focus-within:ring-2 focus-within:ring-[#576cdf]"
-                                            onclick="clearErrorsAutori()">
+                                            onclick="clearErrorsKategorija()">
                                             <div class="flex flex-wrap flex-auto">
                                                 <template x-for="(option,index) in selected" :key="options[option].value">
                                                     <div
@@ -263,7 +265,6 @@
                                         <div class="flex items-center w-8 py-1 pl-2 pr-1 text-gray-300 svelte-1l8159u">
                                             <button type="button" x-show="isOpen() === true" x-on:click="open"
                                                 class="w-6 h-6 text-gray-600 outline-none cursor-pointer focus:outline-none">
-
                                             </button>
                                             <button type="button" x-show="isOpen() === false" @click="close"
                                                 class="w-6 h-6 text-gray-600 outline-none cursor-pointer focus:outline-none">
