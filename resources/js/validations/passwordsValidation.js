@@ -2,11 +2,11 @@ jQuery(document).ready(function () {
     const passwordInput = jQuery("#newPassword");
     const passwordConfirmationInput = jQuery("#newPasswordConfirmation");
 
-    const passwordValidationMessage = jQuery("#passwordValdiationMessage");
+    const passwordValidationMessage = jQuery("#passwordValidationMessage");
 
     const savePasswordBtn = jQuery("#savePasswordBtn");
 
-    savePasswordBtn.click(function () {
+    savePasswordBtn.click(function (e) {
         // Password validation
         if (passwordInput.length > 0) {
             if (
