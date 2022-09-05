@@ -11,7 +11,7 @@ class Book extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'title', 'description', 'isbn', 'publisher_id', 'language_id', 'cover_id', 'script_id', 'format_id', 'total_pages', 'total_copies', 'published_at'
+        'title', 'description', 'picture', 'isbn', 'publisher_id', 'language_id', 'cover_id', 'script_id', 'format_id', 'total_pages', 'total_copies', 'published_at'
     ];
 
     // One to many relationships
@@ -39,6 +39,11 @@ class Book extends Model
     public function format()
     {
         return $this->belongsTo(Format::class, 'format_id');
+    }
+
+    public function gallery()
+    {
+        return $this->hasMany(BookGallery::class);
     }
 
     // Many to many relationships

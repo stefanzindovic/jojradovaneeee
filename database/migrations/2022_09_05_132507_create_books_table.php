@@ -18,8 +18,9 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('isbn');
-            $table->integer('total_copies')->default(1);
+            $table->string('picture')->default('book-placeholder.png');
             $table->string('total_pages')->default('10');
+            $table->integer('total_copies')->default(1);
             $table->foreignId('script_id')->constrained('scripts');
             $table->foreignId('language_id')->constrained('languages');
             $table->foreignId('cover_id')->constrained('covers');

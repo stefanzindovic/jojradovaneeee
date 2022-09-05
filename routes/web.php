@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Models\BookCategory;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth'])->group(function() {
+Route::middleware(['auth'])->group(function () {
     // Settings
-    Route::prefix('settings')->name('settings.')->group(function() {
-        Route::resource('/policies',\App\Http\Controllers\PolicyController::class);
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
         Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
         Route::resource('/genres', \App\Http\Controllers\GenreController::class);
         Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
@@ -36,6 +38,9 @@ Route::middleware(['auth'])->group(function() {
     // Librarians
     Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
     Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
+
+    // Books CRUD
+    Route::resource('/books', BookController::class);
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

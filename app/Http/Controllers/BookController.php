@@ -15,7 +15,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery'])->get();
+        return view('..pages/books/index', compact('books'));
     }
 
     /**
