@@ -15,7 +15,10 @@ jQuery(document).ready(function () {
                 passwordInput.val() === false ||
                 passwordInput.val() === ""
             ) {
+                passwordInput.val(null);
+                passwordConfirmationInput.val(null);
                 setTimeout(function () {
+                    passwordInput.val(null);
                     passwordValidationMessage
                         .css({ display: "block" })
                         .html(
@@ -27,6 +30,8 @@ jQuery(document).ready(function () {
                 passwordInput.val().length < 8 ||
                 passwordInput.val().length > 24
             ) {
+                passwordInput.val(null);
+                passwordConfirmationInput.val(null);
                 setTimeout(function () {
                     passwordValidationMessage
                         .css({ display: "block" })
@@ -38,6 +43,8 @@ jQuery(document).ready(function () {
             } else if (
                 passwordInput.val() !== passwordConfirmationInput.val()
             ) {
+                passwordInput.val(null);
+                passwordConfirmationInput.val(null);
                 setTimeout(function () {
                     passwordValidationMessage
                         .css({ display: "block" })
