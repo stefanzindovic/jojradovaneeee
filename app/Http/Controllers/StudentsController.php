@@ -201,4 +201,20 @@ class StudentsController extends Controller
             return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
         }
     }
+
+    public function resetPassword(Request $request, User $student) {
+        $input = $request->validate([
+            'password' => 'required|min:8|max:24,confirmed',
+        ]);
+
+        try {
+            $hashedPassword = Hash::make($input['password']);
+            $student->password = $hashedPassword;
+            $student->update();
+            
+            return back()->with('successMessage', 'Lozinka je uspješno izmijenjena.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
 }

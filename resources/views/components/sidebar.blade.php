@@ -31,7 +31,7 @@
                             <div>
                                 <a href="{{route('librarians.index')}}" aria-label="Bibliotekari">
                                     <i
-                                        class="@if(\Illuminate\Support\Facades\Request::is('librarians*')) text-[#576cdf] @endif text-[25px] text-[#707070] far fa-address-book transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
+                                        class="@if(\Illuminate\Support\Facades\Request::is('librarians*')) text-[#576cdf] @endif text-[25px] text-[#707070] fa-solid fa-user-shield transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
                                     <div class="hidden sidebar-item">
                                         <p
                                             class="@if(\Illuminate\Support\Facades\Request::is('librarians*')) text-[#576cdf] @endif inline text-[15px] ml-[20px] transition duration-300 ease-in group-hover:text-[#576cdf]">
@@ -68,7 +68,7 @@
                             <div>
                                 <a href="evidencijaKnjiga.php" aria-label="Knjige">
                                     <i
-                                        class="text-[25px] @if(\Illuminate\Support\Facades\Request::is('books*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] far fa-copy"></i>
+                                        class="text-[25px] @if(\Illuminate\Support\Facades\Request::is('books*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fa-solid fa-book"></i>
                                     <div class="hidden sidebar-item">
                                         <p
                                             class="transition @if(\Illuminate\Support\Facades\Request::is('books*')) text-[#576cdf] @endif duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
@@ -86,7 +86,7 @@
                             <div>
                                 <a href="{{ route('authors.index') }}" aria-label="Autori">
                                     <i
-                                        class="text-[25px] @if(\Illuminate\Support\Facades\Request::is('authors*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] far fa-address-book"></i>
+                                        class="text-[25px] @if(\Illuminate\Support\Facades\Request::is('authors*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fa-solid fa-user-edit"></i>
                                     <div class="hidden sidebar-item">
                                         <p
                                             class="transition @if(\Illuminate\Support\Facades\Request::is('authors*')) text-[#576cdf] @endif duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">

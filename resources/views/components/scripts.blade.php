@@ -22,6 +22,7 @@
 @vite('./resources/js/validations/authorsValidation.js')
 @vite('./resources/js/validations/studentsValidations.js')
 @vite('./resources/js/validations/librariansValidation.js')
+@vite('./resources/js/validations/passwordsValidation.js')
 
 <!-- Cropper -->
 @vite('./resources/js/cropper/cropper.min.js')
