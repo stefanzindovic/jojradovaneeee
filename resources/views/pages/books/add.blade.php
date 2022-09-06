@@ -59,23 +59,27 @@
                         <div class="flex flex-row ml-[30px] mb-[150px]">
                             <div class="w-[50%]">
                                 <div class="mt-[20px]">
-                                    <p>Naziv knjige <span class="text-red-500">*</span></p>
-                                    <input required minlength="1" maxlength="50" type="text" name="nazivKnjiga"
-                                        id="nazivKnjiga"
-                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        onkeydown="clearErrorsNazivKnjiga()" />
-                                    <div id="validateNazivKnjiga"></div>
+                                    <p>Naslov knjige <span class="text-red-500">*</span></p>
+                                    <input required minlength="1" maxlength="50" type="text" name="title"
+                                        id="bookTitle"
+                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
+                                    @error('title')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
+                                    <div id="bookTitleValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p class="inline-block mb-2">Kratki sadržaj</p>
-                                    <textarea required minlength="10" maxlength="500" name="kratki_sadrzaj"
+                                    <textarea required minlength="10" maxlength="500" name="description" id="bookDescription"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"></textarea>
+                                    <div id="bookDescriptionValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Izaberite kategorije <span class="text-red-500">*</span></p>
-                                    <select required id="categories" name="categories[]" multiple="multiple"
+                                    <select required id="bookCategories" name="categories[]" multiple="multiple"
                                         class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}">{{ $category->title }}</option>
@@ -148,12 +152,12 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="validateKategorija"></div>
+                                <div id="bookCategoriesValidationMessage"></div>
                             </div>
 
                             <div class="mt-[20px]">
                                 <p>Izaberite žanrove <span class="text-red-500">*</span></p>
-                                <select required id="genres" name="genres[]" multiple="multiple"
+                                <select required id="bookGenres" name="genres[]" multiple="multiple"
                                     class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
                                     @foreach ($genres as $genre)
                                         <option value="{{ $genre->id }}">{{ $genre->title }}</option>
@@ -226,14 +230,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="validateZanr"></div>
+                            <div id="bookGenresValidationMessage"></div>
                         </div>
                     </div>
 
                     <div class="w-[50%]">
                         <div class="mt-[20px]">
                             <p>Izaberite autore <span class="text-red-500">*</span></p>
-                            <select id="authors" name="authors[]" multiple="multiple"
+                            <select required id="bookAuthors" name="authors[]" multiple="multiple"
                                 class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}">{{ $author->full_name }}</option>
@@ -305,38 +309,37 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="validateAutori"></div>
+                        <div id="bookAuthorsValidationMessage"></div>
                     </div>
 
                     <div class="mt-[20px]">
                         <p>Izdavač <span class="text-red-500">*</span></p>
                         <select required
                             class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                            name="izdavac" id="izdavac" onclick="clearErrorsIzdavac()">
+                            name="publisher" id="bookPublisher" id="izdavac">
                             <option selected></option>
                             @foreach ($publishers as $publisher)
                                 <option value="{{ $publisher->id }}">{{ $publisher->name }}</option>
                             @endforeach
                         </select>
-                        <div id="validateIzdavac"></div>
+                        <div id="bookPublisherValidationMessage"></div>
                     </div>
 
                     <div class="mt-[20px]">
                         <p>Godina izdavanja <span class="text-red-500">*</span></p>
                         <input
                             class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                            type="number" required name="published_at" min="1800" max="2022" value="2022"
-                            id="">
-                        <div id="validateGodinaIzdavanja"></div>
+                            type="number" required name="published_at" min="1800" value="2022"
+                            id="bookPublishedAt">
+                        <div id="bookPublishedAtValidationMessage"></div>
                     </div>
 
                     <div class="mt-[20px]">
                         <p>Kolicina <span class="text-red-500">*</span></p>
-                        <input required min="1" max="999" value="1" type="number"
-                            name="knjigaKolicina" id="knjigaKolicina"
-                            class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                            onkeydown="clearErrorsKnjigaKolicina()" />
-                        <div id="validateKnjigaKolicina"></div>
+                        <input required min="1" max="999" value="1" type="number" name="total_copies"
+                            id="bookCopies"
+                            class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
+                        <div id="bookCopiesValidationMessage"></div>
                     </div>
                 </section>
                 <section id="addBookTab_Specifications" class="hidden">
@@ -345,59 +348,59 @@
                             <div class="w-[50%] mb-[150px]">
                                 <div class="mt-[20px]">
                                     <p>Broj strana <span class="text-red-500">*</span></p>
-                                    <input type="text" minlength="1" maxlength="4" value="10" name="brStrana"
-                                        id="brStrana"
+                                    <input type="text" minlength="1" maxlength="4" value="10"
+                                        name="total_pages" id="bookPages"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsBrStrana()" />
-                                    <div id="validateBrStrana"></div>
+                                    <div id="bookPagesValidationMessageByJs"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Pismo <span class="text-red-500">*</span></p>
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        name="pismo" id="pismo" onclick="clearErrorsPismo()">
+                                        name="script" id="bookScript" onclick="clearErrorsPismo()">
                                         <option disabled selected></option>
                                         @foreach ($scripts as $script)
                                             <option value="{{ $script->id }}">{{ $script->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="validatePismo"></div>
+                                    <div id="bookScriptValidationMessageByJs"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Povez <span class="text-red-500">*</span></p>
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        name="povez" id="povez" onclick="clearErrorsPovez()">
+                                        name="cover" id="bookCover" onclick="clearErrorsPovez()">
                                         <option disabled selected></option>
                                         @foreach ($covers as $cover)
                                             <option value="{{ $cover->id }}">{{ $cover->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="validatePovez"></div>
+                                    <div id="bookCoverValidationMessageByJs"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Format <span class="text-red-500">*</span></p>
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        name="format" id="format" onclick="clearErrorsFormat()">
+                                        name="format" id="bookFormat" onclick="clearErrorsFormat()">
                                         <option disabled selected></option>
                                         @foreach ($formats as $format)
                                             <option value="{{ $format->id }}">{{ $format->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="validateFormat"></div>
+                                    <div id="bookFormatValidationMessageByJs"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>International Standard Book Num <span class="text-red-500">*</span></p>
                                     <input required minlength="13" maxlength="13" type="text" name="isbn"
-                                        id="isbn"
+                                        id="bookIsbn"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsIsbn()" />
-                                    <div id="validateIsbn"></div>
+                                    <div id="bookIsbnValidationMessageByJs"></div>
                                 </div>
                             </div>
                         </div>
@@ -411,7 +414,7 @@
                                 class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
                                 <div x-ref="dnd"
                                     class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                                    <input accept="*" type="file" multiple
+                                    <input name="images" accept="*" type="file" multiple
                                         class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                                         @change="addFiles($event)"
                                         @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
@@ -437,7 +440,7 @@
                                                 <!-- Checkbox -->
                                                 <input
                                                     class="absolute top-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
-                                                    type="radio" name="chosen_image" />
+                                                    type="radio" name="cover_image" />
                                                 <!-- End checkbox -->
                                                 <button
                                                     class="absolute bottom-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
@@ -503,20 +506,6 @@
                                 </template>
                             </div>
                         </div>
-                        <div class="absolute bottom-0 w-full">
-                            <div class="flex flex-row">
-                                <div class="inline-block w-full text-white text-right py-[7px] mr-[100px]">
-                                    <button type="button"
-                                        class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                        Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                    </button>
-                                    <button id="vratiKnjigu" type="submit"
-                                        class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
-                                        Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
         </form>
     </div>
     </section>
@@ -527,9 +516,8 @@
                     class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                     Ponisti <i class="fas fa-times ml-[4px]"></i>
                 </button>
-                <button id="sacuvajSpecifikaciju" type="submit"
-                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
-                    onclick="validacijaSpecifikacija()">
+                <button id="saveBookBtn" type="submit"
+                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
                     Sacuvaj <i class="fas fa-check ml-[4px]"></i>
                 </button>
             </div>
