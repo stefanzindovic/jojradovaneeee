@@ -352,20 +352,20 @@
                                         name="total_pages" id="bookPages"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsBrStrana()" />
-                                    <div id="bookPagesValidationMessageByJs"></div>
+                                    <div id="bookPagesValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
                                     <p>Pismo <span class="text-red-500">*</span></p>
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        name="script" id="bookScript" onclick="clearErrorsPismo()">
-                                        <option disabled selected></option>
+                                        name="script" id="bookScript">
+                                        <option selected></option>
                                         @foreach ($scripts as $script)
                                             <option value="{{ $script->id }}">{{ $script->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="bookScriptValidationMessageByJs"></div>
+                                    <div id="bookScriptValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -373,12 +373,12 @@
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="cover" id="bookCover" onclick="clearErrorsPovez()">
-                                        <option disabled selected></option>
+                                        <option selected></option>
                                         @foreach ($covers as $cover)
                                             <option value="{{ $cover->id }}">{{ $cover->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="bookCoverValidationMessageByJs"></div>
+                                    <div id="bookCoverValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -386,12 +386,12 @@
                                     <select required
                                         class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="format" id="bookFormat" onclick="clearErrorsFormat()">
-                                        <option disabled selected></option>
+                                        <option selected></option>
                                         @foreach ($formats as $format)
                                             <option value="{{ $format->id }}">{{ $format->name }}</option>
                                         @endforeach
                                     </select>
-                                    <div id="bookFormatValidationMessageByJs"></div>
+                                    <div id="bookFormatValidationMessage"></div>
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -400,7 +400,7 @@
                                         id="bookIsbn"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsIsbn()" />
-                                    <div id="bookIsbnValidationMessageByJs"></div>
+                                    <div id="bookIsbnValidationMessage"></div>
                                 </div>
                             </div>
                         </div>

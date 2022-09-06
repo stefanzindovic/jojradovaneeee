@@ -10,8 +10,8 @@ jQuery(document).ready(function () {
 
     const totalPagesInput = jQuery("#bookPages");
     const scriptInput = jQuery("#bookScript");
-    const formatInput = jQuery("#bookformat");
-    const coverInput = jQuery("#bookcover");
+    const formatInput = jQuery("#bookFormat");
+    const coverInput = jQuery("#bookCover");
     const isbnInput = jQuery("#bookIsbn");
 
     const titleMessage = jQuery("#bookTitleValidationMessage");
@@ -136,13 +136,13 @@ jQuery(document).ready(function () {
         }
 
         // Book publisher validation
-        console.log(publisherInput.val());
+        console.log(coverInput.val());
         if (publisherInput.val().length < 1) {
             setTimeout(function () {
                 publisherMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jednog autora koji je pisao ovu knjiga.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite izdavača ove knjige.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -206,6 +206,102 @@ jQuery(document).ready(function () {
         } else {
             copiesMessage.css({ display: "none" });
         }
+
+        // Book pages validation
+        if (
+            totalPagesInput.val() === null ||
+            totalPagesInput.val() === undefined ||
+            totalPagesInput.val() === false
+        ) {
+            setTimeout(function () {
+                pagesMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else if (totalPagesInput.val() < 1 || totalPagesInput.val() > 2000) {
+            setTimeout(function () {
+                pagesMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan broj knjiga.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
+            pagesMessage.css({ display: "none" });
+        }
+
+        // Book script validation
+        if (scriptInput.val().length < 1) {
+            setTimeout(function () {
+                scriptMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite pismo kojim je ova knjiga napisana.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
+            scriptMessage.css({ display: "none" });
+        }
+
+        // Book cover validation
+        if (coverInput.val().length < 1) {
+            setTimeout(function () {
+                coverMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu poveza ove knjige</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
+            coverMessage.css({ display: "none" });
+        }
+
+        // Book format validation
+        if (formatInput.val().length < 1) {
+            setTimeout(function () {
+                formatMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu formata ove knjige</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
+            formatMessage.css({ display: "none" });
+        }
+
+        // Book isbn  validation
+        if (
+            isbnInput.val() === null ||
+            isbnInput.val() === undefined ||
+            isbnInput.val() === false
+        ) {
+            setTimeout(function () {
+                isbnMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else if (isbnInput.val().length < 13 || isbnInput.val().length > 13) {
+            setTimeout(function () {
+                isbnMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan ISBN kod.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
+            isbnMessage.css({ display: "none" });
+        }
     });
 
     // Disable inputs when maximum input range is reached
@@ -229,6 +325,18 @@ jQuery(document).ready(function () {
 
     totalCopiesInput.on("keypress", function (e) {
         if (isNaN(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    totalPagesInput.on("keypress", function (e) {
+        if (isNaN(e.key)) {
+            e.preventDefault();
+        }
+    });
+
+    isbnInput.on("keypress", function (e) {
+        if (isNaN(e.key) || isbnInput.val().length >= 13) {
             e.preventDefault();
         }
     });
