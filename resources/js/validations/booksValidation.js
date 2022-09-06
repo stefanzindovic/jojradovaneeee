@@ -12,6 +12,7 @@ jQuery(document).ready(function () {
     const scriptInput = jQuery("#bookScript");
     const formatInput = jQuery("#bookFormat");
     const coverInput = jQuery("#bookCover");
+    const languageInput = jQuery("#bookLanguage");
     const isbnInput = jQuery("#bookIsbn");
 
     const titleMessage = jQuery("#bookTitleValidationMessage");
@@ -27,6 +28,7 @@ jQuery(document).ready(function () {
     const formatMessage = jQuery("#bookFormatValidationMessage");
     const coverMessage = jQuery("#bookCoverValidationMessage");
     const isbnMessage = jQuery("#bookIsbnValidationMessage");
+    const languageMessage = jQuery("#bookLanguageValidationMessage");
 
     const saveBookBtn = jQuery("#saveBookBtn");
 
@@ -263,9 +265,9 @@ jQuery(document).ready(function () {
         }
 
         // Book format validation
-        if (formatInput.val().length < 1) {
+        if (languageInput.val().length < 1) {
             setTimeout(function () {
-                formatMessage
+                languageMessage
                     .css({ display: "block" })
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu formata ove knjige</p>'
@@ -273,10 +275,24 @@ jQuery(document).ready(function () {
             }, 200);
             e.preventDefault();
         } else {
+            languageMessage.css({ display: "none" });
+        }
+
+        // Book language validation
+        if (formatInput.val().length < 1) {
+            setTimeout(function () {
+                formatMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite jezik na kojem je knjiga napisana.</p>'
+                    );
+            }, 200);
+            e.preventDefault();
+        } else {
             formatMessage.css({ display: "none" });
         }
 
-        // Book isbn  validation
+        // Book isbn validation
         if (
             isbnInput.val() === null ||
             isbnInput.val() === undefined ||

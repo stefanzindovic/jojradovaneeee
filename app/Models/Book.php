@@ -50,16 +50,16 @@ class Book extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'book_categories', 'category_id');
+        return $this->belongsToMany(Category::class, 'book_categories');
     }
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'book_genres', 'genre_id');
+        return $this->belongsToMany(Genre::class, 'book_genres');
     }
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class, 'book_authors', 'author_id');
+        return $this->belongsToMany(Author::class, 'book_authors');
     }
 }

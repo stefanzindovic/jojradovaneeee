@@ -6,7 +6,11 @@
 
 @section('page_content')
     <div>
+        @if ($errors->any())
+            {{ $errors }}
+        @endif
         <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+            @csrf
             <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
                 <section>
                     <div class="heading">
@@ -75,6 +79,10 @@
                                     <textarea required minlength="10" maxlength="500" name="description" id="bookDescription"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"></textarea>
                                     <div id="bookDescriptionValidationMessage"></div>
+                                    @error('description')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -153,6 +161,10 @@
                                     </div>
                                 </div>
                                 <div id="bookCategoriesValidationMessage"></div>
+                                @error('categories[]')
+                                    <p style="color:red;" id="errorMessageByLaravel"><i
+                                            class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                @enderror
                             </div>
 
                             <div class="mt-[20px]">
@@ -231,6 +243,10 @@
                                 </div>
                             </div>
                             <div id="bookGenresValidationMessage"></div>
+                            @error('genres[]')
+                                <p style="color:red;" id="errorMessageByLaravel"><i
+                                        class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -310,6 +326,10 @@
                             </div>
                         </div>
                         <div id="bookAuthorsValidationMessage"></div>
+                        @error('authors[]')
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                {{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mt-[20px]">
@@ -323,6 +343,10 @@
                             @endforeach
                         </select>
                         <div id="bookPublisherValidationMessage"></div>
+                        @error('publisher')
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                {{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mt-[20px]">
@@ -332,6 +356,10 @@
                             type="number" required name="published_at" min="1800" value="2022"
                             id="bookPublishedAt">
                         <div id="bookPublishedAtValidationMessage"></div>
+                        @error('published_at')
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                {{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="mt-[20px]">
@@ -340,6 +368,10 @@
                             id="bookCopies"
                             class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
                         <div id="bookCopiesValidationMessage"></div>
+                        @error('total_copies')
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                {{ $message }}</p>
+                        @enderror
                     </div>
                 </section>
                 <section id="addBookTab_Specifications" class="hidden">
@@ -353,6 +385,10 @@
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsBrStrana()" />
                                     <div id="bookPagesValidationMessage"></div>
+                                    @error('total_pages')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -366,6 +402,10 @@
                                         @endforeach
                                     </select>
                                     <div id="bookScriptValidationMessage"></div>
+                                    @error('script')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -379,6 +419,27 @@
                                         @endforeach
                                     </select>
                                     <div id="bookCoverValidationMessage"></div>
+                                    @error('cover')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="mt-[20px]">
+                                    <p>Jezik <span class="text-red-500">*</span></p>
+                                    <select required
+                                        class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
+                                        name="language" id="bookLanguage">
+                                        <option selected></option>
+                                        @foreach ($languages as $language)
+                                            <option value="{{ $language->id }}">{{ $language->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div id="bookLanguageValidationMessage"></div>
+                                    @error('language')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -392,6 +453,10 @@
                                         @endforeach
                                     </select>
                                     <div id="bookFormatValidationMessage"></div>
+                                    @error('format')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
 
                                 <div class="mt-[20px]">
@@ -401,6 +466,10 @@
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsIsbn()" />
                                     <div id="bookIsbnValidationMessage"></div>
+                                    @error('isbn')
+                                        <p style="color:red;" id="errorMessageByLaravel"><i
+                                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

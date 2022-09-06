@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('page_title') 
+@section('page_title')
     Knjige
 @endsection
 
@@ -324,95 +324,108 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white">
-                            @foreach ($books as $book)    
-                            <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
-                                <td class="px-4 py-4 whitespace-no-wrap">
-                                    <label class="inline-flex items-center">
-                                        <input type="checkbox" class="form-checkbox checkOthers">
-                                    </label>
-                                </td>
-                                <td class="flex flex-row items-center px-4 py-4">
-                                    <img style="width: 35px; height: 35px;" class="object-cover w-8 mr-2 h-11 rounded-full" src="@if($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('uploads/books/' . $book->picutre) }} @endif" alt="" />
-                                    <a href="knjigaOsnovniDetalji.php">
-                                        <span class="font-medium text-center">{{ $book->title }}</span>
-                                    </a>
-                                </td>
-                                <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap"> @foreach ($book->authors as $author)
-                                    {{ $author->full_name }} @if(!$loop->last), @endif
-                                @endforeach</td>
-                                <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">Udzbenici</td>
-                                <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">6</td>
-                                <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                        href="aktivneRezervacije.php">5</a></td>
-                                <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                        href="izdateKnjige.php">5</a></td>
-                                <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                        href="knjigePrekoracenje.php">2</a></td>
-                                <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">11</td>
-                                <td class="px-6 py-4 text-sm leading-5 text-right whitespace-no-wrap">
-                                    <p
-                                        class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsKnjige hover:text-[#606FC7]">
-                                        <i class="fas fa-ellipsis-v"></i>
-                                    </p>
-                                    <div
-                                        class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjige">
-                                        <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                            aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
-                                            role="menu">
-                                            <div class="py-1">
-                                                <a href="knjigaOsnovniDetalji.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="far fa-file mr-[10px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Pogledaj</span>
-                                                </a>
+                            @foreach ($books as $book)
+                                <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
+                                    <td class="px-4 py-4 whitespace-no-wrap">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox checkOthers">
+                                        </label>
+                                    </td>
+                                    <td class="flex flex-row items-center px-4 py-4">
+                                        <img style="width: 35px; height: 35px;"
+                                            class="object-cover w-8 mr-2 h-11 rounded-full"
+                                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('uploads/books/' . $book->picutre) }} @endif"
+                                            alt="" />
+                                        <a href="knjigaOsnovniDetalji.php">
+                                            <span class="font-medium text-center">{{ $book->title }}</span>
+                                        </a>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        @foreach ($book->authors as $author)
+                                            {{ $author->full_name }} @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        @foreach ($book->categories as $category)
+                                            {{ $category->title }} @if (!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">6</td>
+                                    <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
+                                            href="aktivneRezervacije.php">5</a></td>
+                                    <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
+                                            href="izdateKnjige.php">5</a></td>
+                                    <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
+                                            href="knjigePrekoracenje.php">2</a></td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">11</td>
+                                    <td class="px-6 py-4 text-sm leading-5 text-right whitespace-no-wrap">
+                                        <p
+                                            class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsKnjige hover:text-[#606FC7]">
+                                            <i class="fas fa-ellipsis-v"></i>
+                                        </p>
+                                        <div
+                                            class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-knjige">
+                                            <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                                aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
+                                                role="menu">
+                                                <div class="py-1">
+                                                    <a href="knjigaOsnovniDetalji.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="far fa-file mr-[10px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Pogledaj</span>
+                                                    </a>
 
-                                                <a href="editKnjiga.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="fas fa-edit mr-[6px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izmijeni</span>
-                                                </a>
+                                                    <a href="editKnjiga.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="fas fa-edit mr-[6px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Izmijeni</span>
+                                                    </a>
 
-                                                <a href="otpisiKnjigu.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Otpiši</span>
-                                                </a>
+                                                    <a href="otpisiKnjigu.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Otpiši</span>
+                                                    </a>
 
-                                                <a href="izdajKnjigu.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izdaj</span>
-                                                </a>
+                                                    <a href="izdajKnjigu.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Izdaj</span>
+                                                    </a>
 
-                                                <a href="vratiKnjigu.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Vrati</span>
-                                                </a>
+                                                    <a href="vratiKnjigu.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Vrati</span>
+                                                    </a>
 
-                                                <a href="rezervisiKnjigu.php" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="far fa-calendar-check mr-[10px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Rezerviši</span>
-                                                </a>
+                                                    <a href="rezervisiKnjigu.php" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="far fa-calendar-check mr-[10px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Rezerviši</span>
+                                                    </a>
 
-                                                <a href="#" tabindex="0"
-                                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                    role="menuitem">
-                                                    <i class="fa fa-trash mr-[10px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izbriši</span>
-                                                </a>
+                                                    <a href="#" tabindex="0"
+                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                        role="menuitem">
+                                                        <i class="fa fa-trash mr-[10px] ml-[5px] py-1"></i>
+                                                        <span class="px-4 py-0">Izbriši</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
 
@@ -420,7 +433,7 @@
                             <tr class="border-b-[1px] border-[#e4dfdf]">
                                 <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
                                     <label class="inline-flex items-center">
-                                        
+
                                     </label>
                                 </th>
                                 <th class="flex items-center px-4 py-4 leading-4 tracking-wider text-left">
@@ -697,7 +710,7 @@
                                 </th>
                                 <th class="px-4 py-4"> </th>
                             </tr>
-                        </tf>
+                            </tf>
                     </table>
                 </div>
             </div>
