@@ -13,6 +13,8 @@ use App\Models\Language;
 use App\Models\Publishers;
 use App\Http\Requests\StoreBookRequest;
 use App\Http\Requests\UpdateBookRequest;
+use App\Models\BookGallery;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -70,7 +72,8 @@ class BookController extends Controller
             'cover' => 'required|numeric|min:1',
             'format' => 'required|numeric|min:1',
             'isbn' => 'required|numeric|digits:13',
-            'cover_image' => 'nullable',
+            'cover_picture' => 'nullable|string',
+            'pictures' => 'nullable|array|min:1',
         ]);
 
         try {
@@ -90,6 +93,32 @@ class BookController extends Controller
             $model->categories()->attach($input['categories']);
             $model->genres()->attach($input['genres']);
             $model->authors()->attach($input['authors']);
+
+            // upload images if exists
+            if ($request->hasFile('pictures')) {
+                foreach ($request->pictures as $picture) {
+                    $uploadsPath = 'uploads/books/';
+                    $genericName = trim(strtolower(time() . $picture->getClientOriginalName()));
+
+                    if ($request->has('cover_picture')) {
+                        if ($picture->getClientOriginalName() == $input['cover_picture']) {
+                            $model->picture = $genericName;
+                            $model->update();
+                        }
+                    }
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadsPath,
+                        $picture,
+                        $genericName,
+                    );
+
+                    $galleryModel = new BookGallery();
+                    $galleryModel->picture = $genericName;
+                    $galleryModel->book()->associate($model);
+                    $galleryModel->save();
+                }
+            }
 
             return to_route('books.index')->with('successMessage', 'Nova knjiga je dodana na spisak.');
         } catch (\Throwable $th) {

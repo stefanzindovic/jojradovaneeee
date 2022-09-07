@@ -334,9 +334,9 @@
                                     <td class="flex flex-row items-center px-4 py-4">
                                         <img style="width: 35px; height: 35px;"
                                             class="object-cover w-8 mr-2 h-11 rounded-full"
-                                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('uploads/books/' . $book->picutre) }} @endif"
+                                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
                                             alt="" />
-                                        <a href="knjigaOsnovniDetalji.php">
+                                        <a href="{{ route('books.show', $book->id) }}">
                                             <span class="font-medium text-center">{{ $book->title }}</span>
                                         </a>
                                     </td>

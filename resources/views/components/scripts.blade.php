@@ -29,11 +29,6 @@
 @vite('./resources/js/cropper/cropper.min.js')
 @vite('./resources/js/cropper.js')
 
-<!-- Custom -->
-@vite('./resources/js/autoUpdatePolicy.js')
-@vite('./resources/js/dataTables.js')
-@vite('./resources/js/main.js')
-
 <!-- Books navigation tabs -->
 @vite('./resources/js/booksTabNavigation.js')
 
@@ -42,3 +37,8 @@
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 @vite('./resources/js/multipleSelect.js')
+
+<!-- Custom -->
+@vite('./resources/js/autoUpdatePolicy.js')
+@vite('./resources/js/dataTables.js')
+@vite('./resources/js/main.js')

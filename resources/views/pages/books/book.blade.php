@@ -12,7 +12,7 @@
                 <div class="py-[10px] flex flex-row">
                     <div class="w-[77px] pl-[30px]">
                         <img style="width: 77px; height: 77px;" class="object-cover w-8 mr-2 h-11"
-                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('uploads/books/' . $book->picutre) }} @endif"
+                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
                             alt="" />
                     </div>
                     <div class="pl-[15px]  flex flex-col">
