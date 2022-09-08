@@ -1,15 +1,12 @@
 @extends('app')
 
 @section('page_title')
-    Nova knjiga
+    {{ $book->title }}
 @endsection
 
 @section('page_content')
     <div>
-        @if ($errors->any())
-            {{ $errors }}
-        @endif
-        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
                 <section>
@@ -18,14 +15,14 @@
                             <div class="pl-[30px] py-[10px] flex flex-col">
                                 <div>
                                     <h1>
-                                        Nova knjiga
+                                        Izmijeni podatke
                                     </h1>
                                 </div>
                                 <div>
                                     <nav class="w-full rounded">
                                         <ol class="flex list-reset">
                                             <li>
-                                                <a onclick="{{ route('books.index') }}"
+                                                <a href="{{ route('books.index') }}"
                                                     class="text-[#2196f3] cursor-pointer hover:text-blue-600">
                                                     Evidencija knjiga
                                                 </a>
@@ -35,7 +32,7 @@
                                             </li>
                                             <li>
                                                 <p class="text-gray-400">
-                                                    Nova knjiga
+                                                    Izmijeni podatke
                                                 </p>
                                             </li>
                                         </ol>
@@ -65,7 +62,7 @@
                                 <div class="mt-[20px]">
                                     <p>Naslov knjige <span class="text-red-500">*</span></p>
                                     <input required minlength="1" maxlength="50" type="text" name="title"
-                                        id="bookTitle" value="{{ old('title') }}"
+                                        id="bookTitle" value="{{ old('title', $book->title) }}"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
                                     @error('title')
                                         <p style="color:red;" id="errorMessageByLaravel"><i
@@ -77,7 +74,7 @@
                                 <div class="mt-[20px]">
                                     <p class="inline-block mb-2">Kratki sadržaj</p>
                                     <textarea required minlength="10" maxlength="500" name="description" id="bookDescription"
-                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{ old('description') }}</textarea>
+                                        class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{ old('description', $book->description) }}</textarea>
                                     <div id="bookDescriptionValidationMessage"></div>
                                     @error('description')
                                         <p style="color:red;" id="errorMessageByLaravel"><i
@@ -89,9 +86,17 @@
                                     <p>Izaberite kategorije <span class="text-red-500">*</span></p>
                                     <select required id="bookCategories" name="categories[]" multiple="multiple"
                                         class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
+                                        {{-- Convert collection of categories into categories id arrays --}}
+                                        @php
+                                            $categoryIds = [];
+                                            foreach ($book->categories as $category) {
+                                                array_push($categoryIds, $category->id);
+                                            }
+                                        @endphp
+
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ collect(old('categories'))->contains($category->id) ? 'selected' : '' }}>
+                                                {{ collect(old('categories', $categoryIds))->contains($category->id) ? 'selected' : '' }}>
                                                 {{ $category->title }}</option>
                                         @endforeach
                                     </select>
@@ -173,9 +178,17 @@
                                 <p>Izaberite žanrove <span class="text-red-500">*</span></p>
                                 <select required id="bookGenres" name="genres[]" multiple="multiple"
                                     class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
+                                    {{-- Convert collection of genres into genres id arrays --}}
+                                    @php
+                                        $genreIds = [];
+                                        foreach ($book->genres as $genre) {
+                                            array_push($genreIds, $genre->id);
+                                        }
+                                    @endphp
+
                                     @foreach ($genres as $genre)
                                         <option value="{{ $genre->id }}"
-                                            {{ collect(old('genres'))->contains($genre->id) ? 'selected' : '' }}>
+                                            {{ collect(old('genres', $genreIds))->contains($genre->id) ? 'selected' : '' }}>
                                             {{ $genre->title }}</option>
                                     @endforeach
                                 </select>
@@ -259,9 +272,17 @@
                             <p>Izaberite autore <span class="text-red-500">*</span></p>
                             <select required id="bookAuthors" name="authors[]" multiple="multiple"
                                 class="select2Form flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">
+                                {{-- Convert collection of authors into authors id arrays --}}
+                                @php
+                                    $authorIds = [];
+                                    foreach ($book->authors as $author) {
+                                        array_push($authorIds, $author->id);
+                                    }
+                                @endphp
+
                                 @foreach ($authors as $author)
                                     <option value="{{ $author->id }}"
-                                        {{ collect(old('authors'))->contains($author->id) ? 'selected' : '' }}>
+                                        {{ collect(old('authors', $authorIds))->contains($author->id) ? 'selected' : '' }}>
                                         {{ $author->full_name }}</option>
                                 @endforeach
                             </select>
@@ -346,7 +367,8 @@
                             <option selected></option>
                             @foreach ($publishers as $publisher)
                                 <option value="{{ $publisher->id }}"
-                                    {{ old('publisher') == $publisher->id ? 'selected' : '' }}>{{ $publisher->name }}
+                                    {{ old('publisher', $book->publisher->id) == $publisher->id ? 'selected' : '' }}>
+                                    {{ $publisher->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -361,8 +383,8 @@
                         <p>Godina izdavanja <span class="text-red-500">*</span></p>
                         <input
                             class="flex w-[45%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                            type="number" required name="published_at" min="1800" value="2022"
-                            id="bookPublishedAt">
+                            type="number" required name="published_at" min="1800"
+                            value="{{ old('published_at', $book->published_at) }}" id="bookPublishedAt">
                         <div id="bookPublishedAtValidationMessage"></div>
                         @error('published_at')
                             <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
@@ -372,7 +394,8 @@
 
                     <div class="mt-[20px]">
                         <p>Kolicina <span class="text-red-500">*</span></p>
-                        <input required min="1" max="999" value="1" type="number" name="total_copies"
+                        <input required min="1" max="999"
+                            value="{{ old('total_copies', $book->total_copies) }}" type="number" name="total_copies"
                             id="bookCopies"
                             class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
                         <div id="bookCopiesValidationMessage"></div>
@@ -388,8 +411,9 @@
                             <div class="w-[50%] mb-[150px]">
                                 <div class="mt-[20px]">
                                     <p>Broj strana <span class="text-red-500">*</span></p>
-                                    <input type="text" minlength="1" maxlength="4" value="10"
-                                        name="total_pages" id="bookPages"
+                                    <input type="text" minlength="1" maxlength="4"
+                                        value="{{ old('total_pages', $book->total_pages) }}" name="total_pages"
+                                        id="bookPages"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsBrStrana()" />
                                     <div id="bookPagesValidationMessage"></div>
@@ -407,7 +431,8 @@
                                         <option selected></option>
                                         @foreach ($scripts as $script)
                                             <option value="{{ $script->id }}"
-                                                {{ old('script') == $script->id ? 'selected' : '' }}>{{ $script->name }}
+                                                {{ old('script', $book->script->id) == $script->id ? 'selected' : '' }}>
+                                                {{ $script->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -426,7 +451,8 @@
                                         <option selected></option>
                                         @foreach ($covers as $cover)
                                             <option value="{{ $cover->id }}"
-                                                {{ old('cover') == $cover->id ? 'selected' : '' }}>{{ $cover->name }}
+                                                {{ old('cover', $book->cover->id) == $cover->id ? 'selected' : '' }}>
+                                                {{ $cover->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -445,7 +471,7 @@
                                         <option selected></option>
                                         @foreach ($languages as $language)
                                             <option value="{{ $language->id }}"
-                                                {{ old('language') == $language->id ? 'selected' : '' }}>
+                                                {{ old('language', $book->language->id) == $language->id ? 'selected' : '' }}>
                                                 {{ $language->name }}</option>
                                         @endforeach
                                     </select>
@@ -464,7 +490,8 @@
                                         <option selected></option>
                                         @foreach ($formats as $format)
                                             <option value="{{ $format->id }}"
-                                                {{ old('format') == $format->id ? 'selected' : '' }}>{{ $format->name }}
+                                                {{ old('format', $book->format->id) == $format->id ? 'selected' : '' }}>
+                                                {{ $format->name }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -478,7 +505,7 @@
                                 <div class="mt-[20px]">
                                     <p>International Standard Book Num <span class="text-red-500">*</span></p>
                                     <input required minlength="13" maxlength="13" type="text" name="isbn"
-                                        id="bookIsbn"
+                                        id="bookIsbn" value="{{ old('isbn', $book->isbn) }}"
                                         class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onkeydown="clearErrorsIsbn()" />
                                     <div id="bookIsbnValidationMessage"></div>

@@ -46,7 +46,6 @@ class BookController extends Controller
         $formats = Format::orderBy('id', 'desc')->get();
 
         return view('..pages/books/add', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages'));
-        return view('..pages/books/add', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages'));
     }
 
     /**
@@ -146,7 +145,16 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $categories = Category::orderBy('id', 'desc')->get();
+        $authors = Author::orderBy('id', 'desc')->get();
+        $genres = Genre::orderBy('id', 'desc')->get();
+        $languages = Language::orderBy('id', 'desc')->get();
+        $scripts = Script::orderBy('id', 'desc')->get();
+        $publishers = Publishers::orderBy('id', 'desc')->get();
+        $covers = Cover::orderBy('id', 'desc')->get();
+        $formats = Format::orderBy('id', 'desc')->get();
+
+        return view('..pages.books.edit', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages', 'book'));
     }
 
     /**
