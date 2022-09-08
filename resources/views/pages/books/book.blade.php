@@ -173,7 +173,7 @@
 
                     <!-- Space for content -->
                     <section id="addBookTab_Specifications" class="hidden">
-                        <div class="pl-[30px] section- mt-[20px]">
+                        <div class="pl-[30px] mt-[20px]">
                             <div class="flex flex-row justify-between">
                                 <div class="mr-[30px]">
                                     <div class="mt-[20px]">
@@ -203,6 +203,21 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </section>
+                    <section id="addBookTab_Multimedia" class="hidden scroll">
+                        <div class="pl-[30px] section- mt-[20px]">
+                            @if ($book->gallery->isEmpty())
+                                Nema dostupne multimedije.
+                            @else
+                                <div style="display: grid;  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; gap: 1rem;">
+                                    @foreach ($book->gallery as $pciture)
+                                        <img style="width: 100%; aspect-ratio: 1 / 1;"
+                                            src="{{ asset('storage/uploads/books/' . $pciture->picture) }}"
+                                            alt="">
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </section>
                 </div>
