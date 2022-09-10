@@ -166,7 +166,80 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        $input = $request->validate([
+            'title' => 'required|min:1|max:50',
+            'description' => 'required|min:10|max:500',
+            'categories' => 'required|min:1',
+            'genres' => 'required|array|min:1',
+            'authors' => 'required|array|min:1',
+            'publisher' => 'required',
+            'published_at' => 'required|numeric|min:1800|max:' . date('Y'),
+            'total_copies' => 'required|numeric|min:1|max:999',
+            'total_pages' => 'required|numeric|min:1|max:2000',
+            'script' => 'required|numeric|min:1',
+            'language' => 'required|numeric|min:1',
+            'cover' => 'required|numeric|min:1',
+            'format' => 'required|numeric|min:1',
+            'isbn' => 'required|numeric|digits:13',
+            'cover_picture' => 'nullable|string',
+            'pictures' => 'nullable|array|min:1',
+        ]);
+
+        try {
+            $book->title = $input['title'];
+            $book->description = $input['description'];
+            $book->total_copies = $input['total_copies'];
+            $book->published_at = $input['published_at'];
+            $book->total_pages = $input['total_pages'];
+            $book->isbn = $input['isbn'];
+            $book->script()->associate($input['script']);
+            $book->cover()->associate($input['cover']);
+            $book->format()->associate($input['format']);
+            $book->publisher()->associate($input['publisher']);
+            $book->language()->associate($input['language']);
+            $book->update();
+            $book->categories()->attach($input['categories']);
+            $book->genres()->attach($input['genres']);
+            $book->authors()->attach($input['authors']);
+
+
+            // change cover picture if there is no new uploaded images
+            if (!$request->hasFile('pictures') && $request->has('cover_picture')) {
+                $book->picture = $input['cover_picture'];
+                $book->update();
+            }
+
+            // upload images if exists
+            if ($request->hasFile('pictures')) {
+                foreach ($request->pictures as $picture) {
+                    $uploadsPath = 'uploads/books/';
+                    $genericName = trim(strtolower(time() . $picture->getClientOriginalName()));
+
+                    if ($request->has('cover_picture')) {
+                        if ($picture->getClientOriginalName() == $input['cover_picture']) {
+                            $book->picture = $genericName;
+                            $book->update();
+                        }
+                    }
+
+                    Storage::disk('public')->putFileAs(
+                        $uploadsPath,
+                        $picture,
+                        $genericName,
+                    );
+
+                    $galleryModel = new BookGallery();
+                    $galleryModel->picture = $genericName;
+                    $galleryModel->book()->associate($book);
+                    $galleryModel->save();
+                }
+            }
+
+            return to_route('books.index')->with('successMessage', 'Informacije o knjizi uspješno izmijenjene.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     /**
