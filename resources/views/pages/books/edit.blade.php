@@ -6,7 +6,7 @@
 
 @section('page_content')
     <div>
-        <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
+        <form id="bookEditForm" action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
@@ -545,7 +545,8 @@
                                     @dragover.prevent="$event.dataTransfer.dropEffect = 'move'">
                                     <!-- Image 1 -->
                                     @foreach ($book->gallery as $picture)
-                                        <div class="relative flex flex-col text-xs bg-white bg-opacity-50 hiddenImage1">
+                                        <div picture="{{ $picture->picture }}"
+                                            class="relative flex flex-col text-xs bg-white bg-opacity-50 hiddenImage1">
                                             <img src="{{ asset('storage/uploads/books/' . $picture->picture) }}"
                                                 alt="" class="h-[322px]">
                                             <!-- Checkbox -->
@@ -556,7 +557,8 @@
                                             <!-- End checkbox -->
                                             <button
                                                 class="absolute bottom-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
-                                                type="button" id="hide-image1">
+                                                type="button"
+                                                onclick="deletePicture('{{ $picture->picture }}', {{ $picture->id }})">
                                                 <svg class="w-[25px] h-[25px] text-gray-700"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     nviewBox="0 0 24 24" stroke="currentColor">
@@ -735,6 +737,33 @@
                     //this.form.formData.files = [...files];
                 }
             };
+        }
+
+        function deletePicture(picture, pictureId) {
+            const selectedPicture = jQuery("div[picture='" + picture + "']");
+            selectedPicture.css({
+                display: 'none',
+            });
+
+            // send backend request witj ajax
+            jQuery.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': jQuery('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            jQuery.ajax({
+                type: "POST",
+                url: "/books/" + {{ $book->id }} + "/" + pictureId,
+                data: jQuery('#bookEditForm').serialize(),
+                success: function() {
+                    console.log('URAAAAA');
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.error(xhr);
+                }
+            });
         }
     </script>
 @endsection

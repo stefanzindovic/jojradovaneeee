@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Books CRUD
     Route::resource('/books', BookController::class);
+    Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
 });
 
 require __DIR__ . '/auth.php';

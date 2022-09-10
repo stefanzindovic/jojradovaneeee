@@ -40,5 +40,6 @@
 
 <!-- Custom -->
 @vite('./resources/js/autoUpdatePolicy.js')
+@vite('./resources/js/deleteOldPictureFromMultimedia.js')
 @vite('./resources/js/dataTables.js')
 @vite('./resources/js/main.js')

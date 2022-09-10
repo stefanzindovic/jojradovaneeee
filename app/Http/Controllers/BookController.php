@@ -198,9 +198,9 @@ class BookController extends Controller
             $book->publisher()->associate($input['publisher']);
             $book->language()->associate($input['language']);
             $book->update();
-            $book->categories()->attach($input['categories']);
-            $book->genres()->attach($input['genres']);
-            $book->authors()->attach($input['authors']);
+            $book->categories()->syncWithoutDetaching($input['categories']);
+            $book->genres()->syncWithoutDetaching($input['genres']);
+            $book->authors()->syncWithoutDetaching($input['authors']);
 
 
             // change cover picture if there is no new uploaded images
@@ -250,6 +250,28 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+    }
+
+    public function destroyPicture(Book $book,  BookGallery $gallery)
+    {
+        try {
+            $uploadPath = 'uploads/books/';
+
+            // remove old picture from storage
+            $oldPicturePath = $uploadPath . $gallery->picture;
+            if (Storage::disk('public')->exists($oldPicturePath)) {
+                Storage::disk('public')->delete($oldPicturePath);
+            }
+
+            // change cover picture if cover is deleted
+            if ($book->picture == $gallery->picture) {
+                $book->picture = 'book-placeholder.png';
+                $book->update();
+            }
+
+            $gallery->delete();
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }

@@ -361,7 +361,8 @@
                                             href="izdateKnjige.php">5</a></td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="knjigePrekoracenje.php">2</a></td>
-                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">11</td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $book->total_copies }}
+                                    </td>
                                     <td class="px-6 py-4 text-sm leading-5 text-right whitespace-no-wrap">
                                         <p
                                             class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsKnjige hover:text-[#606FC7]">
@@ -373,7 +374,7 @@
                                                 aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
                                                 role="menu">
                                                 <div class="py-1">
-                                                    <a href="knjigaOsnovniDetalji.php" tabindex="0"
+                                                    <a href="{{ route('books.show', $book->id) }}" tabindex="0"
                                                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                         role="menuitem">
                                                         <i class="far fa-file mr-[10px] ml-[5px] py-1"></i>
