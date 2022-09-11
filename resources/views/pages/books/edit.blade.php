@@ -9,6 +9,7 @@
         <form id="bookEditForm" action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
+            {{ $book->picture }}
             <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
                 <section>
                     <div class="heading">
@@ -591,7 +592,7 @@
                                             <!-- End checkbox -->
                                             <button
                                                 class="absolute bottom-0 right-0 z-50 p-1 bg-white rounded-bl focus:outline-none"
-                                                type="button" @click="remove(index)">
+                                                type="button" @click="remove(index);">
                                                 <svg class="w-[25px] h-[25px] text-gray-700"
                                                     xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     nviewBox="0 0 24 24" stroke="currentColor">
@@ -745,6 +746,13 @@
                 display: 'none',
             });
 
+            // remove chacked state from isCoverBtn if picutre was cover
+            const isCoverBtn = selectedPicture.find("input");
+            const isCheckedCheck = isCoverBtn.is(':checked');
+            if (isCheckedCheck) {
+                isCoverBtn.removeAttr('checked');
+            }
+
             // send backend request witj ajax
             jQuery.ajaxSetup({
                 headers: {
@@ -758,10 +766,10 @@
                 url: "/books/" + {{ $book->id }} + "/" + pictureId,
                 data: jQuery('#bookEditForm').serialize(),
                 success: function() {
-                    console.log('URAAAAA');
+
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
-                    console.error(xhr);
+                    console.error(xhr.responseText);
                 }
             });
         }

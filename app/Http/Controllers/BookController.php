@@ -205,6 +205,7 @@ class BookController extends Controller
 
             // change cover picture if there is no new uploaded images
             if (!$request->hasFile('pictures') && $request->has('cover_picture')) {
+                dd($request->has('cover_picture'),);
                 $book->picture = $input['cover_picture'];
                 $book->update();
             }
@@ -257,19 +258,20 @@ class BookController extends Controller
         try {
             $uploadPath = 'uploads/books/';
 
-            // remove old picture from storage
-            $oldPicturePath = $uploadPath . $gallery->picture;
-            if (Storage::disk('public')->exists($oldPicturePath)) {
-                Storage::disk('public')->delete($oldPicturePath);
-            }
-
             // change cover picture if cover is deleted
             if ($book->picture == $gallery->picture) {
                 $book->picture = 'book-placeholder.png';
                 $book->update();
             }
 
+            // remove old picture from storage
+            $oldPicturePath = $uploadPath . $gallery->picture;
+            if (Storage::disk('public')->exists($oldPicturePath)) {
+                Storage::disk('public')->delete($oldPicturePath);
+            }
+
             $gallery->delete();
+            return back()->with('errorMessage', 'Slika uspješno obrisana.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
