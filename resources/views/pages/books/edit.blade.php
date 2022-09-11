@@ -9,7 +9,6 @@
         <form id="bookEditForm" action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
-            {{ $book->picture }}
             <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
                 <section>
                     <div class="heading">

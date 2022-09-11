@@ -205,7 +205,6 @@ class BookController extends Controller
 
             // change cover picture if there is no new uploaded images
             if (!$request->hasFile('pictures') && $request->has('cover_picture')) {
-                dd($request->has('cover_picture'),);
                 $book->picture = $input['cover_picture'];
                 $book->update();
             }
