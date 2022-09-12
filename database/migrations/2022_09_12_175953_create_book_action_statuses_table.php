@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('book_action_statuses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->softDeletes();
             $table->timestamps();
         });
 
