@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('books_under_actions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('book_id')->constrained('books');
+            $table->foreignId('student_id')->constrained('users');
             $table->timestamps();
         });
     }
