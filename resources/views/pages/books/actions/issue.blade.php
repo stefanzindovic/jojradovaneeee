@@ -212,7 +212,7 @@
             var month = selectedDate.getMonth() + 1;
             var year = selectedDate.getFullYear();
 
-            var newDate = [day, month, year].join('/');
+            var newDate = [year, month, day].join('-');
 
             document.getElementById('datumVracanja').value = newDate;
         }
