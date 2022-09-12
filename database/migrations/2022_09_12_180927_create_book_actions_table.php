@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('book_actions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('book_under_action')->constrained('books_under_actions');
+            $table->foreignId('books_under_actions_id')->constrained('books_under_actions');
             $table->foreignId('librarian_id')->constrained('users');
             $table->date('action_deadline')->default(date("Y-m-d"));
             $table->softDeletes();
