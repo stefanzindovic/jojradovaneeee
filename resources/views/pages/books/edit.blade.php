@@ -735,7 +735,7 @@
                 addFiles(e) {
                     const files = createFileList([...this.files], [...e.target.files]);
                     this.files = files;
-                    e.target.files = files
+                    e.target.files = files;
                     //this.form.formData.files = [...files];
                 }
             };

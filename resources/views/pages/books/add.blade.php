@@ -25,7 +25,7 @@
                                     <nav class="w-full rounded">
                                         <ol class="flex list-reset">
                                             <li>
-                                                <a onclick="{{ route('books.index') }}"
+                                                <a href="{{ route('books.index') }}"
                                                     class="text-[#2196f3] cursor-pointer hover:text-blue-600">
                                                     Evidencija knjiga
                                                 </a>

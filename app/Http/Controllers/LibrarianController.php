@@ -34,7 +34,7 @@ class LibrarianController extends Controller
      */
     public function create(): View|Factory|RedirectResponse|Application
     {
-        if(Auth::user()->role_id != 1) {
+        if (Auth::user()->role_id != 1) {
             return back()->with('errorMessage', 'Nemate dozvolu za izvršenje ove akcije.');
         }
 
@@ -49,7 +49,7 @@ class LibrarianController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        if(Auth::user()->role_id != 1) {
+        if (Auth::user()->role_id != 1) {
             return back()->with('errorMessage', 'Nemate dozvolu za izvršenje ove akcije.');
         }
 
@@ -64,11 +64,11 @@ class LibrarianController extends Controller
 
         try {
             $genericName = 'profile-picture-placeholder.jpg';
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/librarians/';
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -106,8 +106,8 @@ class LibrarianController extends Controller
      */
     public function show(User $librarian): View|Factory|Application
     {
-        if(!$librarian->is_active) return abort(404);
-        if($librarian->role->id == 3) return abort(404);
+        if (!$librarian->is_active) return abort(404);
+        if ($librarian->role->id == 3) return abort(404);
         return view('..pages.librarians.profile', compact('librarian'));
     }
 
@@ -119,15 +119,19 @@ class LibrarianController extends Controller
      */
     public function edit(User $librarian): View|Factory|RedirectResponse|Application
     {
-        if($librarian->role->id == 3) return abort(404);
-        if(!$librarian->is_active) return abort(404);
+        if ($librarian->role->id == 3) {
+            return abort(404);
+        }
+        if (!$librarian->is_active) {
+            return abort(404);
+        }
 
-        if($librarian->role_id == 1 && Auth::user()->role_id != 1) {
+        if ($librarian->role_id === 1 && Auth::user()->role_id !== 1) {
             return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
         }
 
-        if($librarian->role_id != 3 && Auth::user()->id != $librarian->id) {
-            return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
+        if ($librarian->id != Auth::user()->id && Auth::user()->role_id !== 1) {
+            return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
         }
 
         return view('..pages.librarians.edit', compact('librarian'));
@@ -142,10 +146,10 @@ class LibrarianController extends Controller
      */
     public function update(Request $request, User $librarian): \Illuminate\Http\RedirectResponse
     {
-        if(!$librarian->is_active) return abort(404);
-        if($librarian->role->id == 3) return abort(404);
+        if (!$librarian->is_active) return abort(404);
+        if ($librarian->role->id == 3) return abort(404);
 
-        if($librarian->role->id == 1 && Auth::user()->id == $librarian->id) {
+        if ($librarian->role->id == 1 && Auth::user()->id == $librarian->id) {
             return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
         }
 
@@ -161,17 +165,17 @@ class LibrarianController extends Controller
 
         try {
             $genericName = $librarian->picture;
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/librarians/';
 
                 // remove old icon from storage
                 $oldIconPath = $uploadPath . $librarian->picture;
-                if(Storage::disk('public')->exists($oldIconPath)) {
+                if (Storage::disk('public')->exists($oldIconPath)) {
                     Storage::disk('public')->delete($oldIconPath);
                 }
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -206,18 +210,18 @@ class LibrarianController extends Controller
      */
     public function destroy(User $librarian): RedirectResponse
     {
-        if($librarian->role->id == 3) return abort(404);
-        if(!$librarian->is_active) return abort(404);
+        if ($librarian->role->id == 3) return abort(404);
+        if (!$librarian->is_active) return abort(404);
 
-        if($librarian->role->id == 1) {
+        if ($librarian->role->id == 1) {
             return back()->with('errorMessage', 'Ne možete obrisati administratora.');
         }
 
-        if($librarian->id == Auth::user()->id) {
+        if ($librarian->id == Auth::user()->id) {
             return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
         }
 
-        if(Auth::user()->role_id != 1) {
+        if (Auth::user()->role_id != 1) {
             return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
         }
 
@@ -225,18 +229,19 @@ class LibrarianController extends Controller
             $librarian->delete();
 
             return to_route('librarians.index')->with('successMessage', 'Bibliotekar je obrisan.');
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
-    public function resetPassword(Request $request, User $librarian) {
+    public function resetPassword(Request $request, User $librarian)
+    {
         $input = $request->validate([
             'password' => 'required|min:8|max:24,confirmed',
         ]);
 
 
-        if($librarian->id != Auth::user()->id && Auth::user()->role_id !== 1) {
+        if ($librarian->id != Auth::user()->id && Auth::user()->role_id !== 1) {
             return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
         }
 
