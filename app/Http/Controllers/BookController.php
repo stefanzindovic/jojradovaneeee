@@ -250,6 +250,14 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
+        try {
+            // Todo: Add check if there is some actions used on this book before deleting it
+            $book->delete();
+
+            return to_route('books.index')->with('errorMessage', 'Knjiga je uspješno obrisana.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     public function destroyPicture(Book $book,  BookGallery $gallery)
