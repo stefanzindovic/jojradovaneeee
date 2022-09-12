@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\BookCategory;
+use App\Models\BookGenre;
 use App\Models\Format;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +28,10 @@ class DatabaseSeeder extends Seeder
             LanguageSeeder::class,
             AuthorSeeder::class,
             UserSeeder::class,
+            BookSeeder::class,
+            BookCategoriesSeeder::class,
+            BookGenresSeeder::class,
+            BookAuthorsSeeder::class,
         ]);
     }
 }

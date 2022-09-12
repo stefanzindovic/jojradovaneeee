@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Language extends Model
+class BookGallery extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['name'];
+    protected $fillable = [
+        'picture',
+    ];
 
-    public function books()
+    public function book()
     {
-        return $this->hasMany(Book::class);
+        return $this->belongsTo(Book::class, 'book_id');
     }
 }
