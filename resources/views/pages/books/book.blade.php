@@ -75,7 +75,9 @@
                                     <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
                                     <span class="px-4 py-0">Izmijeni</span>
                                 </a>
-                                <form method="POST" action="{{ route('books.destroy', $book->id) }}">
+                                <form
+                                    onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovu knjigu?')){return false;}"
+                                    method="POST" action="{{ route('books.destroy', $book->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" tabindex="0"
