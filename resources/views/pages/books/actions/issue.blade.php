@@ -101,7 +101,8 @@
 
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form class="text-gray-700 forma">
+            <form class="text-gray-700" method="POST" action="{{ route('books.issues.issue', $book->id) }}">
+                @csrf
                 <div class="flex flex-row ml-[30px]">
                     <div class="w-[50%] mb-[100px] mr-[100px]">
                         <h3 class="mt-[20px] mb-[10px]">Izdaj knjigu</h3>
@@ -109,7 +110,7 @@
                             <p>Izaberi ucenika koji zaduzuje knjigu <span class="text-red-500">*</span></p>
                             <select
                                 class="flex w-[90%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                name="ucenik" id="ucenikIzdavanje">
+                                name="student_id" id="ucenikIzdavanje">
                                 <option disabled selected></option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">
@@ -123,7 +124,7 @@
                             <div class="w-[50%]">
                                 <p>Datum izdavanja <span class="text-red-500">*</span></p>
                                 <label class="text-gray-700" for="date">
-                                    <input type="date" name="datumIzdavanja" id="datumIzdavanja"
+                                    <input type="date" name="action_start" id="datumIzdavanja"
                                         class="flex w-[90%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onchange="funkcijaDatumVracanja();" />
                                 </label>
@@ -134,7 +135,7 @@
                                 <label class="text-gray-700" for="date">
                                     <input type="text" id="datumVracanja"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base text-gray-400 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        disabled />
+                                        name="action_deadline" readonly />
                                 </label>
                                 <div>
                                     <p>Rok vracanja: {{ $policy->value }} dana</p>
