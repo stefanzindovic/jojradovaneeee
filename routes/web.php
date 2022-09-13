@@ -44,8 +44,9 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
 
     // Issue book
-    Route::prefix('books/actions/issue')->name('books.issue')->group(function () {
+    Route::prefix('books/actions/issue')->name('books.issues')->group(function () {
         Route::get('/{book}', [\App\Http\Controllers\IssueBookController::class, 'index']);
+        Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
     });
 });
 
