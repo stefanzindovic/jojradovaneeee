@@ -4,8 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BooksUnderAction extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+
+    public function student()
+    {
+        return $this->belongsTo(User::class, 'student_id');
+    }
 }

@@ -50,12 +50,17 @@ class User extends Authenticatable
     // relation between user roles and users
     function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo( UserRole::class, 'role_id');
+        return $this->belongsTo(UserRole::class, 'role_id');
     }
 
     // relation between user logins and users
     function logins(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany( UserLogins::class);
+        return $this->hasMany(UserLogins::class);
+    }
+
+    function booksUnderAction()
+    {
+        return $this->hasMany(BooksUnderAction::class, 'student_id');
     }
 }
