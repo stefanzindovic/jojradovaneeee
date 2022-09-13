@@ -10,8 +10,13 @@ class BookAction extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function status()
+    function status()
     {
         return $this->belongsTo(BookActionStatus::class, 'action_status_id');
+    }
+
+    function book()
+    {
+        return $this->belongsTo(BooksUnderAction::class, 'books_under_actions_id');
     }
 }

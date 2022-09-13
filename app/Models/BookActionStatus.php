@@ -12,6 +12,6 @@ class BookActionStatus extends Model
 
     function actions()
     {
-        return $this->hasMany(BookAction::class);
+        return $this->hasMany(BookAction::class, 'action_status_id');
     }
 }
