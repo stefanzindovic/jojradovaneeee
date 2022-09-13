@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(BooksUnderAction::class, 'student_id');
     }
+
+    function bookActions()
+    {
+        return $this->hasMany(BookAction::class, 'librarian_id');
+    }
 }
