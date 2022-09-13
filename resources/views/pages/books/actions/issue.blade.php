@@ -205,7 +205,7 @@
     <script>
         function funkcijaDatumVracanja() {
             var selectedDate = new Date(jQuery('#datumIzdavanja').val());
-            var numberOfDaysToAdd = 20;
+            var numberOfDaysToAdd = {{ $policy->value }};
 
             selectedDate.setDate(selectedDate.getDate() + numberOfDaysToAdd);
 
