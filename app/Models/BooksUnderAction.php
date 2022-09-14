@@ -20,6 +20,11 @@ class BooksUnderAction extends Model
         return $this->hasMany(BookAction::class, 'books_under_actions_id');
     }
 
+    function activeAction()
+    {
+        return $this->hasOne(BookAction::class, 'books_under_actions_id')->latestOfMany();
+    }
+
     function book()
     {
         return $this->belongsTo(Book::class, 'book_id');

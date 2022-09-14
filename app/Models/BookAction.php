@@ -20,6 +20,11 @@ class BookAction extends Model
         return $this->belongsTo(BooksUnderAction::class, 'books_under_actions_id');
     }
 
+    function originalBook()
+    {
+        return $this->belongsTo(Book::class, 'books_under_actions_id');
+    }
+
     function librarian()
     {
         return $this->belongsTo(User::class, 'librarian_id');

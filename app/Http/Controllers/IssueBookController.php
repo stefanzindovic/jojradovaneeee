@@ -53,8 +53,18 @@ class IssueBookController extends Controller
         }
     }
 
-    public function issues()
+    public function issues(HttpRequest $request)
     {
-        return view('..pages.books.actions.issues.issues');
+        $books = null;
+        if ($request->has('books')) {
+            return back();
+        } else {
+            $books = BooksUnderAction::with(['activeAction' => function ($query) {
+                $query->where('action_status_id', 1);
+            }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+                $query->where('action_status_id', 1);
+            })->get();
+        }
+        return view('..pages.books.actions.issues.issues', compact('books'));
     }
 }
