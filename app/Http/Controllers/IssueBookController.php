@@ -108,11 +108,18 @@ class IssueBookController extends Controller
     public function writeOff(BooksUnderAction $book)
     {
         try {
+            $policy = Policy::findOrFail(3);
+
             // Check if targeted book is issued
             $allowedStatuses = [1, 7];
 
             if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
                 return back()->with('errorMessage', 'Ova knjiga nije izdata.');
+            }
+
+            // Check if targeted book's deadline is long enough to be written off
+            if (\Carbon\Carbon::parse($book->activeAction->action_deadline)->gt(\Carbon\Carbon::now()) || \Carbon\Carbon::parse($book->activeAction->action_deadline)->diffInDays(null, false) < $policy->value) {
+                return back()->with('errorMessage', 'Prekoračenje nije dovoljno dugo da bi knjiga mogla biti obrisana.');
             }
 
             // Genreate action model for returned book

@@ -69,7 +69,7 @@ class User extends Authenticatable
         $student = User::with(['booksUnderAction'])->findOrFail($student_id);
         $activeBooks = $student->booksUnderAction;
 
-        //todo: Replace 5 with policy value in future
+        //todo: Replace 2 with policy value in future
         $activeBooksCount = 0;
         foreach ($activeBooks as $book) {
             if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2) {
