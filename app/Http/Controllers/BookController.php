@@ -25,8 +25,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery'])->get();
-        return view('..pages/books/index', compact('books'));
+        $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery', 'booksUnderActions'])->get();
+        $issuedBooksCount = Book::issuedBooks()->countBy('book_id');
+
+        return view('..pages/books/index', compact('books', 'issuedBooksCount'));
     }
 
     /**

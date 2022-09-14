@@ -343,7 +343,8 @@
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="aktivneRezervacije.php">5</a></td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="izdateKnjige.php">5</a></td>
+                                            href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a>
+                                    </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="knjigePrekoracenje.php">2</a></td>
                                     <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $book->total_copies }}

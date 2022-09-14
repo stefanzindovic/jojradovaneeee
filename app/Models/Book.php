@@ -62,4 +62,18 @@ class Book extends Model
     {
         return $this->belongsToMany(Author::class, 'book_authors');
     }
+
+    public function booksUnderActions()
+    {
+        return $this->hasMany(BooksUnderAction::class);
+    }
+
+    public static function issuedBooks()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 1);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 1);
+        })->get();
+    }
 }
