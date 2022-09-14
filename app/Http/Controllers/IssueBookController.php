@@ -32,6 +32,14 @@ class IssueBookController extends Controller
         ]);
 
         try {
+
+            // Check if student already have save active issued book
+            $doStudentHaveActiveIssues = User::doStudentHaveActiveIssues($input['student_id'], $book->id);
+
+            if ($doStudentHaveActiveIssues) {
+                return back()->with('errorMessage', 'Korisnik je dostigao limit ili već ima istu knjigu.');
+            }
+
             // Generate and save new model for book under action
             $bookUnderActionModel = new BooksUnderAction();
             $bookUnderActionModel->book()->associate($book);

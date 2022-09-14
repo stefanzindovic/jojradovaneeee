@@ -64,6 +64,26 @@ class User extends Authenticatable
         return $this->hasMany(BooksUnderAction::class, 'student_id');
     }
 
+    public static function doStudentHaveActiveIssues($student_id, $book_id)
+    {
+        $student = User::with(['booksUnderAction'])->findOrFail($student_id);
+        $activeBooks = $student->booksUnderAction;
+
+        //todo: Replace 5 with policy value in future
+
+        if ($activeBooks->count() > 5) {
+            return true;
+        }
+
+        foreach ($activeBooks as $book) {
+            if ($book->book_id == $book_id && ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     function bookActions()
     {
         return $this->hasMany(BookAction::class, 'librarian_id');
