@@ -57,7 +57,11 @@ class IssueBookController extends Controller
     {
         $books = null;
         if ($request->has('books')) {
-            return back();
+            $books = BooksUnderAction::with(['activeAction' => function ($query) {
+                $query->where('action_status_id', 1);
+            }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+                $query->where('action_status_id', 1);
+            })->where('book_id', $request->books)->get();
         } else {
             $books = BooksUnderAction::with(['activeAction' => function ($query) {
                 $query->where('action_status_id', 1);
