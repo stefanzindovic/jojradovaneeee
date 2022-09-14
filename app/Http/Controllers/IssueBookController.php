@@ -119,7 +119,7 @@ class IssueBookController extends Controller
 
             // Check if targeted book's deadline is long enough to be written off
             if (\Carbon\Carbon::parse($book->activeAction->action_deadline)->gt(\Carbon\Carbon::now()) || \Carbon\Carbon::parse($book->activeAction->action_deadline)->diffInDays(null, false) < $policy->value) {
-                return back()->with('errorMessage', 'Prekoračenje nije dovoljno dugo da bi knjiga mogla biti obrisana.');
+                return back()->with('errorMessage', 'Prekoračenje nije dovoljno dugo da bi knjiga mogla biti otpisana.');
             }
 
             // Genreate action model for returned book
