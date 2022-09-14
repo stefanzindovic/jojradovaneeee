@@ -48,7 +48,7 @@
                         <i class="fas fa-level-up-alt mr-[3px]"></i>
                         Otpiši
                     </a>
-                    <a href="{{ route('books.issue', $book->id) }}" class="inline hover:text-blue-600 ml-[20px] pr-[10px]">
+                    <a href="{{ route('books.issues', $book->id) }}" class="inline hover:text-blue-600 ml-[20px] pr-[10px]">
                         <i class="far fa-hand-scissors mr-[3px]"></i>
                         Izdaj
                     </a>

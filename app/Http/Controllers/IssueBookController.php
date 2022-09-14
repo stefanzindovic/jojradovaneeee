@@ -20,7 +20,7 @@ class IssueBookController extends Controller
         $policy = Policy::findOrFail(1);
         $students = User::where('role_id', 3)->get();
 
-        return view('..pages.books.actions.issue', compact('policy', 'students', 'book'));
+        return view('..pages.books.actions.issues.issue', compact('policy', 'students', 'book'));
     }
 
     public function issue(Book $book, HttpRequest $request)
@@ -51,5 +51,10 @@ class IssueBookController extends Controller
             dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
+    }
+
+    public function issues()
+    {
+        return view('..pages.books.actions.issues.issues');
     }
 }

@@ -110,7 +110,7 @@
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap">
                             <div>
-                                <a href="izdateKnjige.php" aria-label="Knjige">
+                                <a href="{{ route('books.issues.issues') }}" aria-label="Knjige">
                                     <i
                                         class="@if (\Illuminate\Support\Facades\Request::is('books/actions*')) text-[#576cdf] @endif text-[22px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-exchange-alt"></i>
                                     <div class="hidden sidebar-item">
