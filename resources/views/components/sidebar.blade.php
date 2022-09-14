@@ -106,13 +106,13 @@
                 </li>
                 <!-- Izdavanje Icon -->
                 <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('books/authors*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
+                    class="@if (\Illuminate\Support\Facades\Request::is('actions/*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
                     <div class="ml-[30px]">
                         <span class="flex justify-between w-full whitespace-nowrap">
                             <div>
                                 <a href="{{ route('books.issues.issues') }}" aria-label="Knjige">
                                     <i
-                                        class="@if (\Illuminate\Support\Facades\Request::is('books/actions*')) text-[#576cdf] @endif text-[22px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-exchange-alt"></i>
+                                        class="@if (\Illuminate\Support\Facades\Request::is('actions*')) text-[#576cdf] @endif text-[22px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-exchange-alt"></i>
                                     <div class="hidden sidebar-item">
                                         <p
                                             class="@if (\Illuminate\Support\Facades\Request::is('books/actions*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">

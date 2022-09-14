@@ -24,7 +24,8 @@
                                     <span class=" whitespace-nowrap w-full text-[25px]  flex justify-between fill-current">
                                         <div
                                             class="py-[15px] px-[20px] w-[268px] cursor-pointer bg-[#EFF3F6] rounded-[10px]">
-                                            <a href="izdateKnjige.php" aria-label="Sve knjige" class="flex items-center">
+                                            <a href="{{ route('books.issues.issues') }}" aria-label="Sve knjige"
+                                                class="flex items-center">
                                                 <i
                                                     class="transition duration-300 ease-in group-hover:text-[#576cdf] text-[#576cdf] far fa-copy text-[20px]"></i>
                                                 <div>
@@ -163,8 +164,11 @@
                                             </label>
                                         </td>
                                         <td class="flex flex-row items-center px-4 py-3">
-                                            <img class="object-cover w-8 mr-2 h-11" src="img/tomsojer.jpg" alt="" />
-                                            <a href="knjigaOsnovniDetalji.php">
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($book->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->book->picture) }} @endif"
+                                                alt="" />
+                                            <a href="{{ route('books.show', $book->id) }}">
                                                 <span class="font-medium text-center">{{ $book->book->title }}</span>
                                             </a>
                                         </td>
@@ -232,12 +236,19 @@
                                                     } else {
                                                         $keepingBook = $years . $months . $days;
                                                     }
+                                                    
+                                                    // check if deadline was breached
+                                                    $isBreached = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($book->activeAction->action_deadline));
                                                 @endphp
-
-                                                <span>{{ $keepingBook }}</span>
+                                                <div
+                                                    @if ($isBreached) class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]" @endif>
+                                                    <span
+                                                        @if ($isBreached) class="text-red-800" @endif>{{ $keepingBook }}</span>
+                                                </div>
                                             </div>
                                         </td>
-                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">Valentina Kascelan
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ $book->activeAction->librarian->name }}
                                         </td>
                                         <td class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap">
                                             <p
