@@ -56,7 +56,6 @@ class IssueBookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno izdata.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -78,5 +77,56 @@ class IssueBookController extends Controller
             })->get();
         }
         return view('..pages.books.actions.issues.issues', compact('books'));
+    }
+
+    public function return(BooksUnderAction $book, HttpRequest $request)
+    {
+        try {
+
+            // Check if targeted book is issued
+            $allowedStatuses = [1, 7];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Ova knjiga nije izdata.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(9);
+            $bookActionModel->action_start = date('Y-m-d');
+            $bookActionModel->action_deadline = null;
+            $bookActionModel->save();
+
+            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function writeOff(BooksUnderAction $book)
+    {
+        try {
+            // Check if targeted book is issued
+            $allowedStatuses = [1, 7];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Ova knjiga nije izdata.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(8);
+            $bookActionModel->action_start = date('Y-m-d');
+            $bookActionModel->action_deadline = null;
+            $bookActionModel->save();
+
+            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }

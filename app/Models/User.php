@@ -70,9 +70,15 @@ class User extends Authenticatable
         $activeBooks = $student->booksUnderAction;
 
         //todo: Replace 5 with policy value in future
+        $activeBooksCount = 0;
+        foreach ($activeBooks as $book) {
+            if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2) {
+                $activeBooksCount++;
 
-        if ($activeBooks->count() > 5) {
-            return true;
+                if ($activeBooksCount > 2) {
+                    return true;
+                }
+            }
         }
 
         foreach ($activeBooks as $book) {

@@ -347,7 +347,8 @@
                                     </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="knjigePrekoracenje.php">2</a></td>
-                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $book->total_copies }}
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        {{ $book->total_copies - ($writtenOffBooks[$book->id] ?? 0) }}
                                     </td>
                                     <td class="px-6 py-4 text-sm leading-5 text-right whitespace-no-wrap">
                                         <p

@@ -27,8 +27,9 @@ class BookController extends Controller
     {
         $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery', 'booksUnderActions'])->get();
         $issuedBooksCount = Book::issuedBooks()->countBy('book_id');
+        $writtenOffBooks = Book::writtenOffBooks()->countBy('book_id');
 
-        return view('..pages/books/index', compact('books', 'issuedBooksCount'));
+        return view('..pages/books/index', compact('books', 'issuedBooksCount', 'writtenOffBooks'));
     }
 
     /**

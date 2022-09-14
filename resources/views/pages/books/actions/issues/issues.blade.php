@@ -267,20 +267,30 @@
                                                             <i class="far fa-file mr-[10px] ml-[5px] py-1"></i>
                                                             <span class="px-4 py-0">Pogledaj detalje</span>
                                                         </a>
+                                                        <form action="{{ route('books.issues.writeoff', $book->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
 
-                                                        <a href="otpisiKnjigu.php" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Otpisi knjigu</span>
-                                                        </a>
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i class="fas fa-level-up-alt mr-[14px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Otpiši knjigu</span>
+                                                            </button>
+                                                        </form>
+                                                        <form action="{{ route('books.issues.return', $book->id) }}"
+                                                            method="POST">
+                                                            @method('PATCH')
+                                                            @csrf
 
-                                                        <a href="vratiKnjigu.php" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Vrati knjigu</span>
-                                                        </a>
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i class="fas fa-redo-alt mr-[10px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Vrati knjigu</span>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

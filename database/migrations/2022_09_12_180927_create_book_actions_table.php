@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('librarian_id')->constrained('users');
             $table->foreignId('action_status_id')->constrained('book_action_statuses');
             $table->date('action_start')->default(date("Y-m-d"));
-            $table->date('action_deadline');
+            $table->date('action_deadline')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
