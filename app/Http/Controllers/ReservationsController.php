@@ -13,9 +13,20 @@ use Illuminate\Support\Facades\Auth;
 
 class ReservationsController extends Controller
 {
-    public function index()
+    public function index(HttpRequest $request)
     {
         // Get all active and pending reservations
+        $pending = null;
+        $active = null;
+
+        if ($request->has('books')) {
+            $pending = Book::pendingReservedBook($request->book);
+            $active = Book::activeReservedBook($request->book);
+        } else {
+            $pending = Book::pendingReservedBooks();
+            $active = Book::activeReservedBooks();
+        }
+        return view('..pages.books.actions.reservations.reservations', compact('pending', 'active'));
     }
 
     public function archived()

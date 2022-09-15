@@ -131,12 +131,39 @@ class Book extends Model
         })->where('book_id', $id)->get();
     }
 
-    public static function reservedBooks()
+    public static function pendingReservedBooks()
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
             $query->where('action_status_id', 2);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 2);
         })->get();
+    }
+
+    public static function pendingReservedBook($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 2);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 2);
+        })->where('book_id', $id)->get();
+    }
+
+    public static function activeReservedBooks()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 3);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 3);
+        })->get();
+    }
+
+    public static function activeReservedBook($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 3);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 3);
+        })->where('book_id', $id)->get();
     }
 }
