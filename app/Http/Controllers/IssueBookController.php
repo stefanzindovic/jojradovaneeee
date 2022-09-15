@@ -104,6 +104,17 @@ class IssueBookController extends Controller
         return view('..pages.books.actions.issues.returned', compact('books'));
     }
 
+    public function breachedDeadline(BooksUnderAction $book, HttpRequest $request)
+    {
+        $books = null;
+        if ($request->has('books')) {
+            $books = Book::issuedBookWithBreachedDeadline($request->books);
+        } else {
+            $books = Book::issuedBooksWithBreachedDeadline();
+        }
+        return view('..pages.books.actions.issues.breached', compact('books'));
+    }
+
     public function writeOff(BooksUnderAction $book)
     {
         try {

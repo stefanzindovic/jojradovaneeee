@@ -62,8 +62,8 @@
                                     <span class=" whitespace-nowrap w-full text-[25px] flex justify-between fill-current">
                                         <div
                                             class="group hover:bg-[#EFF3F6] py-[15px] px-[20px] w-[268px] rounded-[10px] cursor-pointer">
-                                            <a href="knjigePrekoracenje.php" aria-label="Knjige na raspolaganju"
-                                                class="flex items-center">
+                                            <a href="{{ route('books.issues.breached') }}"
+                                                aria-label="Knjige na raspolaganju" class="flex items-center">
                                                 <i
                                                     class="text-[#707070] text-[20px] fas fa-exclamation-triangle transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
                                                 <div>
