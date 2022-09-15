@@ -536,7 +536,7 @@
                                                 class="object-cover w-8 mr-2 h-11 rounded-full"
                                                 src="@if ($book->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->book->picture) }} @endif"
                                                 alt="" />
-                                            <a href="knjigaOsnovniDetalji.php">
+                                            <a href="{{ route('books.show', $book->id) }}">
                                                 <span class="font-medium text-center">{{ $book->book->title }}</span>
                                             </a>
                                         </td>
