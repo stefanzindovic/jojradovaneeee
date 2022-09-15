@@ -525,6 +525,7 @@
                             </thead>
                             <tbody class="bg-white">
                                 @foreach ($books as $book)
+                                    {{ dd($books) }}
                                     <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                                         <td class="px-4 py-3 whitespace-no-wrap">
                                             <label class="inline-flex items-center">
@@ -532,7 +533,9 @@
                                             </label>
                                         </td>
                                         <td class="flex flex-row items-center px-4 py-3">
-                                            <img class="object-cover w-8 mr-2 h-11" src="img/tomsojer.jpg"
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($book->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->book->picture) }} @endif"
                                                 alt="" />
                                             <a href="knjigaOsnovniDetalji.php">
                                                 <span class="font-medium text-center">{{ $book->book->title }}</span>
