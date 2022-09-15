@@ -525,7 +525,6 @@
                             </thead>
                             <tbody class="bg-white">
                                 @foreach ($books as $book)
-                                    {{ dd($books) }}
                                     <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
                                         <td class="px-4 py-3 whitespace-no-wrap">
                                             <label class="inline-flex items-center">
