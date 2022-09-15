@@ -346,7 +346,7 @@
                                             href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a>
                                     </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="knjigePrekoracenje.php">{{ $booksWithBreachedDeadlines[$book->id] ?? 0 }}</a>
+                                            href="{{ route('books.issues.breached', ['books' => $book->id]) }}">{{ $booksWithBreachedDeadlines[$book->id] ?? 0 }}</a>
                                     </td>
                                     <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
                                         {{ $book->total_copies - ($writtenOffBooks[$book->id] ?? 0) }}
