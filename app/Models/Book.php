@@ -130,4 +130,13 @@ class Book extends Model
             $query->whereDate('action_deadline', '<', date('Y-m-d'))->where('action_status_id', 1)->orWhere('action_status_id', 7);
         })->where('book_id', $id)->get();
     }
+
+    public static function reservedBooks()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 2);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 2);
+        })->get();
+    }
 }
