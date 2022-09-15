@@ -72,7 +72,7 @@ class User extends Authenticatable
         //todo: Replace 2 with policy value in future
         $activeBooksCount = 0;
         foreach ($activeBooks as $book) {
-            if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2) {
+            if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7) {
                 $activeBooksCount++;
 
                 if ($activeBooksCount > 2) {
@@ -82,7 +82,7 @@ class User extends Authenticatable
         }
 
         foreach ($activeBooks as $book) {
-            if ($book->book_id == $book_id && ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2)) {
+            if ($book->book_id == $book_id && ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7)) {
                 return true;
             }
         }

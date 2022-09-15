@@ -53,6 +53,16 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
         Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');
     });
+
+    // Reserve book
+    Route::prefix('actions/reservations')->name('books.reservations')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ReservationsController::class, 'index']);
+        Route::get('/archived', [\App\Http\Controllers\ReservationsController::class, 'archived'])->name('.archived');
+        Route::get('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reservePage'])->name('.reservePage');
+        Route::post('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reserve'])->name('.reserve');
+        Route::patch('/{reservation}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
+        Route::patch('/{reservation}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
+    });
 });
 
 require __DIR__ . '/auth.php';

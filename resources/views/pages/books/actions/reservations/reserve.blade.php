@@ -1,7 +1,6 @@
 @extends('app')
 
 @section('page_title')
-    {{ $book->title }} | Izdaj
 @endsection
 
 @section('page_content')
@@ -43,7 +42,7 @@
                                     </li>
                                     <li>
                                         <p class="text-gray-400">
-                                            Izdaj knjigu
+                                            Rezerviši knjigu
                                         </p>
                                     </li>
                                 </ol>
@@ -51,19 +50,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="pt-[24px]
-                                            mr-[30px]">
+                <div class="pt-[24px] mr-[30px]" style="display: flex; align-items: center;">
                     <a href="otpisiKnjigu.php" class="inline hover:text-blue-600">
                         <i class="fas fa-level-up-alt mr-[3px]"></i>
                         Otpiši knjigu
                     </a>
+
+                    <form method="POST" action="{{ route('books.issues.issue', $book->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline hover:text-blue-600 ml-[20px] pr-[10px]">
+                            <i class="far fa-hand-scissors mr-[3px]"></i>
+                            Izdaj knjigu
+                        </button>
+                    </form>
                     <a href="vratiKnjigu.php" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
                         <i class="fas fa-redo-alt mr-[3px] "></i>
                         Vrati knjigu
-                    </a>
-                    <a href="rezervisiKnjigu.php" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
-                        <i class="far fa-calendar-check mr-[3px] "></i>
-                        Rezerviši knjigu
                     </a>
                     <p
                         class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsIzdajKnjigu hover:text-[#606FC7]">
@@ -98,19 +101,19 @@
                 </div>
             </div>
         </div>
-
         <!-- Space for content -->
         <div class="scroll height-content section-content">
-            <form class="text-gray-700" method="POST" action="{{ route('books.issues.issue', $book->id) }}">
+            <form class="text-gray-700" method="POST" action="{{ route('books.reservations.reserve', $book->id) }}"
+                enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-row ml-[30px]">
-                    <div class="w-[50%] mb-[100px] mr-[100px]">
-                        <h3 class="mt-[20px] mb-[10px]">Izdaj knjigu</h3>
+                    <div class="w-[50%] mb-[100px]">
+                        <h3 class="mt-[20px] mb-[10px]">Rezervisi knjigu</h3>
                         <div class="mt-[20px]">
-                            <p>Izaberi ucenika koji zaduzuje knjigu <span class="text-red-500">*</span></p>
+                            <p>Izaberi ucenika za koga se knjiga rezervise <span class="text-red-500">*</span></p>
                             <select
                                 class="flex w-[90%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                name="student_id" id="ucenikIzdavanje">
+                                name="student_id" id="ucenikRezervisanje">
                                 <option disabled selected></option>
                                 @foreach ($students as $student)
                                     <option value="{{ $student->id }}">
@@ -118,82 +121,30 @@
                                     </option>
                                 @endforeach
                             </select>
-                            <div id="validateUcenikIzdavanje"></div>
+                            <div id="validateUcenikRezervisanje"></div>
                         </div>
-                        <div class="mt-[20px] flex justify-between w-[90%]">
-                            <div class="w-[50%]">
-                                <p>Datum izdavanja <span class="text-red-500">*</span></p>
-                                <label class="text-gray-700" for="date">
-                                    <input type="date" name="action_start" id="datumIzdavanja"
-                                        class="flex w-[90%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        onchange="funkcijaDatumVracanja();" />
-                                </label>
-                                <div id="validateDatumIzdavanja"></div>
-                            </div>
-                            <div class="w-[50%]">
-                                <p>Datum vracanja</p>
-                                <label class="text-gray-700" for="date">
-                                    <input type="text" id="datumVracanja"
-                                        class="flex w-[90%] mt-2 px-2 py-2 text-base text-gray-400 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                        name="action_deadline" readonly />
-                                </label>
-                                <div>
-                                    <p>Rok vracanja: {{ $policy->value }} dana</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w-[50%] mb-[100px]">
-                        <div class="border-[1px] border-[#e4dfdf] w-[360px] mt-[75px]">
-                            <h2 class="mt-[20px] ml-[30px]">KOLICINE</h2>
-                            <div class="ml-[30px] mr-[70px] mt-[20px] flex flex-row justify-between">
-                                <div class="text-gray-500 ">
-                                    <p>Na raspolaganju:</p>
-                                    <p class="mt-[20px]">Rezervisano:</p>
-                                    <p class="mt-[20px]">Izdato:</p>
-                                    <p class="mt-[20px]">U prekoracenju:</p>
-                                    <p class="mt-[20px]">Ukupna kolicina:</p>
-                                </div>
-                                <div class="text-center pb-[30px]">
-                                    <p class=" bg-green-200 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                        5
-                                        primjeraka</p>
-                                    <a href="aktivneRezervacije.php">
-                                        <p
-                                            class=" mt-[16px] bg-yellow-200 text-yellow-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                            2 primjerka</p>
-                                    </a>
-                                    <a href="izdateKnjige.php">
-                                        <p
-                                            class=" mt-[16px] bg-blue-200 text-blue-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                            10 primjeraka</p>
-                                    </a>
-                                    <a href="knjigePrekoracenje.php">
-                                        <p
-                                            class=" mt-[16px] bg-red-200 text-red-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                            2 primjerka</p>
-                                    </a>
-                                    <p
-                                        class=" mt-[16px] border-[1px] border-green-700 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                        {{ $book->total_copies }} primjeraka</p>
-                                </div>
-                            </div>
+                        <div class="mt-[20px]">
+                            <p>Datum rezervacije <span class="text-red-500">*</span></p>
+                            <label class="text-gray-700" for="date">
+                                <input type="date" name="action_start" id="datumRezervisanja"
+                                    class="flex w-[50%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
+                            </label>
+                            <div id="validateDatumRezervisanja"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="absolute bottom-0 w-full">
+                <div class="absolute bottom-0 w-full bg-white">
                     <div class="flex flex-row">
                         <div class="inline-block w-full text-right py-[7px] mr-[100px] text-white">
-                            <button type="button"
+                            <button type="reset"
                                 class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                Ponisti <i class="fas fa-times ml-[4px]"></i>
+                                Poništi <i class="fas fa-times ml-[4px]"></i>
                             </button>
-                            <button id="izdajKnjigu" type="submit"
-                                class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
-                                onclick="validacijaIzdavanje()">
-                                Izdaj knjigu <i class="fas fa-check ml-[4px]"></i>
+                            <button id="rezervisiKnjigu" type="submit"
+                                class="btn-animation shadow-lg disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
+                                onclick="validacijaRezervisanje()">
+                                Rezervisi knjigu <i class="fas fa-check ml-[4px]"></i>
                             </button>
                         </div>
                     </div>
@@ -201,21 +152,4 @@
             </form>
         </div>
     </section>
-
-    <script>
-        function funkcijaDatumVracanja() {
-            var selectedDate = new Date(jQuery('#datumIzdavanja').val());
-            var numberOfDaysToAdd = {{ $policy->value }};
-
-            selectedDate.setDate(selectedDate.getDate() + numberOfDaysToAdd);
-
-            var day = selectedDate.getDate();
-            var month = selectedDate.getMonth() + 1;
-            var year = selectedDate.getFullYear();
-
-            var newDate = [year, month, day].join('-');
-
-            document.getElementById('datumVracanja').value = newDate;
-        }
-    </script>
 @endsection
