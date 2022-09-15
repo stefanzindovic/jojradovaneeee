@@ -64,17 +64,9 @@ class IssueBookController extends Controller
     {
         $books = null;
         if ($request->has('books')) {
-            $books = BooksUnderAction::with(['activeAction' => function ($query) {
-                $query->where('action_status_id', 1);
-            }, 'book', 'student'])->whereHas('activeAction', function ($query) {
-                $query->where('action_status_id', 1);
-            })->where('book_id', $request->books)->get();
+            $books = Book::issuedBook($request->books);
         } else {
-            $books = BooksUnderAction::with(['activeAction' => function ($query) {
-                $query->where('action_status_id', 1);
-            }, 'book', 'student'])->whereHas('activeAction', function ($query) {
-                $query->where('action_status_id', 1);
-            })->get();
+            $books = Book::issuedBooks();
         }
         return view('..pages.books.actions.issues.issues', compact('books'));
     }
@@ -96,13 +88,20 @@ class IssueBookController extends Controller
             $bookActionModel->librarian()->associate(Auth::user());
             $bookActionModel->status()->associate(9);
             $bookActionModel->action_start = date('Y-m-d');
-            $bookActionModel->action_deadline = null;
+            $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+            $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
             return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
+    }
+
+    public function returned()
+    {
+        $books = Book::returnedBooks();
+        return view('..pages.books.actions.issues.returned', compact('books'));
     }
 
     public function writeOff(BooksUnderAction $book)

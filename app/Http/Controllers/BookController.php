@@ -156,8 +156,9 @@ class BookController extends Controller
         $publishers = Publishers::orderBy('id', 'desc')->get();
         $covers = Cover::orderBy('id', 'desc')->get();
         $formats = Format::orderBy('id', 'desc')->get();
+        $writtenOffCount = Book::writtenOffBook($book->id)->count();
 
-        return view('..pages.books.edit', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages', 'book'));
+        return view('..pages.books.edit', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages', 'book', 'writtenOffCount'));
     }
 
     /**

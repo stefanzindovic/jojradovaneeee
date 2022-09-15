@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('actions/issues')->name('books.issues')->group(function () {
         Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index']);
         Route::get('/', [\App\Http\Controllers\IssueBookController::class, 'issues'])->name('.issues');
+        Route::get('/returned', [\App\Http\Controllers\IssueBookController::class, 'returned'])->name('.returned');
         Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
         Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
         Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');

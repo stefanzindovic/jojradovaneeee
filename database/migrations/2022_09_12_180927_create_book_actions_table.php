@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('action_status_id')->constrained('book_action_statuses');
             $table->date('action_start')->default(date("Y-m-d"));
             $table->date('action_deadline')->nullable();
+            $table->date('action_addons')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -71,10 +71,19 @@ class Book extends Model
     public static function issuedBooks()
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
-            $query->where('action_status_id', 1);
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
-            $query->where('action_status_id', 1);
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
         })->get();
+    }
+
+    public static function issuedBook($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        })->where('book_id', $id)->get();
     }
 
     public static function writtenOffBooks()
@@ -83,6 +92,24 @@ class Book extends Model
             $query->where('action_status_id', 8);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 8);
+        })->get();
+    }
+
+    public static function writtenOffBook($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 8);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 8);
+        })->where('book_id', $id)->get();
+    }
+
+    public static function returnedBooks()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 9);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 9);
         })->get();
     }
 }
