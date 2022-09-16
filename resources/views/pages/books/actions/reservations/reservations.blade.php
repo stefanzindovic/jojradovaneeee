@@ -437,10 +437,11 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('m.d.Y') }}
+                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('m.d.Y') }}
+
+                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
                                         </td>
                                         <td class="flex flex-row items-center px-4 py-3">
                                             <img class="object-cover w-8 h-8 mr-2 rounded-full"
@@ -451,12 +452,25 @@
                                         </td>
 
                                         <td class="px-4 py-3">
-                                            <a href="#" class="hover:text-green-500 mr-[5px]">
-                                                <i class="fas fa-check reservedStatus"></i>
-                                            </a>
-                                            <a href="#" class="hover:text-red-500 ">
-                                                <i class="fas fa-times deniedStatus"></i>
-                                            </a>
+                                            <div style="display: flex">
+
+                                                <form action="{{ route('books.reservations.accept', $reservation->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
+                                                        <i class="fas fa-check reservedStatus"></i>
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('books.reservations.decline', $reservation->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
+                                                        <i class="fas fa-times deniedStatus"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
 
                                         <td class="px-4 py-3 text-sm leading-5 text-right whitespace-no-wrap">
@@ -509,10 +523,10 @@
                                             </a>
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('m.d.Y') }}
+                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('m.d.Y') }}
+                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
                                         </td>
                                         <td class="flex flex-row items-center px-4 py-3">
                                             <img class="object-cover w-8 h-8 mr-2 rounded-full"
@@ -540,19 +554,32 @@
                                                     aria-labelledby="headlessui-menu-button-1"
                                                     id="headlessui-menu-items-117" role="menu">
                                                     <div class="py-1">
-                                                        <a href="izdajKnjigu.php" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Izdaj knjigu</span>
-                                                        </a>
+                                                        <form
+                                                            action="{{ route('books.reservations.issue', $reservation->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i
+                                                                    class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Izdaj knjigu</span>
+                                                            </button>
+                                                        </form>
 
-                                                        <a href="#" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Otkazi rezervaciju</span>
-                                                        </a>
+                                                        <form
+                                                            action="{{ route('books.reservations.cancel', $reservation->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Otkaži rezervaciju</span>
+                                                            </button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>

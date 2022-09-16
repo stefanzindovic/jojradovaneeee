@@ -60,8 +60,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/archived', [\App\Http\Controllers\ReservationsController::class, 'archived'])->name('.archived');
         Route::get('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reservePage'])->name('.reservePage');
         Route::post('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reserve'])->name('.reserve');
-        Route::patch('/{reservation}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
-        Route::patch('/{reservation}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
+        Route::patch('/{book}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
+        Route::patch('/{book}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
+        Route::patch('/{book}/issue', [\App\Http\Controllers\ReservationsController::class, 'issue'])->name('.issue');
+        Route::patch('/{book}/cancel', [\App\Http\Controllers\ReservationsController::class, 'cancel'])->name('.cancel');
     });
 });
 

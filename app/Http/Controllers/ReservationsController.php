@@ -20,8 +20,8 @@ class ReservationsController extends Controller
         $active = null;
 
         if ($request->has('books')) {
-            $pending = Book::pendingReservedBook($request->book);
-            $active = Book::activeReservedBook($request->book);
+            $pending = Book::pendingReservedBook($request->books);
+            $active = Book::activeReservedBook($request->books);
         } else {
             $pending = Book::pendingReservedBooks();
             $active = Book::activeReservedBooks();
@@ -32,6 +32,9 @@ class ReservationsController extends Controller
     public function archived()
     {
         // Get all accepted, declined and expired reservations
+        $reservations = Book::archivedReservations();
+
+        return view('..pages.books.actions.reservations.archived', compact('reservations'));
     }
 
     public function reserve(Book $book, HttpRequest $request)
@@ -67,21 +70,128 @@ class ReservationsController extends Controller
             $bookActionModel->action_deadline = \Carbon\Carbon::parse($input['action_start'])->addDays($policy->value);
             $bookActionModel->save();
 
-            return to_route('books.index')->with('successMessage', 'Knjiga je uspješno izdata.');
+            return to_route('books.index')->with('successMessage', 'Knjiga je uspješno rezervisana.');
         } catch (\Throwable $th) {
             dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
-    public function accept()
+    public function accept(BooksUnderAction $book)
     {
         // accept pending reservation
+        try {
+
+            // Check if targeted book is issued
+            $allowedStatuses = [2];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Ova knjiga nije rezervisana.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(3);
+            $bookActionModel->action_start = $book->activeAction->action_start;
+            $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+            $bookActionModel->action_addons = date('Y-m-d');
+            $bookActionModel->save();
+
+            return to_route('books.reservations')->with('successMessage', 'Rezervacija je odobrena.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
-    public function decline()
+    public function issue(BooksUnderAction $book)
+    {
+        // accept pending reservation
+        try {
+            $policy = Policy::findOrFail(1);
+
+            // Check if targeted book is issued
+            $allowedStatuses = [3];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Rezervacija ove knjige nije odobrena.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(7);
+            $bookActionModel->action_start = date('Y-m-d');
+            $bookActionModel->action_deadline = \Carbon\Carbon::parse($bookActionModel->action_start)->addDays($policy->value);
+            $bookActionModel->action_addons = null;
+            $bookActionModel->save();
+
+            return to_route('books.reservations')->with('successMessage', 'Knjiga je uspješno izdata po rezervaciji.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function cancel(BooksUnderAction $book)
+    {
+        // accept pending reservation
+        try {
+            $policy = Policy::findOrFail(1);
+
+            // Check if targeted book is issued
+            $allowedStatuses = [3];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Rezervacija ove knjige nije odobrena.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(6);
+            $bookActionModel->action_deadline = $book->action_deadline;
+            $bookActionModel->action_addons = date('Y-m-d');
+            $bookActionModel->save();
+
+            return to_route('books.reservations')->with('successMessage', 'Knjiga je uspješno izdata po rezervaciji.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function decline(BooksUnderAction $book)
     {
         // decline pending reservation
+        try {
+
+            // Check if targeted book is issued
+            $allowedStatuses = [2];
+
+            if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                return back()->with('errorMessage', 'Ova knjiga nije rezervisana.');
+            }
+
+            // Genreate action model for returned book
+            $bookActionModel = new BookAction();
+            $bookActionModel->book()->associate($book);
+            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->status()->associate(4);
+            $bookActionModel->action_start = date('Y-m-d');
+            $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+            $bookActionModel->action_addons = $book->activeAction->action_start;
+            $bookActionModel->save();
+
+            return to_route('books.reservations')->with('successMessage', 'Rezervacija je odobrena.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 
     public function reservePage(Book $book)

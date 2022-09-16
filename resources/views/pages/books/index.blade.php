@@ -341,7 +341,7 @@
                                     </td>
                                     <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">6</td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ $reservedBooksCount[$book->id] ?? 0 }}</a>
+                                            href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ ($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0 }}</a>
                                     </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a>

@@ -74,7 +74,7 @@ class Book extends Model
             $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
-        })->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function issuedBook($id)
@@ -83,7 +83,7 @@ class Book extends Model
             $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
-        })->where('book_id', $id)->get();
+        })->where('book_id', $id)->orderBy('id', 'desc')->get();
     }
 
     public static function writtenOffBooks()
@@ -92,7 +92,7 @@ class Book extends Model
             $query->where('action_status_id', 8);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 8);
-        })->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function writtenOffBook($id)
@@ -101,7 +101,7 @@ class Book extends Model
             $query->where('action_status_id', 8);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 8);
-        })->where('book_id', $id)->get();
+        })->where('book_id', $id)->orderBy('id', 'desc')->get();
     }
 
     public static function returnedBooks()
@@ -110,25 +110,33 @@ class Book extends Model
             $query->where('action_status_id', 9);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 9);
-        })->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function issuedBooksWithBreachedDeadline()
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
-            $query->whereDate('action_deadline', '<', date('Y-m-d'))->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
-            $query->whereDate('action_deadline', '<', date('Y-m-d'))->where('action_status_id', 1)->orWhere('action_status_id', 7);
-        })->get();
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function issuedBookWithBreachedDeadline($id)
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
-            $query->whereDate('action_deadline', '<', date('Y-m-d'))->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
-            $query->whereDate('action_deadline', '<', date('Y-m-d'))->where('action_status_id', 1)->orWhere('action_status_id', 7);
-        })->where('book_id', $id)->get();
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        })->where('book_id', $id)->orderBy('id', 'desc')->get();
     }
 
     public static function pendingReservedBooks()
@@ -137,7 +145,7 @@ class Book extends Model
             $query->where('action_status_id', 2);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 2);
-        })->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function pendingReservedBook($id)
@@ -146,7 +154,7 @@ class Book extends Model
             $query->where('action_status_id', 2);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 2);
-        })->where('book_id', $id)->get();
+        })->where('book_id', $id)->orderBy('id', 'desc')->get();
     }
 
     public static function activeReservedBooks()
@@ -155,7 +163,7 @@ class Book extends Model
             $query->where('action_status_id', 3);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 3);
-        })->get();
+        })->orderBy('id', 'desc')->get();
     }
 
     public static function activeReservedBook($id)
@@ -164,6 +172,15 @@ class Book extends Model
             $query->where('action_status_id', 3);
         }, 'book', 'student'])->whereHas('activeAction', function ($query) {
             $query->where('action_status_id', 3);
-        })->where('book_id', $id)->get();
+        })->where('book_id', $id)->orderBy('id', 'desc')->get();
+    }
+
+    public static function archivedReservations()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        })->orderBy('id', 'desc')->get();
     }
 }

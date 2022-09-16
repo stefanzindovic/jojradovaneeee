@@ -29,9 +29,10 @@ class BookController extends Controller
         $issuedBooksCount = Book::issuedBooks()->countBy('book_id');
         $writtenOffBooks = Book::writtenOffBooks()->countBy('book_id');
         $booksWithBreachedDeadlines = Book::issuedBooksWithBreachedDeadline()->countBy('book_id');
-        $reservedBooksCount = Book::reservedBooks()->countBy('book_id');
+        $reservedBooksPendingCount = Book::pendingReservedBooks()->countBy('book_id');
+        $reservedBooksActiveCount = Book::activeReservedBooks()->countBy('book_id');
 
-        return view('..pages/books/index', compact('books', 'issuedBooksCount', 'writtenOffBooks', 'booksWithBreachedDeadlines', 'reservedBooksCount'));
+        return view('..pages/books/index', compact('books', 'issuedBooksCount', 'writtenOffBooks', 'booksWithBreachedDeadlines', 'reservedBooksPendingCount', 'reservedBooksActiveCount'));
     }
 
     /**
