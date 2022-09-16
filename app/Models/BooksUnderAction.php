@@ -22,7 +22,7 @@ class BooksUnderAction extends Model
 
     function activeAction()
     {
-        return $this->hasOne(BookAction::class, 'books_under_actions_id')->latestOfMany();
+        return $this->hasOne(BookAction::class, 'books_under_actions_id')->latestOfMany()->orderBy('id', 'desc');
     }
 
     function book()
