@@ -463,6 +463,7 @@
                                             @endif
                                         </td>
                                         <th class="px-4 py-4" style="display:none;"> </th>
+                                    </tr>
                                 @endforeach
 
                             </tbody>

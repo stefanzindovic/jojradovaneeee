@@ -193,6 +193,15 @@ class Book extends Model
         })->orderBy('id', 'desc')->get();
     }
 
+    public static function archivedReservationsByBook($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        })->orderBy('id', 'desc')->where('book_id', $id)->get();
+    }
+
     public static function calcNumberOfAvailableCopies($id)
     {
 
