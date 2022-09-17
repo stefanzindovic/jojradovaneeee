@@ -183,4 +183,17 @@ class Book extends Model
             $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
         })->orderBy('id', 'desc')->get();
     }
+
+    public static function calcNumberOfAvailableCopies($id)
+    {
+
+        $book = Book::findOrFail($id);
+        $issuedBooksCount = Book::issuedBook($id)->count();
+        $writtenOffBook = Book::writtenOffBook($id)->count();
+        $bookWithBreachedDeadlines = Book::issuedBookWithBreachedDeadline($id)->count();
+        $reservedBookPendingCount = Book::pendingReservedBook($id)->count();
+        $reservedBookActiveCount = Book::activeReservedBook($id)->count();
+
+        return $book->total_copies - ($issuedBooksCount + $writtenOffBook + $bookWithBreachedDeadlines + $reservedBookPendingCount + $reservedBookActiveCount);;
+    }
 }

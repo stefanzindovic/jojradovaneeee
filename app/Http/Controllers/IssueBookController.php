@@ -16,10 +16,18 @@ class IssueBookController extends Controller
 {
     public function index(Book $book)
     {
+
+        // Check if there is available copies of this book
+        $numOfAvailableCopies = Book::calcNumberOfAvailableCopies($book->id);
+
+        if ($numOfAvailableCopies < 1) {
+            return back()->with('errorMessage', 'Nema dovoljno primjeraka na raspolaganju.');
+        }
+
         $policy = Policy::findOrFail(1);
         $students = User::where('role_id', 3)->get();
 
-        return view('..pages.books.actions.issues.issue', compact('policy', 'students', 'book'));
+        return view('..pages.books.actions.issues.issue', compact('policy', 'students', 'book', 'numOfAvailableCopies'));
     }
 
     public function issue(Book $book, HttpRequest $request)

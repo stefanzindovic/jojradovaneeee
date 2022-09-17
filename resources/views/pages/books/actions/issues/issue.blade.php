@@ -157,7 +157,7 @@
                                 </div>
                                 <div class="text-center pb-[30px]">
                                     <p class=" bg-green-200 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                        5
+                                        {{ $numOfAvailableCopies }}
                                         primjeraka</p>
                                     <a href="aktivneRezervacije.php">
                                         <p

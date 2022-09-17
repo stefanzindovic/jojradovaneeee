@@ -339,7 +339,9 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">6</td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        {{ $book->total_copies - ((($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0) + ($writtenOffBooks[$book->id] ?? 0) + ($issuedBooksCount[$book->id] ?? 0)) }}
+                                    </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
                                             href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ ($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0 }}</a>
                                     </td>

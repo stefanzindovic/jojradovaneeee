@@ -196,6 +196,13 @@ class ReservationsController extends Controller
 
     public function reservePage(Book $book)
     {
+        // Check if there is available copies of this book
+        $numOfAvailableCopies = Book::calcNumberOfAvailableCopies($book->id);
+
+        if ($numOfAvailableCopies < 1) {
+            return back()->with('errorMessage', 'Nema dovoljno primjeraka na raspolaganju.');
+        }
+
         // show reservation book page
         $students = User::where('role_id', 3)->get();
         return view('..pages.books.actions.reservations.reserve', compact('book', 'students'));
