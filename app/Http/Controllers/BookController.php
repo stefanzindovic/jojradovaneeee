@@ -142,7 +142,8 @@ class BookController extends Controller
     {
         $issuedRecords = Book::issuedBook($book->id);
         $returnedRecords = Book::returnedBook($book->id);
-        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords'));
+        $booksWithBreachDeadline = Book::issuedBookWithBreachedDeadline($book->id);
+        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline'));
     }
 
     /**
