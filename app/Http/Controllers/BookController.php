@@ -143,7 +143,10 @@ class BookController extends Controller
         $issuedRecords = Book::issuedBook($book->id);
         $returnedRecords = Book::returnedBook($book->id);
         $booksWithBreachDeadline = Book::issuedBookWithBreachedDeadline($book->id);
-        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline'));
+        $pendingReservations = Book::pendingReservedBook($book->id);
+        $activeReservations = Book::activeReservedBook($book->id);
+
+        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline', 'pendingReservations', 'activeReservations'));
     }
 
     /**
