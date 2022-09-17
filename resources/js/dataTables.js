@@ -1,6 +1,6 @@
 jQuery.noConflict();
 jQuery("document").ready(function () {
-    const table = jQuery("#myTable");
+    const table = jQuery("table#myTable");
     table.DataTable({
         length: 5,
         lengthMenu: [

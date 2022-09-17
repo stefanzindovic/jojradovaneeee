@@ -29,8 +29,9 @@
 @vite('./resources/js/cropper/cropper.min.js')
 @vite('./resources/js/cropper.js')
 
-<!-- Books navigation tabs -->
+<!-- Navigation tabs -->
 @vite('./resources/js/booksTabNavigation.js')
+@vite('./resources/js/bookRecordsTabNavigation.js')
 
 <!-- Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
