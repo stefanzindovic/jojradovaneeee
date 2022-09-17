@@ -102,7 +102,7 @@
                     <a id="bookSpecificationsBtn" class="inline ml-[70px] cursor-pointer hover:text-blue-800 ">
                         Specifikacija
                     </a>
-                    <a href="iznajmljivanjeIzdate.php" class="inline ml-[70px] hover:text-blue-800">
+                    <a id="bookRecordBtn" class="inline ml-[70px] hover:text-blue-800 cursor-pointer">
                         Evidencija iznajmljivanja
                     </a>
                     <a id="bookMultimediaBtn" class="inline ml-[70px] cursor-pointer hover:text-blue-800">
@@ -207,6 +207,43 @@
                             </div>
                         </div>
                     </section>
+
+                    <!-- Space for content -->
+                    <section id="addBookTab_Records" class="hidden">
+                        <div class="pl-[30px] mt-[20px]">
+                            <div class="flex flex-row justify-between">
+                                <div class="mr-[30px]">
+                                    <div class="mt-[20px]">
+                                        <span class="text-gray-500 text-[14px]">Broj strana</span>
+                                        <p class="font-medium">{{ $book->total_pages }}</p>
+                                    </div>
+                                    <div class="mt-[40px]">
+                                        <span class="text-gray-500 text-[14px]">Pismo</span>
+                                        <p class="font-medium">{{ $book->script->name }}</p>
+                                    </div>
+                                    <div class="mt-[40px]">
+                                        <span class="text-gray-500 text-[14px]">Jezik</span>
+                                        <p class="font-medium">{{ $book->language->name }}</p>
+                                    </div>
+                                    <div class="mt-[40px]">
+                                        <span class="text-gray-500 text-[14px]">Povez</span>
+                                        <p class="font-medium">{{ $book->cover->name }}</p>
+                                    </div>
+                                    <div class="mt-[40px]">
+                                        <span class="text-gray-500 text-[14px]">Format</span>
+                                        <p class="font-medium">{{ $book->format->name }}</p>
+                                    </div>
+                                    <div class="mt-[40px]">
+                                        <span class="text-gray-500 text-[14px]">International Standard Book Number
+                                            (ISBN)</span>
+                                        <p class="font-medium">{{ $book->isbn }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Space for content -->
                     <section id="addBookTab_Multimedia" class="hidden scroll">
                         <div class="pl-[30px] section- mt-[20px]">
                             @if ($book->gallery->isEmpty())
