@@ -141,7 +141,8 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $issuedRecords = Book::issuedBook($book->id);
-        return view('..pages.books.book', compact('book', 'issuedRecords'));
+        $returnedRecords = Book::returnedBook($book->id);
+        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords'));
     }
 
     /**
