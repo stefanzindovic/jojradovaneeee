@@ -202,7 +202,7 @@
                                                     }
                                                     
                                                     if (in_array($diff->m, $monthVersionTwoValues)) {
-                                                        $monthVersion = 'mjeseci';
+                                                        $monthVersion = 'mjeseca';
                                                     }
                                                     
                                                     // format for days

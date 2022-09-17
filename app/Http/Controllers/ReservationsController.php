@@ -29,10 +29,16 @@ class ReservationsController extends Controller
         return view('..pages.books.actions.reservations.reservations', compact('pending', 'active'));
     }
 
-    public function archived()
+    public function archived(HttpRequest $request)
     {
         // Get all accepted, declined and expired reservations
-        $reservations = Book::archivedReservations();
+        $reservations = null;
+
+        if ($request->has('books')) {
+            $reservations = Book::archivedReservationsByBook($request->books);
+        } else {
+            $reservations = Book::archivedReservations();
+        }
 
         return view('..pages.books.actions.reservations.archived', compact('reservations'));
     }

@@ -56,7 +56,8 @@
                         <i class="fas fa-redo-alt mr-[3px] "></i>
                         Vrati
                     </a>
-                    <a href="rezervisiKnjigu.php" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
+                    <a href="{{ route('books.reservations.reservePage', $book->id) }}"
+                        class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
                         <i class="far fa-calendar-check mr-[3px] "></i>
                         Rezerviši
                     </a>
@@ -304,7 +305,7 @@
                                                     }
                                                     
                                                     if (in_array($diff->m, $monthVersionTwoValues)) {
-                                                        $monthVersion = 'mjeseci';
+                                                        $monthVersion = 'mjeseca';
                                                     }
                                                     
                                                     // format for days
@@ -474,7 +475,7 @@
                                                     }
                                                     
                                                     if (in_array($diff->m, $monthVersionTwoValues)) {
-                                                        $monthVersion = 'mjeseci';
+                                                        $monthVersion = 'mjeseca';
                                                     }
                                                     
                                                     // format for days
@@ -596,9 +597,6 @@
                                                 {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
                                             </td>
                                             <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                                <img class="object-cover w-8 h-8 mr-2 rounded-full"
-                                                    src="{{ $record->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $record->student->picture) : asset('imgs/' . $record->student->picture) }}"
-                                                    alt="Profilna fotografija" />
                                                 {{ $record->student->name }}
                                             </td>
                                             <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
@@ -650,9 +648,8 @@
                                                     if (in_array($diff->m, $monthVersionOneValues)) {
                                                         $monthVersion = 'mjesec';
                                                     }
-                                                    
                                                     if (in_array($diff->m, $monthVersionTwoValues)) {
-                                                        $monthVersion = 'mjeseci';
+                                                        $monthVersion = 'mjeseca';
                                                     }
                                                     
                                                     // format for days
@@ -1030,21 +1027,21 @@
                             <p class="mt-[20px]">Ukupna kolicina:</p>
                         </div>
                         <div class="text-center pb-[30px]">
-                            <p class=" bg-green-200 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">5
-                                primjeraka</p>
-                            <a href="iznajmljivanjeAktivne.php">
+                            <p class=" bg-green-200 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
+                                {{ $availableCopiesCount }} primjeraka</p>
+                            <a href="{{ route('books.reservations', ['books' => $book->id]) }}">
                                 <p
                                     class=" mt-[16px] bg-yellow-200 text-yellow-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                    2 primjerka</p>
+                                    {{ $pendingReservations->count() + $activeReservations->count() }} primjerka</p>
                             </a>
-                            <a href="iznajmljivanjeIzdate.php">
+                            <a href="{{ route('books.issues.issues', ['books' => $book->id]) }}">
                                 <p
                                     class=" mt-[16px] bg-blue-200 text-blue-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                    102 primjerka</p>
+                                    {{ $issuedRecords->count() }} primjerka</p>
                             </a>
-                            <a href="iznajmljivanjePrekoracenje.php">
+                            <a href="{{ route('books.issues.breached', ['books' => $book->id]) }}">
                                 <p class=" mt-[16px] bg-red-200 text-red-800 rounded-[10px] px-[6px] py-[2px] text-[14px]">
-                                    2 primjerka</p>
+                                    {{ $booksWithBreachDeadline->count() }} primjerka</p>
                             </a>
                             <p
                                 class=" mt-[16px] border-[1px] border-green-700 text-green-700 rounded-[10px] px-[6px] py-[2px] text-[14px]">
