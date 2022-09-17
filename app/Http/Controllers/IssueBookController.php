@@ -27,7 +27,16 @@ class IssueBookController extends Controller
         $policy = Policy::findOrFail(1);
         $students = User::where('role_id', 3)->get();
 
-        return view('..pages.books.actions.issues.issue', compact('policy', 'students', 'book', 'numOfAvailableCopies'));
+        $issuedRecords = Book::issuedBook($book->id);
+        $returnedRecords = Book::returnedBook($book->id);
+        $booksWithBreachDeadline = Book::issuedBookWithBreachedDeadline($book->id);
+        $pendingReservations = Book::pendingReservedBook($book->id);
+        $activeReservations = Book::activeReservedBook($book->id);
+        $archivedReservations = Book::archivedReservationsByBook($book->id);
+
+        $availableCopiesCount = Book::calcNumberOfAvailableCopies($book->id);
+
+        return view('..pages.books.actions.issues.issue', compact('policy', 'students', 'book', 'numOfAvailableCopies', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline', 'pendingReservations', 'activeReservations', 'archivedReservations', 'availableCopiesCount'));
     }
 
     public function issue(Book $book, HttpRequest $request)
