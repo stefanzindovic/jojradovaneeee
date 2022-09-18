@@ -113,6 +113,13 @@
                                     // date dif
                                     $diff = \Carbon\Carbon::parse($action->action_start)->diff(\Carbon\Carbon::now());
                                     
+                                    $diff = 0;
+                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
+                                        $diff = \Carbon\Carbon::parse($action->action_start)->diff(\Carbon\Carbon::now());
+                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
+                                        $diff = \Carbon\Carbon::parse($action->action_addons)->diff($action->action_start);
+                                    }
+                                    
                                     // format for years
                                     $yearVersionOneValues = [2, 3, 4];
                                     $yearVersion = 'godina';
@@ -172,7 +179,12 @@
                             <div class="mt-[40px]">
                                 @php
                                     // date dif in days
-                                    $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays(null, false);
+                                    $diff = 0;
+                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
+                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays(null, false);
+                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
+                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays($action->action_start, false);
+                                    }
                                     
                                     // format for days
                                     $dayVersionOneValues = [1, 21, 31];

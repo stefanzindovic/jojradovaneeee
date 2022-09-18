@@ -154,7 +154,8 @@ class IssueBookController extends Controller
             $bookActionModel->librarian()->associate(Auth::user());
             $bookActionModel->status()->associate(8);
             $bookActionModel->action_start = date('Y-m-d');
-            $bookActionModel->action_deadline = null;
+            $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+            $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
             return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
