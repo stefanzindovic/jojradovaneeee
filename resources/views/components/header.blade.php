@@ -22,7 +22,7 @@
             <div class="flex items-center">
                 <!-- Notification Icon -->
                 <div class="relative block">
-                    <a href="dashboardAktivnost.php" class="relative inline-block px-3 py-2 focus:outline-none"
+                    <a href="{{ route('dashboard') }}" class="relative inline-block px-3 py-2 focus:outline-none"
                         aria-label="Notification">
                         <div class="flex items-center h-5">
                             <div class="_xpkakx">
@@ -33,8 +33,6 @@
                             </div>
                         </div>
                     </a>
-                    <span
-                        class="absolute bg-[#EF4F4C] text-[11px] font-medium text-white right-[10px] top-[-10px] pl-[4px] pr-[5px] pt-[1px] text-center">12</span>
                 </div>
                 <!-- Add Icon -->
                 <a class="inline-block border-l-[1px] border-gray-300 px-3" href="#" aria-label="Add something"

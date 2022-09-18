@@ -254,114 +254,64 @@ Date::setLocale('sr');
                     <div>
                         <table class="w-[560px] table-auto">
                             <tbody class="bg-gray-200">
-                                <tr class="bg-white border-b-[1px] border-[#e4dfdf]">
-                                    <td class="flex flex-row items-center px-2 py-4">
-                                        <img class="object-cover w-8 h-8 rounded-full " src="img/profileStudent.jpg"
-                                            alt="" />
-                                        <a href="ucenikProfile.php" class="ml-2 font-medium text-center">Pero Perovic</a>
-                                    <td>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="knjigaOsnovniDetalji.php">
-                                            Ep o Gilgamesu
-                                        </a>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <span
-                                            class="px-[10px] py-[3px] bg-gray-200 text-gray-800 px-[6px] py-[2px] rounded-[10px]">05.11.2020</span>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="#" class="hover:text-green-500 mr-[5px]">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="#" class="hover:text-red-500 ">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b-[1px] border-[#e4dfdf]">
-                                    <td class="flex flex-row items-center px-2 py-4">
-                                        <img class="object-cover w-8 h-8 rounded-full " src="img/profileStudent.jpg"
-                                            alt="" />
-                                        <a href="ucenikProfile.php" class="ml-2 font-medium text-center">Pero Perovic</a>
-                                    <td>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="knjigaOsnovniDetalji.php">
-                                            Tom Sojer
-                                        </a>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <span
-                                            class="px-[10px] py-[3px] bg-gray-200 text-gray-800 px-[6px] py-[2px] rounded-[10px]">31.04.2019</span>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="#" class="hover:text-green-500 mr-[5px]">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="#" class="hover:text-red-500 ">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b-[1px] border-[#e4dfdf]">
-                                    <td class="flex flex-row items-center px-2 py-4">
-                                        <img class="object-cover w-8 h-8 rounded-full " src="img/profileStudent.jpg"
-                                            alt="" />
-                                        <a href="ucenikProfile.php" class="ml-2 font-medium text-center">Pero Perovic</a>
-                                    <td>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="knjigaOsnovniDetalji.php">
-                                            Ilijada
-                                        </a>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <span
-                                            class="px-[10px] py-[3px] bg-gray-200 text-gray-800 px-[6px] py-[2px] rounded-[10px]">05.11.2020</span>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="#" class="hover:text-green-500 mr-[5px]">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="#" class="hover:text-red-500 ">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                                <tr class="bg-white border-b-[1px] border-[#e4dfdf]">
-                                    <td class="flex flex-row items-center px-2 py-4">
-                                        <img class="object-cover w-8 h-8 rounded-full " src="img/profileStudent.jpg"
-                                            alt="" />
-                                        <a href="ucenikProfile.php" class="ml-2 font-medium text-center">Pero Perovic</a>
-                                    <td>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="knjigaOsnovniDetalji.php">
-                                            Tom Sojer
-                                        </a>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <span
-                                            class="px-[10px] py-[3px] bg-gray-200 text-gray-800 px-[6px] py-[2px] rounded-[10px]">31.02.2021</span>
-                                    </td>
-                                    <td class="px-2 py-2">
-                                        <a href="#" class="hover:text-green-500 mr-[5px]">
-                                            <i class="fas fa-check"></i>
-                                        </a>
-                                        <a href="#" class="hover:text-red-500 ">
-                                            <i class="fas fa-times"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                @if ($reservations->count() > 0)
+                                    @foreach ($reservations as $reservation)
+                                        <tr class="bg-white border-b-[1px] border-[#e4dfdf]">
+                                            <td class="flex flex-row items-center px-2 py-4">
+                                                <img class="object-cover w-8 h-8 rounded-full "
+                                                    src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}"
+                                                    alt="" />
+                                                <a href="ucenikProfile.php"
+                                                    class="ml-2 font-medium text-center">{{ $reservation->student->name }}</a>
+                                            <td>
+                                            </td>
+                                            <td class="px-2 py-2">
+                                                <a href="{{ route('books.show', $reservation->book->id) }}">
+                                                    {{ $reservation->book->title }}
+                                                </a>
+                                            </td>
+                                            <td class="px-2 py-2">
+                                                <span
+                                                    class="px-[10px] py-[3px] bg-gray-200 text-gray-800 px-[6px] py-[2px] rounded-[10px]">{{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}</span>
+                                            </td>
+                                            <td class="px-2 py-2">
+                                                <div style="display: flex">
+
+                                                    <form
+                                                        action="{{ route('books.reservations.accept', $reservation->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="hover:text-green-500 mr-[5px]">
+                                                            <i class="fas fa-check reservedStatus"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form
+                                                        action="{{ route('books.reservations.decline', $reservation->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <button type="submit" class="hover:text-red-500 mr-[5px]">
+                                                            <i class="fas fa-times deniedStatus"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <p>Nema rezervacija</p>
+                                @endif
                             </tbody>
                         </table>
-                        <div class="text-right mt-[5px]">
-                            <a href="aktivneRezervacije.php" class="text-[#2196f3] hover:text-blue-600">
-                                <i class="fas fa-calendar-alt mr-[4px]" aria-hidden="true"></i>
-                                Prikazi sve
-                            </a>
-                        </div>
+                        @if ($reservations->count() > 0)
+                            <div class="text-right mt-[5px]">
+                                <a href="{{ route('books.reservations') }}" class="text-[#2196f3] hover:text-blue-600">
+                                    <i class="fas fa-calendar-alt mr-[4px]" aria-hidden="true"></i>
+                                    Prikazi sve
+                                </a>
+                            </div>
+                        @endif
                     </div>
                     <div class="relative">
                         <h3 class="uppercase mb-[20px] text-left py-[30px]">
@@ -369,7 +319,8 @@ Date::setLocale('sr');
                         </h3>
                         <div class="text-right">
                             <div class="flex pb-[30px]">
-                                <a class="w-[145px] text-[#2196f3] hover:text-blue-600" href="izdateKnjige.php">
+                                <a href="{{ route('books.issues.issues') }}"
+                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="izdateKnjige.php">
                                     Izdate knjige
                                 </a>
                                 <div
@@ -377,11 +328,12 @@ Date::setLocale('sr');
 
                                 </div>
                                 <p class="ml-[10px] number-green text-[#2196f3] hover:text-blue-600">
-                                    73
+                                    {{ $issuedBooksCounter }}
                                 </p>
                             </div>
                             <div class="flex pb-[30px]">
-                                <a class="w-[145px] text-[#2196f3] hover:text-blue-600" href="aktivneRezervacije.php">
+                                <a href="{{ route('books.reservations') }}"
+                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="aktivneRezervacije.php">
                                     Rezervisane knjige
                                 </a>
                                 <div
@@ -389,11 +341,12 @@ Date::setLocale('sr');
 
                                 </div>
                                 <p class="ml-[10px] text-[#2196f3] hover:text-blue-600 number-yellow">
-                                    44
+                                    {{ $reservationsCounter }}
                                 </p>
                             </div>
                             <div class="flex pb-[30px]">
-                                <a class="w-[145px] text-[#2196f3] hover:text-blue-600" href="knjigePrekoracenje.php">
+                                <a href="{{ route('books.issues.breached') }}"
+                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="knjigePrekoracenje.php">
                                     Knjige u prekoracenju
                                 </a>
                                 <div
@@ -401,7 +354,7 @@ Date::setLocale('sr');
 
                                 </div>
                                 <p class="ml-[10px] text-[#2196f3] hover:text-blue-600 number-red">
-                                    25
+                                    {{ $breachedBooksCounter }}
                                 </p>
                             </div>
                         </div>

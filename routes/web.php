@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])->group(function () {
     // Activities
-    Route::get('/', [\App\Http\Controllers\ActivityController::class, 'dashboard']);
+    Route::get('/', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
 
     // Settings
     Route::prefix('settings')->name('settings.')->group(function () {
