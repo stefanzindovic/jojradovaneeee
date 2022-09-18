@@ -122,7 +122,7 @@
                                 <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
                                     {{ $message }}</p>
                             @enderror
-                            <div id="validateUcenikIzdavanje"></div>
+                            <div id="studentIdValidation"></div>
                         </div>
                         <div class="mt-[20px] flex justify-between w-[90%]">
                             <div class="w-[50%]">
@@ -140,7 +140,7 @@
                                             class="fa fa-times  mr-[5px] mt-[10px]"></i>
                                         {{ $message }}</p>
                                 @enderror
-                                <div id="validateDatumIzdavanja"></div>
+                                <div id="actionStartValidation"></div>
                             </div>
                             <div class="w-[50%]">
                                 <p>Datum vracanja</p>
@@ -204,7 +204,7 @@
                                 class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
                                 Ponisti <i class="fas fa-times ml-[4px]"></i>
                             </button>
-                            <button id="izdajKnjigu" type="submit"
+                            <button id="issueBookBtn" type="submit"
                                 class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]"
                                 onclick="validacijaIzdavanje()">
                                 Izdaj knjigu <i class="fas fa-check ml-[4px]"></i>
