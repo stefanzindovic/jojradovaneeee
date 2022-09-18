@@ -113,11 +113,15 @@
                                 name="student_id" id="ucenikIzdavanje">
                                 <option disabled selected></option>
                                 @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">
+                                    <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
                                         {{ $student->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @error('student_id')
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                    {{ $message }}</p>
+                            @enderror
                             <div id="validateUcenikIzdavanje"></div>
                         </div>
                         <div class="mt-[20px] flex justify-between w-[90%]">
@@ -125,15 +129,24 @@
                                 <p>Datum izdavanja <span class="text-red-500">*</span></p>
                                 <label class="text-gray-700" for="date">
                                     <input type="date" name="action_start" id="datumIzdavanja"
+                                        min="{{ \Carbon\Carbon::now()->subDay()->format('Y-m-d') }}"
+                                        max="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
+                                        value="{{ old('action_start', \Carbon\Carbon::now()->format('Y-m-d')) }}"
                                         class="flex w-[90%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         onchange="funkcijaDatumVracanja();" />
                                 </label>
+                                @error('action_start')
+                                    <p style="color:red;" id="errorMessageByLaravel"><i
+                                            class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                        {{ $message }}</p>
+                                @enderror
                                 <div id="validateDatumIzdavanja"></div>
                             </div>
                             <div class="w-[50%]">
                                 <p>Datum vracanja</p>
                                 <label class="text-gray-700" for="date">
                                     <input type="text" id="datumVracanja"
+                                        value="{{ old('action_deadline',\Carbon\Carbon::now()->addDays($policy->value)->format('d/m/Y')) }}"
                                         class="flex w-[90%] mt-2 px-2 py-2 text-base text-gray-400 bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
                                         name="action_deadline" readonly />
                                 </label>
@@ -206,6 +219,7 @@
     <script>
         function funkcijaDatumVracanja() {
             var selectedDate = new Date(jQuery('#datumIzdavanja').val());
+            var oldDate = selectedDate;
             var numberOfDaysToAdd = {{ $policy->value }};
 
             selectedDate.setDate(selectedDate.getDate() + numberOfDaysToAdd);
@@ -214,7 +228,7 @@
             var month = selectedDate.getMonth() + 1;
             var year = selectedDate.getFullYear();
 
-            var newDate = [year, month, day].join('-');
+            var newDate = [day, month, year].join('/');
 
             document.getElementById('datumVracanja').value = newDate;
         }

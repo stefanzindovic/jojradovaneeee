@@ -43,19 +43,18 @@ class IssueBookController extends Controller
     {
         $input = $request->validate([
             'student_id' => 'required|numeric',
-            'action_start' => 'required',
+            'action_start' => 'required|after_or_equal:' . \Carbon\Carbon::now()->subDays(2),
             'action_deadline' => 'required',
         ]);
 
-        try {
 
+        try {
             // Check if student already have save active issued book
             $doStudentHaveActiveIssues = User::doStudentHaveActiveIssues($input['student_id'], $book->id);
 
             if ($doStudentHaveActiveIssues) {
                 return back()->with('errorMessage', 'Korisnik je dostigao limit ili već ima istu knjigu.');
             }
-
             // Generate and save new model for book under action
             $bookUnderActionModel = new BooksUnderAction();
             $bookUnderActionModel->book()->associate($book);
@@ -67,11 +66,12 @@ class IssueBookController extends Controller
             $bookActionModel->librarian()->associate(Auth::user());
             $bookActionModel->status()->associate(1);
             $bookActionModel->action_start = $input['action_start'];
-            $bookActionModel->action_deadline = $input['action_deadline'];
+            $bookActionModel->action_deadline = \Carbon\Carbon::createFromFormat('d/m/Y', $input['action_deadline'])->format('Y-m-d');
             $bookActionModel->save();
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno izdata.');
         } catch (\Throwable $th) {
+            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }

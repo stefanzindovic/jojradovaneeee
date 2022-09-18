@@ -66,7 +66,7 @@ class User extends Authenticatable
 
     public static function doStudentHaveActiveIssues($student_id, $book_id)
     {
-        $student = User::with(['booksUnderAction'])->findOrFail($student_id);
+        $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);
         $activeBooks = $student->booksUnderAction;
 
         //todo: Replace 2 with policy value in future
