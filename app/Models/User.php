@@ -50,12 +50,48 @@ class User extends Authenticatable
     // relation between user roles and users
     function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo( UserRole::class, 'role_id');
+        return $this->belongsTo(UserRole::class, 'role_id');
     }
 
     // relation between user logins and users
     function logins(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany( UserLogins::class);
+        return $this->hasMany(UserLogins::class);
+    }
+
+    function booksUnderAction()
+    {
+        return $this->hasMany(BooksUnderAction::class, 'student_id');
+    }
+
+    public static function doStudentHaveActiveIssues($student_id, $book_id)
+    {
+        $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);
+        $activeBooks = $student->booksUnderAction;
+
+        //todo: Replace 2 with policy value in future
+        $activeBooksCount = 0;
+        foreach ($activeBooks as $book) {
+            if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7) {
+                $activeBooksCount++;
+
+                if ($activeBooksCount > 2) {
+                    return true;
+                }
+            }
+        }
+
+        foreach ($activeBooks as $book) {
+            if ($book->book_id == $book_id && ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function bookActions()
+    {
+        return $this->hasMany(BookAction::class, 'librarian_id');
     }
 }

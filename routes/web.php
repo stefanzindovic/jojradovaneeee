@@ -41,7 +41,31 @@ Route::middleware(['auth'])->group(function () {
 
     // Books CRUD
     Route::resource('/books', BookController::class);
+    Route::get('/books/{book}/action/{action}', [\App\Http\Controllers\BookController::class, 'displayActionDetails'])->name('books.actions.details');
     Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
+
+    // Issue book
+    Route::prefix('actions/issues')->name('books.issues')->group(function () {
+        Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index']);
+        Route::get('/', [\App\Http\Controllers\IssueBookController::class, 'issues'])->name('.issues');
+        Route::get('/returned', [\App\Http\Controllers\IssueBookController::class, 'returned'])->name('.returned');
+        Route::get('/breached', [\App\Http\Controllers\IssueBookController::class, 'breachedDeadline'])->name('.breached');
+        Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
+        Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
+        Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');
+    });
+
+    // Reserve book
+    Route::prefix('actions/reservations')->name('books.reservations')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ReservationsController::class, 'index']);
+        Route::get('/archived', [\App\Http\Controllers\ReservationsController::class, 'archived'])->name('.archived');
+        Route::get('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reservePage'])->name('.reservePage');
+        Route::post('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reserve'])->name('.reserve');
+        Route::patch('/{book}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
+        Route::patch('/{book}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
+        Route::patch('/{book}/issue', [\App\Http\Controllers\ReservationsController::class, 'issue'])->name('.issue');
+        Route::patch('/{book}/cancel', [\App\Http\Controllers\ReservationsController::class, 'cancel'])->name('.cancel');
+    });
 });
 
 require __DIR__ . '/auth.php';

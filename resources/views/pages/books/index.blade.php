@@ -19,21 +19,6 @@
                     class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] tracking-wider text-white bg-[#3f51b5] rounded hover:bg-[#4558BE]">
                     <i class="fas fa-plus mr-[15px]"></i> Nova knjiga
                 </a>
-                <div class="flex items-center">
-                    <div class="relative text-gray-600 focus-within:text-gray-400">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                            <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6">
-                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </button>
-                        </span>
-                        <input type="search" name="q"
-                            class="py-2 pl-10 text-sm text-white bg-white rounded-md focus:outline-none focus:bg-white focus:text-gray-900"
-                            placeholder="Search..." autocomplete="off">
-                    </div>
-                </div>
             </div>
             <!-- Space for content -->
             <div class="px-[30px] pt-2 bg-white">
@@ -354,14 +339,20 @@
                                             @endif
                                         @endforeach
                                     </td>
-                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">6</td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        {{ $book->total_copies - ((($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0) + ($writtenOffBooks[$book->id] ?? 0) + ($issuedBooksCount[$book->id] ?? 0)) }}
+                                    </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="aktivneRezervacije.php">5</a></td>
+                                            href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ ($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0 }}</a>
+                                    </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="izdateKnjige.php">5</a></td>
+                                            href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a>
+                                    </td>
                                     <td class="px-4 py-4 text-sm leading-5 text-blue-800 whitespace-no-wrap"><a
-                                            href="knjigePrekoracenje.php">2</a></td>
-                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $book->total_copies }}
+                                            href="{{ route('books.issues.breached', ['books' => $book->id]) }}">{{ $booksWithBreachedDeadlines[$book->id] ?? 0 }}</a>
+                                    </td>
+                                    <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">
+                                        {{ $book->total_copies - ($writtenOffBooks[$book->id] ?? 0) }}
                                     </td>
                                     <td class="px-6 py-4 text-sm leading-5 text-right whitespace-no-wrap">
                                         <p
@@ -395,7 +386,7 @@
                                                         <span class="px-4 py-0">Otpiši</span>
                                                     </a>
 
-                                                    <a href="izdajKnjigu.php" tabindex="0"
+                                                    <a href="{{ route('books.issues', $book->id) }}" tabindex="0"
                                                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                         role="menuitem">
                                                         <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
@@ -409,12 +400,14 @@
                                                         <span class="px-4 py-0">Vrati</span>
                                                     </a>
 
-                                                    <a href="rezervisiKnjigu.php" tabindex="0"
+                                                    <a href="{{ route('books.reservations.reservePage', $book->id) }}"
+                                                        tabindex="0"
                                                         class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                         role="menuitem">
                                                         <i class="far fa-calendar-check mr-[10px] ml-[5px] py-1"></i>
                                                         <span class="px-4 py-0">Rezerviši</span>
                                                     </a>
+
 
                                                     <form action="{{ route('books.destroy', $book->id) }}" method="POST"
                                                         onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovu knjigu?')){return false;}">

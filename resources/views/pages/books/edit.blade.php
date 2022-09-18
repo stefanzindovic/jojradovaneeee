@@ -396,8 +396,8 @@
                     <div class="mt-[20px]">
                         <p>Kolicina <span class="text-red-500">*</span></p>
                         <input required min="1" max="999"
-                            value="{{ old('total_copies', $book->total_copies) }}" type="number" name="total_copies"
-                            id="bookCopies"
+                            value="{{ old('total_copies', $book->total_copies - $writtenOffCount) }}" type="number"
+                            name="total_copies" id="bookCopies"
                             class="flex w-[45%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
                         <div id="bookCopiesValidationMessage"></div>
                         @error('total_copies')
@@ -735,7 +735,7 @@
                 addFiles(e) {
                     const files = createFileList([...this.files], [...e.target.files]);
                     this.files = files;
-                    e.target.files = files
+                    e.target.files = files;
                     //this.form.formData.files = [...files];
                 }
             };

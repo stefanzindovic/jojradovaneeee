@@ -10,11 +10,13 @@ use App\Models\Format;
 use App\Models\Script;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\BookAction;
 use App\Models\Publishers;
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
 use App\Models\BookGallery;
+use App\Models\BooksUnderAction;
+use App\Http\Requests\StoreBookRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
@@ -25,8 +27,14 @@ class BookController extends Controller
      */
     public function index()
     {
-        $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery'])->get();
-        return view('..pages/books/index', compact('books'));
+        $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery', 'booksUnderActions'])->get();
+        $issuedBooksCount = Book::issuedBooks()->countBy('book_id');
+        $writtenOffBooks = Book::writtenOffBooks()->countBy('book_id');
+        $booksWithBreachedDeadlines = Book::issuedBooksWithBreachedDeadline()->countBy('book_id');
+        $reservedBooksPendingCount = Book::pendingReservedBooks()->countBy('book_id');
+        $reservedBooksActiveCount = Book::activeReservedBooks()->countBy('book_id');
+
+        return view('..pages/books/index', compact('books', 'issuedBooksCount', 'writtenOffBooks', 'booksWithBreachedDeadlines', 'reservedBooksPendingCount', 'reservedBooksActiveCount'));
     }
 
     /**
@@ -134,7 +142,16 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        return view('..pages.books.book', compact('book'));
+        $issuedRecords = Book::issuedBook($book->id);
+        $returnedRecords = Book::returnedBook($book->id);
+        $booksWithBreachDeadline = Book::issuedBookWithBreachedDeadline($book->id);
+        $pendingReservations = Book::pendingReservedBook($book->id);
+        $activeReservations = Book::activeReservedBook($book->id);
+        $archivedReservations = Book::archivedReservationsByBook($book->id);
+
+        $availableCopiesCount = Book::calcNumberOfAvailableCopies($book->id);
+
+        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline', 'pendingReservations', 'activeReservations', 'archivedReservations', 'availableCopiesCount'));
     }
 
     /**
@@ -153,8 +170,9 @@ class BookController extends Controller
         $publishers = Publishers::orderBy('id', 'desc')->get();
         $covers = Cover::orderBy('id', 'desc')->get();
         $formats = Format::orderBy('id', 'desc')->get();
+        $writtenOffCount = Book::writtenOffBook($book->id)->count();
 
-        return view('..pages.books.edit', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages', 'book'));
+        return view('..pages.books.edit', compact('categories', 'authors', 'genres', 'scripts', 'publishers', 'covers', 'formats', 'languages', 'book', 'writtenOffCount'));
     }
 
     /**
@@ -282,5 +300,10 @@ class BookController extends Controller
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
+    }
+
+    public function displayActionDetails(Book $book, BookAction $action)
+    {
+        return view('..pages.books.actions.action', compact('book', 'action'));
     }
 }

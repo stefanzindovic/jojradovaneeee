@@ -25,7 +25,7 @@
                                     <nav class="w-full rounded">
                                         <ol class="flex list-reset">
                                             <li>
-                                                <a onclick="{{ route('books.index') }}"
+                                                <a href="{{ route('books.index') }}"
                                                     class="text-[#2196f3] cursor-pointer hover:text-blue-600">
                                                     Evidencija knjiga
                                                 </a>
@@ -499,7 +499,7 @@
                                 class="relative flex flex-col p-4 text-gray-400 border border-gray-200 rounded">
                                 <div x-ref="dnd"
                                     class="relative flex flex-col text-gray-400 border border-gray-200 border-dashed rounded cursor-pointer">
-                                    <input name="pictures[]" accept="*" type="file" multiple
+                                    <input name="pictures[]" accept="*" type="file" multiple id="multimediaInput"
                                         class="absolute inset-0 z-50 w-full h-full p-0 m-0 outline-none opacity-0 cursor-pointer"
                                         @change="addFiles($event)"
                                         @dragover="$refs.dnd.classList.add('border-blue-400'); $refs.dnd.classList.add('ring-4'); $refs.dnd.classList.add('ring-inset');"
@@ -628,10 +628,12 @@
                     );
                 },
                 remove(index) {
+                    const input = jQuery('#multimediaInput');
                     let files = [...this.files];
                     files.splice(index, 1);
 
                     this.files = createFileList(files);
+                    input[0].files = this.files;
                 },
                 drop(e) {
                     let removed, add;
