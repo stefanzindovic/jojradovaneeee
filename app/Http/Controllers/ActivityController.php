@@ -23,4 +23,11 @@ class ActivityController extends Controller
 
         return view('..pages.books.activities.dashboard', compact('activities', 'reservations', 'issuedBooksCounter', 'reservationsCounter', 'breachedBooksCounter'));
     }
+
+    public function activities()
+    {
+        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->get();
+
+        return view('..pages.books.activities.activities', compact('activities'));
+    }
 }
