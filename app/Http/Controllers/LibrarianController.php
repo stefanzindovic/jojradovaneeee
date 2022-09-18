@@ -149,7 +149,7 @@ class LibrarianController extends Controller
         if (!$librarian->is_active) return abort(404);
         if ($librarian->role->id == 3) return abort(404);
 
-        if ($librarian->role->id == 1 && Auth::user()->id == $librarian->id) {
+        if ($librarian->role->id == 1 && Auth::user()->id != $librarian->id) {
             return back()->with('errorMessage', 'Ne možete izmijeniti administratora');
         }
 
