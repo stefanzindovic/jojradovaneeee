@@ -48,7 +48,7 @@ class ReservationsController extends Controller
         // reserve book for student
         $input = $request->validate([
             'student_id' => 'required|numeric',
-            'action_start' => 'required',
+            'action_start' => 'required|after_or_equal:' . \Carbon\Carbon::now()->format('Y-m-d'),
         ]);
 
         try {

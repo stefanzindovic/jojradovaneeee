@@ -116,19 +116,29 @@
                                 name="student_id" id="ucenikRezervisanje">
                                 <option disabled selected></option>
                                 @foreach ($students as $student)
-                                    <option value="{{ $student->id }}">
+                                    <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
                                         {{ $student->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @error('student_id')
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                    {{ $message }}</p>
+                            @enderror
                             <div id="validateUcenikRezervisanje"></div>
                         </div>
                         <div class="mt-[20px]">
                             <p>Datum rezervacije <span class="text-red-500">*</span></p>
                             <label class="text-gray-700" for="date">
                                 <input type="date" name="action_start" id="datumRezervisanja"
+                                    value="{{ old('action_start', \Carbon\Carbon::now()->format('Y-m-d')) }}"
+                                    min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
                                     class="flex w-[50%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
                             </label>
+                            @error('action_start')
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                    {{ $message }}</p>
+                            @enderror
                             <div id="validateDatumRezervisanja"></div>
                         </div>
                     </div>

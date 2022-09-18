@@ -43,7 +43,7 @@ class IssueBookController extends Controller
     {
         $input = $request->validate([
             'student_id' => 'required|numeric',
-            'action_start' => 'required|after_or_equal:' . \Carbon\Carbon::now()->subDays(2),
+            'action_start' => 'required|after_or_equal:' . \Carbon\Carbon::now()->subDays(2)->format('Y-m-d'),
             'action_deadline' => 'required',
         ]);
 
