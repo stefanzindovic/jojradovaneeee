@@ -10,11 +10,13 @@ use App\Models\Format;
 use App\Models\Script;
 use App\Models\Category;
 use App\Models\Language;
+use App\Models\BookAction;
 use App\Models\Publishers;
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
 use App\Models\BookGallery;
+use App\Models\BooksUnderAction;
+use App\Http\Requests\StoreBookRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateBookRequest;
 
 class BookController extends Controller
 {
@@ -298,5 +300,10 @@ class BookController extends Controller
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
+    }
+
+    public function displayActionDetails(Book $book, BookAction $action)
+    {
+        return view('..pages.books.actions.action', compact('book', 'action'));
     }
 }

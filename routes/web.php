@@ -41,6 +41,7 @@ Route::middleware(['auth'])->group(function () {
 
     // Books CRUD
     Route::resource('/books', BookController::class);
+    Route::get('/books/{book}/action/{action}', [\App\Http\Controllers\BookController::class, 'displayActionDetails'])->name('books.actions.details');
     Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
 
     // Issue book
