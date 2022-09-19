@@ -1078,7 +1078,7 @@
                                             alt="">
                                     @elseif($activity->action_status_id == 5 || $activity->action_status_id == 6)
                                         <img class="rounded-full"
-                                            src="{{ $activity->originalBook->picture !== 'book-placeholder.png' ? asset('storage/uploads/books/' . $activity->originalBook->picture) : asset('imgs/' . $activity->originalBook->picture) }}"
+                                            src="{{ $activity->book->book->picture !== 'book-placeholder.png' ? asset('storage/uploads/books/' . $activity->book->book->picture) : asset('imgs/' . $activity->book->book->picture) }}"
                                             alt="">
                                     @endif
                                 </div>
@@ -1120,10 +1120,10 @@
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     {{ $activity->book->student->name }}
                                                 </a> je zatražio rezervaciju knjige
-                                                <span class="font-medium">{{ $activity->originalBook->title }}
+                                                <span class="font-medium">{{ $activity->book->book->title }}
                                                 </span> za <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1137,7 +1137,7 @@
                                                     {{ $activity->librarian->name }}
                                                 </a>
                                                 je odobrio rezervaciju knjige <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> korisniku
                                                 <a href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1145,7 +1145,7 @@
                                                 </a>
                                                 za <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1159,7 +1159,7 @@
                                                     {{ $activity->librarian->name }}
                                                 </a>
                                                 je odbio rezervaciju knjige <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> korisnika
                                                 <a href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1167,7 +1167,7 @@
                                                 </a>
                                                 za <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1177,7 +1177,7 @@
                                         <div class="">
                                             <p>
                                                 Rezervacija knjige <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> koju je ponudio korisnik <a
                                                     href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1185,7 +1185,7 @@
                                                 </a> za <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
                                                 je istekla.
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1195,7 +1195,7 @@
                                         <div class="">
                                             <p>
                                                 Rezervacija knjige <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> koju je ponudio korisnik <a
                                                     href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1203,7 +1203,7 @@
                                                 </a> za <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
                                                 je otkazana.
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1217,7 +1217,7 @@
                                                     {{ $activity->librarian->name }}
                                                 </a>
                                                 je po rezervaciji izdao knjigu <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> korisniku
                                                 <a href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1225,7 +1225,7 @@
                                                 </a>
                                                 dana <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1239,7 +1239,7 @@
                                                     {{ $activity->librarian->name }}
                                                 </a>
                                                 je po otpisao knjigu <span
-                                                    class="font-medium">{{ $activity->originalBook->title }}
+                                                    class="font-medium">{{ $activity->book->book->title }}
                                                 </span> koja je bila izdata korisniku
                                                 <a href="{{ route('students.show', $activity->book->student->id) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
@@ -1247,7 +1247,7 @@
                                                 </a>
                                                 dana <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1260,10 +1260,10 @@
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     {{ $activity->book->student->name }}
                                                 </a> je vratio knjigu
-                                                <span class="font-medium">{{ $activity->originalBook->title }}
+                                                <span class="font-medium">{{ $activity->book->book->title }}
                                                 </span> dana <span
                                                     class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                <a href="{{ route('books.actions.details', [$activity->originalBook->id, $activity->id]) }}"
+                                                <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
                                                     class="text-[#2196f3] hover:text-blue-600">
                                                     pogledaj detaljnije >>
                                                 </a>
@@ -1273,20 +1273,15 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="inline-block w-full mt-4">
-                            <button type="button"
-                                class="btn-animation w-full px-4 py-2 text-sm tracking-wider text-gray-600 transition duration-300 ease-in border-[1px] border-gray-400 rounded activity-showMore hover:bg-gray-200 focus:outline-none focus:ring-[1px] focus:ring-gray-300">
-                                Show more
-                            </button>
+                        <div class="mt-[40px]">
+                            <a href="{{ route('activities', ['book' => $book->id]) }}"
+                                class="text-[#2196f3] hover:text-blue-600">
+                                <i class="fas fa-history"></i> Prikazi sve
+                            </a>
                         </div>
                     @else
                         Nema aktivnosti
                     @endif
-                    <div class="mt-[40px]">
-                        <a href="dashboardAktivnost.php?knjiga=Tom Sojer" class="text-[#2196f3] hover:text-blue-600">
-                            <i class="fas fa-history"></i> Prikazi sve
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

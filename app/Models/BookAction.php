@@ -40,4 +40,13 @@ class BookAction extends Model
             $paginate
         )->orderBy('created_at', 'desc')->get();
     }
+
+    public static function actionsByBook($id)
+    {
+        return BookAction::with(['book' => function ($query) use ($id) {
+            $query->where('book_id', $id);
+        }])->whereHas('book', function ($query) use ($id) {
+            $query->where('book_id', $id);
+        })->orderBy('created_at', 'desc')->get();
+    }
 }
