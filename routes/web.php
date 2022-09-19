@@ -38,6 +38,7 @@ Route::middleware(['auth'])->group(function () {
     // Students
     Route::resource('/students', \App\Http\Controllers\StudentsController::class);
     Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
+    Route::get('evi')
 
     // Librarians
     Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
