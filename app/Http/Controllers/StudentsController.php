@@ -116,7 +116,10 @@ class StudentsController extends Controller
         // active reservations
         $activeReservations = User::getActiveReservedBooks($student->id);
 
-        return view('..pages.students.profile', compact('student', 'issuedBooks', 'returnedBooks', 'breachedBooks', 'pendingReservations', 'activeReservations'));
+        // archived reservations
+        $archivedReservations = User::getArchivedReservations($student->id);
+
+        return view('..pages.students.profile', compact('student', 'issuedBooks', 'returnedBooks', 'breachedBooks', 'pendingReservations', 'activeReservations', 'archivedReservations'));
     }
 
     /**

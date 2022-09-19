@@ -762,10 +762,81 @@ Date::setLocale('sr');
                     </div>
 
                     <div id="studentRecords_Archived" class="hidden">
-                        Arhivirane
+                        <table class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf]"
+                            id="myTable">
+                            <thead class="bg-[#EFF3F6]">
+                                <tr class="border-b-[1px] border-[#e4dfdf]">
+                                    <th class="px-4 py-3 leading-4 tracking-wider text-left text-blue-500">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox">
+                                        </label>
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Naslov knige
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Datum rezervacije
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Rezervacija istice
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Rezervaciju podnio
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Status</th>
+                                    <th class="px-4 py-3"> </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                                @foreach ($archivedReservations as $record)
+                                    <tr
+                                        class="hover:bg-gray-200 hover:shadow-md bg-gray-200 border-b-[1px] border-[#e4dfdf] changeBg">
+                                        <td class="px-4 py-3 whitespace-no-wrap">
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" class="form-checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="flex flex-row items-center px-4 py-3">
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($record->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $record->book->picture) }} @endif"
+                                                alt="" />
+                                            <a href="{{ route('books.show', $record->book_id) }}">
+                                                <span class="font-medium text-center">{{ $record->book->title }}</span>
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_deadline)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="flex flex-row items-center px-4 py-3">
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($record->student->picture === 'profile-picture-placeholder.jpg') {{ asset('imgs/profile-picture-placeholder.jpg') }} @else {{ asset('storage/uploads/students/' . $record->student->picture) }} @endif"
+                                                alt="" />
+                                            <a href="{{ route('students.show', $record->student->id) }}"
+                                                class="ml-2 font-medium text-center">{{ $record->student->name }}</a>
+                                        </td>
+
+                                        <td class="px-4 py-3 text-sm leading-5 text-blue-900 whitespace-no-wrap">
+                                            @if ($record->activeAction->action_status_id == 7)
+                                                <div
+                                                    class="inline-block px-[6px] py-[2px] font-medium bg-green-200 rounded-[10px]">
+                                                    <span class="text-xs text-green-800">Knjiga izdata</span>
+                                                </div>
+                                            @else
+                                                <div
+                                                    class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]">
+                                                    <span
+                                                        class="text-xs text-red-800">{{ $record->activeAction->status->name }}</span>
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <th class="px-4 py-4" style="display:none;"> </th>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
-        </div>
         </div>
     </section>
     </div>
