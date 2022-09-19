@@ -583,7 +583,182 @@ Date::setLocale('sr');
                     </div>
 
                     <div id="studentRecords_Reservations" class="hidden">
-                        Rezervisane
+                        <table
+                            class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf] rezervacije"
+                            id="myTable">
+                            <thead class="bg-[#EFF3F6]">
+                                <tr class="border-b-[1px] border-[#e4dfdf]">
+                                    <th class="px-4 py-3 leading-4 tracking-wider text-left text-blue-500">
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="form-checkbox">
+                                        </label>
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Naslov knjige
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Datum rezervacije
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Rezervacija istice
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Rezervaciju podnio
+                                    </th>
+                                    <th class="px-4 py-3 text-sm leading-4 tracking-wider text-left">Status</th>
+                                    <th class="px-4 py-3"> </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white">
+                                @foreach ($pendingReservations as $record)
+                                    <tr
+                                        class="hover:bg-gray-200 hover:shadow-md bg-gray-200 border-b-[1px] border-[#e4dfdf] changeBg">
+                                        <td class="px-4 py-3 whitespace-no-wrap">
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" class="form-checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_deadline)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="flex flex-row items-center px-4 py-3">
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($record->student->picture === 'profile-picture-placeholder.jpg') {{ asset('imgs/profile-picture-placeholder.jpg') }} @else {{ asset('storage/uploads/students/' . $record->student->picture) }} @endif"
+                                                alt="" />
+                                            <a href="{{ route('students.show', $record->student->id) }}"
+                                                class="ml-2 font-medium text-center">{{ $record->student->name }}</a>
+                                        </td>
+
+                                        <td class="px-4 py-3">
+                                            <div style="display: flex">
+
+                                                <form action="{{ route('books.reservations.accept', $record->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
+                                                        <i class="fas fa-check reservedStatus"></i>
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('books.reservations.decline', $record->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PATCH')
+                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
+                                                        <i class="fas fa-times deniedStatus"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </td>
+
+                                        <td class="px-4 py-3 text-sm leading-5 text-right whitespace-no-wrap">
+                                            <p
+                                                class="hidden inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsAktivneRezervacije hover:text-[#606FC7]">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </p>
+                                            <div
+                                                class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 aktivne-rezervacije">
+                                                <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                                    aria-labelledby="headlessui-menu-button-1"
+                                                    id="headlessui-menu-items-117" role="menu">
+                                                    <div class="py-1">
+                                                        <a href="izdajKnjigu.php" tabindex="0"
+                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                            role="menuitem">
+                                                            <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
+                                                            <span class="px-4 py-0">Izdaj knjigu</span>
+                                                        </a>
+
+                                                        <a href="#" tabindex="0"
+                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                            role="menuitem">
+                                                            <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
+                                                            <span class="px-4 py-0">Otkazi rezervaciju</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                @foreach ($activeReservations as $record)
+                                    <tr
+                                        class="hover:bg-gray-200 hover:shadow-md bg-gray-200 border-b-[1px] border-[#e4dfdf] changeBg">
+                                        <td class="px-4 py-3 whitespace-no-wrap">
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" class="form-checkbox">
+                                            </label>
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
+                                            {{ \Carbon\Carbon::parse($record->activeAction->action_deadline)->format('d.m.Y') }}
+                                        </td>
+                                        <td class="flex flex-row items-center px-4 py-3">
+                                            <img style="width: 35px; height: 35px;"
+                                                class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                src="@if ($record->student->picture === 'profile-picture-placeholder.jpg') {{ asset('imgs/profile-picture-placeholder.jpg') }} @else {{ asset('storage/uploads/students/' . $record->student->picture) }} @endif"
+                                                alt="" />
+                                            <a href="{{ route('students.show', $record->student->id) }}"
+                                                class="ml-2 font-medium text-center">{{ $record->student->name }}</a>
+                                        </td>
+
+                                        <td class="px-4 py-3 text-sm leading-5 text-blue-900 whitespace-no-wrap">
+                                            <div
+                                                class="inline-block px-[6px] py-[2px] font-medium bg-yellow-200 rounded-[10px]">
+                                                <span class="text-xs text-yellow-700">Rezervisano</span>
+                                            </div>
+                                        </td>
+
+                                        <td class="px-4 py-3 text-sm leading-5 text-right whitespace-no-wrap">
+                                            <p
+                                                class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsAktivneRezervacije hover:text-[#606FC7]">
+                                                <i class="fas fa-ellipsis-v"></i>
+                                            </p>
+                                            <div
+                                                class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 aktivne-rezervacije">
+                                                <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                                                    aria-labelledby="headlessui-menu-button-1"
+                                                    id="headlessui-menu-items-117" role="menu">
+                                                    <div class="py-1">
+                                                        <form
+                                                            action="{{ route('books.reservations.issue', $record->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i
+                                                                    class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Izdaj knjigu</span>
+                                                            </button>
+                                                        </form>
+
+                                                        <form
+                                                            action="{{ route('books.reservations.cancel', $record->id) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PATCH')
+                                                            <button type="submit" tabindex="0"
+                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                                                role="menuitem">
+                                                                <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
+                                                                <span class="px-4 py-0">Otkaži rezervaciju</span>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
 
                     <div id="studentRecords_Archived" class="hidden">

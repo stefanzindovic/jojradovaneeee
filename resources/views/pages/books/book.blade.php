@@ -699,7 +699,7 @@
                                                         aria-labelledby="headlessui-menu-button-1"
                                                         id="headlessui-menu-items-117" role="menu">
                                                         <div class="py-1">
-                                                            <a href="{{ route('books.actions.details', ['book' => $book->id, 'action' => $book->activeAction->id]) }}"
+                                                            <a href="{{ route('books.actions.details', ['book' => $record->book->id, 'action' => $record->activeAction->id]) }}"
                                                                 tabindex="0"
                                                                 class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                                                 role="menuitem">
@@ -928,7 +928,6 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
 
                         <div id="archivedReservationsBooks_Records" class="w-full mt-[10px] ml-2 px-4 hidden">
@@ -959,6 +958,16 @@
                                                 <label class="inline-flex items-center">
                                                     <input type="checkbox" class="form-checkbox">
                                                 </label>
+                                            </td>
+                                            <td class="flex flex-row items-center px-4 py-3">
+                                                <img style="width: 35px; height: 35px;"
+                                                    class="object-cover w-8 mr-2 h-11 rounded-full"
+                                                    src="@if ($record->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $record->book->picture) }} @endif"
+                                                    alt="" />
+                                                <a href="{{ route('books.show', $record->book_id) }}">
+                                                    <span
+                                                        class="font-medium text-center">{{ $record->book->title }}</span>
+                                                </a>
                                             </td>
                                             <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
                                                 {{ \Carbon\Carbon::parse($record->activeAction->action_start)->format('d.m.Y') }}
