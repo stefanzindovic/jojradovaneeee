@@ -166,6 +166,19 @@ class Book extends Model
         })->orderBy('id', 'desc')->paginate($paginate);
     }
 
+    public static function getBreachedReservations()
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 2)->orWhere('action_status_id', 3);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 2)->orWhere('action_status_id', 3);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        })->orderBy('id', 'desc')->get();
+    }
+
     public static function pendingReservedBook($id)
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
