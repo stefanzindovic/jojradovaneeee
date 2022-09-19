@@ -64,27 +64,29 @@ class User extends Authenticatable
         return $this->hasMany(BooksUnderAction::class, 'student_id');
     }
 
+    public static function getIssuedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
     public static function doStudentHaveActiveIssues($student_id, $book_id)
     {
         $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);
         $activeBooks = $student->booksUnderAction;
 
         //todo: Replace 2 with policy value in future
-        $activeBooksCount = 0;
-        foreach ($activeBooks as $book) {
-            if ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7) {
-                $activeBooksCount++;
+        $activeBookCount = User::getIssuedBooks($student_id)->count();
 
-                if ($activeBooksCount > 2) {
-                    return true;
-                }
-            }
+        if ($activeBookCount > 2) {
+            return true;
         }
 
-        foreach ($activeBooks as $book) {
-            if ($book->book_id == $book_id && ($book->activeAction->action_status_id == 1 || $book->activeAction->action_status_id == 2 || $book->activeAction->action_status_id == 3 || $book->activeAction->action_status_id == 7)) {
-                return true;
-            }
+        if (User::getIssuedBooks($student_id)->pluck('book_id')->contains($book_id)) {
+            return true;
         }
 
         return false;

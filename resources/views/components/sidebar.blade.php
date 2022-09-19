@@ -10,13 +10,13 @@
             <ul class="text-[#2D3B48] sidebar-nav">
                 <!-- Dashboard Icon -->
                 <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('dashboards*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
+                    class="@if (\Illuminate\Support\Facades\Request::is('/')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
                     <div class="ml-[20px]">
                         <span class="flex justify-between w-full fill-current whitespace-nowrap">
                             <div class="transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                <a href="dashboard.php" aria-label="Dashboard">
+                                <a href="{{ route('dashboard') }}" aria-label="Dashboard">
                                     <i
-                                        class="text-[#707070] @if (\Illuminate\Support\Facades\Request::is('dashboards*')) text-[#576cdf] @endif px-[5px] pt-[4px] pb-[5px] fas fa-tachometer-alt text-[25px] rounded-[3px]"></i>
+                                        class="text-[#707070] @if (\Illuminate\Support\Facades\Request::is('/')) text-[#576cdf] @endif px-[5px] pt-[4px] pb-[5px] fas fa-tachometer-alt text-[25px] rounded-[3px]"></i>
                                     <div class="hidden sidebar-item">
                                         <p
                                             class="@if (\Illuminate\Support\Facades\Request::is('dashboards*')) text-[#576cdf] @endif inline text-[15px] ml-[15px]">

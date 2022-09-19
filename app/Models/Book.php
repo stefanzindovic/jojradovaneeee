@@ -157,6 +157,15 @@ class Book extends Model
         })->orderBy('id', 'desc')->get();
     }
 
+    public static function pendingReservedBooksPaginate($paginate)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 2);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 2);
+        })->orderBy('id', 'desc')->paginate($paginate);
+    }
+
     public static function pendingReservedBook($id)
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {

@@ -111,52 +111,64 @@
                                 {{-- Search difs between two dates and format results in to the string --}}
                                 @php
                                     // date dif
-                                    $diff = \Carbon\Carbon::parse($action->action_start)->diff(\Carbon\Carbon::now());
                                     
-                                    // format for years
-                                    $yearVersionOneValues = [2, 3, 4];
-                                    $yearVersion = 'godina';
-                                    
-                                    if (in_array($diff->y, $yearVersionOneValues)) {
-                                        $yearVersion = 'godine';
+                                    $diff = null;
+                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
+                                        $diff = \Carbon\Carbon::parse($action->action_start)->diff(\Carbon\Carbon::now());
+                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
+                                        $diff = \Carbon\Carbon::parse($action->action_addons)->diff($action->action_start);
                                     }
                                     
-                                    // format for months
-                                    $monthVersionOneValues = [1];
-                                    $monthVersionTwoValues = [2, 3, 4];
-                                    $monthVersion = 'mjeseci';
-                                    
-                                    if (in_array($diff->m, $monthVersionOneValues)) {
-                                        $monthVersion = 'mjesec';
-                                    }
-                                    
-                                    if (in_array($diff->m, $monthVersionTwoValues)) {
-                                        $monthVersion = 'mjeseca';
-                                    }
-                                    
-                                    // format for days
-                                    $dayVersionOneValues = [1, 21, 31];
-                                    $dayVersion = 'dana';
-                                    
-                                    if (in_array($diff->d, $dayVersionOneValues)) {
-                                        $dayVersion = 'dan';
-                                    }
-                                    
-                                    // separated strings
                                     $years = null;
                                     $months = null;
                                     $days = null;
                                     
-                                    if ($diff->y != 0) {
-                                        $years = $diff->y . ' ' . $yearVersion . ' ';
-                                    }
+                                    if ($diff != null) {
+                                        // format for years
+                                        $yearVersionOneValues = [2, 3, 4];
+                                        $yearVersion = 'godina';
                                     
-                                    if ($diff->m != 0) {
-                                        $months = $diff->m . ' ' . $monthVersion . ' ';
-                                    }
+                                        if (in_array($diff->y, $yearVersionOneValues)) {
+                                            $yearVersion = 'godine';
+                                        }
                                     
-                                    if ($diff->d != 0) {
-                                        $days = $diff->d . ' ' . $dayVersion . ' ';
+                                        // format for months
+                                        $monthVersionOneValues = [1];
+                                        $monthVersionTwoValues = [2, 3, 4];
+                                        $monthVersion = 'mjeseci';
+                                    
+                                        if (in_array($diff->m, $monthVersionOneValues)) {
+                                            $monthVersion = 'mjesec';
+                                        }
+                                    
+                                        if (in_array($diff->m, $monthVersionTwoValues)) {
+                                            $monthVersion = 'mjeseca';
+                                        }
+                                    
+                                        // format for days
+                                        $dayVersionOneValues = [1, 21, 31];
+                                        $dayVersion = 'dana';
+                                    
+                                        if (in_array($diff->d, $dayVersionOneValues)) {
+                                            $dayVersion = 'dan';
+                                        }
+                                    
+                                        // separated strings
+                                        $years = null;
+                                        $months = null;
+                                        $days = null;
+                                    
+                                        if ($diff->y != 0) {
+                                            $years = $diff->y . ' ' . $yearVersion . ' ';
+                                        }
+                                    
+                                        if ($diff->m != 0) {
+                                            $months = $diff->m . ' ' . $monthVersion . ' ';
+                                        }
+                                    
+                                        if ($diff->d != 0) {
+                                            $days = $diff->d . ' ' . $dayVersion . ' ';
+                                        }
                                     }
                                     
                                     // final string
@@ -172,7 +184,12 @@
                             <div class="mt-[40px]">
                                 @php
                                     // date dif in days
-                                    $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays(null, false);
+                                    $diff = 0;
+                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
+                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays(null, false);
+                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
+                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays($action->action_start, false);
+                                    }
                                     
                                     // format for days
                                     $dayVersionOneValues = [1, 21, 31];
