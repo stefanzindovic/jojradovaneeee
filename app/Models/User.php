@@ -73,6 +73,28 @@ class User extends Authenticatable
         })->orderBy('id', 'desc')->where('student_id', $id)->get();
     }
 
+    public static function getReturnedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 9);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 9);
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
+    public static function getBreachedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
     public static function doStudentHaveActiveIssues($student_id, $book_id)
     {
         $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);

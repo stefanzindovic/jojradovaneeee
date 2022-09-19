@@ -57,11 +57,11 @@ class StudentsController extends Controller
 
         try {
             $genericName = 'profile-picture-placeholder.jpg';
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/students/';
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -98,9 +98,19 @@ class StudentsController extends Controller
      */
     public function show(User $student): View|Factory|Application
     {
-        if(!$student->is_active) return abort(404);
-        if($student->role->id != 3) return abort(404);
-        return view('..pages.students.profile', compact('student'));
+        if (!$student->is_active) return abort(404);
+        if ($student->role->id != 3) return abort(404);
+
+        // issued books
+        $issuedBooks = User::getIssuedBooks($student->id);
+
+        // returned books
+        $returnedBooks = User::getReturnedBooks($student->id);
+
+        // deadline breached books
+        $breachedBooks = User::getBreachedBooks($student->id);
+
+        return view('..pages.students.profile', compact('student', 'issuedBooks', 'returnedBooks', 'breachedBooks'));
     }
 
     /**
@@ -111,8 +121,8 @@ class StudentsController extends Controller
      */
     public function edit(User $student)
     {
-        if($student->role->id != 3) return abort(404);
-        if(!$student->is_active) return abort(404);
+        if ($student->role->id != 3) return abort(404);
+        if (!$student->is_active) return abort(404);
         return view('..pages.students.edit', compact('student'));
     }
 
@@ -125,8 +135,8 @@ class StudentsController extends Controller
      */
     public function update(Request $request, User $student): RedirectResponse
     {
-        if($student->role->id != 3) return abort(404);
-        if(!$student->is_active) return abort(404);
+        if ($student->role->id != 3) return abort(404);
+        if (!$student->is_active) return abort(404);
 
         $input = $request->validate([
             'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
@@ -140,17 +150,17 @@ class StudentsController extends Controller
 
         try {
             $genericName = $student->picture;
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/students/';
 
                 // remove old icon from storage
                 $oldIconPath = $uploadPath . $student->picture;
-                if(Storage::disk('public')->exists($oldIconPath)) {
+                if (Storage::disk('public')->exists($oldIconPath)) {
                     Storage::disk('public')->delete($oldIconPath);
                 }
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -185,10 +195,10 @@ class StudentsController extends Controller
      */
     public function destroy(User $student): RedirectResponse
     {
-        if(!$student->is_active) return abort(404);
-        if($student->role->id != 3) return abort(404);
+        if (!$student->is_active) return abort(404);
+        if ($student->role->id != 3) return abort(404);
 
-        if($student->id == Auth::user()->id) {
+        if ($student->id == Auth::user()->id) {
             return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
         }
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
@@ -202,7 +212,8 @@ class StudentsController extends Controller
         }
     }
 
-    public function resetPassword(Request $request, User $student) {
+    public function resetPassword(Request $request, User $student)
+    {
         $input = $request->validate([
             'password' => 'required|min:8|max:24,confirmed',
         ]);
@@ -211,7 +222,7 @@ class StudentsController extends Controller
             $hashedPassword = Hash::make($input['password']);
             $student->password = $hashedPassword;
             $student->update();
-            
+
             return back()->with('successMessage', 'Lozinka je uspješno izmijenjena.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
