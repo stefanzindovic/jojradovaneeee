@@ -234,6 +234,6 @@ class Book extends Model
         $reservedBookPendingCount = Book::pendingReservedBook($id)->count();
         $reservedBookActiveCount = Book::activeReservedBook($id)->count();
 
-        return $book->total_copies - ($issuedBooksCount + $writtenOffBook + $bookWithBreachedDeadlines + $reservedBookPendingCount + $reservedBookActiveCount);;
+        return $book->total_copies - ($issuedBooksCount + $writtenOffBook + $bookWithBreachedDeadlines + $reservedBookPendingCount + $reservedBookActiveCount);
     }
 }

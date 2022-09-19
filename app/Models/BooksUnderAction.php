@@ -29,4 +29,9 @@ class BooksUnderAction extends Model
     {
         return $this->belongsTo(Book::class, 'book_id');
     }
+
+    public static function booksUnderActionsWithoutAction()
+    {
+        return BooksUnderAction::doesntHave('activeAction')->with(['activeAction', 'book', 'student'])->get();
+    }
 }
