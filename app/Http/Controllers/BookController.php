@@ -151,7 +151,9 @@ class BookController extends Controller
 
         $availableCopiesCount = Book::calcNumberOfAvailableCopies($book->id);
 
-        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline', 'pendingReservations', 'activeReservations', 'archivedReservations', 'availableCopiesCount'));
+        $bookRecentActions = BookAction::actionsByBookPaginate($book->id, 4);
+
+        return view('..pages.books.book', compact('book', 'issuedRecords', 'returnedRecords', 'booksWithBreachDeadline', 'pendingReservations', 'activeReservations', 'archivedReservations', 'availableCopiesCount', 'bookRecentActions'));
     }
 
     /**
