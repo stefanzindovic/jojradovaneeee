@@ -1,15 +1,16 @@
-@props(['current_date' => \Carbon\Carbon::now(), 'deadline_date', 'indicator' => 'true'])
+@props(['current_date' => \Carbon\Carbon::now(), 'deadline_date', 'indicator' => 'true', 'start_date' => \Carbon\Carbon::now()])
 
 @php
 $current_date = Carbon\Carbon::parse($current_date);
 $deadline_date = Carbon\Carbon::parse($deadline_date);
+$start_date = Carbon\Carbon::parse($start_date);
 
-$diff = $deadline_date->diff($current_date, false);
+$diff = $current_date->diff($start_date);
 
 // Diff values
-$days = $diff->d;
-$months = $diff->m;
-$years = $diff->y;
+$days = $current_date->gt($start_date) ? $diff->d : 0;
+$months = $current_date->gt($start_date) ? $diff->m : 0;
+$years = $current_date->gt($start_date) ? $diff->y : 0;
 
 // Final strings
 $dayFinalForm = null;

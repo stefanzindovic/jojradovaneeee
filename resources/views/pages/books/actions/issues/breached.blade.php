@@ -373,30 +373,11 @@
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
                                             {{ $book->student->name }}</td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            @php
-                                                // date dif in days
-                                                $diff = \Carbon\Carbon::parse($book->activeAction->action_start)->diffInDays(null, false);
-                                                
-                                                // format for days
-                                                $dayVersionOneValues = [1, 21, 31];
-                                                $dayVersion = 'dana';
-                                                
-                                                $lastDigit = $diff % 10;
-                                                
-                                                if (in_array($lastDigit, $dayVersionOneValues)) {
-                                                    $dayVersion = 'dan';
-                                                }
-                                                
-                                                // final string
-                                                $days = null;
-                                                
-                                                if ($diff > 0) {
-                                                    $days = $diff . ' ' . $dayVersion . ' ';
-                                                }
-                                            @endphp
                                             <div
                                                 class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]">
-                                                <span class="text-xs text-red-800">{{ $days }}</span>
+                                                <x-breached-days start_date="{{ $book->activeAction->action_start }}"
+                                                    deadline_date="{{ $book->activeAction->action_deadline }}">
+                                                </x-breached-days>
                                             </div>
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">

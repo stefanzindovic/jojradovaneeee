@@ -108,110 +108,36 @@
                                 </p>
                             </div>
                             <div class="mt-[40px]">
-                                {{-- Search difs between two dates and format results in to the string --}}
-                                @php
-                                    // date dif
-                                    
-                                    $diff = null;
-                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
-                                        $diff = \Carbon\Carbon::parse($action->action_start)->diff(\Carbon\Carbon::now());
-                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
-                                        $diff = \Carbon\Carbon::parse($action->action_addons)->diff($action->action_start);
-                                    }
-                                    
-                                    $years = null;
-                                    $months = null;
-                                    $days = null;
-                                    
-                                    if ($diff != null) {
-                                        // format for years
-                                        $yearVersionOneValues = [2, 3, 4];
-                                        $yearVersion = 'godina';
-                                    
-                                        if (in_array($diff->y, $yearVersionOneValues)) {
-                                            $yearVersion = 'godine';
-                                        }
-                                    
-                                        // format for months
-                                        $monthVersionOneValues = [1];
-                                        $monthVersionTwoValues = [2, 3, 4];
-                                        $monthVersion = 'mjeseci';
-                                    
-                                        if (in_array($diff->m, $monthVersionOneValues)) {
-                                            $monthVersion = 'mjesec';
-                                        }
-                                    
-                                        if (in_array($diff->m, $monthVersionTwoValues)) {
-                                            $monthVersion = 'mjeseca';
-                                        }
-                                    
-                                        // format for days
-                                        $dayVersionOneValues = [1, 21, 31];
-                                        $dayVersion = 'dana';
-                                    
-                                        if (in_array($diff->d, $dayVersionOneValues)) {
-                                            $dayVersion = 'dan';
-                                        }
-                                    
-                                        // separated strings
-                                        $years = null;
-                                        $months = null;
-                                        $days = null;
-                                    
-                                        if ($diff->y != 0) {
-                                            $years = $diff->y . ' ' . $yearVersion . ' ';
-                                        }
-                                    
-                                        if ($diff->m != 0) {
-                                            $months = $diff->m . ' ' . $monthVersion . ' ';
-                                        }
-                                    
-                                        if ($diff->d != 0) {
-                                            $days = $diff->d . ' ' . $dayVersion . ' ';
-                                        }
-                                    }
-                                    
-                                    // final string
-                                    if ($years == null && $months == null && $days == null) {
-                                        $keepingBook = 'Izdata danas';
-                                    } else {
-                                        $keepingBook = $years . $months . $days;
-                                    }
-                                @endphp
                                 <span class="text-gray-500">Trenutno zadrzavanje knjige</span>
-                                <p class="font-medium">{{ $keepingBook }}</p>
+                                @if ($action->status->id == 1 || $action->status->id == 7)
+                                    <x-current-holding start_date="{{ $action->action_start }}"
+                                        deadline_date="{{ $action->action_deadline }}" indicator="false">
+                                    </x-current-holding>
+                                @elseif ($action->status->id == 8 || $action->status->id == 9)
+                                    <x-current-holding current_date="{{ $action->action_start }}"
+                                        deadline_date="{{ $action->action_deadline }}" indicator="false">
+                                    </x-current-holding>
+                                @else
+                                    <div class="text-gray-500">
+                                        <p class="font-medium">Nema zadržavanja</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mt-[40px]">
-                                @php
-                                    // date dif in days
-                                    $diff = 0;
-                                    if ($action->action_status_id == 1 || $action->action_status_id == 7) {
-                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays(null, false);
-                                    } elseif ($action->action_status_id == 8 || $action->action_status_id == 9) {
-                                        $diff = \Carbon\Carbon::parse($action->action_deadline)->diffInDays($action->action_start, false);
-                                    }
-                                    
-                                    // format for days
-                                    $dayVersionOneValues = [1, 21, 31];
-                                    $dayVersion = 'dana';
-                                    
-                                    $lastDigit = $diff % 10;
-                                    
-                                    if (in_array($lastDigit, $dayVersionOneValues)) {
-                                        $dayVersion = 'dan';
-                                    }
-                                    
-                                    // final string
-                                    $days = null;
-                                    
-                                    if ($diff > 0) {
-                                        $days = $diff . ' ' . $dayVersion . ' ';
-                                    } else {
-                                        $days = 'Nema prekoračenja';
-                                    }
-                                @endphp
-                                <span class="text-gray-500">Prekoracenje</span>
-                                <p class="font-medium">{{ $days }}</p>
+                                <span class="text-gray-500">Prekoracenje u danima</span>
+                                @if ($action->status->id == 1 || $action->status->id == 7)
+                                    <x-breached-days start_date="{{ $action->action_start }}"
+                                        deadline_date="{{ $action->action_deadline }}">
+                                    </x-breached-days>
+                                @elseif ($action->status->id == 8 || $action->status->id == 9)
+                                    <x-breached-days start_date="{{ $action->action_start }}"
+                                        deadline_date="{{ $action->action_deadline }}">
+                                    </x-breached-days>
+                                @else
+                                    <div class="text-gray-500">
+                                        <p class="font-medium">Nema zadržavanja</p>
+                                    </div>
+                                @endif
                             </div>
                             <div class="mt-[40px]">
                                 <span class="text-gray-500">Bibliotekar</span>
