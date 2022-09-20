@@ -73,6 +73,55 @@ class User extends Authenticatable
         })->orderBy('id', 'desc')->where('student_id', $id)->get();
     }
 
+    public static function getReturnedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 9);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 9);
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
+    public static function getBreachedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where(function ($query) {
+                $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+            })->whereDate('action_deadline', '<', date('Y-m-d'));
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
+    public static function getPendingReservedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 2);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 2);
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
+    public static function getActiveReservedBooks($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 3);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 3);
+        })->where('student_id', $id)->orderBy('id', 'desc')->get();
+    }
+
+    public static function getArchivedReservations($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 4)->orWhere('action_status_id', 5)->orWhere('action_status_id', 6)->orWhere('action_status_id', 7);
+        })->orderBy('id', 'desc')->where('student_id', $id)->get();
+    }
+
     public static function doStudentHaveActiveIssues($student_id, $book_id)
     {
         $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);

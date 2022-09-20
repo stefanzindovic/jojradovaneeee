@@ -24,9 +24,14 @@ class ActivityController extends Controller
         return view('..pages.books.activities.dashboard', compact('activities', 'reservations', 'issuedBooksCounter', 'reservationsCounter', 'breachedBooksCounter'));
     }
 
-    public function activities()
+    public function activities(Request $request)
     {
-        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->get();
+        $activities = null;
+        if ($request->has('book')) {
+            $activities = BookAction::actionsByBook($request->book);
+        } else {
+            $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->get();
+        }
 
         return view('..pages.books.activities.activities', compact('activities'));
     }

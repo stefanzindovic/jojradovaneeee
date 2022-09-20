@@ -373,97 +373,17 @@
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
                                             {{ $book->student->name }}</td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            @php
-                                                // date dif in days
-                                                $diff = \Carbon\Carbon::parse($book->activeAction->action_start)->diffInDays(null, false);
-                                                
-                                                // format for days
-                                                $dayVersionOneValues = [1, 21, 31];
-                                                $dayVersion = 'dana';
-                                                
-                                                $lastDigit = $diff % 10;
-                                                
-                                                if (in_array($lastDigit, $dayVersionOneValues)) {
-                                                    $dayVersion = 'dan';
-                                                }
-                                                
-                                                // final string
-                                                $days = null;
-                                                
-                                                if ($diff > 0) {
-                                                    $days = $diff . ' ' . $dayVersion . ' ';
-                                                }
-                                            @endphp
                                             <div
                                                 class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]">
-                                                <span class="text-xs text-red-800">{{ $days }}</span>
+                                                <x-breached-days start_date="{{ $book->activeAction->action_start }}"
+                                                    deadline_date="{{ $book->activeAction->action_deadline }}">
+                                                </x-breached-days>
                                             </div>
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{-- Search difs between two dates and format results in to the string --}}
-                                            @php
-                                                // date dif
-                                                $diff = \Carbon\Carbon::parse($book->activeAction->action_start)->diff(\Carbon\Carbon::now());
-                                                
-                                                // format for years
-                                                $yearVersionOneValues = [2, 3, 4];
-                                                $yearVersion = 'godina';
-                                                
-                                                if (in_array($diff->y, $yearVersionOneValues)) {
-                                                    $yearVersion = 'godine';
-                                                }
-                                                
-                                                // format for months
-                                                $monthVersionOneValues = [1];
-                                                $monthVersionTwoValues = [2, 3, 4];
-                                                $monthVersion = 'mjeseci';
-                                                
-                                                if (in_array($diff->m, $monthVersionOneValues)) {
-                                                    $monthVersion = 'mjesec';
-                                                }
-                                                
-                                                if (in_array($diff->m, $monthVersionTwoValues)) {
-                                                    $monthVersion = 'mjeseca';
-                                                }
-                                                
-                                                // format for days
-                                                $dayVersionOneValues = [1, 21, 31];
-                                                $dayVersion = 'dana';
-                                                
-                                                if (in_array($diff->d, $dayVersionOneValues)) {
-                                                    $dayVersion = 'dan';
-                                                }
-                                                
-                                                // separated strings
-                                                $years = null;
-                                                $months = null;
-                                                $days = null;
-                                                
-                                                if ($diff->y != 0) {
-                                                    $years = $diff->y . ' ' . $yearVersion . ' ';
-                                                }
-                                                
-                                                if ($diff->m != 0) {
-                                                    $months = $diff->m . ' ' . $monthVersion . ' ';
-                                                }
-                                                
-                                                if ($diff->d != 0) {
-                                                    $days = $diff->d . ' ' . $dayVersion . ' ';
-                                                }
-                                                
-                                                // final string
-                                                if ($years == null && $months == null && $days == null) {
-                                                    $keepingBook = 'Izdata danas';
-                                                } else {
-                                                    $keepingBook = $years . $months . $days;
-                                                }
-                                                
-                                                // check if deadline was breached
-                                                $isBreached = \Carbon\Carbon::now()->gt(\Carbon\Carbon::parse($book->activeAction->action_deadline));
-                                            @endphp
-                                            <div>
-                                                <span>{{ $keepingBook }}</span>
-                                            </div>
+                                            <x-current-holding deadline_date="{{ $book->activeAction->action_deadline }}"
+                                                indicator="false">
+                                            </x-current-holding>
                                         </td>
                                         <td class="px-6 py-3 text-sm leading-5 text-right whitespace-no-wrap">
                                             <p

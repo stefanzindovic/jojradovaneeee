@@ -29,4 +29,24 @@ class BookAction extends Model
     {
         return $this->belongsTo(User::class, 'librarian_id');
     }
+
+    public static function actionsByBookPaginate($id, $paginate)
+    {
+        return BookAction::with(['book' => function ($query) use ($id) {
+            $query->where('book_id', $id);
+        }])->whereHas('book', function ($query) use ($id) {
+            $query->where('book_id', $id);
+        })->take(
+            $paginate
+        )->orderBy('created_at', 'desc')->get();
+    }
+
+    public static function actionsByBook($id)
+    {
+        return BookAction::with(['book' => function ($query) use ($id) {
+            $query->where('book_id', $id);
+        }])->whereHas('book', function ($query) use ($id) {
+            $query->where('book_id', $id);
+        })->orderBy('created_at', 'desc')->get();
+    }
 }
