@@ -1,146 +1,132 @@
-<nav id="sidebar"
-    class="fixed z-10 flex flex-col justify-between overflow-x-hidden overflow-y-auto bg-[#EFF3F6] sidebar nav-height">
-    <div class="">
-        <!-- Hamburger Icon -->
-        <div
-            class="cursor-pointer text-[#707070] pl-[30px] pt-[28px] pb-[27px] text-[25px] border-b-[1px] border-[#e4dfdf] ">
-            <i id="hamburger" class="hamburger-btn fas fa-bars"></i>
-        </div>
-        <div class="mt-[30px]">
-            <ul class="text-[#2D3B48] sidebar-nav">
-                <!-- Dashboard Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('/')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA]">
-                    <div class="ml-[20px]">
-                        <span class="flex justify-between w-full fill-current whitespace-nowrap">
-                            <div class="transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                <a href="{{ route('dashboard') }}" aria-label="Dashboard">
-                                    <i
-                                        class="text-[#707070] @if (\Illuminate\Support\Facades\Request::is('/')) text-[#576cdf] @endif px-[5px] pt-[4px] pb-[5px] fas fa-tachometer-alt text-[25px] rounded-[3px]"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="@if (\Illuminate\Support\Facades\Request::is('dashboards*')) text-[#576cdf] @endif inline text-[15px] ml-[15px]">
-                                            Komandna tabla</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
+<nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main">
+    <div class="scrollbar-inner">
+        <!-- Brand -->
+        <div class="sidenav-header  d-flex  align-items-center">
+            <a class="navbar-brand" href="../../../index.html">
+                <img src="../../assets/img/brand/dark.svg" height="40" class="navbar-brand-img" alt="...">
+            </a>
+            <div class=" ml-auto ">
+                <!-- Sidenav toggler -->
+                <div class="sidenav-toggler d-none d-xl-block" data-action="sidenav-unpin" data-target="#sidenav-main">
+                    <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
+                        <i class="sidenav-toggler-line"></i>
                     </div>
-                </li>
-                <!-- Bibliotekari Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('librarians*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="{{ route('librarians.index') }}" aria-label="Bibliotekari">
-                                    <i
-                                        class="@if (\Illuminate\Support\Facades\Request::is('librarians*')) text-[#576cdf] @endif text-[25px] text-[#707070] fa-solid fa-user-shield transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="@if (\Illuminate\Support\Facades\Request::is('librarians*')) text-[#576cdf] @endif inline text-[15px] ml-[20px] transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                            Bibliotekari
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Ucenici Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('students*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="{{ route('students.index') }}" aria-label="Učenici">
-                                    <i
-                                        class="text-[19px] @if (\Illuminate\Support\Facades\Request::is('students*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-users"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition @if (\Illuminate\Support\Facades\Request::is('students*')) text-[#576cdf] @endif duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Ucenici</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Knjige Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('books*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="{{ route('books.index') }}" aria-label="Knjige">
-                                    <i
-                                        class="text-[25px] @if (\Illuminate\Support\Facades\Request::is('books*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fa-solid fa-book"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition @if (\Illuminate\Support\Facades\Request::is('books*')) text-[#576cdf] @endif duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Knjige</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Autori Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('authors*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="{{ route('authors.index') }}" aria-label="Autori">
-                                    <i
-                                        class="text-[25px] @if (\Illuminate\Support\Facades\Request::is('authors*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fa-solid fa-user-edit"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="transition @if (\Illuminate\Support\Facades\Request::is('authors*')) text-[#576cdf] @endif duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Autori</p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-                <!-- Izdavanje Icon -->
-                <li
-                    class="@if (\Illuminate\Support\Facades\Request::is('actions/*')) bg-[#EAEAEA] @endif pt-[18px] pb-[14px] mb-[4px] group hover:bg-[#EAEAEA] h-[60px]">
-                    <div class="ml-[30px]">
-                        <span class="flex justify-between w-full whitespace-nowrap">
-                            <div>
-                                <a href="{{ route('books.issues.issues') }}" aria-label="Knjige">
-                                    <i
-                                        class="@if (\Illuminate\Support\Facades\Request::is('actions*')) text-[#576cdf] @endif text-[22px] transition duration-300 ease-in group-hover:text-[#576cdf] text-[#707070] fas fa-exchange-alt"></i>
-                                    <div class="hidden sidebar-item">
-                                        <p
-                                            class="@if (\Illuminate\Support\Facades\Request::is('books/actions*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                                            Izdavanje
-                                            knjiga
-                                        </p>
-                                    </div>
-                                </a>
-                            </div>
-                        </span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div
-        class="@if (\Illuminate\Support\Facades\Request::is('settings*')) bg-[#EAEAEA] @endif sidebar-nav py-[10px] border-t-[1px] border-[#e4dfdf] pt-[23px] pb-[29px]  group hover:bg-[#EAEAEA]">
-        <!-- Settings Icon -->
-        <a href="{{ route('settings.policies.index') }}" aria-label="Settngs" class="ml-[30px]">
-            <span class="whitespace-nowrap">
-                <i
-                    class="@if (\Illuminate\Support\Facades\Request::is('settings*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] text-[22px] text-[#707070] fas fa-cog"></i>
-                <div class="hidden sidebar-item">
-                    <p
-                        class="@if (\Illuminate\Support\Facades\Request::is('settings*')) text-[#576cdf] @endif transition duration-300 ease-in group-hover:text-[#576cdf] inline text-[15px] ml-[20px]">
-                        Podešavanja</p>
                 </div>
-            </span>
-        </a>
+            </div>
+        </div>
+        <div class="navbar-inner">
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+                <!-- Nav items -->
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+                            <i class="ni ni-shop text-primary"></i>
+                            <span class="nav-link-text">Dashboards</span>
+                        </a>
+                        <div class="collapse show" id="navbar-dashboards">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
+                                        <span class="sidenav-mini-icon"> D </span>
+                                        <span class="sidenav-normal"> Dashboard </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
+                            <i class="ni ni-ungroup text-orange"></i>
+                            <span class="nav-link-text">Examples</span>
+                        </a>
+                        <div class="collapse" id="navbar-examples">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="../../pages/examples/login.html" class="nav-link">
+                                        <span class="sidenav-mini-icon"> L </span>
+                                        <span class="sidenav-normal"> Login </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../../pages/examples/register.html" class="nav-link">
+                                        <span class="sidenav-mini-icon"> R </span>
+                                        <span class="sidenav-normal"> Register </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="../../pages/examples/profile.html" class="nav-link">
+                                        <span class="sidenav-mini-icon"> P </span>
+                                        <span class="sidenav-normal"> Profile </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-tables" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-tables">
+                            <i class="ni ni-align-left-2 text-default"></i>
+                            <span class="nav-link-text">Tables</span>
+                        </a>
+                        <div class="collapse" id="navbar-tables">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="../../pages/tables/tables.html" class="nav-link">
+                                        <span class="sidenav-mini-icon"> T </span>
+                                        <span class="sidenav-normal"> Tables </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#navbar-maps" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-maps">
+                            <i class="ni ni-map-big text-primary"></i>
+                            <span class="nav-link-text">Maps</span>
+                        </a>
+                        <div class="collapse" id="navbar-maps">
+                            <ul class="nav nav-sm flex-column">
+                                <li class="nav-item">
+                                    <a href="../../pages/maps/google.html" class="nav-link">
+                                        <span class="sidenav-mini-icon"> G </span>
+                                        <span class="sidenav-normal"> Google </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <hr class="my-3">
+                    <h6 class="navbar-heading pl-4 text-muted">
+                        <span class="docs-normal">Documentation</span>
+                    </h6>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/getting-started/quick-start/">
+                            <i class="ni ni-spaceship"></i>
+                            <span class="nav-link-text">Getting started</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/dashboard/alerts/">
+                            <i class="ni ni-ui-04"></i>
+                            <span class="nav-link-text">Components</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/plugins/charts/">
+                            <i class="ni ni-chart-pie-35"></i>
+                            <span class="nav-link-text">Plugins</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active active-pro" href="https://www.creative-tim.com/product/impact-design-system-pro" target="_blank">
+                            <i class="ni ni-send text-primary"></i>
+                            <span class="nav-link-text">Upgrade to PRO</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 </nav>

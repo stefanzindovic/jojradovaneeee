@@ -1,123 +1,234 @@
-<header
-    class="z-20 small:hidden  flex items-center text-white justify-between w-full h-[71px] pr-[30px] mx-auto bg-[#4558BE]">
-    <!-- logo -->
-    <div class="logo-font inline-flex bg-[#3F51B5] py-[18px] px-[30px]">
-        <a class="_o6689fn" href="#">
-            <div class="block">
-                <a href="dashboard.php" class="text-[20px] font-medium">
-                    <div class="flex">
-                        <img src='{{ asset('imgs/logo.svg') }}' alt="" width="35px" height="35px">
-                        <p class="text-[20px] mt-[5px]">&nbsp;&nbsp;Online Biblioteka</p>
+<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Search form -->
+            <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
+                <div class="form-group mb-0">
+                    <div class="input-group input-group-alternative input-group-merge">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        </div>
+                        <input class="form-control" placeholder="Search" type="text">
                     </div>
-
-                </a>
-            </div>
-        </a>
-    </div>
-    <!-- end logo -->
-
-    <!-- login -->
-    <div class="flex-initial">
-        <div class="relative flex items-center justify-end">
-            <div class="flex items-center">
-                <!-- Notification Icon -->
-                <div class="relative block">
-                    <a href="{{ route('dashboard') }}" class="relative inline-block px-3 py-2 focus:outline-none"
-                        aria-label="Notification">
-                        <div class="flex items-center h-5">
-                            <div class="_xpkakx">
-                                <span
-                                    class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px] ">
-                                    <i class="far fa-bell"></i>
-                                </span>
+                </div>
+                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </form>
+            <!-- Navbar links -->
+            <ul class="navbar-nav align-items-center  ml-md-auto ">
+                <li class="nav-item d-xl-none">
+                    <!-- Sidenav toggler -->
+                    <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
+                        <div class="sidenav-toggler-inner">
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                            <i class="sidenav-toggler-line"></i>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item d-sm-none">
+                    <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                        <i class="ni ni-zoom-split-in"></i>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ni ni-bell-55"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                        <!-- Dropdown header -->
+                        <div class="px-3 py-3">
+                            <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
+                        </div>
+                        <!-- List group -->
+                        <div class="list-group list-group-flush">
+                            <a href="#!" class="list-group-item list-group-item-action">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="../../assets/img/theme/team-1.jpg" class="avatar rounded-circle">
+                                    </div>
+                                    <div class="col ml--2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                            </div>
+                                            <div class="text-right text-muted">
+                                                <small>2 hrs ago</small>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="../../assets/img/theme/team-2.jpg" class="avatar rounded-circle">
+                                    </div>
+                                    <div class="col ml--2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                            </div>
+                                            <div class="text-right text-muted">
+                                                <small>3 hrs ago</small>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="../../assets/img/theme/team-3.jpg" class="avatar rounded-circle">
+                                    </div>
+                                    <div class="col ml--2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                            </div>
+                                            <div class="text-right text-muted">
+                                                <small>5 hrs ago</small>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm mb-0">Your posts have been liked a lot.</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg" class="avatar rounded-circle">
+                                    </div>
+                                    <div class="col ml--2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                            </div>
+                                            <div class="text-right text-muted">
+                                                <small>2 hrs ago</small>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="#!" class="list-group-item list-group-item-action">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <!-- Avatar -->
+                                        <img alt="Image placeholder" src="../../assets/img/theme/team-5.jpg" class="avatar rounded-circle">
+                                    </div>
+                                    <div class="col ml--2">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h4 class="mb-0 text-sm">John Snow</h4>
+                                            </div>
+                                            <div class="text-right text-muted">
+                                                <small>3 hrs ago</small>
+                                            </div>
+                                        </div>
+                                        <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <!-- View all -->
+                        <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="ni ni-ungroup"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
+                        <div class="row shortcuts px-4">
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-red">
+                      <i class="ni ni-calendar-grid-58"></i>
+                    </span>
+                                <small>Calendar</small>
+                            </a>
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
+                      <i class="ni ni-email-83"></i>
+                    </span>
+                                <small>Email</small>
+                            </a>
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-info">
+                      <i class="ni ni-credit-card"></i>
+                    </span>
+                                <small>Payments</small>
+                            </a>
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-green">
+                      <i class="ni ni-books"></i>
+                    </span>
+                                <small>Reports</small>
+                            </a>
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
+                      <i class="ni ni-pin-3"></i>
+                    </span>
+                                <small>Maps</small>
+                            </a>
+                            <a href="#!" class="col-4 shortcut-item">
+                    <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
+                      <i class="ni ni-basket"></i>
+                    </span>
+                                <small>Shop</small>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="media align-items-center">
+                  <span class="avatar avatar-sm rounded-circle">
+                    <img alt="Image placeholder" src="../../assets/img/theme/team-4.jpg">
+                  </span>
+                            <div class="media-body  ml-2  d-none d-lg-block">
+                                <span class="mb-0 text-sm  font-weight-bold">John Snow</span>
                             </div>
                         </div>
                     </a>
-                </div>
-                <!-- Add Icon -->
-                <a class="inline-block border-l-[1px] border-gray-300 px-3" href="#" aria-label="Add something"
-                    id="dropdownCreate">
-                    <span
-                        class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px]  ">
-                        <i class="fas fa-plus"></i>
-                    </span>
-                </a>
-
-                <div
-                    class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-create">
-                    <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                        aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-                        <div class="py-1">
-                            @if (\Illuminate\Support\Facades\Auth::user()->role_id == 1)
-                                <a href="{{ route('librarians.create') }}" tabindex="0"
-                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                    role="menuitem">
-                                    <i class="far fa-address-book mr-[8px] ml-[5px] py-1"></i>
-                                    <span class="px-4 py-0">Bibliotekar</span>
-                                </a>
-                            @endif
-                            <a href="{{ route('students.create') }}" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                role="menuitem">
-                                <i class="fas fa-users mr-[5px] ml-[3px] py-1"></i>
-                                <span class="px-4 py-0">Učenik</span>
-                            </a>
-                            <a href="{{ route('books.create') }}" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                role="menuitem">
-                                <i class="far fa-copy mr-[10px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0">Knjiga</span>
-                            </a>
-                            <a href="{{ route('authors.create') }}" tabindex="0"
-                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                role="menuitem">
-                                <i class="far fa-address-book mr-[10px] ml-[5px] py-1"></i>
-                                <span class="px-4 py-0">Autor</span>
-                            </a>
+                    <div class="dropdown-menu  dropdown-menu-right ">
+                        <div class="dropdown-header noti-title">
+                            <h6 class="text-overflow m-0">Welcome!</h6>
                         </div>
-                    </div>
-                </div>
-                @auth
-                    <div class="ml-[10px] relative block">
-                        <a href="#" class="relative inline-block px-3 py-2 focus:outline-none" id="dropdownProfile"
-                            aria-label="User profile">
-                            <div class="flex items-center h-5">
-                                <div style="width: 45px; height: 45px;" class="mt-[15px]">
-                                    <img class="rounded-full w-full h-full"
-                                        src="{{ \Illuminate\Support\Facades\Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (\Illuminate\Support\Facades\Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . \Illuminate\Support\Facades\Auth::user()->picture) : asset('storage/uploads/librarians/' . \Illuminate\Support\Facades\Auth::user()->picture)) : asset('imgs/' . \Illuminate\Support\Facades\Auth::user()->picture) }}"
-                                        alt="Profilna fotografija">
-                                </div>
-                            </div>
+                        <a href="#!" class="dropdown-item">
+                            <i class="ni ni-single-02"></i>
+                            <span>My profile</span>
+                        </a>
+                        <a href="#!" class="dropdown-item">
+                            <i class="ni ni-settings-gear-65"></i>
+                            <span>Settings</span>
+                        </a>
+                        <a href="#!" class="dropdown-item">
+                            <i class="ni ni-calendar-grid-58"></i>
+                            <span>Activity</span>
+                        </a>
+                        <a href="#!" class="dropdown-item">
+                            <i class="ni ni-support-16"></i>
+                            <span>Support</span>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#!" class="dropdown-item">
+                            <i class="ni ni-user-run"></i>
+                            <span>Logout</span>
                         </a>
                     </div>
-                    <div
-                        class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-profile">
-                        <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                            aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-                            <div class="py-1">
-                                <a href="{{ route('librarians.show', \Illuminate\Support\Facades\Auth::user()->id) }}"
-                                    tabindex="0"
-                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                    role="menuitem">
-                                    <i class="fas fa-file mr-[8px] ml-[5px] py-1"></i>
-                                    <span class="px-4 py-0">Profil</span>
-                                </a>
-                                <form action="{{ route('logout') }}" method="POST">
-                                    @csrf
-
-                                    <button type="submit" tabindex="0"
-                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                        role="menuitem">
-                                        <i class="fas fa-sign-out-alt mr-[5px] ml-[5px] py-1"></i>
-                                        <span class="px-4 py-0">Odjavi se</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </li>
+            </ul>
         </div>
-    @endauth
-    <!-- end login -->
-</header>
+    </div>
+</nav>
