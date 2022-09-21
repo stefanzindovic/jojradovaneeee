@@ -2,8 +2,8 @@
     <div class="scrollbar-inner">
         <!-- Brand -->
         <div class="sidenav-header  d-flex  align-items-center">
-            <a class="navbar-brand" href="../../../index.html">
-                <img src="../../assets/img/brand/dark.svg" height="40" class="navbar-brand-img" alt="...">
+            <a class="navbar-brand" href="#">
+                <img src="{{asset('imgs/booklogo.png')}}" height="40" class="navbar-brand-img" alt="...">
             </a>
             <div class=" ml-auto ">
                 <!-- Sidenav toggler -->
@@ -21,108 +21,57 @@
             <div class="collapse navbar-collapse" id="sidenav-collapse-main">
                 <!-- Nav items -->
                 <ul class="navbar-nav">
+
                     <li class="nav-item">
-                        <a class="nav-link active" href="#navbar-dashboards" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-dashboards">
+                        <a class="nav-link @if (url()->current() == route('dashboard')) active @endif" href="{{route('dashboard')}}" >
                             <i class="ni ni-shop text-primary"></i>
-                            <span class="nav-link-text">Dashboards</span>
+                            <span class="nav-link-text">Dashboard</span>
                         </a>
-                        <div class="collapse show" id="navbar-dashboards">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="#" class="nav-link">
-                                        <span class="sidenav-mini-icon"> D </span>
-                                        <span class="sidenav-normal"> Dashboard </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#navbar-examples" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples">
-                            <i class="ni ni-ungroup text-orange"></i>
-                            <span class="nav-link-text">Examples</span>
+                        <a class="nav-link @if (url()->current() == route('librarians.index')) active @endif" href="{{route('librarians.index')}}">
+                            <i class="ni ni-badge text-primary"></i>
+                            <span class="nav-link-text">Bibliotekari</span>
                         </a>
-                        <div class="collapse" id="navbar-examples">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="../../pages/examples/login.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> L </span>
-                                        <span class="sidenav-normal"> Login </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../pages/examples/register.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> R </span>
-                                        <span class="sidenav-normal"> Register </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="../../pages/examples/profile.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal"> Profile </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#navbar-tables" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-tables">
-                            <i class="ni ni-align-left-2 text-default"></i>
-                            <span class="nav-link-text">Tables</span>
+                        <a class="nav-link @if (url()->current() == route('students.index')) active @endif" href="{{route('students.index')}}">
+                            <i class="ni ni-single-02 text-primary"></i>
+                            <span class="nav-link-text">Učenici</span>
                         </a>
-                        <div class="collapse" id="navbar-tables">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="../../pages/tables/tables.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> T </span>
-                                        <span class="sidenav-normal"> Tables </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#navbar-maps" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-maps">
-                            <i class="ni ni-map-big text-primary"></i>
-                            <span class="nav-link-text">Maps</span>
+                        <a class="nav-link @if (url()->current() == route('books.index')) active @endif" href="{{route('books.index')}}">
+                            <i class="ni ni-books text-primary"></i>
+                            <span class="nav-link-text">Knjige</span>
                         </a>
-                        <div class="collapse" id="navbar-maps">
-                            <ul class="nav nav-sm flex-column">
-                                <li class="nav-item">
-                                    <a href="../../pages/maps/google.html" class="nav-link">
-                                        <span class="sidenav-mini-icon"> G </span>
-                                        <span class="sidenav-normal"> Google </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (url()->current() == route('authors.index')) active @endif" href="{{route('authors.index')}}">
+                            <i class="ni ni-circle-08 text-primary"></i>
+                            <span class="nav-link-text">Autori</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (url()->current() == route('books.issues.issues')) active @endif" href="{{route('books.issues.issues')}}">
+                            <i class="ni ni-curved-next text-primary"></i>
+                            <span class="nav-link-text">Izdavanje</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @if (url()->current() == route('settings.policies.index')) active @endif" href="{{route('settings.policies.index')}}">
+                            <i class="ni ni-settings-gear-65 text-primary"></i>
+                            <span class="nav-link-text">Settingss</span>
+                        </a>
                     </li>
                     <hr class="my-3">
                     <h6 class="navbar-heading pl-4 text-muted">
-                        <span class="docs-normal">Documentation</span>
+                        <span class="docs-normal">Dokumentacija</span>
                     </h6>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/getting-started/quick-start/">
+                        <a class="nav-link" href="#">
                             <i class="ni ni-spaceship"></i>
-                            <span class="nav-link-text">Getting started</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/dashboard/alerts/">
-                            <i class="ni ni-ui-04"></i>
-                            <span class="nav-link-text">Components</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://demos.creative-tim.com/impact-design-system-pro/docs/plugins/charts/">
-                            <i class="ni ni-chart-pie-35"></i>
-                            <span class="nav-link-text">Plugins</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active active-pro" href="https://www.creative-tim.com/product/impact-design-system-pro" target="_blank">
-                            <i class="ni ni-send text-primary"></i>
-                            <span class="nav-link-text">Upgrade to PRO</span>
+                            <span class="nav-link-text">API</span>
                         </a>
                     </li>
                 </ul>
