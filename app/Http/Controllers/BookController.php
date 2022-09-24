@@ -66,7 +66,7 @@ class BookController extends Controller
     {
         $input = $request->validate([
             'title' => 'required|min:1|max:50',
-            'description' => 'required|min:10|max:500',
+            'description' => 'nullable|min:10|max:2048',
             'categories' => 'required|min:1',
             'genres' => 'required|array|min:1',
             'authors' => 'required|array|min:1',
@@ -86,7 +86,7 @@ class BookController extends Controller
         try {
             $model = new Book();
             $model->title = $input['title'];
-            $model->description = $input['description'];
+            $model->description = $input['description'] ?? 'Nema sadržaja';
             $model->total_copies = $input['total_copies'];
             $model->published_at = $input['published_at'];
             $model->total_pages = $input['total_pages'];

@@ -65,34 +65,29 @@ jQuery(document).ready(function () {
         }
 
         // Book description validation
+        console.log(descriptionInput.val() !== null);
         if (
-            descriptionInput.val() === "" ||
-            descriptionInput.val() === null ||
-            descriptionInput.val() === undefined ||
-            descriptionInput.val() === false
+            descriptionInput.val() !== "" &&
+            descriptionInput.val() !== null &&
+            descriptionInput.val() !== undefined &&
+            descriptionInput.val() !== false &&
+            descriptionInput.val().length > 0
         ) {
-            setTimeout(function () {
-                descriptionMessage
-                    .css({ display: "block" })
-                    .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
-                    );
-            }, 200);
-            e.preventDefault();
-        } else if (
-            descriptionInput.val().length < 10 ||
-            descriptionInput.val().length > 500
-        ) {
-            setTimeout(function () {
-                descriptionMessage
-                    .css({ display: "block" })
-                    .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Naslov može sadržati od 1 do 50 karaktera.</p>'
-                    );
-            }, 200);
-            e.preventDefault();
-        } else {
-            descriptionMessage.css({ display: "none" });
+            if (
+                descriptionInput.val().length < 10 ||
+                descriptionInput.val().length > 2048
+            ) {
+                setTimeout(function () {
+                    descriptionMessage
+                        .css({ display: "block" })
+                        .html(
+                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Opis može sadržati od 10 do 2048 karaktera.</p>'
+                        );
+                }, 200);
+                e.preventDefault();
+            } else {
+                descriptionMessage.css({ display: "none" });
+            }
         }
 
         // Book categories validation
