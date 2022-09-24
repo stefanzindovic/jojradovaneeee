@@ -45,17 +45,17 @@ class AuthorController extends Controller
     {
         $input = $request->validate([
             'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
-            'bio' =>'required|min:10|max:500',
+            'bio' => 'nullable|min:10|max:500',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
         try {
             $genericName = 'profile-picture-placeholder.jpg';
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/authors/';
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -70,7 +70,7 @@ class AuthorController extends Controller
             // update category in db
             $model = new Author();
             $model->full_name = $input['full_name'];
-            $model->bio = $input['bio'];
+            $model->bio = $input['bio'] ?? 'Nema biografije.';
             $model->picture = $genericName;
 
             $model->save();
@@ -114,23 +114,23 @@ class AuthorController extends Controller
     {
         $input = $request->validate([
             'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
-            'bio' =>'required|min:10|max:500',
+            'bio' => 'nullable|min:10|max:500',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
         try {
             $genericName = $author->picture;
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/authors/';
 
                 // remove old icon from storage
                 $oldIconPath = $uploadPath . $author->picture;
-                if(Storage::disk('public')->exists($oldIconPath)) {
+                if (Storage::disk('public')->exists($oldIconPath)) {
                     Storage::disk('public')->delete($oldIconPath);
                 }
 
                 // upload new icon
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -144,7 +144,7 @@ class AuthorController extends Controller
 
             // update category in db
             $author->full_name = $input['full_name'];
-            $author->bio = $input['bio'];
+            $author->bio = $input['bio'] ?? 'Nema biografije.';
             $author->picture = $genericName;
 
             $author->update();
@@ -170,7 +170,7 @@ class AuthorController extends Controller
 
             // remove old icon from storage
             $oldIconPath = $uploadPath . $author->picture;
-            if(Storage::disk('public')->exists($oldIconPath)) {
+            if (Storage::disk('public')->exists($oldIconPath)) {
                 Storage::disk('public')->delete($oldIconPath);
             }
 
