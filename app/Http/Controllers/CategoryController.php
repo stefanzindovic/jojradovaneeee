@@ -46,13 +46,13 @@ class CategoryController extends Controller
     {
         $input = $request->validate([
             'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
-            'description' =>'required|min:10|max:512',
+            'description' => 'nullable|min:10|max:512',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
         // upload image if image exists
         $genericName = 'profile-picture-placeholder.jpg';
-        if($request->hasFile('picture')) {
+        if ($request->hasFile('picture')) {
             $uploadedFile = $request->file('picture');
             $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
             $uploadsPath = 'uploads/categories/';
@@ -68,12 +68,11 @@ class CategoryController extends Controller
             // Generate new category model
             $model = new Category();
             $model->title = $input['title'];
-            $model->description = $input['description'];
+            $model->description = $input['description'] ?? 'Nema opisa.';
             $model->picture = $genericName;
             $model->save();
 
             return to_route('settings.categories.index')->with('successMessage', 'Nova kategorija je uspješno kreirana.')->with('successMessage', 'Nova kategorija je dodana na spisak.');
-
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
@@ -112,23 +111,23 @@ class CategoryController extends Controller
     {
         $input = $request->validate([
             'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
-            'description' =>'required|min:10|max:512',
+            'description' => 'nullable|min:10|max:512',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
         try {
             $genericName = $category->picture;
-            if($request->hasFile('picture')) {
+            if ($request->hasFile('picture')) {
                 $uploadPath = 'uploads/categories/';
 
                 // remove old picture from storage
                 $oldpicturePath = $uploadPath . $category->picture;
-                if(Storage::disk('public')->exists($oldpicturePath)) {
+                if (Storage::disk('public')->exists($oldpicturePath)) {
                     Storage::disk('public')->delete($oldpicturePath);
                 }
 
                 // upload new picture
-                if($request->hasFile('picture')) {
+                if ($request->hasFile('picture')) {
                     $uploadedFile = $request->file('picture');
                     $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
 
@@ -142,7 +141,7 @@ class CategoryController extends Controller
 
             // update category in db
             $category->title = $input['title'];
-            $category->description = $input['description'];
+            $category->description = $input['description'] ?? 'Nema opisa.';
             $category->picture = $genericName;
 
             $category->update();
@@ -168,7 +167,7 @@ class CategoryController extends Controller
 
             // remove old picture from storage
             $oldpicturePath = $uploadPath . $category->picture;
-            if(Storage::disk('public')->exists($oldpicturePath)) {
+            if (Storage::disk('public')->exists($oldpicturePath)) {
                 Storage::disk('public')->delete($oldpicturePath);
             }
 
