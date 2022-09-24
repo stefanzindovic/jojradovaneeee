@@ -381,7 +381,8 @@
                                             </div>
                                         </td>
                                         <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            <x-current-holding deadline_date="{{ $book->activeAction->action_deadline }}"
+                                            <x-current-holding start_date="{{ $book->activeAction->action_start }}"
+                                                deadline_date="{{ $book->activeAction->action_deadline }}"
                                                 indicator="false">
                                             </x-current-holding>
                                         </td>
