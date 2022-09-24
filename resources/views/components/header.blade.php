@@ -48,7 +48,7 @@
                     <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                         aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
                         <div class="py-1">
-                            @if (\Illuminate\Support\Facades\Auth::user()->role_id == 1)
+                            @if (Auth::user()->role_id == 1)
                                 <a href="{{ route('librarians.create') }}" tabindex="0"
                                     class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                     role="menuitem">
@@ -84,7 +84,7 @@
                             <div class="flex items-center h-5">
                                 <div style="width: 45px; height: 45px;" class="mt-[15px]">
                                     <img class="rounded-full w-full h-full"
-                                        src="{{ \Illuminate\Support\Facades\Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (\Illuminate\Support\Facades\Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . \Illuminate\Support\Facades\Auth::user()->picture) : asset('storage/uploads/librarians/' . \Illuminate\Support\Facades\Auth::user()->picture)) : asset('imgs/' . \Illuminate\Support\Facades\Auth::user()->picture) }}"
+                                        src="{{ Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . Auth::user()->picture) : asset('storage/uploads/librarians/' . Auth::user()->picture)) : asset('imgs/' . Auth::user()->picture) }}"
                                         alt="Profilna fotografija">
                                 </div>
                             </div>
@@ -95,7 +95,7 @@
                         <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
                             aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
                             <div class="py-1">
-                                <a href="{{ route('librarians.show', \Illuminate\Support\Facades\Auth::user()->id) }}"
+                                <a href="{{ route('librarians.show', Auth::user()->id) }}"
                                     tabindex="0"
                                     class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
                                     role="menuitem">

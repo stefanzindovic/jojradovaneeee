@@ -28,7 +28,7 @@
 @vite('./resources/js/validations/issueBookValidation.js')
 
 <!-- Cropper -->
-@vite('./resources/js/cropper/cropper.min.js')
+<script src="{{asset('assets/js/cropper.min.js')}}"></script>
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->

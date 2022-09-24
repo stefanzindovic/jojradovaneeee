@@ -14,61 +14,74 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
+Route::get('/knjige', 'App\Http\Controllers\HomeController@indexKnjige')->name('knjige');
 
 Route::middleware(['auth'])->group(function () {
-    // Activities
-    Route::get('/', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
-    Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'activities'])->name('activities');
 
-    // Settings
-    Route::prefix('settings')->name('settings.')->group(function () {
-        Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
-        Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
-        Route::resource('/genres', \App\Http\Controllers\GenreController::class);
-        Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
-        Route::resource('/covers', \App\Http\Controllers\CoverController::class);
-        Route::resource('/formats', \App\Http\Controllers\FormatController::class);
-        Route::resource('/scripts', \App\Http\Controllers\ScriptController::class);
-        Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
-    });
+    //User Side
+    Route::get('/profil', 'App\Http\Controllers\HomeController@show')->name('profil');
+    Route::get('/profil/edit/', 'App\Http\Controllers\HomeController@edit')->name('profil.edit');
+    Route::patch('/profil/{id}', 'App\Http\Controllers\HomeController@update')->name('profil.update');
 
-    // Authors
-    Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
+    Route::middleware(['staff'])->group(function (){
 
-    // Students
-    Route::resource('/students', \App\Http\Controllers\StudentsController::class);
-    Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
 
-    // Librarians
-    Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
-    Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
+        // Activities
+        Route::get('/dashboard', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
+        Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'activities'])->name('activities');
 
-    // Books CRUD
-    Route::resource('/books', BookController::class);
-    Route::get('/books/{book}/action/{action}', [\App\Http\Controllers\BookController::class, 'displayActionDetails'])->name('books.actions.details');
-    Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
+        // Settings
+        Route::prefix('settings')->name('settings.')->group(function () {
+            Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
+            Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+            Route::resource('/genres', \App\Http\Controllers\GenreController::class);
+            Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
+            Route::resource('/covers', \App\Http\Controllers\CoverController::class);
+            Route::resource('/formats', \App\Http\Controllers\FormatController::class);
+            Route::resource('/scripts', \App\Http\Controllers\ScriptController::class);
+            Route::resource('/languages', \App\Http\Controllers\LanguageController::class);
+        });
 
-    // Issue book
-    Route::prefix('actions/issues')->name('books.issues')->group(function () {
-        Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index']);
-        Route::get('/', [\App\Http\Controllers\IssueBookController::class, 'issues'])->name('.issues');
-        Route::get('/returned', [\App\Http\Controllers\IssueBookController::class, 'returned'])->name('.returned');
-        Route::get('/breached', [\App\Http\Controllers\IssueBookController::class, 'breachedDeadline'])->name('.breached');
-        Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
-        Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
-        Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');
-    });
+        // Authors
+        Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
 
-    // Reserve book
-    Route::prefix('actions/reservations')->name('books.reservations')->group(function () {
-        Route::get('/', [\App\Http\Controllers\ReservationsController::class, 'index']);
-        Route::get('/archived', [\App\Http\Controllers\ReservationsController::class, 'archived'])->name('.archived');
-        Route::get('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reservePage'])->name('.reservePage');
-        Route::post('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reserve'])->name('.reserve');
-        Route::patch('/{book}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
-        Route::patch('/{book}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
-        Route::patch('/{book}/issue', [\App\Http\Controllers\ReservationsController::class, 'issue'])->name('.issue');
-        Route::patch('/{book}/cancel', [\App\Http\Controllers\ReservationsController::class, 'cancel'])->name('.cancel');
+        // Students
+        Route::resource('/students', \App\Http\Controllers\StudentsController::class);
+        Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
+
+        // Librarians
+        Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
+        Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
+
+        // Books CRUD
+        Route::resource('/books', BookController::class);
+        Route::get('/books/{book}/action/{action}', [\App\Http\Controllers\BookController::class, 'displayActionDetails'])->name('books.actions.details');
+        Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
+
+        // Issue book
+        Route::prefix('actions/issues')->name('books.issues')->group(function () {
+            Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index']);
+            Route::get('/', [\App\Http\Controllers\IssueBookController::class, 'issues'])->name('.issues');
+            Route::get('/returned', [\App\Http\Controllers\IssueBookController::class, 'returned'])->name('.returned');
+            Route::get('/breached', [\App\Http\Controllers\IssueBookController::class, 'breachedDeadline'])->name('.breached');
+            Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
+            Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
+            Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');
+        });
+
+        // Reserve book
+        Route::prefix('actions/reservations')->name('books.reservations')->group(function () {
+            Route::get('/', [\App\Http\Controllers\ReservationsController::class, 'index']);
+            Route::get('/archived', [\App\Http\Controllers\ReservationsController::class, 'archived'])->name('.archived');
+            Route::get('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reservePage'])->name('.reservePage');
+            Route::post('/{book}/reserve', [\App\Http\Controllers\ReservationsController::class, 'reserve'])->name('.reserve');
+            Route::patch('/{book}/accept', [\App\Http\Controllers\ReservationsController::class, 'accept'])->name('.accept');
+            Route::patch('/{book}/decline', [\App\Http\Controllers\ReservationsController::class, 'decline'])->name('.decline');
+            Route::patch('/{book}/issue', [\App\Http\Controllers\ReservationsController::class, 'issue'])->name('.issue');
+            Route::patch('/{book}/cancel', [\App\Http\Controllers\ReservationsController::class, 'cancel'])->name('.cancel');
+        });
+
     });
 });
 
