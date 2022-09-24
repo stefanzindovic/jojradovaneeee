@@ -1,103 +1,123 @@
-<nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Search form -->
-            <form class="navbar-search navbar-search-light form-inline mr-sm-3" id="navbar-search-main">
-                <div class="form-group mb-0">
-                    <div class="input-group input-group-alternative input-group-merge">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><i class="fas fa-search"></i></span>
-                        </div>
-                        <input class="form-control" placeholder="Search" type="text">
+<header
+    class="z-20 small:hidden  flex items-center text-white justify-between w-full h-[71px] pr-[30px] mx-auto bg-[#4558BE]">
+    <!-- logo -->
+    <div class="logo-font inline-flex bg-[#3F51B5] py-[18px] px-[30px]">
+        <a class="_o6689fn" href="#">
+            <div class="block">
+                <a href="dashboard.php" class="text-[20px] font-medium">
+                    <div class="flex">
+                        <img src='{{ asset('imgs/logo.svg') }}' alt="" width="35px" height="35px">
+                        <p class="text-[20px] mt-[5px]">&nbsp;&nbsp;Online Biblioteka</p>
                     </div>
-                </div>
-                <button type="button" class="close" data-action="search-close" data-target="#navbar-search-main" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </form>
-            <!-- Navbar links -->
-            <ul class="navbar-nav align-items-center  ml-md-auto ">
-                <li class="nav-item d-xl-none">
-                    <!-- Sidenav toggler -->
-                    <div class="pr-3 sidenav-toggler sidenav-toggler-dark" data-action="sidenav-pin" data-target="#sidenav-main">
-                        <div class="sidenav-toggler-inner">
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                            <i class="sidenav-toggler-line"></i>
-                        </div>
-                    </div>
-                </li>
-                <li class="nav-item d-sm-none">
-                    <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                        <i class="ni ni-zoom-split-in"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="ni ni-bell-55"></i>
-                    </a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa-solid fa-plus"></i>
-                    </a>
-                    <div class="dropdown-menu  dropdown-menu-right ">
-                        <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">NOVI</h6>
-                        </div>
-                        <a href="{{route('librarians.create')}}" class="dropdown-item">
-                            <i class="ni ni-badge"></i>
-                            <span>Bibliotekar</span>
-                        </a>
-                        <a href="{{route('students.create')}}" class="dropdown-item">
-                            <i class="ni ni-single-02"></i>
-                            <span>Učenik</span>
-                        </a>
-                        <a href="{{route('books.create')}}" class="dropdown-item">
-                            <i class="ni ni-books"></i>
-                            <span>Knjiga</span>
-                        </a>
-                        <a href="{{route('authors.create')}}" class="dropdown-item">
-                            <i class="ni ni-circle-08"></i>
-                            <span>Autor</span>
-                        </a>
-                    </div>
-                </li>
-            </ul>
-            <ul class="navbar-nav align-items-center  ml-auto ml-md-0 ">
-                <li class="nav-item dropdown">
-                    <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <div class="media align-items-center">
-                  <span class="avatar avatar-sm rounded-circle">
-                    <img alt="Image placeholder" src="{{ Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . Auth::user()->picture) : asset('storage/uploads/librarians/' . Auth::user()->picture)) : asset('imgs/' . Auth::user()->picture) }}">
-                  </span>
-                            <div class="media-body  ml-2  d-none d-lg-block">
-                                <span class="mb-0 text-sm  font-weight-bold">{{Auth::user()->name}}</span>
+
+                </a>
+            </div>
+        </a>
+    </div>
+    <!-- end logo -->
+
+    <!-- login -->
+    <div class="flex-initial">
+        <div class="relative flex items-center justify-end">
+            <div class="flex items-center">
+                <!-- Notification Icon -->
+                <div class="relative block">
+                    <a href="{{ route('dashboard') }}" class="relative inline-block px-3 py-2 focus:outline-none"
+                        aria-label="Notification">
+                        <div class="flex items-center h-5">
+                            <div class="_xpkakx">
+                                <span
+                                    class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px] ">
+                                    <i class="far fa-bell"></i>
+                                </span>
                             </div>
                         </div>
                     </a>
-                    <div class="dropdown-menu  dropdown-menu-right ">
-                        <div class="dropdown-header noti-title">
-                            <h6 class="text-overflow m-0">UPRAVLJAJ</h6>
+                </div>
+                <!-- Add Icon -->
+                <a class="inline-block border-l-[1px] border-gray-300 px-3" href="#" aria-label="Add something"
+                    id="dropdownCreate">
+                    <span
+                        class="transition duration-300 ease-in bg-[#606FC7] text-[25px] rounded-full px-[11px] py-[7px]  ">
+                        <i class="fas fa-plus"></i>
+                    </span>
+                </a>
+
+                <div
+                    class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-create">
+                    <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                        aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+                        <div class="py-1">
+                            @if (Auth::user()->role_id == 1)
+                                <a href="{{ route('librarians.create') }}" tabindex="0"
+                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                    role="menuitem">
+                                    <i class="far fa-address-book mr-[8px] ml-[5px] py-1"></i>
+                                    <span class="px-4 py-0">Bibliotekar</span>
+                                </a>
+                            @endif
+                            <a href="{{ route('students.create') }}" tabindex="0"
+                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                role="menuitem">
+                                <i class="fas fa-users mr-[5px] ml-[3px] py-1"></i>
+                                <span class="px-4 py-0">Učenik</span>
+                            </a>
+                            <a href="{{ route('books.create') }}" tabindex="0"
+                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                role="menuitem">
+                                <i class="far fa-copy mr-[10px] ml-[5px] py-1"></i>
+                                <span class="px-4 py-0">Knjiga</span>
+                            </a>
+                            <a href="{{ route('authors.create') }}" tabindex="0"
+                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                role="menuitem">
+                                <i class="far fa-address-book mr-[10px] ml-[5px] py-1"></i>
+                                <span class="px-4 py-0">Autor</span>
+                            </a>
                         </div>
-                        <a href="{{ route('librarians.show', Auth::user()->id) }}"
-                           class="dropdown-item">
-                            <i class="ni ni-single-02"></i>
-                            <span>Moj profil</span>
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                        <div class="dropdown-divider"></div>
-                        <a href="#"
-                           class="dropdown-item"
-                           onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="ni ni-user-run"></i>
-                            <span>Odjavi se</span>
-                        </a>
-                        </form>
                     </div>
-                </li>
-            </ul>
+                </div>
+                @auth
+                    <div class="ml-[10px] relative block">
+                        <a href="#" class="relative inline-block px-3 py-2 focus:outline-none" id="dropdownProfile"
+                            aria-label="User profile">
+                            <div class="flex items-center h-5">
+                                <div style="width: 45px; height: 45px;" class="mt-[15px]">
+                                    <img class="rounded-full w-full h-full"
+                                        src="{{ Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . Auth::user()->picture) : asset('storage/uploads/librarians/' . Auth::user()->picture)) : asset('imgs/' . Auth::user()->picture) }}"
+                                        alt="Profilna fotografija">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div
+                        class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-profile">
+                        <div class="absolute right-[12px] w-56 mt-[35px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
+                            aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
+                            <div class="py-1">
+                                <a href="{{ route('librarians.show', Auth::user()->id) }}"
+                                    tabindex="0"
+                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                    role="menuitem">
+                                    <i class="fas fa-file mr-[8px] ml-[5px] py-1"></i>
+                                    <span class="px-4 py-0">Profil</span>
+                                </a>
+                                <form action="{{ route('logout') }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" tabindex="0"
+                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
+                                        role="menuitem">
+                                        <i class="fas fa-sign-out-alt mr-[5px] ml-[5px] py-1"></i>
+                                        <span class="px-4 py-0">Odjavi se</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</nav>
+    @endauth
+    <!-- end login -->
+</header>

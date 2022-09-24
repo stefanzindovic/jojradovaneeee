@@ -1,44 +1,33 @@
-<!--
-
-=========================================================
-* Impact Design System - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/impact-design-system
-* Copyright 2010 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/impact-design-system/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@yield('page_title')</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
+    <title>Online biblioteka | @yield('page_title')</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('imgs/library-favicon.ico') }}">
 
     <x-styles></x-styles>
-
 </head>
 
-
 <body>
-
-<x-sidebar></x-sidebar>
-
-<div class="main-content" id="panel">
+    <!-- Header navigation -->
     <x-header></x-header>
-    @yield('page_content')
-</div>
 
-<x-scripts></x-scripts>
+    <main class="flex flex-row small:hidden">
+        <!-- Sidebar navigation -->
+        <x-sidebar></x-sidebar>
+
+        <!-- Page content -->
+        @yield('page_content')
+    </main>
+
+    <x-inProgress></x-inProgress>
+    <x-scripts></x-scripts>
 </body>
 
 </html>

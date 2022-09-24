@@ -1,18 +1,3 @@
-<!-- Core -->
-<script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('assets/vendor/js-cookie/js.cookie.js')}}"></script>
-<script src="{{asset('assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
-<script src="{{asset('assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
-<!-- Optional JS -->
-<script src="{{asset('assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
-<script src="{{asset('assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
-<!-- Argon JS -->
-<script src="{{asset('assets/js/dashboard.js?v=1.2.0')}}"></script>
-<!-- Demo JS - remove this in your project -->
-<script src="{{asset('assets/js/demo.min.js')}}"></script>
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
     integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -43,7 +28,7 @@
 @vite('./resources/js/validations/issueBookValidation.js')
 
 <!-- Cropper -->
-@vite('./resources/js/cropper/cropper.min.js')
+<script src="{{asset('assets/js/cropper.min.js')}}"></script>
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
