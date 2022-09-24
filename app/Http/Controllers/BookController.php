@@ -271,10 +271,23 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         try {
-            // Todo: Add check if there is some actions used on this book before deleting it
+            // Check if there is some actions used on this book before deleting it
             if ($book->booksUnderActions()->count() > 0) {
                 return back()->with('errorMessage', 'Kopije ove knjige se nalaze u evidenciji biblioteke. Nije je moguće obrisati.');
             }
+
+            // Delete book multimedia
+            if ($book->gallery()->count() > 0) {
+                $uploadPath = 'uploads/books/';
+
+                foreach ($book->gallery() as $gallery) {
+                    $oldPicturePath = $uploadPath . $gallery->picture;
+                    if (Storage::disk('public')->exists($oldPicturePath)) {
+                        Storage::disk('public')->delete($oldPicturePath);
+                    }
+                }
+            }
+            // delete book
             $book->delete();
 
             return to_route('books.index')->with('errorMessage', 'Knjiga je uspješno obrisana.');
