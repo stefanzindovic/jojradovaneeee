@@ -272,6 +272,9 @@ class BookController extends Controller
     {
         try {
             // Todo: Add check if there is some actions used on this book before deleting it
+            if ($book->booksUnderActions()->count() > 0) {
+                return back()->with('errorMessage', 'Kopije ove knjige se nalaze u evidenciji biblioteke. Nije je moguće obrisati.');
+            }
             $book->delete();
 
             return to_route('books.index')->with('errorMessage', 'Knjiga je uspješno obrisana.');
