@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('isbn');
             $table->string('picture')->default('book-placeholder.png');
             $table->string('total_pages')->default('10');
