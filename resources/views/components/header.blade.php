@@ -4,7 +4,7 @@
 
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
-                <img src="{{asset('img/TIM1.png')}}" height="30">
+                <img src="{{asset('imgs/Intelecto.png')}}" height="28">
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
