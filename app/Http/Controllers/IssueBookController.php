@@ -164,11 +164,15 @@ class IssueBookController extends Controller
         }
     }
 
-    public function returnMultiple(HttpRequest $request){
-        return view('pages.books.actions.issues.returnMultiple');
+    public function returnMultiple(Book $book, HttpRequest $request)
+    {
+        $books = Book::issuedBook($book->id);
+
+        return view('pages.books.actions.issues.returnMultiple', compact('books'));
     }
 
-    public function writeOffMultiple(HttpRequest $request){
+    public function writeOffMultiple(Book $book, HttpRequest $request)
+    {
         return view('pages.books.actions.issues.writeoffmultiple');
     }
 }
