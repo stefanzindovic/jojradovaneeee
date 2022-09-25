@@ -1,6 +1,6 @@
+<script src="{{asset('dashboardfiles/js/cropper.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/vendor/@popperjs/core/dist/umd/popper.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
-<script src="{{ asset('js/cropper.min.js') }}"></script>
 <!-- Vendor JS -->
 <script src="{{asset('dashboardfiles/vendor/onscreen/dist/on-screen.umd.min.js')}}"></script>
 
@@ -16,11 +16,8 @@
 
 <!-- Datepicker -->
 <script src="{{asset('dashboardfiles/vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
-<script src="{{asset('dashboardfiles/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/assets/js/multi.js')}}"></script>
-<script src="{{asset('dashboardfiles/assets/js/PolicyAutoSave.js')}}"></script>
 <script type="text/javascript" charset="utf8" src={{asset('dashboardfiles/vendor/datatable/datatables.js')}}></script>
-{{--<script src="https://cdn.datatables.net/responsive/2.2.7/js/dataTables.responsive.js"></script>--}}
 <!-- Sweet Alerts 2 -->
 <script src="{{asset('dashboardfiles/vendor/sweetalert2/dist/sweetalert2.all.min.js')}}"></script>
 
@@ -44,11 +41,6 @@
 <script src="{{asset('dashboardfiles/assets/js/volt.js')}}"></script>
 
 
-
-<script src="{{asset('select2/js/select2.min.js')}}"></script>
-{{--Uploader--}}
-<script src="{{asset('js/imageuploadify.min.js')}}"></script>
-
 <script src="{{asset('dashboardfiles/vendor/choices/choices.min.js')}}"></script>
 
 <script src="{{asset('dashboardfiles/vendor/notyf/notyf.min.js')}}"></script>
@@ -68,8 +60,6 @@
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://unpkg.com/create-file-list"></script>
 
-<!-- Datatables -->
-<script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
 
 <!-- Validations -->
 @vite('./resources/js/validations/policyInputsRestrictions.js')
@@ -89,8 +79,6 @@
 @vite('./resources/js/validations/issueBookValidation.js')
 
 <!-- Cropper -->
-<script src="{{asset('dashboardfiles/js/cropper.min.js')}}"></script>
-@vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
 @vite('./resources/js/booksTabNavigation.js')
