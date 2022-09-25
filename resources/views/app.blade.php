@@ -9,6 +9,7 @@
 
 
     <x-styles></x-styles>
+    @yield('style')
 
     <!-- NOTICE: You can use the _analytics.html partial to include production code specific code & trackers -->
 
@@ -24,6 +25,15 @@
 <main class="content">
 
     <x-header></x-header>
+    <div class="row">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+            <div class="d-block mb-4 mb-md-0">
+                <x-breadcrumb></x-breadcrumb>
+                <h2 class="h4">@yield('page_title')</h2>
+            </div>
+            @yield('interaction')
+        </div>
+    </div>
     @yield('page_content')
 </main>
 
