@@ -137,7 +137,7 @@ class User extends Authenticatable
             return true;
         }
 
-        if (User::getIssuedBooks($student_id)->pluck('book_id')->contains($book_id)) {
+        if (User::getIssuedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getPendingReservedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getActiveReservedBooks($student_id)->pluck('book_id')->contains($book_id)) {
             return true;
         }
 
