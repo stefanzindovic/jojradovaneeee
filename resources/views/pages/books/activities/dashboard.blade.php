@@ -317,70 +317,67 @@ Date::setLocale('sr');
                         <h3 class="uppercase mb-[20px] text-left py-[30px]">
                             Statistika
                         </h3>
-                        <div class="text-right">
-                            <div class="flex pb-[30px]">
-                                <a href="{{ route('books.issues.issues') }}"
-                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="izdateKnjige.php">
-                                    Izdate knjige
-                                </a>
-                                <div
-                                    class="ml-[30px] bg-green-600 transition duration-200 ease-in  hover:bg-green-900 stats-bar-green h-[26px]">
-
-                                </div>
-                                <p class="ml-[10px] number-green text-[#2196f3] hover:text-blue-600">
-                                    {{ $issuedBooksCounter }}
-                                </p>
-                            </div>
-                            <div class="flex pb-[30px]">
-                                <a href="{{ route('books.reservations') }}"
-                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="aktivneRezervacije.php">
-                                    Rezervisane knjige
-                                </a>
-                                <div
-                                    class="ml-[30px] bg-yellow-600 transition duration-200 ease-in  hover:bg-yellow-900 stats-bar-yellow  h-[26px]">
-
-                                </div>
-                                <p class="ml-[10px] text-[#2196f3] hover:text-blue-600 number-yellow">
-                                    {{ $reservationsCounter }}
-                                </p>
-                            </div>
-                            <div class="flex pb-[30px]">
-                                <a href="{{ route('books.issues.breached') }}"
-                                    class="w-[145px] text-[#2196f3] hover:text-blue-600" href="knjigePrekoracenje.php">
-                                    Knjige u prekoracenju
-                                </a>
-                                <div
-                                    class="ml-[30px] bg-red-600 transition duration-200 ease-in hover:bg-red-900 stats-bar-red h-[26px]">
-
-                                </div>
-                                <p class="ml-[10px] text-[#2196f3] hover:text-blue-600 number-red">
-                                    {{ $breachedBooksCounter }}
-                                </p>
-                            </div>
-                        </div>
-                        <div class="absolute h-[220px] w-[1px] bg-black top-[78px] left-[174px]">
-                        </div>
-                        <div
-                            class="absolute flex conte left-[175px] border-t-[1px] border-[#e4dfdf] top-[248px] pr-[87px]">
-                            <p class="ml-[-13px]">
-                                0
-                            </p>
-                            <p class="ml-[57px]">
-                                20
-                            </p>
-                            <p class="ml-[57px]">
-                                40
-                            </p>
-                            <p class="ml-[57px]">
-                                60
-                            </p>
-                            <p class="ml-[57px]">
-                                80
-                            </p>
-                        </div>
+                        <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    {{-- Chartjs --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+        integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        const labels = ["Izdate knjige", "U prekoračenju", "Rezervisane"]
+        const data = {
+            labels: labels,
+            datasets: [{
+                label: "Broj knjiga",
+                data: [{{ $issuedBooksCounter }}, {{ $breachedBooksCounter }}, {{ $reservationsCounter }}],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.7)',
+                    'rgba(36, 108, 160, 0.7)',
+                    'rgba(18, 54, 79, 0.7)',
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 0.1)',
+                    'rgba(36, 108, 160, 0.1)',
+                    'rgba(18, 54, 79, 0.1)',
+                ],
+                borderWidth: 1,
+            }]
+        };
+        const config = {
+            type: 'bar',
+            data,
+            options: {
+                ticks: {
+                    precision: 0
+                },
+                indexAxis: 'y',
+                scales: {
+                    x: {
+                        grid: {
+                            // beginAtZero: true,
+                            color: "rgba(235,235,235)",
+                            borderWidth: 1,
+                            // borderOffset: 2,
+                            borderColor: "rgba(120,120,120)"
+                        }
+                    },
+                    y: {
+                        grid: {
+                            display: false,
+                            borderWidth: 1,
+                            // borderOffset: 2,
+                            borderColor: "rgba(120,120,120)"
+                        }
+                    }
+                }
+            }
+        };
+        const myChart = new Chart(document.getElementById('myChart'), config);
+    </script>
 @endsection

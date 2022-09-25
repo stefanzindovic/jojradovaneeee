@@ -3,6 +3,11 @@
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
+{{-- Chartjs --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+    integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <!-- File upload -->
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://unpkg.com/create-file-list"></script>
@@ -28,7 +33,7 @@
 @vite('./resources/js/validations/issueBookValidation.js')
 
 <!-- Cropper -->
-<script src="{{asset('assets/js/cropper.min.js')}}"></script>
+<script src="{{ asset('assets/js/cropper.min.js') }}"></script>
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
