@@ -12,17 +12,24 @@ use Illuminate\Support\Facades\Route;
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
+
 |
 */
-Route::get('/', 'App\Http\Controllers\HomeController@index')->name('home');
-Route::get('/knjige', 'App\Http\Controllers\HomeController@indexKnjige')->name('knjige');
+
+Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->name('home');
+Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
+Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class,'show'])->name('knjige.show');
 
 Route::middleware(['auth'])->group(function () {
 
     //User Side
-    Route::get('/profil', 'App\Http\Controllers\HomeController@show')->name('profil');
-    Route::get('/profil/edit/', 'App\Http\Controllers\HomeController@edit')->name('profil.edit');
-    Route::patch('/profil/{id}', 'App\Http\Controllers\HomeController@update')->name('profil.update');
+    Route::get('/profil', [\App\Http\Controllers\ProfileController::class,'show'])->name('profil');
+    Route::get('/profil/edit/', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profil.edit');
+    Route::patch('/profil/{id}', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profil.update');
+    Route::get('/rezervacije', [\App\Http\Controllers\UserReservationController::class, 'index'])->name('rezervacije.index');
+    Route::get('/rezervisi/{id}', [\App\Http\Controllers\UserReservationController::class, 'create'])->name('rezervacija.knjige');
+    Route::post('/rezervisi/{book}',[\App\Http\Controllers\UserReservationController::class, 'rezervisi'])->name('rezervisi.knjigu');
+    Route::patch('/otkazi/{book}', [\App\Http\Controllers\UserReservationController::class, 'otkazi'])->name('rezervacija.otkazi');
 
     Route::middleware(['staff'])->group(function (){
 
