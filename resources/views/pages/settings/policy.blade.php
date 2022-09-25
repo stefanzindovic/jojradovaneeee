@@ -151,6 +151,30 @@
                             </div>
                         </form>
                         <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-200"></li>
+                        <form id="conflictDeadlineForm" action="{{ route('settings.policies.update', $policies[2]->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label" for="value">Rok konflikta</label>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <input type="hidden" id="conflictPolicyId" value="{{$policies[2]->id}}">
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="pt-3">
+                                        <div class="input-group">
+                                            <input class="form-control" id="conflictDeadline" name="value{{$policies[2]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[2]->id}", $policies[2]->value) }}"/>
+                                            <span class="input-group-text">dana</span>
+                                        </div>
+                                    </div>
+                                    @error("value{$policies[2]->id}")
+                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
+                                    <div id="conflictMessageByJs"></div>
+                                </div>
+                            </div>
+                        </form>
+                        <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-200"></li>
                         <form id="maxBooksPerUserForm"
                               action="{{ route('settings.policies.update', $policies[3]->id) }}" method="POST">
                             @csrf
