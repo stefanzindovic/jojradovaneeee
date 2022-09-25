@@ -193,7 +193,7 @@ class ReservationsController extends Controller
             $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
-            return to_route('books.reservations')->with('successMessage', 'Rezervacija je odobrena.');
+            return to_route('books.reservations')->with('successMessage', 'Rezervacija je odbijena.');
         } catch (\Throwable $th) {
             dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');

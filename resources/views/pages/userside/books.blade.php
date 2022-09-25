@@ -15,23 +15,45 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-3">
-                                    <h3>FILTERI</h3>
-
+                                <div class="col-md-3">
+                                    <h3 class="text-primary">KATEGORIJE</h3>
+                                    <div class="scroll" style="min-height: 250px;max-height: 350px;">
+                                        <ul class="list-group">
+                                            @foreach($categories as $category)
+                                                <li class="label list-group-item">
+                                                    <input type="checkbox" class="me-2" value="{{$category->id}}">
+                                                    {{$category->title}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <h3 class="text-primary pt-5">ŽANROVI</h3>
+                                    <div class="scroll" style="min-height: 250px;max-height: 350px;">
+                                        <ul class="list-group">
+                                            @foreach($genres as $genre)
+                                                <li class="label list-group-item">
+                                                    <input type="checkbox" class="me-2" value="{{$genre->id}}">
+                                                    {{$genre->title}}
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="col-9">
+                                <div class="col-md-9">
                                     <div class="row">
                                         @foreach($books as $book)
-                                            <div class="col-4">
+                                            <div class="col-md-4">
                                                 <div class="card" style="width: 18rem;">
-                                                    <img style="object-fit: fill;height: 288px;width: 288px" src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif" class="book-image" alt="...">
+                                                    <a href="{{route('knjige.show', $book->id)}}">
+                                                       <img style="object-fit: cover;height: 288px;width: 288px" src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif" class="book-image" alt="...">
+                                                    </a>
                                                     <div class="card-body">
-                                                        <h5 class="card-title">{{$book->title}}</h5>
+                                                        <h2 class="card-title"><a href="{{route('knjige.show', $book->id)}}">{{$book->title}}</a></h2>
                                                         <p class="card-text">
                                                             {{ Str::limit($book->description),80 }}
                                                         </p>
                                                         <div class="d-grid gap-2">
-                                                            <a href="#" class="btn btn-primary">Rezerviši</a>
+                                                            <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
                                                         </div>
                                                     </div>
                                                 </div>

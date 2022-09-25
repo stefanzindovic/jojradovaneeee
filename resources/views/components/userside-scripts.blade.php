@@ -1,4 +1,5 @@
 <!-- Vendor JS Files -->
+<script src="{{asset('assets/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('userside/vendor/purecounter/purecounter_vanilla.js')}}"></script>
 <script src="{{asset('userside/vendor/aos/aos.js')}}"></script>
 <script src="{{asset('userside/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -36,16 +37,25 @@
 @if (session('createMessage'))
     <script>
         notyf.success("{{ Session::get('createMessage') }}");
+        {{ Session::forget('createMessage') }}
     </script>
 @endif
 @if (session('editMessage'))
     <script>
         notyf.success("{{ Session::get('editMessage') }}");
+        {{ Session::forget('editMessage') }}
     </script>
 @endif
 @if (session('successMessage'))
     <script>
         notyf.success("{{ Session::get('successMessage') }}");
+        {{ Session::forget('succcessMessage') }}
+    </script>
+@endif
+@if (session('errorMessage'))
+    <script>
+        notyf.error("{{ Session::get('errorMessage') }}");
+        {{ Session::forget('errorMessage') }}
     </script>
 @endif
 
