@@ -1,7 +1,7 @@
 <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
     <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
         <li class="breadcrumb-item">
-            <a href="/">
+            <a href="/dashboard">
                 <svg class="icon icon-xxs" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                      xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -9,7 +9,9 @@
                 </svg>
             </a>
         </li>
-        {{--        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>--}}
+
+        {{--   Za ovaj hard kod je trebalo puno rada, znoja i mozdanih celija  --}}
+
         @php
             $currentUrl = request()->path();
             $currentDomain = request()->getSchemeAndHttpHost();
@@ -18,23 +20,21 @@
             $breadcrumbLength = count($breadcrumbLCase);
             $breadcrumbUrl = $currentDomain;
             $i=0;
+            $mode = 0;
 
-            if(isset($breadcrumbLCase[1])){
+            if(isset($breadcrumbLCase[1]) && !isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1])){
                 $mode = 1;
             }
-
-            if(isset($breadcrumbLCase[3])){
+            else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1]) && is_numeric($breadcrumbLCase[3])){
                 $mode = 2;
             }
-            else{
-                $mode = 0;
+            else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[2])){
+                $mode = 3;
             }
 
             switch ($mode){
                 case 0: break;
                 case 1:
-                if (is_numeric($breadcrumbLCase[1])){
-                    //$breadcrumbUCase[1] =  $user->name;
                     switch ($breadcrumbLCase[0]){
                         case 'librarians':
                                 $user = \App\Models\User::findOrFail($breadcrumbLCase[1]);
@@ -55,35 +55,67 @@
                                 $author = \App\Models\Author::findOrFail($breadcrumbLCase[1]);
                                 $breadcrumbUCase[1] =  $author->full_name;
                             break;
+
                     }
-                }
-                break;
+                    break;
 
                 case 2:
+                    $book = \App\Models\Book::findOrFail($breadcrumbLCase[1]);
+                    $action = \App\Models\BookActionStatus::findOrFail($breadcrumbLCase[3]);
 
-                    if(is_numeric($breadcrumbLCase[1]) && is_numeric($breadcrumbLCase[3])){
-                        $book = \App\Models\Book::findOrFail($breadcrumbLCase[1]);
-                        $action = \App\Models\BookActionStatus::findOrFail($breadcrumbLCase[3]);
+                    $breadcrumbUCase[1] =  $book->title;
+                    $breadcrumbUCase[3] =  $action->name;
+                    break;
 
-                        $breadcrumbUCase[1] =  $book->title;
-                        $breadcrumbUCase[3] =  $action->name;
+                case 3:
+                    switch($breadcrumbLCase[1]){
+                        case 'categories':
+                            $category = \App\Models\Category::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $category->title;
+                            break;
+                        case 'genres':
+                            $genre = \App\Models\Genre::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $genre->title;
+                            break;
+                        case 'publishers':
+                            $publisher = \App\Models\Publishers::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $publisher->name;
+                            break;
+                        case 'covers':
+                            $cover = \App\Models\Cover::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $cover->name;
+                            break;
+                        case 'formats':
+                            $format = \App\Models\Format::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $format->name;
+                            break;
+                        case 'scripts':
+                            $script = \App\Models\Script::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $script->name;
+                            break;
+                        case 'languages':
+                            $language = \App\Models\Language::findOrFail($breadcrumbLCase[2]);
+                            $breadcrumbUCase[2] = $language->name;
+                            break;
                     }
                     break;
             }
-
 
             //=================================================
             //  If any words dont appear as they should be in the
             //  breadcrumb down in array $seperateThese put it like this
             // '(exactly how the words appear)|(how they should appear)',
             //=================================================
+
             $seperateThese = [
                 'Izdateknjige|Izdate Knjige',
                 'Vraceneknjige|Vracene Knjige',
                 'Rezervacijearhiva|Arhivirane Rezervacije',
             ];
 
+
             foreach ($breadcrumbUCase as $key => $crumb){
+
                 $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
 
                 foreach ($seperateThese as $seperate){
@@ -92,11 +124,19 @@
                         $crumb = $temp[1];
                     }
                 }
-                if ($key + 1 == $breadcrumbLength){
+                if($mode == 3 && $key==2){
+                    echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
+                }
+                else if ($key + 1 == $breadcrumbLength){
                     echo "<li style=\"color: #131732; font-weight: bold;\" class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
                 }
                 else{
-                    echo "<li class=\"breadcrumb-item active\" aria-current=\"page\"><a href=\"$breadcrumbUrl\">$crumb</a></li>";
+                    if(isset($breadcrumbUCase[2]) && $breadcrumbUCase[2] == "Action" && $key == 2){
+                         echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
+                    }
+                    else{
+                        echo "<li class=\"breadcrumb-item active\" aria-current=\"page\"><a href=\"$breadcrumbUrl\">$crumb</a></li>";
+                    }
                 }
                 $i++;
             }
