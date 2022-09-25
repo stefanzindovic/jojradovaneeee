@@ -4,99 +4,43 @@
     {{ $author->full_name }}
 @endsection
 
+@section('interaction')
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group ms-2 me-2">
+            <a href="{{route('authors.edit', $author->id)}}" type="button" class="btn btn-sm btn-outline-primary">Izmijeni autora</a>
+        </div>
+        <form class="mb-0" id="delete-form" action="{{route('authors.destroy', $author->id)}}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-outline-danger">Obriši</button>
+        </form>
+    </div>
+
+@endsection
+
 @section('page_content')
-    <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading">
-            <div class="flex justify-between border-b-[1px] border-[#e4dfdf]">
-                <div class="pl-[30px] py-[10px] flex flex-col">
-                    <div>
-                        <h1>
-                            {{$author->full_name}}
-                        </h1>
+    <div class="card card-body rounded-0 border-0 shadow">
+        <div class="row">
+            <div class="col-md-2 pb-2">
+                    <div class="text-center">
+                        <img style="height: 250px;width: 250px;" @if($author->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}} @else src="{{asset('storage/uploads/authors/' . $author->picture)}} @endif" alt="Author Image">
                     </div>
-                    <div>
-                        <nav class="w-full rounded">
-                            <ol class="flex list-reset">
-                                <li>
-                                    <a href="{{route('authors.index')}}" class="text-[#2196f3] hover:text-blue-600">
-                                        Evidencija autora
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <p class="text-gray-400">
-                                        {{ $author->full_name }}
-                                    </p>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-                <div class="pt-[24px] pr-[30px]">
-                    <p class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsAutor hover:text-[#606FC7]">
-                        <i
-                            class="fas fa-ellipsis-v"></i>
-                    </p>
-                    <div
-                        class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-autor">
-                        <div class="absolute right-0 w-56 mt-[2px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                             aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-                            <div class="py-1">
-                                <a href="{{ route('authors.edit', $author->id) }}" tabindex="0"
-                                   class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                   role="menuitem">
-                                    <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-                                    <span class="px-4 py-0">Izmijeni</span>
-                                </a>
-                                <form
-                                    onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovog autora?')){return false;}"
-                                    method="POST" action="{{route('authors.destroy', $author->id)}}">
-                                    @csrf
-                                    @method('DELETE')
-
-                                    <button type="submit" tabindex="0"
-                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                            role="menuitem">
-                                        <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                        <span class="px-4 py-0">Izbriši</span>
-                                    </button>
-                                </form>
-                            </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <p class="form-label">Ime</p>
+                            <p class="h6">{{$author->full_name}}</p>
+                        </div>
+                        <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-200"></li>
+                        <div class="mb-3">
+                            <p class="form-label">Opis</p>
+                            <p>{!! $author->bio !!}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Space for content -->
-        <div class="flex flex-row ml-[30px]">
-            <div class="pl-[4px] mr-[70px] height-profile pb-[30px] scroll mt-[20px]">
-                <div class="mr-[30px]">
-                    <div class="mt-[20px]">
-                        <span class="text-gray-500">Ime i prezime</span>
-                        <p class="font-medium">{{ $author->full_name }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Opis</span>
-                        <p class="font-medium max-w-[550px]">
-                            {!! $author->bio !!}
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex flex-col">
-                <label class="mt-6">
-                    <div style="width: 220px; height: 220px;" id="empty-cover-art"
-                         class="relative py-[48px] text-center border-2 border-gray-300 border-solid">
-                        <div class="py-4">
-                            <img id="imageOutput" class="absolute w-full h-full bottom-0" @if($author->picture === 'profile-picture-placeholder.jpg') src="{{asset('imgs/profile-picture-placeholder.jpg')}} @else src="{{asset('storage/uploads/authors/' . $author->picture)}} @endif">
-                        </div>
-                    </div>
-                </label>
-            </div>
-        </div>
-    </section>
+    </div>
 @endsection
