@@ -129,8 +129,11 @@ class User extends Authenticatable
 
         //todo: Replace 2 with policy value in future
         $activeBookCount = User::getIssuedBooks($student_id)->count();
+        $pendingReservationsCount = User::getPendingReservedBooks($student_id)->count();
+        $activeReservationsCount = User::getActiveReservedBooks($student_id)->count();
 
-        if ($activeBookCount > 2) {
+
+        if (($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 2) {
             return true;
         }
 
