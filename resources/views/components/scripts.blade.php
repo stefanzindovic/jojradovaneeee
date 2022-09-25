@@ -1,11 +1,10 @@
-<script src="{{asset('dashboardfiles/js/cropper.min.js')}}"></script>
+<script src="{{asset('dashboardfiles/assets/js/jquery.min.js')}}"></script>
+<script type="text/javascript" charset="utf8" src={{asset('dashboardfiles/vendor/datatable/datatables.js')}}></script>
+<script src="{{asset('assets/js/cropper.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/vendor/@popperjs/core/dist/umd/popper.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/vendor/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- Vendor JS -->
 <script src="{{asset('dashboardfiles/vendor/onscreen/dist/on-screen.umd.min.js')}}"></script>
-
-<!-- Slider -->
-<script src="{{asset('dashboardfiles/vendor/nouislider/distribute/nouislider.min.js')}}"></script>
 
 <!-- Smooth scroll -->
 <script src="{{asset('dashboardfiles/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js')}}"></script>
@@ -17,7 +16,6 @@
 <!-- Datepicker -->
 <script src="{{asset('dashboardfiles/vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/assets/js/multi.js')}}"></script>
-<script type="text/javascript" charset="utf8" src={{asset('dashboardfiles/vendor/datatable/datatables.js')}}></script>
 <!-- Sweet Alerts 2 -->
 <script src="{{asset('dashboardfiles/vendor/sweetalert2/dist/sweetalert2.all.min.js')}}"></script>
 
@@ -45,10 +43,6 @@
 
 <script src="{{asset('dashboardfiles/vendor/notyf/notyf.min.js')}}"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-    integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 {{-- Chartjs --}}
@@ -77,8 +71,6 @@
 @vite('./resources/js/validations/reserveBookValidation.js')
 @vite('./resources/js/validations/issueBookValidation.js')
 
-<!-- Cropper -->
-<script src="{{ asset('assets/js/cropper.min.js') }}"></script>
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
@@ -96,5 +88,4 @@
 <!-- Custom -->
 @vite('./resources/js/autoUpdatePolicy.js')
 @vite('./resources/js/deleteOldPictureFromMultimedia.js')
-@vite('./resources/js/dataTables.js')
 @vite('./resources/js/main.js')
