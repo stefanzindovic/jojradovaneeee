@@ -88,7 +88,7 @@
                             <tbody class="align-middle">
                             @foreach ($books as $book)
                                 <tr>
-                                    <td class="text-center">
+                                    <td class="">
                                         <img style="width: 35px; height: 35px;"
                                              class="Image"
                                              src="@if ($book->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->book->picture) }} @endif"

@@ -5,632 +5,218 @@
 @endsection
 
 @section('page_content')
-    <section class="w-screen h-screen pl-[80px] py-4 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading mt-[7px]">
-            <h1 class="pl-[30px] pb-[21px] border-b-[1px] border-[#e4dfdf] ">
-                Aktivne rezervacije
-            </h1>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="mb-2">
+                <div class="row py-2 px-2 mx-1 rounded  hoverItem">
+                    <a href="{{route('books.issues.issues')}}" class="hoverText nav-link rounded-3">
+                    <span class="sidebar-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <path d="M8.235 1.559a.5.5 0 0 0-.47 0l-7.5 4a.5.5 0 0 0 0 .882L3.188 8 .264 9.559a.5.5 0 0 0 0 .882l7.5 4a.5.5 0 0 0 .47 0l7.5-4a.5.5 0 0 0 0-.882L12.813 8l2.922-1.559a.5.5 0 0 0 0-.882l-7.5-4zm3.515 7.008L14.438 10 8 13.433 1.562 10 4.25 8.567l3.515 1.874a.5.5 0 0 0 .47 0l3.515-1.874zM8 9.433 1.562 6 8 2.567 14.438 6 8 9.433z"/>
+                        </svg>
+                    </span>
+                        <span class="sidebar-text ps-2">Izdate knjige</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="row py-2 px-2 mx-1 rounded hoverItem">
+                    <a href="{{route('books.issues.returned')}}" class="hoverText nav-link rounded-3">
+                        <span class="sidebar-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                            </svg>
+                        </span>
+                        <span class="sidebar-text ps-2">Vraćene knjige</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="row py-2 px-2 mx-1 rounded hoverItem">
+                    <a href="{{ route('books.issues.breached') }}" class="hoverText nav-link rounded-3">
+                    <span class="sidebar-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
+                        </svg>
+                        </span>
+                        <span class="sidebar-text ps-2">Knjige u prekoračenju</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="row py-2 px-2 mx-1 rounded hoverItemActive">
+                    <a href="#" class="hoverTextActive nav-link rounded-3">
+                    <span class="sidebar-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <path d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                        </svg>
+                        </span>
+                        <span class="sidebar-text ps-2">Aktivne rezervacije</span>
+                    </a>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="row py-2 px-2 mx-1 rounded hoverItem">
+                    <a href="{{route('books.reservations.archived')}}" class="hoverText nav-link rounded-3">
+                    <span class="sidebar-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                            <path d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 7V5H0v5h5a1 1 0 1 1 0 2H0v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9h-6a1 1 0 1 1 0-2h6z"/>
+                        </svg>
+                        </span>
+                        <span class="sidebar-text ps-2">Arhivirane rezervacije</span>
+                    </a>
+                </div>
+            </div>
         </div>
-        <!-- Space for content -->
-        <div class="scroll height-dashboard">
-
-            <div>
-                <!-- Space for content -->
-                <div class="flex justify-start pt-3 bg-white">
-                    <div class="mt-[10px]">
-                        <ul class="text-[#2D3B48]">
-                            <li class="mb-[4px]">
-                                <div class="w-[300px] pl-[32px]">
-                                    <span class=" whitespace-nowrap w-full text-[25px]  flex justify-between fill-current">
-                                        <div
-                                            class="py-[15px] px-[20px] w-[268px] cursor-pointer group hover:bg-[#EFF3F6] rounded-[10px]">
-                                            <a href="{{ route('books.issues.issues') }}" aria-label="Sve knjige"
-                                                class="flex items-center">
-                                                <i
-                                                    class="text-[#707070] transition duration-300 ease-in group-hover:text-[#576cdf] far fa-copy text-[20px]"></i>
-                                                <div>
-                                                    <p
-                                                        class="transition duration-300 ease-in group-hover:text-[#576cdf]  text-[15px] ml-[18px]">
-                                                        Izdate knjige
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="mb-[4px]">
-                                <div class="w-[300px] pl-[32px]">
-                                    <span class=" whitespace-nowrap w-full text-[25px] flex justify-between fill-current">
-                                        <div
-                                            class="group hover:bg-[#EFF3F6] py-[15px] px-[20px] w-[268px] rounded-[10px] cursor-pointer">
-                                            <a href="{{ route('books.issues.returned') }}" aria-label="Vracene knjige"
-                                                class="flex items-center">
-                                                <i
-                                                    class="transition duration-300 ease-in  text-[#707070] text-[20px] fas fa-file group-hover:text-[#576cdf]"></i>
-                                                <div>
-                                                    <p
-                                                        class="transition duration-300 ease-in  text-[15px] ml-[21px] group-hover:text-[#576cdf]">
-                                                        Vracene knjige
-                                                    </p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="mb-[4px]">
-                                <div class="w-[300px] pl-[28px]">
-                                    <span class=" whitespace-nowrap w-full text-[25px] flex justify-between fill-current">
-                                        <div
-                                            class="group hover:bg-[#EFF3F6] py-[15px] px-[20px] w-[268px] rounded-[10px] cursor-pointer">
-                                            <a href="{{ route('books.issues.breached') }}"
-                                                aria-label="Knjige na raspolaganju" class="flex items-center">
-                                                <i
-                                                    class="group-hover:text-[#576cdf] text-[#707070] text-[20px] fas fa-exclamation-triangle transition duration-300 ease-in "></i>
-                                                <div>
-                                                    <p
-                                                        class="text-[15px] ml-[17px] transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                                        Knjige u prekoracenju</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="mb-[4px]">
-                                <div class="w-[300px] pl-[32px]">
-                                    <span class=" whitespace-nowrap w-full text-[25px] flex justify-between fill-current">
-                                        <div
-                                            class="group bg-[#EFF3F6] hover:bg-[#EFF3F6] py-[15px] px-[20px] w-[268px] rounded-[10px] cursor-pointer">
-                                            <a href="{{ route('books.reservations') }}" aria-label="Rezervacije"
-                                                class="flex items-center">
-                                                <i
-                                                    class="text-[#576cdf] text-[20px] far fa-calendar-check transition duration-300 ease-in"></i>
-                                                <div>
-                                                    <p
-                                                        class="text-[15px] ml-[19px] transition duration-300 ease-in text-[#576cdf]">
-                                                        Aktivne rezervacije</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </li>
-                            <li class="mb-[4px]">
-                                <div class="w-[300px] pl-[32px]">
-                                    <span class=" whitespace-nowrap w-full text-[25px] flex justify-between fill-current">
-                                        <div
-                                            class="group hover:bg-[#EFF3F6] py-[15px] px-[20px] w-[268px] rounded-[10px] cursor-pointer">
-                                            <a href="{{ route('books.reservations.archived') }}" aria-label="Rezervacije"
-                                                class="flex items-center">
-                                                <i
-                                                    class="text-[#707070] text-[20px] fas fa-calendar-alt transition duration-300 ease-in group-hover:text-[#576cdf]"></i>
-                                                <div>
-                                                    <p
-                                                        class="text-[15px] ml-[19px] transition duration-300 ease-in group-hover:text-[#576cdf]">
-                                                        Arhivirane rezervacije</p>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="w-full mt-[10px] ml-2 px-2">
-                        <table class="overflow-hidden shadow-lg rounded-xl w-full border-[1px] border-[#e4dfdf] rezervacije"
-                            id="myTable">
-                            <thead class="bg-[#EFF3F6]">
-                                <tr class="border-b-[1px] border-[#e4dfdf]">
-                                    <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
-                                        <label class="inline-flex items-center">
-                                            <input type="checkbox" class="form-checkbox">
-                                        </label>
-                                    </th>
-                                    <th class="flex items-center px-4 py-4 leading-4 tracking-wider text-left">Naziv
-                                        knjige<a href="#"><i class="ml-2 fa-lg fas fa-long-arrow-alt-down"
-                                                onclick="sortTable()"></i></a>
-                                    </th>
-
-                                    <!-- Datum rezervacije + dropdown filter for date -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer datumDrop-toggle">
-                                        Datum rezervacije<i class="ml-2 fas fa-filter"></i>
-                                        <div id="datumDropdown"
-                                            class="datumMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] pin-l border-2 border-gray-300">
-                                            <div
-                                                class="flex justify-between flex-row p-2 pb-[15px] border-b-[2px] relative border-gray-300">
-                                                <div>
-                                                    <label class="font-medium text-gray-500">Period od:</label>
-                                                    <input type="date"
-                                                        class="border-[1px] border-[#e4dfdf]  cursor-pointer focus:outline-none">
-                                                </div>
-                                                <div class="ml-[50px]">
-                                                    <label class="font-medium text-gray-500">Period do:</label>
-                                                    <input type="date"
-                                                        class="border-[1px] border-[#e4dfdf]  cursor-pointer focus:outline-none">
-                                                </div>
-                                            </div>
-                                            <div class="flex pt-[10px] text-white ">
-                                                <a href="#"
-                                                    class="btn-animation py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">
-                                                    Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="btn-animation ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                                    Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <!-- Rezervacija istice + dropdown filter for date -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer zadrzavanjeDrop-toggle">
-                                        Rezervacija
-                                        istice<i class="ml-2 fas fa-filter"></i>
-                                        <div id="zadrzavanjeDropdown"
-                                            class="zadrzavanjeMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] right-0 border-2 border-gray-300">
-                                            <div
-                                                class="flex justify-between flex-row p-2 pb-[15px] border-b-[2px] relative border-gray-300">
-                                                <div>
-                                                    <label class="font-medium text-gray-500">Period od:</label>
-                                                    <input type="date"
-                                                        class="border-[1px] border-[#e4dfdf]  cursor-pointer focus:outline-none">
-                                                </div>
-                                                <div class="ml-[50px]">
-                                                    <label class="font-medium text-gray-500">Period do:</label>
-                                                    <input type="date"
-                                                        class="border-[1px] border-[#e4dfdf]  cursor-pointer focus:outline-none">
-                                                </div>
-                                            </div>
-                                            <div class="flex pt-[10px] text-white ">
-                                                <a href="#"
-                                                    class="btn-animation py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">
-                                                    Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="btn-animation ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                                    Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <!-- Rezervaciju podnio + dropdown filter for ucenik -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer uceniciDrop-toggle">
-                                        Rezervaciju
-                                        podnio<i class="ml-2 fas fa-filter"></i>
-                                        <div id="uceniciDropdown"
-                                            class="uceniciMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px]  right-0 border-2 border-gray-300">
-                                            <ul class="border-b-2 border-gray-300 list-reset">
-                                                <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300">
-                                                    <input class="w-full h-10 px-2 border-2 rounded focus:outline-none"
-                                                        placeholder="Search"
-                                                        onkeyup="filterFunction('searchUcenici', 'uceniciDropdown', 'dropdown-item-ucenik')"
-                                                        id="searchUcenici"><br>
-                                                    <button
-                                                        class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </li>
-                                                <div class="h-[200px] scroll font-normal">
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Ucenik Ucenikovic
-                                                        </p>
-                                                    </li>
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Pero Perovic
-                                                        </p>
-                                                    </li>
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Marko Markovic
-                                                        </p>
-                                                    </li>
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Nikola Nikolic
-                                                        </p>
-                                                    </li>
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Zivko Zivkovic
-                                                        </p>
-                                                    </li>
-                                                    <li
-                                                        class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200 dropdown-item-ucenik">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <img width="40px" height="30px" class="ml-[15px] rounded-full"
-                                                            src="img/profileStudent.jpg">
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Petar Petrovic
-                                                        </p>
-                                                    </li>
-                                                </div>
-                                            </ul>
-                                            <div class="flex pt-[10px] text-white ">
-                                                <a href="#"
-                                                    class="btn-animation py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">
-                                                    Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="btn-animation ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                                    Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </th>
-
-                                    <!-- Status + dropdown filter for status -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer statusDrop-toggle">
-                                        Status<i class="ml-2 fas fa-filter"></i>
-                                        <div id="statusDropdown"
-                                            class="statusMenu hidden absolute rounded bg-white min-w-[310px] p-[10px] shadow-md top-[42px] right-0 border-2 border-gray-300">
-                                            <ul class="border-b-2 border-gray-300 list-reset">
-                                                <li class="p-2 pb-[15px] border-b-[2px] relative border-gray-300">
-                                                    <input class="w-full h-10 px-2 border-2 rounded focus:outline-none"
-                                                        placeholder="Search"
-                                                        onkeyup="filterFunction('searchStatus', 'statusDropdown')"
-                                                        id="searchStatus"><br>
-                                                    <button
-                                                        class="absolute block text-xl text-center text-gray-400 transition-colors w-7 h-7 leading-0 top-[14px] right-4 focus:outline-none hover:text-gray-900">
-                                                        <i class="fas fa-search"></i>
-                                                    </button>
-                                                </li>
-                                                <div class="h-[200px] scroll font-normal">
-                                                    <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Rezervisano
-                                                        </p>
-                                                    </li>
-                                                    <li class="flex p-2 mt-[2px] pt-[15px] group hover:bg-gray-200">
-                                                        <label class="flex items-center justify-start">
-                                                            <div
-                                                                class="flex items-center justify-center flex-shrink-0 w-[16px] h-[16px] mr-2 bg-white border-2 border-gray-400 rounded focus-within:border-blue-500">
-                                                                <input type="checkbox" class="absolute opacity-0">
-                                                                <svg class="hidden w-4 h-4 text-green-500 pointer-events-none fill-current"
-                                                                    viewBox="0 0 20 20">
-                                                                    <path d="M0 11l2-2 5 5L18 3l2 2L7 18z" />
-                                                                </svg>
-                                                            </div>
-                                                        </label>
-                                                        <p
-                                                            class="block p-2 text-black cursor-pointer group-hover:text-blue-600">
-                                                            Odbijeno
-                                                        </p>
-                                                    </li>
-                                                </div>
-                                            </ul>
-                                            <div class="flex pt-[10px] text-white ">
-                                                <a href="#"
-                                                    class="btn-animation py-2 px-[20px] transition duration-300 ease-in hover:bg-[#46A149] bg-[#4CAF50] rounded-[5px]">
-                                                    Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                                                </a>
-                                                <a href="#"
-                                                    class="btn-animation ml-[20px] py-2 px-[20px] transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                                    Ponisti <i class="fas fa-times ml-[4px]"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <th class="px-4 py-4"> </th>
-
-                                </tr>
+        <div class="col-md-9">
+            <div class="row bg-white py-2 px-2 mx-1 rounded">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table id="myTable" class="table" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Naziv knjige</th>
+                                <th>Datum rezervacije</th>
+                                <th>Rezervacija ističe</th>
+                                <th>Rezervaciju podnio</th>
+                                <th class="text-center">Status</th>
+                                <th>Akcija</th>
+                            </tr>
                             </thead>
-                            <tbody class="bg-white">
+                            <tbody class="align-middle">
+                            @foreach ($pending as $reservation)
+                                <tr>
+                                    <td class="">
+                                        <img style="width: 35px; height: 35px;"
+                                             class="Image"
+                                             src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
+                                             alt="" />
+                                        <a href="{{ route('books.show', $reservation->id) }}">
+                                            <span class="fw-bold text-center">{{ $reservation->book->title }}</span>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
+                                    </td>
+                                    <td class="text-center">
+
+                                        {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
+                                    </td>
+                                    <td class="">
+                                        <img class="Avatar rounded-circle"
+                                             src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}"
+                                             alt="Profilna fotografija" />
+                                        <a href="{{ route('students.show', $reservation->student->id) }}"
+                                           class="fw-bold">{{ $reservation->student->name }}</a>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="d-flex">
+                                            <form action="{{ route('books.reservations.accept', $reservation->id) }}"
+                                                  method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn hover:text-green-500">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </form>
+                                            <form action="{{ route('books.reservations.decline', $reservation->id) }}"
+                                                  method="POST">
+                                                @csrf
+                                                @method('PATCH')
+                                                <button type="submit" class="btn hover:text-red-500">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            @endforeach
+                            @foreach ($active as $reservation)
+                               <tr>
+                                   <td class="">
+                                       <img style="width: 35px; height: 35px;"
+                                            class="Image"
+                                            src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
+                                            alt="" />
+                                       <a href="{{ route('books.show', $reservation->id) }}">
+                                           <span class="fw-bold text-center">{{ $reservation->book->title }}</span>
+                                       </a>
+                                   </td>
+                                   <td class="text-center">
+                                       {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
+                                   </td>
+                                   <td class="text-center">
+
+                                       {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
+                                   </td>
+                                   <td class="">
+                                       <img class="Avatar rounded-circle"
+                                            src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}"
+                                            alt="Profilna fotografija" />
+                                       <a href="{{ route('students.show', $reservation->student->id) }}"
+                                          class="fw-bold">{{ $reservation->student->name }}</a>
+                                   </td>
+                                   <td>
+                                    <span class="text-middle">
+                                        <span class="text-success">Rezervisano</span>
+                                    </span>
+                                   </td>
+                                   <td>
+                                       <div class="dropdown">
+                                           <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                               <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon icon-xs" viewBox="0 0 20 20">
+                                                   <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                                               </svg>
+                                           </div>
+                                           <ul class="dropdown-menu">
+                                               <li>
+                                                   <form class="mb-0"
+                                                         action="{{ route('books.reservations.issue', $reservation->id) }}"
+                                                         method="POST">
+                                                       @csrf
+                                                       @method('PATCH')
+                                                       <button class="dropdown-item" type="submit">
+                                                           <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                                               <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z" />
+                                                           </svg>
+                                                           Izdaj
+                                                       </button>
+                                                   </form>
+                                               </li>
+                                               <li>
+                                                   <form class="mb-0"
+                                                         action="{{ route('books.reservations.cancel', $reservation->id) }}"
+                                                         method="POST">
+                                                       @csrf
+                                                       @method('PATCH')
+                                                       <button class="dropdown-item" type="submit">
+                                                           <svg class="dropdown-icon text-danger me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                                               <path
+                                                                   d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                                                           </svg>
+                                                           Otkaži rezervaciju
+                                                       </button>
+                                                   </form>
+                                               </li>
+                                           </ul>
+                                       </div>
+                                   </td>
+                               </tr>
+
+                            @endforeach
 
 
-                                @foreach ($pending as $reservation)
-                                    <tr
-                                        class="hover:bg-gray-200 hover:shadow-md bg-gray-200 border-b-[1px] border-[#e4dfdf] changeBg">
-                                        <td class="px-4 py-3 whitespace-no-wrap">
-                                            <label class="inline-flex items-center">
-                                                <input type="checkbox" class="form-checkbox">
-                                            </label>
-                                        </td>
-                                        <td class="flex flex-row items-center px-4 py-3">
-                                            <img style="width: 35px; height: 35px;"
-                                                class="object-cover w-8 mr-2 h-11 rounded-full"
-                                                src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
-                                                alt="" />
-                                            <a href="{{ route('books.show', $reservation->book_id) }}">
-                                                <span
-                                                    class="font-medium text-center">{{ $reservation->book->title }}</span>
-                                            </a>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
-                                        </td>
-                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
 
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
-                                        </td>
-                                        <td class="flex flex-row items-center px-4 py-3">
-                                            <img class="object-cover w-8 h-8 mr-2 rounded-full"
-                                                src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}"
-                                                alt="Profilna fotografija" />
-                                            <a href="{{ route('students.show', $reservation->student->id) }}"
-                                                class="ml-2 font-medium text-center">{{ $reservation->student->name }}</a>
-                                        </td>
 
-                                        <td class="px-4 py-3">
-                                            <div style="display: flex">
-
-                                                <form action="{{ route('books.reservations.accept', $reservation->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
-                                                        <i class="fas fa-check reservedStatus"></i>
-                                                    </button>
-                                                </form>
-                                                <form action="{{ route('books.reservations.decline', $reservation->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PATCH')
-                                                    <button type="submit" class="hover:text-green-500 mr-[5px]">
-                                                        <i class="fas fa-times deniedStatus"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </td>
-
-                                        <td class="px-4 py-3 text-sm leading-5 text-right whitespace-no-wrap">
-                                            <p
-                                                class="hidden inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsAktivneRezervacije hover:text-[#606FC7]">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </p>
-                                            <div
-                                                class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 aktivne-rezervacije">
-                                                <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                                    aria-labelledby="headlessui-menu-button-1"
-                                                    id="headlessui-menu-items-117" role="menu">
-                                                    <div class="py-1">
-                                                        <a href="izdajKnjigu.php" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Izdaj knjigu</span>
-                                                        </a>
-
-                                                        <a href="#" tabindex="0"
-                                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                            role="menuitem">
-                                                            <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
-                                                            <span class="px-4 py-0">Otkazi rezervaciju</span>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                @foreach ($active as $reservation)
-                                    <tr
-                                        class="hover:bg-gray-200 hover:shadow-md bg-gray-200 border-b-[1px] border-[#e4dfdf] changeBg">
-                                        <td class="px-4 py-3 whitespace-no-wrap">
-                                            <label class="inline-flex items-center">
-                                                <input type="checkbox" class="form-checkbox">
-                                            </label>
-                                        </td>
-                                        <td class="flex flex-row items-center px-4 py-3">
-                                            <img style="width: 35px; height: 35px;"
-                                                class="object-cover w-8 mr-2 h-11 rounded-full"
-                                                src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
-                                                alt="" />
-                                            <a href="{{ route('books.show', $reservation->book_id) }}">
-                                                <span
-                                                    class="font-medium text-center">{{ $reservation->book->title }}</span>
-                                            </a>
-                                        </td>
-                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}
-                                        </td>
-                                        <td class="px-4 py-3 text-sm leading-5 whitespace-no-wrap">
-                                            {{ \Carbon\Carbon::parse($reservation->activeAction->action_deadline)->format('d.m.Y') }}
-                                        </td>
-                                        <td class="flex flex-row items-center px-4 py-3">
-                                            <img class="object-cover w-8 h-8 mr-2 rounded-full"
-                                                src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}"
-                                                alt="Profilna fotografija" />
-                                            <a href="{{ route('students.show', $reservation->student->id) }}"
-                                                class="ml-2 font-medium text-center">{{ $reservation->student->name }}</a>
-                                        </td>
-
-                                        <td class="px-4 py-3 text-sm leading-5 text-blue-900 whitespace-no-wrap">
-                                            <div
-                                                class="inline-block px-[6px] py-[2px] font-medium bg-yellow-200 rounded-[10px]">
-                                                <span class="text-xs text-yellow-700">Rezervisano</span>
-                                            </div>
-                                        </td>
-
-                                        <td class="px-4 py-3 text-sm leading-5 text-right whitespace-no-wrap">
-                                            <p
-                                                class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsAktivneRezervacije hover:text-[#606FC7]">
-                                                <i class="fas fa-ellipsis-v"></i>
-                                            </p>
-                                            <div
-                                                class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 aktivne-rezervacije">
-                                                <div class="absolute right-0 w-56 mt-2 origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                                    aria-labelledby="headlessui-menu-button-1"
-                                                    id="headlessui-menu-items-117" role="menu">
-                                                    <div class="py-1">
-                                                        <form
-                                                            action="{{ route('books.reservations.issue', $reservation->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <button type="submit" tabindex="0"
-                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                                role="menuitem">
-                                                                <i
-                                                                    class="far fa-hand-scissors mr-[10px] ml-[5px] py-1"></i>
-                                                                <span class="px-4 py-0">Izdaj knjigu</span>
-                                                            </button>
-                                                        </form>
-
-                                                        <form
-                                                            action="{{ route('books.reservations.cancel', $reservation->id) }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <button type="submit" tabindex="0"
-                                                                class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                                role="menuitem">
-                                                                <i class="fas fa-undo mr-[10px] ml-[5px] py-1"></i>
-                                                                <span class="px-4 py-0">Otkaži rezervaciju</span>
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
 
                             </tbody>
-                            <tfoot>
-                                <tr class="border-b-[1px] border-[#e4dfdf]">
-                                    <th class="px-4 py-4 leading-4 tracking-wider text-left text-blue-500">
-
-                                    </th>
-                                    <th class="flex items-center px-4 py-4 leading-4 tracking-wider text-left">Naziv
-                                        knjige
-                                    </th>
-
-                                    <!-- Datum rezervacije + dropdown filter for date -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer">
-                                        Datum rezervacije
-                                    </th>
-
-                                    <!-- Rezervacija istice + dropdown filter for date -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer">
-                                        Rezervacija
-                                        istice
-                                    </th>
-
-                                    <!-- Rezervaciju podnio + dropdown filter for ucenik -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer">
-                                        Rezervaciju
-                                        podnio
-                                    </th>
-
-                                    <!-- Status + dropdown filter for status -->
-                                    <th
-                                        class="relative px-4 py-4 text-sm leading-4 tracking-wider text-left cursor-pointer">
-                                        Status
-                                    </th>
-                                    <th class="px-4 py-4"> </th>
-
-                                </tr>
-                            </tfoot>
                         </table>
-
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 @endsection
