@@ -1,103 +1,81 @@
 @extends('app')
 
 @section('page_title')
-    Izmjena kategorije
+    Nova kategorija
 @endsection
 
 @section('page_content')
-    <x-cropper-frame></x-cropper-frame>
-    <!-- Content -->
-    <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading">
-            <div class="flex border-b-[1px] border-[#e4dfdf]">
-                <div class="pl-[30px] py-[10px] flex flex-col">
-                    <div>
-                        <h1>
-                            Izmjeni podatke
-                        </h1>
-                    </div>
-                    <div>
-                        <nav class="w-full rounded">
-                            <ol class="flex list-reset">
-                                <li>
-                                    <a href="{{ route('settings.policies.index') }}"
-                                        class="text-[#2196f3] hover:text-blue-600">
-                                        Settings
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <a href="{{ route('settings.categories.index') }}"
-                                        class="text-[#2196f3] hover:text-blue-600">
-                                        Kategorije
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <p class="text-gray-400 disabled">
-                                        Izmijeni podatke
-                                    </p>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Space for content -->
-        <div class="scroll height-content section-content">
-            <form id="myForm" method="POST" action="{{ route('settings.categories.update', $category->id) }}"
-                enctype="multipart/form-data">
-                @csrf
-                @method('PATCH')
-
-                <div class="flex flex-row ml-[30px]">
-                    <div class="w-[50%] mb-[100px]">
-                        <div class="mt-[20px]">
-                            <p>Naziv kategorije <span class="text-red-500">*</span></p>
-                            <input id="categoryTitle" required minlength="4" maxlength="50"
-                                value="{{ old('title', $category->title) }}" type="text" name="title"
-                                class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
+    <x-cropper></x-cropper>
+    <div class="card card-body border-0 shadow mb-4">
+        <h2 class="h5 mb-4">Opšte informacije</h2>
+        <form id="myForm" method="POST" action="{{ route('settings.categories.update', $category->id) }}"
+              enctype="multipart/form-data">
+            @csrf
+            @method('PATCH')
+            <div class="row">
+                <div class="col-sm-4">
+                    <label for="upload-picture" class="form-label">Izaberi fotografiju</label>
+                    <label class="border border-gray-300 rounded d-flex justify-content-center">
+                        <div id="empty-cover-art" class="overflow-hidden">
+                            <div class="text-center">
+                                <img src="{{asset($category->picture)}}" style="object-fit: fill;" id="image-output" width="400px" height="400px" @if($category->picture == null) hidden @endif>
+                                @if($category->picture == null)
+                                    <div id="addphototext" class="text-center pb-lg-12">
+                                        <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                            <polyline points="21 15 16 10 5 21"></polyline>
+                                        </svg>
+                                        <span class="mt-2">Add photo</span>
+                                    </div>
+                                @endif
+                                <input onchange="cropperFunction(event)" id="upload-picture" value="" name="picture-raw" type="file" class="d-none" :accept="accept">
+                            </div>
                         </div>
-                        @error('title')
+                    </label>
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class=" mb-3">
+                            <div>
+                                <label for="name" class="form-label">Naziv</label>
+                                <input name="title" value="{{$category->title}}" placeholder="Naziv" type="text" class="form-control" id="categoryTitle">
+                                @error('name')
+                                <div  class="text-red">** {{ $message }}</div>
+                                @enderror
+                            </div>
+                            @error('title')
                             <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
                                 {{ $message }}</p>
-                        @enderror
-                        <div id="categoryTitleValidationMessage"></div>
+                            @enderror
+                            <div id="categoryTitleValidationMessage"></div>
 
-                        <div class="mt-[20px]">
-                            <p class="inline-block">Opis</p>
-                            <textarea minlength="10" maxlength="512" id="categoryDescription" name="description" rows="10"
-                                class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]">{{ old('description', $category->description) }}</textarea>
+                            <div id="categoryIconValidationMessage"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Opis</label>
+                            <textarea name="description" placeholder="Opis" type="text" class="form-control" id="categoryDescription">{{ $category->description}}</textarea>
+                            @error('lastname')
+                            <div  class="text-red">** {{ $message }}</div>
+                            @enderror
                         </div>
                         @error('description')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
-                                {{ $message }}</p>
+                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            {{ $message }}</p>
                         @enderror
                         <div id="categoryDescriptionValidationMessage"></div>
                     </div>
-                    <x-cropper picture="{{ $category->picture }}" stage="categories"></x-cropper>
                 </div>
-                <div class="absolute bottom-0 w-full">
-                    <div class="flex flex-row">
-                        <div class="inline-block w-full text-white text-right py-[7px] mr-[100px]">
-                            <button type="reset"
-                                class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                Ponisti <i class="fas fa-times ml-[4px]"></i>
-                            </button>
-                            <button id="saveCategory" type="submit"
-                                class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
-                                Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                            </button>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="float-end">
+                        <button class="btn btn-outline-danger" type="reset">Poništi</button>
+                        <button type="submit" class="btn btn-primary" >Kreiraj</button>
                     </div>
                 </div>
-            </form>
-        </div>
-    </section>
+            </div>
+        </form>
+    </div>
 @endsection
+

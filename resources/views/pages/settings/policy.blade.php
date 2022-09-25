@@ -151,26 +151,56 @@
                             </div>
                         </form>
                         <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-200"></li>
-                        <form id="conflictDeadlineForm" action="{{ route('settings.policies.update', $policies[2]->id) }}" method="POST">
+                        <form id="maxBooksPerUserForm"
+                              action="{{ route('settings.policies.update', $policies[3]->id) }}" method="POST">
                             @csrf
                             @method('PATCH')
                             <div class="row">
                                 <div class="col-md-8">
-                                    <label class="form-label" for="value">Rok konflikta</label>
+                                    <label class="form-label" for="value">Broj aktivnih knjiga po učeniku</label>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
-                                    <input type="hidden" id="conflictPolicyId" value="{{$policies[2]->id}}">
+                                    <input type="hidden" id="maxBooksPerUserPolicyId" value="{{ $policies[3]->id }}">
                                 </div>
                                 <div class="col-md-2">
                                     <div class="pt-3">
                                         <div class="input-group">
-                                            <input class="form-control" id="conflictDeadline" name="value{{$policies[2]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[2]->id}", $policies[2]->value) }}"/>
-                                            <span class="input-group-text">dana</span>
+                                            <input class="form-control" id="maxBooksPerUser"
+                                                   name="value{{ $policies[3]->id }}" type="number" min="1" max="5"
+                                                   value="{{ old("value{$policies[3]->id}", $policies[3]->value) }}"/>
+                                            <span class="input-group-text">knjiga</span>
                                         </div>
                                     </div>
-                                    @error("value{$policies[2]->id}")
-                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @error("value{$policies[3]->id}")
+                                    <p style="color:red;" id="errorMessageByLaravel"><i
+                                            class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                                     @enderror
-                                    <div id="conflictMessageByJs"></div>
+                                    <div id="maxBooksPerUserMessageByJs"></div>
+                                </div>
+                            </div>
+                        </form>
+                        <li role="separator" class="dropdown-divider mt-2 mb-3 border-gray-200"></li>
+                        <form id="multipleBookCopiesPerUserForm"
+                              action="{{ route('settings.policies.update', $policies[4]->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label class="form-label" for="value">Više <b>istih</b> knjiga po korisniku</label>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <input type="hidden" id="multipleBookCopiesPerUserPolicyId" value="{{ $policies[4]->id }}">
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="pt-3">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" value="{{ old('value' . $policies[4]->id, $policies[4]->value) }}"
+                                                   id="multipleBookCopiesPerUser" name="value{{ $policies[4]->id }}" type="checkbox" role="switch" @if ($policies[4]->value === 2) checked @endif>
+                                        </div>
+                                    </div>
+                                    @error("value{$policies[4]->id}")
+                                    <p style="color:red;" id="errorMessageByLaravel"><i
+                                            class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    @enderror
+                                    <div id="multipleBookCopiesPerUserMessageByJs"></div>
                                 </div>
                             </div>
                         </form>
