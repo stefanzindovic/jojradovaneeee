@@ -143,11 +143,41 @@
                                 @enderror
                                 <div id="maxBooksPerUserMessageByJs"></div>
                             </form>
-                            <p class="ml-[10px] mt-[10px]">dana</p>
+                            <p class="ml-[10px] mt-[10px]">knjige</p>
                         </div>
                     </div>
                 </div>
+                <div class="pl-[30px] flex border-b-[1px] border-[#e4dfdf]  py-[20px]">
+                    <div>
+                        <h3>
+                            Više istih knjiga za jednog korisnika
+                        </h3>
+                        <p class="pt-[15px] max-w-[400px]">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum eligendi nihil, vel
+                            necessitatibus saepe laboriosam! Perspiciatis laboriosam culpa veritatis ea
+                            voluptatum commodi tempora unde, dolorum debitis quia id dicta vitae.
+                        </p>
+                    </div>
+                    <div class="relative flex ml-[60px] mt-[20px]">
+                        <form id="multipleBookCopiesPerUserForm"
+                            action="{{ route('settings.policies.update', $policies[4]->id) }}" method="POST">
+                            @csrf
+                            @method('PATCH')
+
+                            <input type="hidden" id="multipleBookCopiesPerUserPolicyId" value="{{ $policies[4]->id }}">
+                            <input value="{{ old('value' . $policies[4]->id, $policies[4]->value) }}"
+                                id="multipleBookCopiesPerUser" name="value{{ $policies[4]->id }}" type="checkbox"
+                                class="p h-[50px]" @if ($policies[4]->value === 2) checked @endif>
+                            @error("value{$policies[4]->id}")
+                                <p style="color:red;" id="errorMessageByLaravel"><i
+                                        class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                            @enderror
+                            <div id="multipleBookCopiesPerUserMessageByJs"></div>
+                        </form>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     </section>
 @endsection

@@ -77,7 +77,7 @@ class PolicyController extends Controller
     public function update(UpdatePolicyRequest $request, Policy $policy): RedirectResponse
     {
         $input = $request->validate([
-           'value' . $policy->id => 'required|integer|min:1|max:100'
+            'value' . $policy->id => 'required|integer|min:1|max:100'
         ]);
 
         try {

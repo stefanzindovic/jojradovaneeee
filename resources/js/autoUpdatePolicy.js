@@ -288,3 +288,62 @@ jQuery("#maxBooksPerUser").on("input propertychange change", function () {
         });
     }, 500);
 });
+
+// multiple book copies per user autosave
+jQuery("#multipleBookCopiesPerUser").on(
+    "input propertychange change",
+    function () {
+        clearTimeout(timeoutId);
+        setTimeout(function () {
+            let isChecked = jQuery("#multipleBookCopiesPerUser")[0].checked;
+            let value = 1;
+
+            // set value based on isChecked
+            if (isChecked) {
+                value = 2;
+            }
+
+            // set value to checkbox
+            let data = jQuery(
+                "#multipleBookCopiesPerUserForm"
+            ).serializeArray();
+            data.push({ name: "value5", value });
+
+            let id = jQuery("#multipleBookCopiesPerUserPolicyId").val();
+
+            jQuery.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+
+            jQuery.ajax({
+                type: "POST",
+                url: "/settings/policies/" + id,
+                data: data,
+                success: function () {
+                    setTimeout(function () {
+                        jQuery("#multipleBookCopiesPerUserMessageByJs")
+                            .css({ display: "block", "max-width": "250px" })
+                            .html(
+                                '<p class="text-green-500 align-middle"><i class="fa fa-check text-green-500 mr-[5px] mt-[10px]"></i> Polje je uspješno izmijenjeno</p>'
+                            );
+                    }, 200);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    setTimeout(function () {
+                        jQuery("#multipleBookCopiesPerUserMessageByJs")
+                            .css({ display: "block", "max-width": "250px" })
+                            .html(
+                                '<p class="text-red-500"><i class="fa fa-times fa-check text-red-500 mr-[5px] mt-[10px]"></i> ' +
+                                    xhr.responseJSON.message +
+                                    "</p>"
+                            );
+                    }, 200);
+                },
+            });
+        }, 500);
+    }
+);

@@ -44,7 +44,7 @@ return new class extends Migration
 
             [
                 'variable' => 'multiple_book_copies_per_user',
-                'value' => 0
+                'value' => 1
             ]
         ];
 
