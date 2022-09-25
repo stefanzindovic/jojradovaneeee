@@ -5,80 +5,35 @@
 @endsection
 
 @section('page_content')
-    <!-- Content -->
-    <section class="w-screen h-screen pl-[80px] pb-4 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading">
-            <div class="flex border-b-[1px] border-[#e4dfdf]">
-                <div class="pl-[30px] py-[10px] flex flex-col">
-                    <div>
-                        <h1>
-                            Novi format
-                        </h1>
+    <div class="card card-body border-0 shadow mb-4">
+        <h2 class="h5 mb-4">Opšte informacije</h2>
+        <form id="form" class="form" action="{{route('settings.formats.store')}}" method="POST">
+            @csrf
+            <div class="row">
+                <div class="col-sm">
+                    <div class="row">
+                        <div class=" mb-3">
+                            <div>
+                                <label for="name" class="form-label">Naziv</label>
+                                <input type="text" value="{{old('name')}}" required minlength="2" maxlength="25" name="name" id="formatName" class="form-control">
+                                @error('name')
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                @enderror
+                                <div id="formatNameValidationMessageByJs"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <nav class="w-full rounded">
-                            <ol class="flex list-reset">
-                                <li>
-                                    <a href="{{ route('settings.policies.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Podešavanja
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <a href="{{ route('settings.formats.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Formati
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <p class="text-gray-400">
-                                        Novi format
-                                    </p>
-                                </li>
-                            </ol>
-                        </nav>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="float-end">
+                        <button class="btn btn-outline-danger" type="reset">Poništi</button>
+                        <button type="submit" class="btn btn-primary">Kreiraj</button>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Space for content -->
-        <div class="scroll height-content section-content">
-            <form method="POST" action="{{route('settings.formats.store')}}">
-                @csrf
-
-                <div class="flex flex-row ml-[30px]">
-                    <div class="w-[50%] mb-[150px]">
-                        <div class="mt-[20px]">
-                            <p>Naziv formata <span class="text-red-500">*</span></p>
-                            <input type="text" value="{{old('name')}}" required minlength="2" maxlength="25" name="name" id="formatName" class="flex w-[90%] mt-2 px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"/>
-                        </div>
-                        @error('name')
-                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
-                        @enderror
-                        <div id="formatNameValidationMessageByJs"></div>
-                    </div>
-                </div>
-                <div class="absolute bottom-0 w-full">
-                    <div class="flex flex-row">
-                        <div class="inline-block w-full text-white text-right py-[7px] mr-[100px]">
-                            <button type="reset"
-                                    class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                Ponisti <i class="fas fa-times ml-[4px]"></i>
-                            </button>
-                            <button id="saveFormatBtn" type="submit"
-                                    class="btn-animation shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
-                                Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </section>
+        </form>
+    </div>
 @endsection
