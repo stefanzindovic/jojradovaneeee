@@ -36,6 +36,16 @@ return new class extends Migration
                 'variable' => 'conflict_deadline',
                 'value' => 15
             ],
+
+            [
+                'variable' => 'max_books_per_user',
+                'value' => 5
+            ],
+
+            [
+                'variable' => 'multiple_book_copies_per_user',
+                'value' => 0
+            ]
         ];
 
         foreach ($policies as $policy) {
