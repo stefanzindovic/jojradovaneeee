@@ -38,6 +38,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
         Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'activities'])->name('activities');
 
+        Route::get('/settings', function (){
+            return redirect('/settings/policies');
+        });
+
         // Settings
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
