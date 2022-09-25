@@ -75,6 +75,8 @@ Route::middleware(['auth'])->group(function () {
             Route::post('/{book}', [\App\Http\Controllers\IssueBookController::class, 'issue'])->name('.issue');
             Route::patch('/{book}/return', [\App\Http\Controllers\IssueBookController::class, 'return'])->name('.return');
             Route::patch('/{book}/writeoff', [\App\Http\Controllers\IssueBookController::class, 'writeOff'])->name('.writeoff');
+            Route::get('/{book}/returnmultiple', [\App\Http\Controllers\IssueBookController::class, 'returnmultiple'])->name('.returnmultiple');
+            Route::get('/{book}/writeoffmultiple', [\App\Http\Controllers\IssueBookController::class, 'writeoffmultiple'])->name('.writeoffmultiple');
         });
 
         // Reserve book
