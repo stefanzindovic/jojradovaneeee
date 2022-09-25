@@ -17,7 +17,7 @@ class Staff
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->role_id < 3){
+        if(Auth::user()->role_id != 3){
             return $next($request);
         } else {
             return redirect('/');

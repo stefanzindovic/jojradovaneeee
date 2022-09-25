@@ -124,6 +124,8 @@ class User extends Authenticatable
 
     public static function doStudentHaveActiveIssues($student_id, $book_id)
     {
+        $maxBooksPerUserPolicy = Policy::findOrFail(4);
+        $multipleCopiesOfBookPerUserPolicy = Policy::findOrFail(5);
         $student = User::with(['booksUnderAction', 'booksUnderAction.activeAction'])->findOrFail($student_id);
         $activeBooks = $student->booksUnderAction;
 
@@ -133,11 +135,11 @@ class User extends Authenticatable
         $activeReservationsCount = User::getActiveReservedBooks($student_id)->count();
 
 
-        if (($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 2) {
+        if (($activeBookCount + $pendingReservationsCount + $activeReservationsCount) >= $maxBooksPerUserPolicy->value) {
             return true;
         }
 
-        if (User::getIssuedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getPendingReservedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getActiveReservedBooks($student_id)->pluck('book_id')->contains($book_id)) {
+        if ($multipleCopiesOfBookPerUserPolicy->value != 2 && (User::getIssuedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getPendingReservedBooks($student_id)->pluck('book_id')->contains($book_id) || User::getActiveReservedBooks($student_id)->pluck('book_id')->contains($book_id))) {
             return true;
         }
 

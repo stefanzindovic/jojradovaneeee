@@ -30,15 +30,29 @@ return new class extends Migration
             $table->timestamps();
         });
 
+
+        // Create system user
+        $system = new \App\Models\User();
+        $system->name = 'System';
+        $system->email = 'system@system.net';
+        $system->jmbg = '0000000000000';
+        $system->username = 'system';
+        $system->role_id = 1;
+        $system->email_verified_at = now();
+        $system->password = Hash::make('admin123admin');
+        $system->remember_token = Str::random(10);
+        $system->save();
+
+
         // Create admin user
         $model = new \App\Models\User();
         $model->name = 'Administrator';
         $model->email = 'administrator@administrator.com';
-        $model->jmbg = '0000000000000';
+        $model->jmbg = '0000000000001';
         $model->username = 'administrator';
         $model->role_id = 1;
         $model->email_verified_at = now();
-        $model->password = \Illuminate\Support\Facades\Hash::make('admin123admin');
+        $model->password = Hash::make('admin123admin');
         $model->remember_token = Str::random(10);
         $model->save();
     }
