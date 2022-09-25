@@ -163,4 +163,12 @@ class IssueBookController extends Controller
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
+
+    public function returnMultiple(HttpRequest $request){
+        return view('pages.books.actions.issues.returnMultiple');
+    }
+
+    public function writeOffMultiple(HttpRequest $request){
+        return view('pages.books.actions.issues.writeoffmultiple');
+    }
 }

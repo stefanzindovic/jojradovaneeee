@@ -213,4 +213,5 @@ class ReservationsController extends Controller
         $students = User::where('role_id', 3)->get();
         return view('..pages.books.actions.reservations.reserve', compact('book', 'students'));
     }
+
 }
