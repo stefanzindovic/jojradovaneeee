@@ -135,7 +135,6 @@ Date::setLocale('sr');
                                                 @if($librarian->logins->isEmpty())
                                                     Nikad nije ulogovan
                                                 @else
-                                                    {{Jenssegers\Date\Date::setLocale('sr')}}
                                                     {{\Carbon\Carbon::parse($librarian->logins->last()->time)->diffForHumans()}}
                                                 @endif
                                             </p>

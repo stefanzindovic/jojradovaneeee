@@ -46,8 +46,8 @@
                                 </a>
                             </td>
                             </td>
-                            <td class="text-center">{{ $librarian->role->name }}</td>
-                            <td class="text-center">@if($librarian->logins->isNotEmpty())
+                            <td>{{ $librarian->role->name }}</td>
+                            <td>@if($librarian->logins->isNotEmpty())
                                     {{ $librarian->logins[$librarian->logins->count() - 1]->created_at->diffForHumans() }}
                                 @else
                                     Nikada se nije ulogovao
