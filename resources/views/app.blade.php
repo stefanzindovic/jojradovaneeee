@@ -73,7 +73,7 @@
     </script>
 @endif
 
-
+@yield('pre-scripts')
 @yield('scripts')
 
 

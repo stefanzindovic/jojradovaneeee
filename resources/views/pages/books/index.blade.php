@@ -37,7 +37,7 @@
                     <tbody class="align-middle">
                         @foreach ($books as $book)
                             <tr style="white-space: pre-line;">
-                                <td class="flex flex-row items-center px-4 py-4">
+                                <td class="">
                                     <img style="width: 35px; height: 35px;" class="Image"
                                         src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
                                         alt="" />
@@ -45,12 +45,10 @@
                                         <span class="font-medium text-center">{{ $book->title }}</span>
                                     </a>
                                 </td>
-                                <td style="white-space: pre-line;">
+                                <td style="white-space:pre-line ;">
                                     <p class="text-center">
                                         @foreach ($book->authors as $author)
-                                            {{ $author->full_name }} @if (!$loop->last)
-                                                ,
-                                            @endif
+                                            {{ $author->full_name }} @if (!$loop->last),@endif
                                         @endforeach
                                     </p>
                                 </td>

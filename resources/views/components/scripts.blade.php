@@ -16,7 +16,6 @@
 
 <!-- Datepicker -->
 <script src="{{asset('dashboardfiles/vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
-<script src="{{asset('dashboardfiles/assets/js/multi.js')}}"></script>
 <!-- Sweet Alerts 2 -->
 <script src="{{asset('dashboardfiles/vendor/sweetalert2/dist/sweetalert2.all.min.js')}}"></script>
 
