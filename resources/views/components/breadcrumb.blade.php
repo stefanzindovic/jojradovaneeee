@@ -21,6 +21,7 @@
             $breadcrumbUrl = $currentDomain;
             $i=0;
             $mode = 0;
+            $done = 0;
 
             if(isset($breadcrumbLCase[1]) && !isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1])){
                 $mode = 1; //Users & books
@@ -122,7 +123,16 @@
 
             foreach ($breadcrumbUCase as $key => $crumb){
 
-                $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
+
+                if($breadcrumbLCase[0] == 'actions' && $done != 1){
+                    $breadcrumbUrl = $breadcrumbUrl . '/' . 'books';
+                    $done = 1;
+                }
+
+                if($breadcrumbLCase[0] == 'actions' && $key < 2){}
+                else{
+                    $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
+                }
 
                 foreach ($seperateThese as $seperate){
                     $temp = explode('|', $seperate);
@@ -130,7 +140,10 @@
                         $crumb = $temp[1];
                     }
                 }
-                if($mode == 3 && $key==2){
+
+                if($breadcrumbLCase[0] == 'actions' && $key < 2){
+                }
+                else if($breadcrumbLCase[0] != 'actions' &&  $mode == 3 && $key==2){
                     echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
                 }
                 else if ($key + 1 == $breadcrumbLength){
