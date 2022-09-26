@@ -15,7 +15,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-header border-0">
-                            <h3 class="mb-0">Rezervacije u toku</h3>
+                            <h3 class="mb-0">Rezervacije</h3>
                         </div>
                         <!-- Light table -->
                         <div class="table-responsive">
@@ -23,6 +23,7 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Knjiga</th>
+                                    <th scope="col">Datum rezervacije</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Akcija</th>
                                 </tr>
@@ -43,6 +44,7 @@
                                                 </div>
                                             </div>
                                         </th>
+                                        <th scope="row">{{ \Carbon\Carbon::parse($pendingRes->activeAction->action_start)->format('d.m.Y') }}</th>
                                         <td>
                                               <span class="badge badge-dot mr-4">
                                                 <i class="bg-warning"></i>
@@ -73,6 +75,7 @@
                                                 </div>
                                             </div>
                                         </th>
+                                        <th scope="row">{{ \Carbon\Carbon::parse($activeRes->activeAction->action_start)->format('d.m.Y') }}</th>
                                         <td>
                                               <span class="badge badge-dot mr-4">
                                                 <i class="bg-info"></i>
@@ -81,6 +84,32 @@
                                         </td>
                                         <td></td>
                                     </tr>
+                                @endforeach
+                                @foreach ($reservations as $reservation)
+                                    @if ($reservation->activeAction->action_status_id != 7)
+                                    <tr>
+                                        <th scope="row">
+                                            <div class="media align-items-center">
+                                                <a href="#" class="avatar mr-3">
+                                                    <img alt="Image placeholder" src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a href="{{route('knjige.show', $reservation->book->id)}}" target="_blank">
+                                                        <span class="name mb-0 text-sm">{{$reservation->book->title}}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th scope="row">{{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}</th>
+                                        <td>
+                                            <span class="badge badge-dot mr-4">
+                                                <i class="bg-danger"></i>
+                                                <span class="text-danger">rezervacija odbijena</span>
+                                            </span>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                    @endif
                                 @endforeach
                                 </tbody>
                             </table>
@@ -91,7 +120,7 @@
                     <div class="card">
                         <!-- Card header -->
                         <div class="card-header border-0">
-                            <h3 class="mb-0">Izdate knjige</h3>
+                            <h3 class="mb-0">Moje knjige</h3>
                         </div>
                         <!-- Light table -->
                         <div class="table-responsive">
@@ -99,6 +128,7 @@
                                 <thead class="thead-light">
                                 <tr>
                                     <th scope="col">Knjiga</th>
+                                    <th scope="col">Knjiga izdata</th>
                                     <th scope="col">Status</th>
                                 </tr>
                                 </thead>
@@ -118,6 +148,7 @@
                                                     </div>
                                                 </div>
                                             </th>
+                                            <th scope="row"> {{ \Carbon\Carbon::parse($reservation->activeAction->action_start)->format('d.m.Y') }}</th>
                                             <td>
                                                   <span class="badge badge-dot mr-4">
                                                     <i class="bg-success"></i>
