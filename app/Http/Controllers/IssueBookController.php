@@ -108,8 +108,9 @@ class IssueBookController extends Controller
             $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
-            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return to_route('books.issues.issues')->with('successMessage', 'Kniga je uspješno vraćena.');
         } catch (\Throwable $th) {
+            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -158,17 +159,21 @@ class IssueBookController extends Controller
             $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
-            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return to_route('books.issues.issues')->with('successMessage', 'Knjiga je uspješno otpisana.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
-    public function returnMultiple(HttpRequest $request){
-        return view('pages.books.actions.issues.returnMultiple');
+    public function returnMultiple(Book $book, HttpRequest $request)
+    {
+        $books = Book::issuedBook($book->id);
+
+        return view('pages.books.actions.issues.returnMultiple', compact('books'));
     }
 
-    public function writeOffMultiple(HttpRequest $request){
+    public function writeOffMultiple(Book $book, HttpRequest $request)
+    {
         return view('pages.books.actions.issues.writeoffmultiple');
     }
 }
