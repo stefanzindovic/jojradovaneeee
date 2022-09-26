@@ -290,7 +290,7 @@ class BookController extends Controller
             // delete book
             $book->delete();
 
-            return to_route('books.index')->with('errorMessage', 'Knjiga je uspješno obrisana.');
+            return to_route('books.index')->with('successMessage', 'Knjiga je uspješno obrisana.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
@@ -314,7 +314,7 @@ class BookController extends Controller
             }
 
             $gallery->delete();
-            return back()->with('errorMessage', 'Slika uspješno obrisana.');
+            return back()->with('successMessage', 'Slika uspješno obrisana.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }

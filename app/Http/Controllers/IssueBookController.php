@@ -108,8 +108,9 @@ class IssueBookController extends Controller
             $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
-            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return to_route('books.issues.issues')->with('successMessage', 'Kniga je uspješno vraćena.');
         } catch (\Throwable $th) {
+            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -158,7 +159,7 @@ class IssueBookController extends Controller
             $bookActionModel->action_addons = $book->activeAction->action_start;
             $bookActionModel->save();
 
-            return to_route('books.issues.issues')->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            return to_route('books.issues.issues')->with('successMessage', 'Knjiga je uspješno otpisana.');
         } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
