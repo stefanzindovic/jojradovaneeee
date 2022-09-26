@@ -23,13 +23,13 @@
             $mode = 0;
 
             if(isset($breadcrumbLCase[1]) && !isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1])){
-                $mode = 1;
+                $mode = 1; //Users & books
             }
             else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1]) && is_numeric($breadcrumbLCase[3])){
-                $mode = 2;
+                $mode = 2; //Activities
             }
             else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[2])){
-                $mode = 3;
+                $mode = 3; //settings
             }
 
             switch ($mode){
@@ -97,6 +97,12 @@
                             $language = \App\Models\Language::findOrFail($breadcrumbLCase[2]);
                             $breadcrumbUCase[2] = $language->name;
                             break;
+                        default:
+                            if($breadcrumbLCase[0] == 'actions'){
+                                $book = \App\Models\Book::findOrFail($breadcrumbLCase[2]);
+                                $breadcrumbUCase[2] = $book->title;
+                            }
+
                     }
                     break;
             }
