@@ -42,16 +42,16 @@
                                 <div class="col-md-9">
                                     <div class="row">
                                         @foreach($books as $book)
-                                            <div class="col-md-4">
-                                                <div class="card" style="width: 18rem;">
+                                            <div class="col-auto">
+                                                <div class="card" style="width: 18rem;height: auto">
                                                     <a href="{{route('knjige.show', $book->id)}}">
-                                                       <img style="object-fit: cover;height: 288px;width: 288px" src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif" class="book-image" alt="...">
+                                                       <img style="object-fit: cover;height: 100%; width: 100%" src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif" class="book-image" alt="...">
                                                     </a>
                                                     <div class="card-body">
                                                         <h2 class="card-title"><a href="{{route('knjige.show', $book->id)}}">{{$book->title}}</a></h2>
-                                                        <p class="card-text">
-                                                            {{ Str::limit($book->description),80 }}
-                                                        </p>
+                                                        <div class="card-text" style="min-height: 120px">
+                                                            {{ Str::limit($book->description, 80)}}
+                                                        </div>
                                                         <div class="d-grid gap-2">
                                                             <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
                                                         </div>

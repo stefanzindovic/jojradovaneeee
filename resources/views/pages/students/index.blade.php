@@ -7,98 +7,101 @@
 @extends('app')
 
 @section('page_title')
-    Učnici
+    Učenici
+@endsection
+
+@section('interaction')
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <a href="{{route('students.create')}}" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+            <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+            Novi učenik
+        </a>
+    </div>
 @endsection
 
 @section('page_content')
-    <section class="w-screen h-screen py-4 pl-[60px] text-[#212121]">
-        <!-- Heading of content -->
-        <div class="heading mt-[7px]">
-            <h1 class="pl-[50px] pb-[21px]  border-b-[1px] border-[#e4dfdf] ">
-                Učenici
-            </h1>
-        </div>
-        <!-- Space for content -->
-        <div class="scroll height-dashboard">
-            <div class="flex items-center justify-between px-[50px] py-4 space-x-3 rounded-lg">
-                <a href="{{ route('students.create') }}"
-                   class="btn-animation inline-flex items-center text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] tracking-wider text-white bg-[#3f51b5] rounded hover:bg-[#4558BE]">
-                    <i class="fas fa-plus mr-[15px]"></i> Novi ucenik
-                </a>
-            </div>
-
-            <div
-                class="inline-block min-w-full px-[50px] pt-3 align-middle bg-white rounded-bl-lg rounded-br-lg shadow-dashboard">
-                <table class="overflow-hidden shadow-lg rounded-xl min-w-full border-[1px] border-[#e4dfdf]"
-                       id="myTable">
-                    <thead class="bg-[#EFF3F6]">
-                    <tr class="border-b-[1px] border-[#e4dfdf]">
-                        <th class="px-4 py-3 leading-4 tracking-wider text-left text-blue-500">
-                            <label class="inline-flex items-center">
-                                <input type="checkbox" class="form-checkbox">
-                            </label>
-                        </th>
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left">Ime i prezime</th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Email</th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Tip korisnika</th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Zadnji pristup sistemu</th>
-                        <th class="px-4 py-4"></th>
+    <div class="row bg-white py-2 px-2 mx-1 rounded">
+        <div class="col">
+            <div class="table-responsive">
+                <table id="myTable" class="table" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th class="border-bottom">Ime i Prezime</th>
+                        <th class="border-bottom">Tip korisnika</th>
+                        <th class="border-bottom">Zadnji pristup sistemu</th>
+                        <th class="border-bottom">Akcija</th>
                     </tr>
                     </thead>
-                    <tbody class="bg-white">
-                    @foreach($students as $student)
-                        <tr class="hover:bg-gray-200 hover:shadow-md border-b-[1px] border-[#e4dfdf]">
-                            <td class="px-4 py-4 whitespace-no-wrap">
-                                <label class="inline-flex items-center">
-                                    <input type="checkbox" class="form-checkbox">
-                                </label>
-                            </td>
-                            <td class="flex flex-row items-center px-4 py-4">
-                                <img class="object-cover w-8 h-8 mr-2 rounded-full" src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $student->picture) : asset('imgs/' . $student->picture)}}"
-                                     alt="Profilna fotografija"/>
-                                <a href="{{ route('students.show', $student->id) }}">
-                                    <span class="font-medium text-center">{{ $student->name }}</span>
+                    <tbody class="align-middle">
+                    @foreach ($students as $student)
+                        <tr>
+                            <td>
+                                <a href="{{route('students.show', $student->id)}}" class="d-flex align-items-center">
+                                        <img src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $student->picture) : asset('imgs/' . $student->picture)}}" class="avatar rounded-circle me-3" alt="Avatar">
+                                    <div class="d-block"><span class="fw-bold">{{ $student->name }} {{ $student->lastname }}</span>
+                                        <div class="small text-gray"><span class="__cf_email__">{{ $student->email }}</span>
+                                        </div>
+                                    </div>
                                 </a>
                             </td>
-                            <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $student->email }}</td>
-                            <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">{{ $student->role->name }}</td>
-                            <td class="px-4 py-4 text-sm leading-5 whitespace-no-wrap">@if($student->logins->isNotEmpty()) {{ $student->logins[$student->logins->count() - 1]->created_at->diffForHumans() }} @else Nikada se nije ulogovao @endif</td>
-                            <td class="px-4 py-4 text-sm leading-5 text-right whitespace-no-wrap">
-                                <p class="inline cursor-pointer text-[20px] py-[10px] px-[30px] border-gray-300 dotsStudent hover:text-[#606FC7]">
-                                    <i class="fas fa-ellipsis-v"></i>
-                                </p>
-                                <div
-                                    class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-student">
-                                    <div
-                                        class="absolute right-[25px] w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                        aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117"
-                                        role="menu">
-                                        <div class="py-1">
-                                            <a href="{{ route('students.show', $student->id) }}" tabindex="0"
-                                               class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                               role="menuitem">
-                                                <i class="far fa-file mr-[5px] ml-[5px] py-1"></i>
-                                                <span class="px-4 py-0">Pogledaj</span>
+                            <td><span class="d-flex align-items-center">{{ $student->role->name }}</span></td>
+                            <td><span class="d-flex align-items-center">
+                                    @if($student->logins->isNotEmpty()) {{ $student->logins[$student->logins->count() - 1]->created_at->diffForHumans() }} @else Nikada se nije ulogovao @endif
+                            </span>
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <div class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" class="icon icon-xs"  viewBox="0 0 20 20">
+                                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"/>
+                                        </svg>
+                                    </div>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{route('students.show', $student->id)}}">
+                                                <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                                </svg>
+                                                Detalji
                                             </a>
-                                            <a href="{{ route('students.edit', $student->id) }}" tabindex="0"
-                                               class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                               role="menuitem">
-                                                <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-                                                <span class="px-4 py-0">Izmijeni</span>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{route('students.edit', $student->id)}}">
+                                                <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor"  viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                </svg>
+                                                Izmijeni
                                             </a>
-                                            <form
-                                                onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovog učenika?')){return false;}"
-                                                method="POST" action="{{route('students.destroy', $student->id)}}">
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button type="submit" tabindex="0"
-                                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                                        role="menuitem">
-                                                    <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                                    <span class="px-4 py-0">Izbriši</span>
-                                                </button>
-                                            </form>
+                                        </li>
+                                        <div role="separator" class="dropdown-divider my-1"></div>
+                                        <li>
+                                            <a type="button" class="dropdown-item" data-bs-toggle="modal" href="#deleteBook{{$student->id}}">
+                                                <svg class="dropdown-icon text-danger me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                                                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                </svg>
+                                                Izbriši
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    {{--Modal--}}
+                                    <div class="modal fade" id="deleteBook{{$student->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header border-0">
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body px-md-5">
+                                                    <h2 class="h4 text-center">Brisanje</h2>
+                                                    <p class="text-center mb-4">Da li ste sigurni?</p>
+                                                    <form class="mb-0" action="{{ route('students.destroy', $student->id) }}" method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <div class="d-grid">
+                                                            <button type="submit" class="btn btn-danger">Obriši</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -106,22 +109,9 @@
                         </tr>
                     @endforeach
                     </tbody>
-                    <tfoot>
-                    <tr class="border-b-[1px] border-[#e4dfdf]">
-                        <th class="px-4 py-3 leading-4 tracking-wider text-left text-blue-500">
-
-                        </th>
-                        <th class="px-4 py-4 leading-4 tracking-wider text-left">Ime i prezime<a href="#"><i
-                                    class="ml-3 fa-lg fas fa-long-arrow-alt-down" onclick="sortTable()"></i></a></th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Email</th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Tip korisnika</th>
-                        <th class="px-4 py-4 text-sm leading-4 tracking-wider text-left">Zadnji pristup sistemu</th>
-                        <th class="px-4 py-4"></th>
-                    </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
+    </div>
 
-    </section>
 @endsection
