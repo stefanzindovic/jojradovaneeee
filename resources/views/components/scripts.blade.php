@@ -1,4 +1,5 @@
 <script src="{{asset('dashboardfiles/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('dashboardfiles/vendor/choices/choices.min.js')}}"></script>
 <script type="text/javascript" charset="utf8" src={{asset('dashboardfiles/vendor/datatable/datatables.js')}}></script>
 <script src="{{asset('assets/js/cropper.min.js')}}"></script>
 <script src="{{asset('dashboardfiles/vendor/@popperjs/core/dist/umd/popper.min.js')}}"></script>
@@ -15,7 +16,6 @@
 
 <!-- Datepicker -->
 <script src="{{asset('dashboardfiles/vendor/vanillajs-datepicker/dist/js/datepicker.min.js')}}"></script>
-<script src="{{asset('dashboardfiles/assets/js/multi.js')}}"></script>
 <!-- Sweet Alerts 2 -->
 <script src="{{asset('dashboardfiles/vendor/sweetalert2/dist/sweetalert2.all.min.js')}}"></script>
 
@@ -39,7 +39,6 @@
 <script src="{{asset('dashboardfiles/assets/js/volt.js')}}"></script>
 
 
-<script src="{{asset('dashboardfiles/vendor/choices/choices.min.js')}}"></script>
 
 <script src="{{asset('dashboardfiles/vendor/notyf/notyf.min.js')}}"></script>
 

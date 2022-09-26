@@ -62,13 +62,18 @@
         notyf.success("{{ Session::get('deleteMessage') }}");
     </script>
 @endif
+@if (session('successMessage'))
+    <script>
+        notyf.success("{{ Session::get('successMessage') }}");
+    </script>
+@endif
 @if (session('errorMessage'))
     <script>
         notyf.error("{{ Session::get('errorMessage') }}");
     </script>
 @endif
 
-
+@yield('pre-scripts')
 @yield('scripts')
 
 
