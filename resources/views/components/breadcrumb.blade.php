@@ -21,15 +21,16 @@
             $breadcrumbUrl = $currentDomain;
             $i=0;
             $mode = 0;
+            $done = 0;
 
             if(isset($breadcrumbLCase[1]) && !isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1])){
-                $mode = 1;
+                $mode = 1; //Users & books
             }
             else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1]) && is_numeric($breadcrumbLCase[3])){
-                $mode = 2;
+                $mode = 2; //Activities
             }
             else if(isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[2])){
-                $mode = 3;
+                $mode = 3; //settings
             }
 
             switch ($mode){
@@ -97,6 +98,12 @@
                             $language = \App\Models\Language::findOrFail($breadcrumbLCase[2]);
                             $breadcrumbUCase[2] = $language->name;
                             break;
+                        default:
+                            if($breadcrumbLCase[0] == 'actions'){
+                                $book = \App\Models\Book::findOrFail($breadcrumbLCase[2]);
+                                $breadcrumbUCase[2] = $book->title;
+                            }
+
                     }
                     break;
             }
@@ -116,7 +123,16 @@
 
             foreach ($breadcrumbUCase as $key => $crumb){
 
-                $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
+
+                if($breadcrumbLCase[0] == 'actions' && $done != 1){
+                    $breadcrumbUrl = $breadcrumbUrl . '/' . 'books';
+                    $done = 1;
+                }
+
+                if($breadcrumbLCase[0] == 'actions' && $key < 2){}
+                else{
+                    $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
+                }
 
                 foreach ($seperateThese as $seperate){
                     $temp = explode('|', $seperate);
@@ -124,7 +140,10 @@
                         $crumb = $temp[1];
                     }
                 }
-                if($mode == 3 && $key==2){
+
+                if($breadcrumbLCase[0] == 'actions' && $key < 2){
+                }
+                else if($breadcrumbLCase[0] != 'actions' &&  $mode == 3 && $key==2){
                     echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
                 }
                 else if ($key + 1 == $breadcrumbLength){
