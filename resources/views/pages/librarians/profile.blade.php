@@ -10,175 +10,144 @@ Date::setLocale('sr');
     {{ $librarian->name }}
 @endsection
 
-@section('page_content')
-    <section class="w-screen h-screen pl-[80px] pb-2 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading">
-            <div class="flex flex-row justify-between border-b-[1px] border-[#e4dfdf]">
-                <div class="pl-[30px] py-[10px] flex flex-col">
-                    <div>
-                        <h1>
-                            {{ $librarian->name }}
-                        </h1>
-                    </div>
-                    <div>
-                        <nav class="w-full rounded">
-                            <ol class="flex list-reset">
-                                <li>
-                                    <a href="{{ route('librarians.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                        Svi bibliotekari
-                                    </a>
-                                </li>
-                                <li>
-                                    <span class="mx-2">/</span>
-                                </li>
-                                <li>
-                                    <p class="text-gray-400">
-                                        {{ $librarian->name }}
-                                    </p>
-                                </li>
-                            </ol>
-                        </nav>
+@section('interaction')
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group ms-2 me-2">
+            <a href="{{route('librarians.edit', $librarian->id)}}" type="button" class="btn btn-sm btn-outline-primary">Izmijeni</a>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modalSignUp">Resetuj šifru</button>
+            <div class="modal fade" id="modalSignUp" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body px-md-5">
+                            <h2 class="h4 text-center">Resetuj šifru</h2>
+                            <p class="text-center mb-4">Resetovanje šifre za {{$librarian->name}} {{$librarian->lastname}}</p>
+                            <form id="validateForm" method="POST" action="{{ route('librarians.password', $librarian->id) }}">
+                                @method('PATCH')
+                                @csrf
+                                <!-- End of Form -->
+                                <div class="form-group">
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="password">Šifra</label>
+                                        <div class="input-group">
+                                                    <span class="input-group-text border-gray-300" id="basic-addon4">
+                                                        <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                                                    </span>
+                                            <input onkeyup="checkPasswordMatch();" name="password" type="password" placeholder="Šifra" class="form-control border-gray-300" id="password" required>
+                                        </div>
+                                    </div>
+                                    <!-- End of Form -->
+                                    <!-- Form -->
+                                    <div class="form-group mb-4">
+                                        <label for="confirm_password">Ponovite Šifru</label>
+                                        <div class="input-group">
+                                                    <span class="input-group-text border-gray-300" id="basic-addon5">
+                                                        <svg class="icon icon-xxs" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                                                    </span>
+                                            <input onkeyup="checkPasswordMatch();" name="password_confirmation" equalto="#password" type="password" placeholder="Ponovite Šifru" class="form-control border-gray-300" id="password_confirm" required>
+                                            <div class="invalid-feedback">
+                                                Lozinke se ne poklapaju!
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-grid">
+                                    <button id="submitDugme" type="submit" class="btn btn-primary" disabled>Resetuj</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="pt-[24px] pr-[30px]">
-                    @if (($librarian->id == \Illuminate\Support\Facades\Auth::user()->id) == $librarian->id ||
-                        \Illuminate\Support\Facades\Auth::user()->role_id == 1)
-                        <a href="#" class="inline hover:text-blue-600 show-modal">
-                            <i class="fas fa-redo-alt mr-[3px]"></i>
-                            Resetuj šifru
-                        </a>
-                        <a href="{{ route('librarians.edit', $librarian->id) }}"
-                            class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
-                            <i class="fas fa-edit mr-[3px] "></i>
-                            Izmjeni podatke
-                        </a>
-                    @endif
-                    @if (\Illuminate\Support\Facades\Auth::user()->role_id == 1 &&
-                        $librarian->id != \Illuminate\Support\Facades\Auth::user()->id)
-                        <p class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-gray-300 dotsLibrarianProfile hover:text-[#606FC7]"
-                            id="dropdownStudent">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </p>
-                        <div
-                            class="z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-librarian-profile">
-                            <div class="absolute right-0 w-56 mt-[10px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                                aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-                                <div class="py-1">
-                                    <form
-                                        onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovog bibliotekara?')){return false;}"
-                                        method="POST" action="{{ route('librarians.destroy', $librarian->id) }}">
-                                        @csrf
-                                        @method('DELETE')
+            </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#delete{{$librarian->id}}">Obriši</button>
+        {{--Modal--}}
+        <div class="modal fade" id="delete{{$librarian->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header border-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body px-md-5">
+                        <h2 class="h4 text-center">Brisanje</h2>
+                        <p class="text-center mb-4">Da li ste sigurni?</p>
+                        <form class="mb-0" action="{{ route('librarians.destroy', $librarian->id) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-danger">Obriši</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                                        <button type="submit" tabindex="0"
-                                            class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                            role="menuitem">
-                                            <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                            <span class="px-4 py-0">Izbriši</span>
-                                        </button>
-                                    </form>
+@endsection
+
+@section('page_content')
+    <div class="col-12 mb-4">
+        <div class="card shadow border-0">
+            <div class="text-center p-0">
+                <div class="profile-cover rounded-top bg-gray-900"></div>
+                <div class="card-body pb-5">
+                    <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{$librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $librarian->picture) : asset('imgs/' . $librarian->picture)}}" alt="Profile Image">
+                    <h4 class="h3">{{$librarian->name}}</h4>
+                    <p class="text-gray mb-4">{{$librarian->email}}</p>
+                    <a class="btn btn-sm btn-primary" href="mailto:{{$librarian->email}}"><i class="icon icon-xxs me-2 fas fa-envelope"></i>E-mail kontakt</a>
+                </div>
+            </div>
+            <div class="row pb-5">
+                <div class="d-flex justify-content-center">
+                    <div class="col-md-11">
+                        <div class="accordion" id="informacije">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                        Informacije o korisniku
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#informacije">
+                                    <div class="accordion-body">
+                                        <div class="mb-4">
+                                            <p class="fw-bold">Username</p>
+                                            <p class="p">{{$librarian->username}}</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <p class="fw-bold">JMBG</p>
+                                            @if($librarian->jmbg)
+                                                <p class="p">{{$librarian->jmbg}}</p>
+                                            @else
+                                                <span class="text-danger">Podatak nije dostupan</span>
+                                            @endif
+                                        </div>
+                                        <div class="mb-4">
+                                            <p class="fw-bold">Broj logovanja</p>
+                                            <p class="p">{{count($librarian->logins)}}</p>
+                                        </div>
+                                        <div class="mb-4">
+                                            <p class="fw-bold">Poslednji login</p>
+                                            <p class="p">
+                                                @if($librarian->logins->isEmpty())
+                                                    Nikad nije ulogovan
+                                                @else
+                                                    {{Jenssegers\Date\Date::setLocale('sr')}}
+                                                    {{\Carbon\Carbon::parse($librarian->logins->last()->time)->diffForHumans()}}
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- Space for content -->
-        <div class="pl-[30px] height-profile pb-[30px] scroll mt-[20px]">
-            <div class="flex flex-row">
-                <div class="mr-[30px]">
-                    <div class="mt-[20px]">
-                        <span class="text-gray-500">Ime i prezime</span>
-                        <p class="font-medium">{{ $librarian->name }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Tip korisnika</span>
-                        <p class="font-medium">{{ $librarian->role->name }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">JMBG</span>
-                        <p class="font-medium">{{ $librarian->jmbg }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Email</span>
-                        <a href="mailto:{{ $librarian->email }}"
-                            class="cursor-pointer block font-medium text-[#2196f3] hover:text-blue-600">{{ $librarian->email }}</a>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Korisnicko ime</span>
-                        <p class="font-medium">{{ $librarian->username }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Broj logovanja</span>
-                        <p class="font-medium">{{ $librarian->logins->count() }}</p>
-                    </div>
-                    <div class="mt-[40px]">
-                        <span class="text-gray-500">Poslednji put logovan/a</span>
-                        <p class="font-medium">
-                            @if ($librarian->logins->isNotEmpty())
-                                {{ $librarian->logins[$librarian->logins->count() - 1]->created_at->diffForHumans() }}
-                            @else
-                                Nikada se nije ulogovao
-                            @endif
-                        </p>
-                    </div>
+    </div>
 
-                </div>
-                <div class="ml-[100px]  mt-[20px]">
-                    <img class="p-2 border-2 border-gray-300" width="300px"
-                        @if ($librarian->picture === 'profile-picture-placeholder.jpg') src="{{ asset('imgs/profile-picture-placeholder.jpg') }}"
-                         @else src="{{ asset('storage/uploads/librarians/' . $librarian->picture) }}" @endif
-                        alt="Profilna fotografija">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- This code will show up when we press reset password -->
-    @if ($librarian->id == \Illuminate\Support\Facades\Auth::user()->id ||
-        \Illuminate\Support\Facades\Auth::user()->role_id == 1)
-        <div
-            class="fixed top-0 left-0 flex items-center justify-center hidden w-full h-screen bg-black bg-opacity-50 modal">
-            <!-- Modal -->
-            <div class="w-[500px] bg-white rounded shadow-lg md:w-1/3">
-                <!-- Modal Header -->
-                <div class="flex items-center justify-between px-[30px] py-[20px] border-b">
-                    <h3>Resetuj šifru: {{ $librarian->name }}</h3>
-                    <button class="text-black close-modal">&cross;</button>
-                </div>
-                <!-- Modal Body -->
-                <form method="POST" action="{{ route('librarians.password', $librarian->id) }}">
-                    @csrf
-                    @method('PATCH')
-                    <div class="flex flex-col px-[30px] py-[30px]">
-                        <div class="flex flex-col pb-[30px]">
-                            <span>Unesi novu šifru <span class="text-red-500">*</span></span>
-                            <input required minlength="8" maxlength="24"
-                                class="h-[40px] px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                type="password" name="password" id="newPassword">
-                            <div id="passwordValidationMessage"></div>
-                        </div>
-                        <div class="flex flex-col pb-[30px]">
-                            <span>Ponovi šifru <span class="text-red-500">*</span></span>
-                            <input required minlength="8" maxlength="24"
-                                class="h-[40px] px-2 py-2 text-base bg-white border border-gray-300 shadow-sm appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                type="password" name="password_confirmation" id="newPasswordConfirmation">
-                        </div>
-                    </div>
-                    <div class="flex items-center justify-end px-[30px] py-[20px] border-t w-100 text-white">
-                        <button type="reset"
-                            class="shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                            Ponisti <i class="fas fa-times ml-[4px]"></i>
-                        </button>
-                        <button id="savePasswordBtn" type="submit"
-                            class="shadow-lg w-[150px] disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
-                            Sacuvaj <i class="fas fa-check ml-[4px]"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endif
 @endsection

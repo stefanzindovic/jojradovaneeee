@@ -52,7 +52,7 @@
                 <li class="nav-item dropdown ms-lg-3">
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="media d-flex align-items-center">
-                            <img class="avatar rounded-circle" alt="Image placeholder" src="{{(Auth::user()->picture) ? asset(Auth::user()->picture) : "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" }}">
+                            <img class="avatar rounded-circle" alt="Image placeholder" src="{{Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . Auth::user()->picture) : asset('imgs/' . Auth::user()->picture)}}">
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">{{Auth::user()->name}} {{Auth::user()->lastname}}</span>
                             </div>
@@ -60,7 +60,7 @@
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
                         <a class="dropdown-item d-flex align-items-center"
-                           href="@if (Auth::user()->role_id == 1) {{route('students.show', Auth::user()->id)}} @endif @if (Auth::user()->role_id == 2) {{route('librarians.show', Auth::user()->id)}} @endif">
+                           href="{{route('librarians.show', Auth::user()->id)}} ">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"></path></svg>
                             Profil
                         </a>
