@@ -2,6 +2,7 @@
 <link type="text/css" href="{{asset('dashboardfiles/css/volt.css')}}" rel="stylesheet">
 <link type="text/css" href="{{asset('dashboardfiles/css/cropper.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link href="{{asset('dashboardfiles/vendor/choices/choices.min.css')}}" rel="stylesheet" />
 
 <!-- Sweet Alert -->
 <link type="text/css" href="{{asset('dashboardfiles/vendor/sweetalert2/dist/sweetalert2.min.css')}}" rel="stylesheet">
@@ -9,7 +10,6 @@
 
 <link rel="stylesheet" href="{{asset('dashboardfiles/assets/js/all.min.css')}}" />
 
-<link href="{{asset('dashboardfiles/vendor/choices/choices.min.css')}}" rel="stylesheet" />
 
 <link rel="stylesheet" href="{{asset('dashboardfiles/vendor/notyf/notyf.min.css')}}">
 
