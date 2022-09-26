@@ -16,8 +16,8 @@
                         <h2 class="h5 mb-4">Opšte informacije</h2>
                         <div class="col-md-12 mb-3">
                             <div>
-                                <label for="name" class="form-label">Ime i prezime</label>
-                                <input minlength="4" maxlength="50" required type="text" name="name" id="librarianName" value="{{ old('name')}}" class="form-control" onkeydown="clearErrorsNameUcenikEdit()"/>
+                                <label for="librarianName" class="form-label">Ime i prezime</label>
+                                <input minlength="4" maxlength="50" required type="text" placeholder="Ime i prezime" name="name" id="librarianName" value="{{ old('name')}}" class="form-control" onkeydown="clearErrorsNameUcenikEdit()"/>
                                 @error('name')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times"></i> {{ $message }}</p>
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="role_id" class="form-label">Tip korisnika</label>
-                            <select name="tip_korisnika" id="role_id" class="form-control">
+                            <select name="tip_korisnika" id="role_id" class="form-control" disabled>
                                 <option value="2">
                                     Bibliotekar
                                 </option>
@@ -38,8 +38,8 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="jmbg" class="form-label">JMBG</label>
-                            <input minlength="13" maxlength="13" required type="text" name="jmbg" id="librarianJmbg" value="{{old('jmbg')}}" class="form-control" onkeydown="clearErrorsJmbgUcenikEdit()">
+                            <label for="librarianJmbg" class="form-label">JMBG</label>
+                            <input minlength="13" maxlength="13" required type="text" placeholder="JMBG" name="jmbg" id="librarianJmbg" value="{{old('jmbg')}}" class="form-control" onkeydown="clearErrorsJmbgUcenikEdit()">
                             @error('jmbg')
                             <p style="color:red;" id="errorMessageByLaravel"><i
                                     class="fa fa-times"></i> {{ $message }}</p>
@@ -49,8 +49,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input required type="email" name="email" id="librarianEmail" value="{{ old('email') }}" class="form-control" onkeydown="clearErrorsEmailUcenikEdit()">
+                        <label for="librarianEmail" class="form-label">Email</label>
+                        <input required type="email" name="email" id="librarianEmail"  placeholder="E-mail" value="{{ old('email') }}" class="form-control" onkeydown="clearErrorsEmailUcenikEdit()">
                         @error('email')
                         <p style="color:red;" id="errorMessageByLaravel"><i
                                 class="fa fa-times"></i> {{ $message }}</p>
@@ -59,8 +59,8 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="username" class="form-label">Korisničko ime</label>
-                        <input minlength="4" maxlength="18" required type="text" name="username" id="librarianUsername" value="{{old('username')}}" class="form-control" onkeydown="clearErrorsUsernameUcenikEdit()">
+                        <label for="librarianUsername" class="form-label">Korisničko ime</label>
+                        <input minlength="4" maxlength="18" required type="text" placeholder="Korisničko ime" name="username" id="librarianUsername" value="{{old('username')}}" class="form-control" onkeydown="clearErrorsUsernameUcenikEdit()">
                         @error('username')
                         <p style="color:red;" id="errorMessageByLaravel"><i
                                 class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
@@ -70,19 +70,18 @@
 
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="pwUcenik" class="form-label">Šifra</label>
-                            <input type="password" placeholder="*****" name="password" id="pwUcenik" class="form-control"/>
+                            <label for="librarianPassword" class="form-label">Šifra</label>
+                            <input minlength="8" maxlength="24" required type="password" placeholder="********" name="password" id="librarianPassword" required minlength="8" maxlength="24" class="form-control"/>
                             @error('password')
-                            <div class="text-red">** {{ $message }}</div>
+                            <p style="color:red;" id="errorMessageByLaravel"><i
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
+                            <div id="librarianPasswordValidationMessage"></div>
                         </div>
 
                         <div class="col-md-6 mb-3">
-                            <label for="pw2Ucenik" class="form-label">Ponovi šifru</label>
-                            <input type="password" placeholder="*****" name="password_confirmation" id="pw2Ucenik" class="form-control"/>
-                            @error('password_confirmation')
-                            <div id="validateNazivFormat" class="text-red-500 text-sm mt-2">** {{ $message }}</div>
-                            @enderror
+                            <label for="librarianPasswordConfirm" class="form-label">Ponovi šifru</label>
+                            <input minlength="8" maxlength="24" required type="password" placeholder="********" name="password_confirmation" id="librarianPasswordConfirm" required minlength="8" maxlength="24" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -110,7 +109,7 @@
                 <div class="col">
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Ažuriraj</button>
+                        <button type="submit" class="btn btn-primary">Kreiraj</button>
                     </div>
                 </div>
             </div>
