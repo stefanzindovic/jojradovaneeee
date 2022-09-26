@@ -157,7 +157,7 @@
                         <div class="col">
                             <div class="float-end">
                                 <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="button" id="next">Ažuriraj</button>
+                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
                             </div>
                         </div>
                     </div>
@@ -277,7 +277,7 @@
                         <div class="col">
                             <div class="float-end">
                                 <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="button" id="next">Ažuriraj</button>
+                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
                             </div>
                         </div>
                     </div>
@@ -419,7 +419,7 @@
                         <div class="col">
                             <div class="float-end">
                                 <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="button" id="next">Ažuriraj</button>
+                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
                             </div>
                         </div>
                     </div>
