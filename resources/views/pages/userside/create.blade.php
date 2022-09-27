@@ -43,7 +43,7 @@
                                             </div>
                                             <div class="col-auto ps-0">
                                                 <h2>{{$book->title}}</h2>
-                                                <p>{{Str::limit($book->description, 25)}}</p>
+                                                <p>{!! Str::limit($book->description, 25)!!}</p>
                                             </div>
                                         </div>
                                        <div class="row m-3">

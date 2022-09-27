@@ -50,7 +50,7 @@
                                                     <div class="card-body">
                                                         <h2 class="card-title"><a href="{{route('knjige.show', $book->id)}}">{{$book->title}}</a></h2>
                                                         <div class="card-text" style="min-height: 120px">
-                                                            {{ Str::limit($book->description, 80)}}
+                                                            {!! Str::limit($book->description, 80) !!}
                                                         </div>
                                                         <div class="d-grid gap-2">
                                                             <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
