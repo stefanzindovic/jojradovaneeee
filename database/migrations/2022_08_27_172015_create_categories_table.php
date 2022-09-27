@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('picture')->default('profile-picture-placeholder.jpg');
+            $table->string('picture')->default('placeholder.png');
             $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();

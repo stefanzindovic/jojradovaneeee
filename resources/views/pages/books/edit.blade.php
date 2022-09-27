@@ -153,14 +153,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="float-end">
-                                <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
             <div class="tab-pane fade hidden" id="specifikacije-tab" role="tabpanel" aria-labelledby="specifikacije">
@@ -270,14 +262,6 @@
                                 <p style="color:red;" id="errorMessageByLaravel"><i
                                         class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
                                 @enderror
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="float-end">
-                                <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
                             </div>
                         </div>
                     </div>
@@ -415,17 +399,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="float-end">
-                                <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
-                                <button class="button btn btn-primary" type="submit">Ažuriraj</button>
-                            </div>
-                        </div>
-                    </div>
                 </section>
             </div>
         </div>
+            <div class="row">
+                <div class="col">
+                    <div class="float-end">
+                        <button class="button btn btn-outline-danger" type="button" id="prev">Poništi</button>
+                        <button id="saveBookBtn" class="button btn btn-primary" type="submit">Ažuriraj</button>
+                    </div>
+                </div>
+            </div>
     </form>
 
 

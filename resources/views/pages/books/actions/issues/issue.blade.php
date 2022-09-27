@@ -47,7 +47,7 @@
                     <div class="mb-3">
                         <label class="form-label">Izaberi ucenika koji zaduzuje knjigu <span class="text-red">*</span></label>
                         <select class="form-control" id="multi" name="student_id" id="ucenikIzdavanje">
-                            <option selected>Izaberite ucenika</option>
+                            <option value="null" selected>Izaberite ucenika</option>
                             @foreach ($students as $student)
                                 <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
                                     {{ $student->name }}
@@ -91,7 +91,7 @@
                     <input name="book_id" type="number" value="{{ $book->id }}" hidden>
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Izdaj</button>
+                        <button id="issueBookBtn" type="submit" class="btn btn-primary">Izdaj</button>
                     </div>
                 </form>
             </div>

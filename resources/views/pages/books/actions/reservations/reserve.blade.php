@@ -1,164 +1,99 @@
 @extends('app')
 
 @section('page_title')
+    {{ $book->title }} | Rezerviši
+@endsection
+
+@section('interaction')
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group ms-2 me-2">
+            <a href="{{ route('books.issues.returnmultiple', $book->id) }}" type="button" class="btn btn-sm btn-outline-primary">Otpiši</a>
+            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Vrati</a>
+            <a href="{{ route('books.reservations.reservePage', $book->id) }}" type="button" class="btn btn-sm btn-outline-primary">Rezerviši</a>
+
+        </div>
+    </div>
+
 @endsection
 
 @section('page_content')
-    <section class="w-screen h-screen pl-[80px] pb-2 text-gray-700">
-        <!-- Heading of content -->
-        <div class="heading">
-            <div class="flex flex-row justify-between border-b-[1px] border-[#e4dfdf]">
-                <div class="py-[10px] flex flex-row">
-                    <div class="w-[77px] pl-[30px]">
-                        <img style="width: 77px; height: 77px;" class="object-cover w-8 mr-2 h-11"
-                            src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
-                            alt="" />
+    <div class="card card-body border-0 shadow mb-4">
+        <div class="row">
+            <div class="col-md-4 border-end">
+                <div class="row pb-5">
+                    <div class="col-auto">
+                        <img style="height: 110px;width: 80px" src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif" alt="">
                     </div>
-                    <div class="pl-[15px]  flex flex-col">
-                        <div>
-                            <h1>
-                                {{ $book->title }}
-                            </h1>
-                        </div>
-                        <div>
-                            <nav class="w-full rounded">
-                                <ol class="flex list-reset">
-                                    <li>
-                                        <a href="{{ route('books.index') }}" class="text-[#2196f3] hover:text-blue-600">
-                                            Evidencija knjiga
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="mx-2">/</span>
-                                    </li>
-                                    <li>
-                                        <a href="{{ route('books.show', $book->id) }}"
-                                            class="text-[#2196f3] hover:text-blue-600">
-                                            {{ $book->title }}
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <span class="mx-2">/</span>
-                                    </li>
-                                    <li>
-                                        <p class="text-gray-400">
-                                            Rezerviši knjigu
-                                        </p>
-                                    </li>
-                                </ol>
-                            </nav>
-                        </div>
+                    <div class="col-auto ps-0">
+                        <h2>{{$book->title}}</h2>
+                        <p>{{Str::limit($book->description, 25)}}</p>
                     </div>
-                </div>
-                <div class="pt-[24px] mr-[30px]" style="display: flex; align-items: center;">
-                    <a href="otpisiKnjigu.php" class="inline hover:text-blue-600">
-                        <i class="fas fa-level-up-alt mr-[3px]"></i>
-                        Otpiši knjigu
-                    </a>
-
-                    <form method="POST" action="{{ route('books.issues.issue', $book->id) }}">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="inline hover:text-blue-600 ml-[20px] pr-[10px]">
-                            <i class="far fa-hand-scissors mr-[3px]"></i>
-                            Izdaj knjigu
-                        </button>
-                    </form>
-                    <a href="vratiKnjigu.php" class="hover:text-blue-600 inline ml-[20px] pr-[10px]">
-                        <i class="fas fa-redo-alt mr-[3px] "></i>
-                        Vrati knjigu
-                    </a>
-                    <p
-                        class="inline cursor-pointer text-[25px] py-[10px] pl-[30px] border-l-[1px] border-[#e4dfdf] dotsIzdajKnjigu hover:text-[#606FC7]">
-                        <i class="fas fa-ellipsis-v"></i>
-                    </p>
-                    <div
-                        class="relative z-10 hidden transition-all duration-300 origin-top-right transform scale-95 -translate-y-2 dropdown-izdaj-knjigu">
-                        <div class="absolute right-0 w-56 mt-[7px] origin-top-right bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg outline-none"
-                            aria-labelledby="headlessui-menu-button-1" id="headlessui-menu-items-117" role="menu">
-                            <div class="py-1">
-                                <a href="{{ route('books.edit', $book->id) }}" tabindex="0"
-                                    class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                    role="menuitem">
-                                    <i class="fas fa-edit mr-[1px] ml-[5px] py-1"></i>
-                                    <span class="px-4 py-0">Izmijeni knjigu</span>
-                                </a>
-                                <form
-                                    onSubmit="if(!confirm('Da li ste sigurni da želite da obrišete ovu knjigu?')){return false;}"
-                                    method="POST" action="{{ route('books.destroy', $book->id) }}">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" tabindex="0"
-                                        class="flex w-full px-4 py-2 text-sm leading-5 text-left text-gray-700 outline-none hover:text-blue-600"
-                                        role="menuitem">
-                                        <i class="fa fa-trash mr-[5px] ml-[5px] py-1"></i>
-                                        <span class="px-4 py-0">Izbriši</span>
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                    <div class="row pt-2">
+                        <span class="text-gray">
+                            <p class="text-sm">
+                                @foreach ($book->authors as $author)
+                                    {{ $author->full_name }} @if (!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
+                            </p>
+                        </span>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Space for content -->
-        <div class="scroll height-content section-content">
-            <form class="text-gray-700" method="POST" action="{{ route('books.reservations.reserve', $book->id) }}"
-                enctype="multipart/form-data">
-                @csrf
-                <div class="flex flex-row ml-[30px]">
-                    <div class="w-[50%] mb-[100px]">
-                        <h3 class="mt-[20px] mb-[10px]">Rezervisi knjigu</h3>
-                        <div class="mt-[20px]">
-                            <p>Izaberi ucenika za koga se knjiga rezervise <span class="text-red-500">*</span></p>
-                            <select
-                                class="flex w-[90%] mt-2 px-2 py-2 border bg-white border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#576cdf]"
-                                name="student_id" id="ucenikRezervisanje">
-                                <option disabled selected></option>
-                                @foreach ($students as $student)
-                                    <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
-                                        {{ $student->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                            @error('student_id')
-                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
-                                    {{ $message }}</p>
-                            @enderror
-                            <div id="studentIdValidation"></div>
-                        </div>
-                        <div class="mt-[20px]">
-                            <p>Datum rezervacije <span class="text-red-500">*</span></p>
-                            <label class="text-gray-700" for="date">
-                                <input type="date" name="action_start" id="datumRezervisanja"
+            <div class="col-md-8">
+                <form method="POST" action="{{ route('books.reservations.reserve', $book->id) }}">
+                    @csrf
+                    <div class="mb-3">
+                        <label class="form-label">Izaberi ucenika za koga se knjiga rezerviše <span class="text-red">*</span></label>
+                        <select class="form-control" id="multi" name="student_id" id="ucenikRezervisanje">
+                            <option value="null" selected>Izaberite ucenika</option>
+                            @foreach ($students as $student)
+                                <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
+                                    {{ $student->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('student_id')
+                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            {{ $message }}</p>
+                        @enderror
+                        <div id="studentIdValidation"></div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <label class="form-label">Datum rezervisanja<span class="text-red">*</span></label>
+                                <input
+                                    type="date" name="action_start" id="datumRezervisanja"
                                     value="{{ old('action_start', \Carbon\Carbon::now()->format('Y-m-d')) }}"
                                     min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}"
-                                    class="flex w-[50%] mt-2 px-4 py-2 text-base placeholder-gray-400 bg-white border border-gray-300 appearance-none focus:outline-none focus:ring-2 focus:ring-[#576cdf]" />
-                            </label>
-                            @error('action_start')
-                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                    class="form-control">
+                                @error('action_start')
+                                <p style="color:red;" id="errorMessageByLaravel"><i
+                                        class="fa fa-times  mr-[5px] mt-[10px]"></i>
                                     {{ $message }}</p>
-                            @enderror
-                            <div id="actionStartValidation"></div>
+                                @enderror
+                                <div id="actionStartValidation"></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="absolute bottom-0 w-full bg-white">
-                    <div class="flex flex-row">
-                        <div class="inline-block w-full text-right py-[7px] mr-[100px] text-white">
-                            <button type="reset"
-                                class="btn-animation shadow-lg mr-[15px] w-[150px] focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in bg-[#F44336] hover:bg-[#F55549] rounded-[5px]">
-                                Poništi <i class="fas fa-times ml-[4px]"></i>
-                            </button>
-                            <button id="reserveBookBtn" type="submit"
-                                class="btn-animation shadow-lg disabled:opacity-50 focus:outline-none text-sm py-2.5 px-5 transition duration-300 ease-in rounded-[5px] hover:bg-[#46A149] bg-[#4CAF50]">
-                                Rezervisi knjigu <i class="fas fa-check ml-[4px]"></i>
-                            </button>
-                        </div>
+                    <input name="book_id" type="number" value="{{ $book->id }}" hidden>
+                    <div class="float-end">
+                        <button class="btn btn-outline-danger" type="reset">Poništi</button>
+                        <button id="reserveBookBtn" type="submit" class="btn btn-primary">Rezerviši</button>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+
+@endsection
+
+@section('scripts')
+    <script>
+        const element = document.querySelector('#multi');
+        const choices = new Choices(element);
+
+    </script>
 @endsection

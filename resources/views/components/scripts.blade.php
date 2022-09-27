@@ -65,7 +65,6 @@
 @vite('./resources/js/validations/authorsValidation.js')
 @vite('./resources/js/validations/studentsValidations.js')
 @vite('./resources/js/validations/librariansValidation.js')
-@vite('./resources/js/validations/passwordsValidation.js')
 @vite('./resources/js/validations/booksValidation.js')
 @vite('./resources/js/validations/reserveBookValidation.js')
 @vite('./resources/js/validations/issueBookValidation.js')
@@ -73,7 +72,6 @@
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
-@vite('./resources/js/booksTabNavigation.js')
 @vite('./resources/js/bookRecordsTabNavigation.js')
 @vite('./resources/js/userProfileTabsNavigation.js')
 @vite('./resources/js/userRecordsTabNavigation.js')

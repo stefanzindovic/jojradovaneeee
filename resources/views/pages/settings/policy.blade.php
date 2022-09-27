@@ -120,7 +120,7 @@
                                 <div class="col-md-2">
                                     <div class="pt-3">
                                         <div class="input-group">
-                                            <input class="form-control" name="value{{$policies[1]->id}}" id="reservationDeadline" type="number" min="1" max="100" value="{{ old("value{$policies[1]->id}", $policies[1]->value) }}"/>
+                                            <input class="form-control policyInput" name="value{{$policies[1]->id}}" id="reservationDeadline" type="number" min="1" max="100" value="{{ old("value{$policies[1]->id}", $policies[1]->value) }}"/>
                                             <span class="input-group-text">dana</span>
                                         </div>
                                     </div>
@@ -142,7 +142,7 @@
                                 <div class="col-md-2">
                                     <div class="pt-3">
                                         <div class="input-group">
-                                            <input class="form-control" id="returnDeadline" name="value{{$policies[0]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[0]->id}", $policies[0]->value) }}"/>
+                                            <input class="form-control policyInput" id="returnDeadline" name="value{{$policies[0]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[0]->id}", $policies[0]->value) }}"/>
                                             <span class="input-group-text">dana</span>
                                         </div>
                                     </div>
@@ -163,7 +163,7 @@
                                 <div class="col-md-2">
                                     <div class="pt-3">
                                         <div class="input-group">
-                                            <input class="form-control" id="conflictDeadline" name="value{{$policies[2]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[2]->id}", $policies[2]->value) }}"/>
+                                            <input class="form-control policyInput" id="conflictDeadline" name="value{{$policies[2]->id}}" type="number" min="1" max="100" value="{{ old("value{$policies[2]->id}", $policies[2]->value) }}"/>
                                             <span class="input-group-text">dana</span>
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@
                                 <div class="col-md-2">
                                     <div class="pt-3">
                                         <div class="input-group">
-                                            <input class="form-control" id="maxBooksPerUser"
+                                            <input class="form-control policyInput" id="maxBooksPerUser"
                                                    name="value{{ $policies[3]->id }}" type="number" min="1" max="5"
                                                    value="{{ old("value{$policies[3]->id}", $policies[3]->value) }}"/>
                                             <span class="input-group-text">knjiga</span>
