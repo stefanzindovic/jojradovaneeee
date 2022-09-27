@@ -1,5 +1,9 @@
 @extends('layouts.user')
 
+@section('title')
+    Početna
+@endsection
+
 @section('main')
     <section id="hero" class="hero d-flex align-items-center" style="padding-top: 0 !important;">
 
@@ -53,6 +57,11 @@
             </div>
 
         </section>
+        <div class="bg-white py-3">
+            <div class="d-flex justify-content-center">
+                <span>Powered by <img src="{{asset('imgs/Intelecto.png')}}" class="pb-1" height="20px" alt="Intelco"></span>
+            </div>
+        </div>
     </main>
 @endsection
 
