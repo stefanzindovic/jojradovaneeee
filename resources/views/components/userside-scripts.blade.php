@@ -9,6 +9,7 @@
 <script src="{{asset('userside/vendor/php-email-form/validate.js')}}"></script>
 <!-- Template Main JS File -->
 <script src="{{asset('userside/js/main.js')}}"></script>
+<script src="{{asset('assets/js/cropper.min.js')}}"></script>
 
 <script src="{{asset('userside/vendor/notyf/notyf.min.js')}}"></script>
 
@@ -23,6 +24,7 @@
         loop: false, // optional
         autoplay: true, // optional
         name: "Icon", // optional
+
     });
 </script>
 

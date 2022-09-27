@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('title')
-    {{$book->title}}
+    {{$book->title}} | Rezerviši
 @endsection
 
 
