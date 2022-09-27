@@ -1,5 +1,4 @@
 jQuery(document).ready(function () {
-    const studentIdInput = jQuery("#ucenikRezervisanje");
     const actionStartInput = jQuery("#datumRezervisanja");
 
     const studentIdValidation = jQuery("#studentIdValidation");
@@ -10,10 +9,7 @@ jQuery(document).ready(function () {
     reserveBookBtn.click(function (e) {
         // validate student id input
         if (
-            studentIdInput.val() == null ||
-            studentIdInput.val() == undefined ||
-            studentIdInput.val() == "" ||
-            studentIdInput.val().length < 1
+            element.value == "null"
         ) {
             setTimeout(function () {
                 studentIdValidation

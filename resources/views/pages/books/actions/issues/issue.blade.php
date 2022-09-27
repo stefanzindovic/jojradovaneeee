@@ -47,7 +47,7 @@
                     <div class="mb-3">
                         <label class="form-label">Izaberi ucenika koji zaduzuje knjigu <span class="text-red">*</span></label>
                         <select class="form-control" id="multi" name="student_id" id="ucenikIzdavanje">
-                            <option selected>Izaberite ucenika</option>
+                            <option value="null" selected>Izaberite ucenika</option>
                             @foreach ($students as $student)
                                 <option value="{{ $student->id }}" @if (old('student_id') == $student->id) selected @endif>
                                     {{ $student->name }}
