@@ -91,7 +91,7 @@
                     <input name="book_id" type="number" value="{{ $book->id }}" hidden>
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Izdaj</button>
+                        <button id="issueBookBtn" type="submit" class="btn btn-primary">Izdaj</button>
                     </div>
                 </form>
             </div>

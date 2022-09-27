@@ -72,7 +72,6 @@
 @vite('./resources/js/cropper.js')
 
 <!-- Navigation tabs -->
-@vite('./resources/js/booksTabNavigation.js')
 @vite('./resources/js/bookRecordsTabNavigation.js')
 @vite('./resources/js/userProfileTabsNavigation.js')
 @vite('./resources/js/userRecordsTabNavigation.js')
