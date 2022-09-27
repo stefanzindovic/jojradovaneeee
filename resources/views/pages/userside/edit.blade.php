@@ -1,12 +1,15 @@
 @extends('layouts.user')
-
+@section('title')
+    Izmijeni profil
+@endsection
 
 @section('styles')
     <link href="{{asset('assets/css/cropper.min.css')}}" rel="stylesheet">
-    <x-cropperprofile></x-cropperprofile>
 @endsection
 
 @section('main')
+    <link type="text/css" href="{{asset('dashboardfiles/css/cropper.min.css')}}" rel="stylesheet">
+    <x-cropper></x-cropper>
 
 
     <main id="main" style="padding-top: 3%; !important;">

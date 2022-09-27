@@ -12,7 +12,7 @@
 
 
 </head>
-<body>
+<body style="height: 100vh">
 <!-- ======= Header ======= -->
 <x-userside-header></x-userside-header>
 
@@ -21,7 +21,6 @@
 <x-userside-scripts></x-userside-scripts>
 
 @yield('scripts')
-
 
 
 </body>

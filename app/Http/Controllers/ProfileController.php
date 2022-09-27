@@ -72,7 +72,7 @@ class ProfileController extends Controller
 
             $student->update();
 
-            return to_route('home')->with('successMessage', 'Informacije o učeniku su izmijenjene.');
+            return to_route('profil')->with('successMessage', 'Informacije o učeniku su izmijenjene.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }

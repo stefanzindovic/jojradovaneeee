@@ -1,5 +1,9 @@
 @extends('layouts.user')
 
+@section('title')
+    {{Auth::user()->name}}
+@endsection
+
 @section('main')
 
     <main id="main" style="padding-top: 3%; !important;">
