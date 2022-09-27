@@ -18,8 +18,8 @@
                     <label class="border border-gray-300 rounded d-flex justify-content-center">
                         <div id="empty-cover-art" class="overflow-hidden">
                             <div class="text-center">
-                                <img src="{{asset($category->picture)}}" style="object-fit: fill;" id="image-output" width="400px" height="400px" @if($category->picture == null) hidden @endif>
-                                @if($category->picture == null)
+                                <img src="{{asset($category->picture )}}" style="object-fit: fill;" id="image-output" width="400px" height="400px" @if($category->picture == 'placeholder.png') hidden @endif>
+                                @if($category->picture == 'placeholder.png')
                                     <div id="addphototext" class="text-center pb-lg-12">
                                         <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
@@ -71,7 +71,7 @@
                 <div class="col">
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary" >Kreiraj</button>
+                        <button id="saveCategory" type="submit" class="btn btn-primary">Ažuriraj</button>
                     </div>
                 </div>
             </div>

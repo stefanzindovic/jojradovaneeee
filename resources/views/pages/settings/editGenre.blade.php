@@ -32,7 +32,7 @@
                 <div class="col">
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Ažuriraj</button>
+                        <button id="saveGenreBtn" type="submit" class="btn btn-primary">Ažuriraj</button>
                     </div>
                 </div>
             </div>
