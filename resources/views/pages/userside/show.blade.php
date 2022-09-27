@@ -69,7 +69,7 @@
                                             @endif
                                         @endforeach
                                     </h4>
-                                    <div class="mt-2 pr-3 content"><p>{{$book->description}}</p>
+                                    <div class="mt-2 pr-3 content"><p>{!! $book->description !!}</p>
                                     </div>
 
                                     <div class="d-grid gap-2 pt-5">

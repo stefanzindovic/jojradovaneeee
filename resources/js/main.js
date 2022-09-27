@@ -64,7 +64,6 @@ jQuery(function () {
 
 jQuery(document).ready(function () {
     //this will execute on page load(to be more specific when document ready event occurs)
-    console.log("Idi u kurac");
     if (jQuery(".activity-card").length > 6) {
         jQuery(".activity-card:gt(6)").hide();
         jQuery(".activity-showMore").show();
