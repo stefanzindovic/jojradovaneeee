@@ -1,4 +1,5 @@
 jQuery(document).ready(function () {
+    var notyf = new Notyf();
     const titleInput = jQuery("#bookTitle");
     const descriptionInput = jQuery("#bookDescription");
     const categoriesInput = jQuery("#bookCategories");
@@ -46,6 +47,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
                     );
+               notyf.error('Naslov knjige ne može biti prazan');
             }, 200);
             e.preventDefault();
         } else if (
@@ -58,6 +60,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Naslov može sadržati od 1 do 50 karaktera.</p>'
                     );
+               notyf.error('Naslov knjige može sadržati od 1 do 50 karaktera.');
             }, 200);
             e.preventDefault();
         } else {
@@ -83,6 +86,7 @@ jQuery(document).ready(function () {
                         .html(
                             '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Opis može sadržati od 10 do 2048 karaktera.</p>'
                         );
+                   notyf.error('Opis može sadržati od 10 do 2048 karaktera.');
                 }, 200);
                 e.preventDefault();
             } else {
@@ -98,6 +102,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jednu kategoriju kojoj pripada ova knjiga.</p>'
                     );
+               notyf.error('Odaberite bar jednu kategoriju kojoj pripada ova knjiga.');
             }, 200);
             e.preventDefault();
         } else {
@@ -112,6 +117,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jedan žanr kojem pripada ova knjiga.</p>'
                     );
+               notyf.error('Odaberite bar jedan žanr kojem pripada ova knjiga.');
             }, 200);
             e.preventDefault();
         } else {
@@ -126,6 +132,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jednog autora koji je pisao ovu knjiga.</p>'
                     );
+               notyf.error('Odaberite bar jednog autora koji je pisao ovu knjiga.');
             }, 200);
             e.preventDefault();
         } else {
@@ -141,6 +148,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite izdavača ove knjige.</p>'
                     );
+               notyf.error('Odaberite izdavača ove knjige.');
             }, 200);
             e.preventDefault();
         } else {
@@ -159,6 +167,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
                     );
+               notyf.error('Odaberite godinu izdavanja');
             }, 200);
             e.preventDefault();
         } else if (
@@ -171,6 +180,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validnu godinu izdavanja knjige.</p>'
                     );
+               notyf.error('Unesite validnu godinu izdavanja ove knjige.');
             }, 200);
             e.preventDefault();
         } else {
@@ -189,6 +199,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
                     );
+               notyf.error('Količina knjiga ne može biti prazna.');
             }, 200);
             e.preventDefault();
         } else if (totalCopiesInput.val() < 1 || totalCopiesInput.val() > 999) {
@@ -198,6 +209,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan broj knjiga.</p>'
                     );
+               notyf.error('Unesite validan broj knjiga.');
             }, 200);
             e.preventDefault();
         } else {
@@ -216,6 +228,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
                     );
+               notyf.error('Broj stranica ne može biti prazan');
             }, 200);
             e.preventDefault();
         } else if (totalPagesInput.val() < 1 || totalPagesInput.val() > 2000) {
@@ -225,6 +238,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan broj knjiga.</p>'
                     );
+               notyf.error('Unesite validan broj stranica.');
             }, 200);
             e.preventDefault();
         } else {
@@ -239,6 +253,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite pismo kojim je ova knjiga napisana.</p>'
                     );
+               notyf.error('Izaberite pismo kojim je ova knjiga napisana.');
             }, 200);
             e.preventDefault();
         } else {
@@ -253,6 +268,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu poveza ove knjige</p>'
                     );
+               notyf.error('Izaberite vrstu poveza ove knjige');
             }, 200);
             e.preventDefault();
         } else {
@@ -267,6 +283,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu formata ove knjige</p>'
                     );
+               notyf.error('Izaberite vrstu formata ove knjige.');
             }, 200);
             e.preventDefault();
         } else {
@@ -281,6 +298,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite jezik na kojem je knjiga napisana.</p>'
                     );
+               notyf.error('Izaberite jezik na kojem je knjiga napisana.');
             }, 200);
             e.preventDefault();
         } else {
@@ -299,6 +317,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
                     );
+               notyf.error('ISBN ne može biti prazan.');
             }, 200);
             e.preventDefault();
         } else if (isbnInput.val().length < 13 || isbnInput.val().length > 13) {
@@ -308,6 +327,7 @@ jQuery(document).ready(function () {
                     .html(
                         '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan ISBN kod.</p>'
                     );
+               notyf.error('Unesite validan ISBN kod.');
             }, 200);
             e.preventDefault();
         } else {

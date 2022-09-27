@@ -351,7 +351,7 @@
                     <div class="col">
                         <div class="d-flex justify-content-between">
                             <button class="button btn btn-outline-secondary" type="button" id="prev">Nazad</button>
-                            <button class="button btn btn-primary" type="submit">Kreiraj</button>
+                            <button id="saveBookBtn" class="button btn btn-primary" type="submit">Kreiraj</button>
                         </div>
                     </div>
                 </div>

@@ -31,7 +31,7 @@
                 <div class="col">
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="button">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Kreiraj</button>
+                        <button id="saveCoverBtn" type="submit" class="btn btn-primary">Kreiraj</button>
                     </div>
                 </div>
             </div>

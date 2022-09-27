@@ -131,7 +131,7 @@
                                 <tr>
                                     <td>
                                         @if (!$category->picture == null)
-                                            <img class="profpic rounded-circle" src="{{$category->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/categories/' . $category->picture) : asset('imgs/' . $category->picture)}}" alt="Ikonica" />
+                                            <img class="profpic rounded-circle" src="{{$category->picture !== 'placeholder.png' ? asset('storage/uploads/categories/' . $category->picture) : asset('imgs/' . $category->picture)}}" alt="Ikonica" />
                                         @endif
                                         {{ $category->title }}
                                     </td>

@@ -52,26 +52,31 @@
         notyf.success("{{ Session::get('createMessage') }}");
     </script>
 @endif
+{{Session::forget('createMessage')}}
 @if (session('editMessage'))
     <script>
         notyf.success("{{ Session::get('editMessage') }}");
     </script>
 @endif
+{{Session::forget('editMessage')}}
 @if (session('deleteMessage'))
     <script>
         notyf.success("{{ Session::get('deleteMessage') }}");
     </script>
 @endif
+{{Session::forget('deleteMessage')}}
 @if (session('successMessage'))
     <script>
         notyf.success("{{ Session::get('successMessage') }}");
     </script>
 @endif
+{{Session::forget('successMessage')}}
 @if (session('errorMessage'))
     <script>
         notyf.error("{{ Session::get('errorMessage') }}");
     </script>
 @endif
+{{Session::forget('errorMessage')}}
 
 @yield('pre-scripts')
 @yield('scripts')

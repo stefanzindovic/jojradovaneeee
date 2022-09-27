@@ -131,7 +131,7 @@ var cropperFunction = function (e) {
     var croppedOutput = document.getElementById("image-output");
     var cropperCropBtn = document.getElementById("cropper-crop-btn");
     var cropperCancleBtn = document.getElementById("cropper-cancle-btn");
-    var form = document.getElementById("form");
+    var form = document.getElementById("myForm");
 
     var cropper;
 
