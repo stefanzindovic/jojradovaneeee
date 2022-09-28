@@ -54,7 +54,7 @@ class BookUserSideController extends Controller
                 }
             }
             $books = $categories->merge($genres);
-            $books = $books->unique();
+            $books = $books->unique(strict: true, key: 'id');
         }
 
         $categories = Category::all();
