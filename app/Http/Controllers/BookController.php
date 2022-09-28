@@ -205,6 +205,7 @@ class BookController extends Controller
             'pictures' => 'nullable|array|min:1',
         ]);
 
+
         try {
             $book->title = $input['title'];
             $book->description = $input['description'] ?? 'Nema sadržaja.';
@@ -218,9 +219,9 @@ class BookController extends Controller
             $book->publisher()->associate($input['publisher']);
             $book->language()->associate($input['language']);
             $book->update();
-            $book->categories()->syncWithoutDetaching($input['categories']);
-            $book->genres()->syncWithoutDetaching($input['genres']);
-            $book->authors()->syncWithoutDetaching($input['authors']);
+            $book->categories()->sync($input['categories']);
+            $book->genres()->sync($input['genres']);
+            $book->authors()->sync($input['authors']);
 
 
             // change cover picture if there is no new uploaded images
