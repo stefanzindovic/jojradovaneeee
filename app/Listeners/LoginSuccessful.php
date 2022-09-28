@@ -34,12 +34,6 @@ class LoginSuccessful
      */
     public function handle(Login $event)
     {
-        // if user is student
-        if(Auth::user()->role_id == 3) {
-            Auth::logout();
-            Session::flush();
-            return abort(401);
-        }
         // change last login value
         $model = new UserLogins();
         $model->user_id = Auth::user()->id;

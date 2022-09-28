@@ -423,7 +423,10 @@
         let elementi = ["bookCategories", "bookGenres", "bookAuthors", "bookPublishers", "bookScript", "bookLanguage", "bookCover", "bookFormat"]
 
         $.each( elementi, function(key, value ) {
-            new Choices(document.getElementById(value));
+            new Choices(document.getElementById(value), {
+                removeItems: true,
+                removeItemButton: true,
+            });
         });
 
         ClassicEditor
