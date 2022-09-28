@@ -27,7 +27,7 @@ class BookUserSideController extends Controller
             $authors = collect([]);
             $languages = collect([]);
 
-            if ($request->has('category_id')) {
+            if ($request->has('category_id') && !$request->has('genre_id')) {
                 foreach ($request->category_id as $key => $value) {
                     $results = Book::with(['categories'])->whereHas('categories', function ($query) use ($value) {
                         $query->where('category_id', $value);
@@ -40,7 +40,7 @@ class BookUserSideController extends Controller
                     }
                 }
             }
-            if ($request->has('genre_id')) {
+            if ($request->has('genre_id') && !$request->has('category_id')) {
                 foreach ($request->genre_id as $key => $value) {
                     $results = Book::with(['genres'])->whereHas('genres', function ($query) use ($value) {
                         $query->where('genre_id', $value);
@@ -50,6 +50,30 @@ class BookUserSideController extends Controller
                         foreach ($results as $result) {
                             $genres->add($result);
                         }
+                    }
+                }
+            }
+            if ($request->has('genre_id') && $request->has('category_id')) {
+                $genresValues = collect([]);
+                $categoriesValues = collect([]);
+                foreach ($request->genre_id as $key => $value) {
+                    $genresValues->add($value);
+                }
+
+                foreach ($request->category_id as $key => $value) {
+                    $categoriesValues->add($value);
+                }
+
+                $results = Book::with(['genres', 'categories'])->whereHas('genres', function ($query) use ($genresValues) {
+                    $query->whereIn('genre_id', $genresValues);
+                })->whereHas('categories', function ($query) use ($categoriesValues) {
+                    $query->whereIn('category_id', $categoriesValues);
+                })->get();
+
+
+                if ($results->isNotEmpty()) {
+                    foreach ($results as $result) {
+                        $genres->add($result);
                     }
                 }
             }
