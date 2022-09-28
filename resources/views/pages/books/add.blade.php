@@ -19,7 +19,7 @@
                                    id="bookTitle" value="{{ old('title') }}" class="form-control" />
                             @error('title')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                             <div id="bookTitleValidationMessage"></div>
                         </div>
@@ -30,7 +30,7 @@
                             <div id="bookDescriptionValidationMessage"></div>
                             @error('description')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -45,7 +45,7 @@
                             </select>
                             @error('categories[]')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                             <div id="bookGenresValidationMessage"></div>
                             @error('genres[]')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -78,7 +78,7 @@
                             </select>
                             <div id="bookAuthorsValidationMessage"></div>
                             @error('authors[]')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                 {{ $message }}</p>
                             @enderror
                         </div>
@@ -94,7 +94,7 @@
                             </select>
                             <div id="bookPublisherValidationMessage"></div>
                             @error('publisher')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                 {{ $message }}</p>
                             @enderror
                         </div>
@@ -105,7 +105,7 @@
                                     id="bookPublishedAt" class="form-control">
                             <div id="bookPublishedAtValidationMessage"></div>
                             @error('published_at')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                 {{ $message }}</p>
                             @enderror
                         </div>
@@ -116,7 +116,7 @@
                                    id="bookCopies" class="form-control">
                             <div id="bookCopiesValidationMessage"></div>
                             @error('total_copies')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                 {{ $message }}</p>
                             @enderror
                         </div>
@@ -144,7 +144,7 @@
                             <div id="bookPagesValidationMessage"></div>
                             @error('total_pages')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -163,7 +163,7 @@
                             <div id="bookScriptValidationMessage"></div>
                             @error('script')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -182,7 +182,7 @@
                             <div id="bookLanguageValidationMessage"></div>
                             @error('language')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -201,7 +201,7 @@
                             <div id="bookCoverValidationMessage"></div>
                             @error('cover')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
 
@@ -220,7 +220,7 @@
                             <div id="bookFormatValidationMessage"></div>
                             @error('format')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
                         <div class="mb-3">
@@ -232,7 +232,7 @@
                             <div id="bookIsbnValidationMessage"></div>
                             @error('isbn')
                             <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    class="fa fa-times"></i> {{ $message }}</p>
                             @enderror
                         </div>
                     </div>

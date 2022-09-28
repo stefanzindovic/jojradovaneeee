@@ -9,7 +9,7 @@
     <main id="main" style="padding-top: 3%; !important;">
 
         <section id="books" class="values">
-            <div class="container-xxl" data-aos="fade-up">
+            <div class="container-xxl">
                 <div class="row">
                     <div class="card">
                         <form action="" method="GET">

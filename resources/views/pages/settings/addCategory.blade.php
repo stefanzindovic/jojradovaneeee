@@ -41,7 +41,7 @@
                                 @enderror
                             </div>
                             @error('title')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                 {{ $message }}</p>
                             @enderror
                             <div id="categoryTitleValidationMessage"></div>
@@ -56,7 +56,7 @@
                             @enderror
                         </div>
                         @error('description')
-                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                             {{ $message }}</p>
                         @enderror
                         <div id="categoryDescriptionValidationMessage"></div>

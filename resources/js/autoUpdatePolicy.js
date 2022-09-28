@@ -18,7 +18,7 @@ jQuery("#reservationDeadline").on("input propertychange change", function () {
                 jQuery("#reservationMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
             }, 200);
         }
@@ -29,7 +29,7 @@ jQuery("#reservationDeadline").on("input propertychange change", function () {
                 jQuery("#reservationMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</small>'
                     );
             }, 200);
         }
@@ -90,7 +90,7 @@ jQuery("#returnDeadline").on("input propertychange change", function () {
                 jQuery("#returnMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
             }, 200);
         }
@@ -101,7 +101,7 @@ jQuery("#returnDeadline").on("input propertychange change", function () {
                 jQuery("#returnMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</small>'
                     );
             }, 200);
         }
@@ -163,7 +163,7 @@ jQuery("#conflictDeadline").on("input propertychange change", function () {
                 jQuery("#conflictMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
             }, 200);
         }
@@ -174,7 +174,7 @@ jQuery("#conflictDeadline").on("input propertychange change", function () {
                 jQuery("#conflictMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja mogže biti cijeli broj čija je vrijednost između 1 i 100.</small>'
                     );
             }, 200);
         }
@@ -235,7 +235,7 @@ jQuery("#maxBooksPerUser").on("input propertychange change", function () {
                 jQuery("#maxBooksPerUserMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
             }, 200);
         }
@@ -246,7 +246,7 @@ jQuery("#maxBooksPerUser").on("input propertychange change", function () {
                 jQuery("#maxBooksPerUserMessageByJs")
                     .css({ display: "block", "max-width": "250px" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može biti cijeli broj čija je vrijednost između 1 i 5.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može biti cijeli broj čija je vrijednost između 1 i 5.</small>'
                     );
             }, 200);
         }

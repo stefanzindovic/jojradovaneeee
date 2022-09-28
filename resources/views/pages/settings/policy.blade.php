@@ -168,7 +168,7 @@
                                         </div>
                                     </div>
                                     @error("value{$policies[2]->id}")
-                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i> {{ $message }}</p>
                                     @enderror
                                     <div id="conflictMessageByJs"></div>
                                 </div>
@@ -196,7 +196,7 @@
                                     </div>
                                     @error("value{$policies[3]->id}")
                                     <p style="color:red;" id="errorMessageByLaravel"><i
-                                            class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                            class="fa fa-times"></i> {{ $message }}</p>
                                     @enderror
                                     <div id="maxBooksPerUserMessageByJs"></div>
                                 </div>
@@ -222,7 +222,7 @@
                                     </div>
                                     @error("value{$policies[4]->id}")
                                     <p style="color:red;" id="errorMessageByLaravel"><i
-                                            class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                            class="fa fa-times"></i> {{ $message }}</p>
                                     @enderror
                                     <div id="multipleBookCopiesPerUserMessageByJs"></div>
                                 </div>

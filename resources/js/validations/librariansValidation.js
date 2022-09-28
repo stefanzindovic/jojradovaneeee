@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
                 nameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -39,7 +39,7 @@ jQuery(document).ready(function () {
                 nameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -48,7 +48,7 @@ jQuery(document).ready(function () {
                 nameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja nije u korektnom formatu.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja nije u korektnom formatu.</p>'
                     );
             }, 200);
             return e.preventDefault();
@@ -69,7 +69,7 @@ jQuery(document).ready(function () {
                 jmbgValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -78,7 +78,7 @@ jQuery(document).ready(function () {
                 jmbgValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan JMBG.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan JMBG.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -87,7 +87,7 @@ jQuery(document).ready(function () {
                 jmbgValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan JMBG.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan JMBG.</p>'
                     );
             }, 200);
             return e.preventDefault();
@@ -108,7 +108,7 @@ jQuery(document).ready(function () {
                 usernameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -120,7 +120,7 @@ jQuery(document).ready(function () {
                 usernameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje može sadržati od 4 do 18 karaktera.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje može sadržati od 4 do 18 karaktera.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -129,7 +129,7 @@ jQuery(document).ready(function () {
                 usernameValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Možete koristiti samo velika i mala slova.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Možete koristiti samo velika i mala slova.</p>'
                     );
             }, 200);
             return e.preventDefault();
@@ -150,7 +150,7 @@ jQuery(document).ready(function () {
                 emailValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -163,7 +163,7 @@ jQuery(document).ready(function () {
                 emailValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validnu e-mail adresu.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validnu e-mail adresu.</p>'
                     );
             }, 200);
             return e.preventDefault();
@@ -185,7 +185,7 @@ jQuery(document).ready(function () {
                     passwordValidationMessage
                         .css({ display: "block" })
                         .html(
-                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</p>'
                         );
                 }, 200);
                 e.preventDefault();
@@ -197,7 +197,7 @@ jQuery(document).ready(function () {
                     passwordValidationMessage
                         .css({ display: "block" })
                         .html(
-                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Lozinka može sadržati između 8 i 24 karaktera.</p>'
+                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Lozinka može sadržati između 8 i 24 karaktera.</p>'
                         );
                 }, 200);
                 return e.preventDefault();
@@ -206,7 +206,7 @@ jQuery(document).ready(function () {
                     passwordValidationMessage
                         .css({ display: "block" })
                         .html(
-                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Potvrda lozinke nije uspjela. Pokušajte ponovo.</p>'
+                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Potvrda lozinke nije uspjela. Pokušajte ponovo.</p>'
                         );
                 }, 200);
                 return e.preventDefault();
