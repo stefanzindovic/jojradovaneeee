@@ -34,7 +34,9 @@ class BookUserSideController extends Controller
                     })->get();
 
                     if ($results->isNotEmpty()) {
-                        $categories->add($results->first());
+                        foreach ($results as $result) {
+                            $categories->add($result);
+                        }
                     }
                 }
             }
@@ -45,7 +47,9 @@ class BookUserSideController extends Controller
                     })->get();
 
                     if ($results->isNotEmpty()) {
-                        $genres->add($results->first());
+                        foreach ($results as $result) {
+                            $genres->add($result);
+                        }
                     }
                 }
             }
