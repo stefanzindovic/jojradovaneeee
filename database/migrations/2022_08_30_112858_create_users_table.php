@@ -18,10 +18,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('jmbg', 13)->unique();
+            $table->string('jmbg', 13)->unique()->nullable();
             $table->string('username', 18)->unique();
             $table->string('picture')->default('profile-picture-placeholder.jpg');
-            $table->foreignId('role_id')->constrained('user_roles');
+            $table->foreignId('role_id')->default(3)->constrained('user_roles');
             $table->boolean('is_active')->default(true);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

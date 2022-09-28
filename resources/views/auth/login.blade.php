@@ -1,56 +1,101 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
 
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
+<!DOCTYPE html>
+<html>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Prijavi se</title>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" href="{{asset('userside/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
+</head>
 
-            <!-- Email Address -->
-            <div>
-                <x-label for="email" :value="__('Email')" />
 
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+<body class="bg-white">
+
+<div class="main-content">
+    <!-- Header -->
+    <div class="header py-7 py-lg-8 pt-lg-9">
+        <div class="separator separator-bottom separator-skew zindex-100">
+            <svg x="0" y="0" viewBox="0 0 2560 100" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <polygon class="fill-white" points="2560 0 2560 100 0 100"></polygon>
+            </svg>
+        </div>
+    </div>
+    <!-- Page content -->
+    <div class="container mt--9 pb-5 text-gray">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-5 col-md-7">
+                <div class="card bg-secondary border border-soft mb-0">
+                    <div class="card-body px-lg-5 py-lg-5">
+                        <div class="pb-5">
+                            <div class="d-flex justify-content-center">
+                                <div class="w-25" id="icon-container"></div>
+                            </div>
+                            <h2 class="text-center">Biblioteka</h2>
+                        </div>
+                        <form method="POST" action="{{ route('login') }}">
+                            @csrf
+                            <div class="form-group mb-3">
+                                <div class="input-group input-group-merge input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                    </div>
+                                    <input name="email" class="form-control" placeholder="Email" type="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group input-group-merge input-group-alternative">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                                    </div>
+                                    <input name="password" class="form-control" placeholder="Šifra" type="password">
+                                </div>
+                            </div>
+                            <div class="custom-control custom-control-alternative custom-checkbox">
+                                <input class="custom-control-input" name="remember" id="remember_me" type="checkbox">
+                                <label class="custom-control-label" for="remember_me">
+                                    <span>Zapamti me</span>
+                                </label>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-premium my-4">Prijavi se</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <a href="#" class="text-gray"><small>Zaboravili ste šifru?</small></a>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="{{route('register')}}" class="text-gray"><small>Registrujte se</small></a>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+</div>
+<script src="{{asset('dashboardfiles/assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+<!-- Argon JS -->
+<script src="{{asset('js/dashboard.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.4/lottie.min.js"></script>
+<script>
+    var animation = bodymovin.loadAnimation({
+        // animationData: { /* ... */ },
+        container: document.getElementById('icon-container'), // required
+        path: "{{asset('userside/img/online.json')}}", // required
+        renderer: 'svg', // required
+        loop: false, // optional
+        autoplay: true, // optional
+        name: "Icon", // optional
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+    });
+</script>
+</body>
 
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="current-password" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" name="remember">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-
-                <x-button class="ml-3">
-                    {{ __('Log in') }}
-                </x-button>
-            </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+</html>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Models\BookCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 |
 */
+Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->name('home');
 Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
@@ -98,4 +100,4 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-require __DIR__ . '/auth.php';
+
