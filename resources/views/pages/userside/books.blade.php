@@ -19,29 +19,38 @@
                                         <h3 class="text-primary">KATEGORIJE</h3>
                                         <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                             <ul class="list-group">
-                                                @foreach ($categories as $category)
-                                                    <li class="label list-group-item">
-                                                        <input type="checkbox" name="category_id[{{ $category->title }}]"
-                                                            onChange="this.form.submit()" class="me-2 categoryFilterId"
-                                                            value="{{ $category->id }}"
-                                                            @if (request()->filled('category_id.' . $category->title)) checked @endif>
-                                                        {{ $category->title }}
-                                                    </li>
-                                                @endforeach
+                                                @if ($categories->isNotEmpty())
+                                                    @foreach ($categories as $category)
+                                                        <li class="label list-group-item">
+                                                            <input type="checkbox"
+                                                                name="category_id[{{ $category->title }}]"
+                                                                onChange="this.form.submit()" class="me-2 categoryFilterId"
+                                                                value="{{ $category->id }}"
+                                                                @if (request()->filled('category_id.' . $category->title)) checked @endif>
+                                                            {{ $category->title }}
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    Nema kategorija.
+                                                @endif
                                             </ul>
                                         </div>
                                         <h3 class="text-primary pt-5">ŽANROVI</h3>
                                         <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                             <ul class="list-group">
-                                                @foreach ($genres as $genre)
-                                                    <li class="label list-group-item">
-                                                        <input type="checkbox" class="me-2"
-                                                            name="genre_id[{{ $genre->title }}]"
-                                                            onChange="this.form.submit()" value="{{ $genre->id }}"
-                                                            @if (request()->filled('genre_id.' . $genre->title)) checked @endif>
-                                                        {{ $genre->title }}
-                                                    </li>
-                                                @endforeach
+                                                @if ($genres->isNotEmpty())
+                                                    @foreach ($genres as $genre)
+                                                        <li class="label list-group-item">
+                                                            <input type="checkbox" class="me-2"
+                                                                name="genre_id[{{ $genre->title }}]"
+                                                                onChange="this.form.submit()" value="{{ $genre->id }}"
+                                                                @if (request()->filled('genre_id.' . $genre->title)) checked @endif>
+                                                            {{ $genre->title }}
+                                                        </li>
+                                                    @endforeach
+                                                @else
+                                                    Nema žanrova.
+                                                @endif
                                             </ul>
                                         </div>
                                     </div>
@@ -72,7 +81,7 @@
                                                     </div>
                                                 @endforeach
                                             @else
-                                                Nema rezultata
+                                                Nema rezultata.
                                             @endif
                                         </div>
                                     </div>
@@ -91,6 +100,12 @@
             </div>
 
         </section>
+        <div class="bg-white py-3">
+            <div class="d-flex justify-content-center">
+                <span>Powered by <img src="{{ asset('imgs/Intelecto.png') }}" class="pb-1" height="20px"
+                        alt="Intelco"></span>
+            </div>
+        </div>
 
     </main>
 @endsection

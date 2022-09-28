@@ -39,6 +39,8 @@
 <!-- Volt JS -->
 <script src="{{ asset('dashboardfiles/assets/js/volt.js') }}"></script>
 
+<script src="{{ asset('dashboardfiles/assets/js/dashboard.js') }}"></script>
+
 <!-- User side filters JS -->
 <script src="{{ asset('assets/js/usersideFilters.js') }}"></script>
 
@@ -56,35 +58,34 @@
 <script src="https://unpkg.com/create-file-list"></script>
 
 <!-- Validations -->
-@vite('./resources/js/validations/policyInputsRestrictions.js')
-@vite('./resources/js/validations/categoriesValidation.js')
-@vite('./resources/js/validations/genresValidation.js')
-@vite('./resources/js/validations/publishersValidations.js')
-@vite('./resources/js/validations/coversValidation.js')
-@vite('./resources/js/validations/formatsValidation.js')
-@vite('./resources/js/validations/scriptsValidation.js')
-@vite('./resources/js/validations/languageValidation.js')
-@vite('./resources/js/validations/authorsValidation.js')
-@vite('./resources/js/validations/studentsValidations.js')
-@vite('./resources/js/validations/librariansValidation.js')
-@vite('./resources/js/validations/booksValidation.js')
-@vite('./resources/js/validations/reserveBookValidation.js')
-@vite('./resources/js/validations/issueBookValidation.js')
+<script src="{{ asset('js/validations/policyInputsRestrictions.js') }}"></script>
+<script src="{{ asset('js/validations/categoriesValidation.js') }}"></script>
+<script src="{{ asset('js/validations/genresValidation.js') }}"></script>
+<script src="{{ asset('js/validations/publishersValidations.js') }}"></script>
+<script src="{{ asset('js/validations/coversValidation.js') }}"></script>
+<script src="{{ asset('js/validations/formatsValidation.js') }}"></script>
+<script src="{{ asset('js/validations/scriptsValidation.js') }}"></script>
+<script src="{{ asset('js/validations/languageValidation.js') }}"></script>
+<script src="{{ asset('js/validations/authorsValidation.js') }}"></script>
+<script src="{{ asset('js/validations/studentsValidations.js') }}"></script>
+<script src="{{ asset('js/validations/librariansValidation.js') }}"></script>
+<script src="{{ asset('js/validations/booksValidation.js') }}"></script>
+<script src="{{ asset('js/validations/reserveBookValidation.js') }}"></script>
+<script src="{{ asset('js/validations/issueBookValidation.js') }}"></script>
 
-@vite('./resources/js/cropper.js')
+<script src="{{ asset('js/cropper.js') }}"></script>
 
 <!-- Navigation tabs -->
-@vite('./resources/js/bookRecordsTabNavigation.js')
-@vite('./resources/js/userProfileTabsNavigation.js')
-@vite('./resources/js/userRecordsTabNavigation.js')
+<script src="{{ asset('js/bookRecordsTabNavigation.js') }}"></script>
+<script src="{{ asset('js/userProfileTabsNavigation.js') }}"></script>
+<script src="{{ asset('js/userRecordsTabNavigation.js') }}"></script>
 
 <!-- Select2 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"
     integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-@vite('./resources/js/multipleSelect.js')
 
 <!-- Custom -->
-@vite('./resources/js/autoUpdatePolicy.js')
-@vite('./resources/js/deleteOldPictureFromMultimedia.js')
-@vite('./resources/js/main.js')
+<script src="{{ asset('js/autoUpdatePolicy.js') }}"></script>
+<script src="{{ asset('js/deleteOldPictureFromMultimedia.js') }}"></script>
+<script src="{{ asset('js/main.js') }}"></script>

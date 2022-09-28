@@ -2,8 +2,8 @@
     <div class="container-xxl  d-flex align-items-center justify-content-between">
 
         <a href="/" class="logo d-flex align-items-center">
-            <div id="icon-container" style="max-width: 40px;margin: 0;padding: 0;margin-right: 10px;" ></div>
-            <span>Biblioteka</span>
+            <div id="icon-container" style="max-width: 50px;margin: 0;padding: 0" ></div>
+            <span style="font-size: 24px !important;">Biblioteka</span>
         </a>
 
         <div class="col-5 d-flex justify-content-center">
