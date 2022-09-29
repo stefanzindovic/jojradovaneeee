@@ -84,14 +84,14 @@
                                                 Nema rezultata.
                                             @endif
                                         </div>
+{{--                                        <div class="row">--}}
+
+{{--                                            {{ $books->links() }}--}}
+
+{{--                                        </div>--}}
                                     </div>
 
                                 </div>
-                                {{-- <div class="row">
-
-                                    {{ $books->links() }}
-
-                                </div> --}}
                             </div>
                         </form>
                     </div>
