@@ -98,7 +98,10 @@
                     <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $student->picture) : asset('imgs/' . $student->picture)}}" alt="Profile Image">
                     <h4 class="h3">{{$student->name}}</h4>
                     <p class="text-gray mb-4">{{$student->email}}</p>
-                    <a class="btn btn-sm btn-primary" href="mailto:{{$student->email}}"><i class="icon icon-xxs me-2 fas fa-envelope"></i>E-mail kontakt</a>
+                    <a class="btn btn-sm btn-primary mt-2" href="mailto:{{$student->email}}"><i class="icon icon-xxs me-2 fas fa-envelope"></i>E-mail kontakt</a>
+                    <a href="{{route('student.issued', $student->id)}}" class="btn btn-sm btn-secondary mt-2">
+                        <i class="icon icon-xxs me-2 fas fa-history"></i>Evidencija iznajmljivanja
+                    </a>
                 </div>
             </div>
             <div class="row pb-5">

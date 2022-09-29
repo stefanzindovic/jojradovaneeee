@@ -33,5 +33,5 @@ $deadlineBreachedDate = $deadline_date->addDay();
 
 <div
     @if ($current_date->gt($deadlineBreachedDate)) class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]" @endif>
-    <span @if ($current_date->gt($deadlineBreachedDate)) class="text-red-800" @endif>{{ $dayFinalForm }}</span>
+    <small @if ($current_date->gt($deadlineBreachedDate)) class="text-red-800" @endif>{{ $dayFinalForm }}</small>
 </div>
