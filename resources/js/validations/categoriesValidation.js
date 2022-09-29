@@ -22,7 +22,7 @@ jQuery(document).ready(function () {
                 titleValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
             }, 200);
             e.preventDefault();
@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
                 titleValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</small>'
                     );
             }, 200);
             return e.preventDefault();
@@ -40,7 +40,7 @@ jQuery(document).ready(function () {
                 titleValidationMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja nije u korektnom formatu.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja nije u korektnom formatu.</small>'
                     );
             }, 200);
             return e.preventDefault();
@@ -66,7 +66,7 @@ jQuery(document).ready(function () {
                     descriptionValidationMessage
                         .css({ display: "block" })
                         .html(
-                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 10 do 500 karaktera.</p>'
+                            '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 10 do 500 karaktera.</small>'
                         );
                 }, 200);
                 return e.preventDefault();

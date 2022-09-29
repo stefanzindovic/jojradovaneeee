@@ -22,6 +22,8 @@ Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->
 Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
 Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class,'show'])->name('knjige.show');
 
+Route::post('/search', [\App\Http\Controllers\SearchController::class, 'search']);
+
 Route::middleware(['auth'])->group(function () {
 
     //User Side

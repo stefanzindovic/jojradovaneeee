@@ -63,7 +63,7 @@
                         <input minlength="4" maxlength="18" required type="text" placeholder="Korisničko ime" name="username" id="studentUsername" value="{{old('username')}}" class="form-control" onkeydown="clearErrorsUsernameUcenikEdit()">
                         @error('username')
                         <p style="color:red;" id="errorMessageByLaravel"><i
-                                class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                class="fa fa-times"></i> {{ $message }}</p>
                         @enderror
                         <div id="studentUsernameValidationMessage"></div>
                     </div>

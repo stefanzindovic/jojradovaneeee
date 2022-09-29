@@ -1,9 +1,98 @@
-/**
-* Template Name: FlexStart - v1.10.1
-* Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+if (!isMobile) {
+    $(window).resize(function() {
+        if ($(window).width() < 1048){
+            if($(".mobile-wrapper").is(":visible")){
+                $(".mobile-wrapper").hide();
+            }
+        } else {
+            $(".mobile-wrapper").show();
+        }
+    })
+}
+
+
+
+if ($(window).width() < 1048){
+    $(".mobile-wrapper").hide();
+} else {
+    $(".mobile-wrapper").show();
+}
+
+$(".nav-icon-btn").on('click', function (){
+    $(".mobile-wrapper").fadeIn()
+})
+
+$("#mobile-close-search-button").on('click', function (){
+    $(".mobile-wrapper").fadeOut()
+})
+
+
+let knjige = $("#searchBoxList");
+let form = $('#searchForm');
+let imageurl = "";
+
+function search(){
+    if ($("#SearchBar").val().length < 3){
+        $("#searchBoxResults").fadeOut();
+    }
+    else {
+        setTimeout(function () {
+            // send request to /search
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+
+            $.ajax({
+                type: "POST",
+                url: "/search",
+                data: form.serialize(),
+                success:function(data){
+                    setTimeout(function () {
+
+                        knjige.empty()
+                        imageurl = "";
+
+                        if(data.books != null && $("#SearchBar").val().length >= 3){
+                            $("#searchBoxResults").fadeIn();
+                            $.each(data.books, function (k, book) {
+                                if(book.picture === 'book-placeholder.png'){
+                                    imageurl = 'imgs/book-placeholder.png';
+                                }else {
+                                    imageurl = 'storage/uploads/books/' + book.picture;
+                                }
+                                knjige.append(`
+                                                <li class="list-group-item mb-2" style="border:0">
+                                                        <div class="media align-items-center">
+                                                            <a href="/knjige/${book.id}" class="avatar mr-3">
+                                                                <img alt="IMG" src="${imageurl}" style="width: 48px;height: 80px;object-fit: fill">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <a href="/knjige/${book.id}"><span class="name mb-0">${book.title}</span></a>
+                                                            </div>
+                                                        </div>
+                                                </li>
+                                `).show('slow');
+                            })
+                        }
+
+
+                    },300)
+                },
+            });
+        }, 300);
+    }
+}
+
+
+
+// $("#SearchBar").focusout( function (){
+//    $("#searchBoxResults").hide()
+// });
 
 var cropperFunction = function (e) {
     var cropperOverlay = document.getElementById("cropper-wrapper");
@@ -349,9 +438,13 @@ function checkPasswordMatch() {
     aos_init();
   });
 
+
+
   /**
    * Initiate Pure Counter
    */
   new PureCounter();
+
+
 
 })();

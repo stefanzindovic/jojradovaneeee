@@ -19,12 +19,12 @@ jQuery(document).ready(function () {
 
         if (!allowedTypes.includes(uploadedFile.type)) {
             setTimeout(function () {
-                pictureValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odabrani fajl nije podržanog formata. Molimo vas da odaberete drugu SLIKU.</p>');
+                pictureValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odabrani fajl nije podržanog formata. Molimo vas da odaberete drugu SLIKU.</p>');
             }, 200);
             return e.preventDefault();
         } else if (uploadedFile > 5 * 1024 * 1024) {
             setTimeout(function () {
-                pictureValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odabrani fajl je prevelik. Molimo vas da odaberete neki manji fajl.</p>');
+                pictureValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odabrani fajl je prevelik. Molimo vas da odaberete neki manji fajl.</p>');
             }, 200);
             return e.preventDefault();
         } else {
