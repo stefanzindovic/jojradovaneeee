@@ -10,7 +10,7 @@
             </a>
         </li>
 
-        {{--   Za ovaj hard kod je trebalo puno rada, znoja i mozdanih celija  --}}
+        {{--   Za ovaj hardcode je trebalo puno rada, znoja i mozdanih celija  --}}
 
         @php
             $currentUrl = request()->path();
@@ -115,9 +115,18 @@
             //=================================================
 
             $seperateThese = [
-                'Izdateknjige|Izdate Knjige',
-                'Vraceneknjige|Vracene Knjige',
-                'Rezervacijearhiva|Arhivirane Rezervacije',
+                //'Izdateknjige|Izdate Knjige',
+                //'Vraceneknjige|Vracene Knjige',
+                //'Rezervacijearhiva|Arhivirane Rezervacije',
+                'Izdata|Issued',
+                'Rezervisana|Reserved',
+                'Rezervacija odobrena|Reservation approved',
+                'Rezervacija odbijena|Reservation denied',
+                'Rezervacija istekla|Reservation expired',
+                'Rezervacija otkazana|Reservation canceled',
+                'Izdata po rezervaciji|Issued via reservation',
+                'Otpisana|Signed off',
+                'Vraćena|Returned'
             ];
 
 
@@ -141,7 +150,7 @@
                     }
                 }
 
-                if($breadcrumbLCase[0] == 'actions' && $key < 2){
+                if($breadcrumbLCase[0] == 'actions' && $key < 2 && isset($breadcrumbUCase[3])){
                 }
                 else if($breadcrumbLCase[0] != 'actions' &&  $mode == 3 && $key==2){
                     echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
