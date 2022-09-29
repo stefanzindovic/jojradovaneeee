@@ -37,6 +37,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['staff'])->group(function (){
 
+        //Student Issued
+
+        Route::get('/student/{id}/issuedbooks', [\App\Http\Controllers\StudentRecords::class, 'issuedBooks'])->name('student.issued');
+        Route::get('/student/{id}/returnedbooks', [\App\Http\Controllers\StudentRecords::class, 'returnedBooks'])->name('student.returned');
+        Route::get('/student/{id}/breachedbooks', [\App\Http\Controllers\StudentRecords::class, 'breachedBooks'])->name('student.breached');
+        Route::get('/student/{id}/reservedbooks', [\App\Http\Controllers\StudentRecords::class, 'reservedBooks'])->name('student.reserved');
+        Route::get('/student/{id}/archivedreservations', [\App\Http\Controllers\StudentRecords::class, 'archivedReservations'])->name('student.archivedReservations');
+
 
         // Activities
         Route::get('/dashboard', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
