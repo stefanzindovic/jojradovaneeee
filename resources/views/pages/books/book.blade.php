@@ -8,10 +8,10 @@
 @section('interaction')
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group ms-2 me-2">
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Otpiši</a>
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Izdaj</a>
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Vrati</a>
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Rezerviši</a>
+            <a href="{{route('books.issues.writeoffmultiple', $book->id)}}" type="button" class="btn btn-sm btn-outline-primary">Otpiši</a>
+            <a href="{{route('books.issues.issuebook', $book->id)}}" type="button" class="btn btn-sm btn-outline-primary">Izdaj</a>
+            <a href="{{route('books.issues.returnmultiple', $book->id)}}" type="button" class="btn btn-sm btn-outline-primary">Vrati</a>
+            <a href="{{route('books.reservations.reserve', $book->id)}}" type="button" class="btn btn-sm btn-outline-primary">Rezerviši</a>
             <div class="dropdown pt-2 ps-4">
                 <div class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="icon icon-xs" viewBox="0 0 20 20">
@@ -224,7 +224,7 @@
                                 <p class="text-gray-400">IZDATO</p>
                                 <p class="p border border-blue rounded-3 w-50 text-center"> {{ $issuedRecords->count() }}
                                     @php
-                                        
+
                                         if ($issuedRecords->count() != 11 && $issuedRecords->count() % 10 == 1) {
                                             echo 'primjerak';
                                         } elseif ($issuedRecords->count() % 10 >= 2 && $issuedRecords->count() % 10 <= 4) {
@@ -243,7 +243,7 @@
                                 <p class="p border text-white bg-danger rounded-3 w-50 text-center">
                                     {{ $booksWithBreachDeadline->count() }}
                                     @php
-                                        
+
                                         if ($booksWithBreachDeadline->count() != 11 && $booksWithBreachDeadline->count() % 10 == 1) {
                                             echo 'primjerak';
                                         } elseif ($booksWithBreachDeadline->count() % 10 >= 2 && $booksWithBreachDeadline->count() % 10 <= 4) {
@@ -277,7 +277,7 @@
                 </div>
             </div>
             <div class="d-grid gap-2 pb-5">
-                <a href="#" class="btn btn-secondary">
+                <a href="{{route('book.issued', $book->id)}}" class="btn btn-secondary">
                     <i class="icon icon-xxs me-2 fas fa-history"></i>Evidencija iznajmljivanja
                 </a>
             </div>

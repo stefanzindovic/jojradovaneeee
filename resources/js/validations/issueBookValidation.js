@@ -15,7 +15,7 @@ jQuery(document).ready(function () {
                 studentIdValidation
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite učenika kojem želite da izdate ovu knjigu.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite učenika kojem želite da izdate ovu knjigu.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -36,7 +36,7 @@ jQuery(document).ready(function () {
                 actionStartValidation
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite datum kada je knjiga izdata.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite datum kada je knjiga izdata.</p>'
                     );
             }, 200);
             e.preventDefault();
@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
                 actionStartValidation
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odabrani datum može današnji ili jučerašnji.</p>'
+                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odabrani datum može današnji ili jučerašnji.</p>'
                     );
             }, 200);
             e.preventDefault();

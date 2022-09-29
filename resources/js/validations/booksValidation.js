@@ -45,7 +45,7 @@ jQuery(document).ready(function () {
                 titleMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
                notyf.error('Naslov knjige ne može biti prazan');
             }, 200);
@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
                 titleMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Naslov može sadržati od 1 do 50 karaktera.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Naslov može sadržati od 1 do 50 karaktera.</small>'
                     );
                notyf.error('Naslov knjige može sadržati od 1 do 50 karaktera.');
             }, 200);
@@ -84,7 +84,7 @@ jQuery(document).ready(function () {
                     descriptionMessage
                         .css({ display: "block" })
                         .html(
-                            '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Opis može sadržati od 10 do 2048 karaktera.</p>'
+                            '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Opis može sadržati od 10 do 2048 karaktera.</small>'
                         );
                    notyf.error('Opis može sadržati od 10 do 2048 karaktera.');
                 }, 200);
@@ -100,7 +100,7 @@ jQuery(document).ready(function () {
                 categoriesMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jednu kategoriju kojoj pripada ova knjiga.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite bar jednu kategoriju kojoj pripada ova knjiga.</small>'
                     );
                notyf.error('Odaberite bar jednu kategoriju kojoj pripada ova knjiga.');
             }, 200);
@@ -115,7 +115,7 @@ jQuery(document).ready(function () {
                 genresMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jedan žanr kojem pripada ova knjiga.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite bar jedan žanr kojem pripada ova knjiga.</small>'
                     );
                notyf.error('Odaberite bar jedan žanr kojem pripada ova knjiga.');
             }, 200);
@@ -130,7 +130,7 @@ jQuery(document).ready(function () {
                 authorsMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite bar jednog autora koji je pisao ovu knjiga.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite bar jednog autora koji je pisao ovu knjiga.</small>'
                     );
                notyf.error('Odaberite bar jednog autora koji je pisao ovu knjiga.');
             }, 200);
@@ -146,7 +146,7 @@ jQuery(document).ready(function () {
                 publisherMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Odaberite izdavača ove knjige.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Odaberite izdavača ove knjige.</small>'
                     );
                notyf.error('Odaberite izdavača ove knjige.');
             }, 200);
@@ -165,7 +165,7 @@ jQuery(document).ready(function () {
                 publishedAtMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
                notyf.error('Odaberite godinu izdavanja');
             }, 200);
@@ -178,7 +178,7 @@ jQuery(document).ready(function () {
                 publishedAtMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validnu godinu izdavanja knjige.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validnu godinu izdavanja knjige.</small>'
                     );
                notyf.error('Unesite validnu godinu izdavanja ove knjige.');
             }, 200);
@@ -197,7 +197,7 @@ jQuery(document).ready(function () {
                 copiesMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
                notyf.error('Količina knjiga ne može biti prazna.');
             }, 200);
@@ -207,7 +207,7 @@ jQuery(document).ready(function () {
                 copiesMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan broj knjiga.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan broj knjiga.</small>'
                     );
                notyf.error('Unesite validan broj knjiga.');
             }, 200);
@@ -226,7 +226,7 @@ jQuery(document).ready(function () {
                 pagesMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
                notyf.error('Broj stranica ne može biti prazan');
             }, 200);
@@ -236,7 +236,7 @@ jQuery(document).ready(function () {
                 pagesMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan broj knjiga.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan broj knjiga.</small>'
                     );
                notyf.error('Unesite validan broj stranica.');
             }, 200);
@@ -251,7 +251,7 @@ jQuery(document).ready(function () {
                 scriptMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite pismo kojim je ova knjiga napisana.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Izaberite pismo kojim je ova knjiga napisana.</small>'
                     );
                notyf.error('Izaberite pismo kojim je ova knjiga napisana.');
             }, 200);
@@ -266,7 +266,7 @@ jQuery(document).ready(function () {
                 coverMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu poveza ove knjige</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Izaberite vrstu poveza ove knjige</small>'
                     );
                notyf.error('Izaberite vrstu poveza ove knjige');
             }, 200);
@@ -281,7 +281,7 @@ jQuery(document).ready(function () {
                 languageMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite vrstu formata ove knjige</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Izaberite vrstu formata ove knjige</small>'
                     );
                notyf.error('Izaberite vrstu formata ove knjige.');
             }, 200);
@@ -296,7 +296,7 @@ jQuery(document).ready(function () {
                 formatMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Izaberite jezik na kojem je knjiga napisana.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Izaberite jezik na kojem je knjiga napisana.</small>'
                     );
                notyf.error('Izaberite jezik na kojem je knjiga napisana.');
             }, 200);
@@ -315,7 +315,7 @@ jQuery(document).ready(function () {
                 isbnMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
                     );
                notyf.error('ISBN ne može biti prazan.');
             }, 200);
@@ -325,7 +325,7 @@ jQuery(document).ready(function () {
                 isbnMessage
                     .css({ display: "block" })
                     .html(
-                        '<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan ISBN kod.</p>'
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan ISBN kod.</small>'
                     );
                notyf.error('Unesite validan ISBN kod.');
             }, 200);

@@ -67,6 +67,6 @@ if ($dayFinalForm === null && $monthFinalForm === null && $yearFinalForm === nul
 
 <div
     @if ($indicator === 'true' && $current_date->gt($deadline_date)) class="inline-block px-[6px] py-[2px] font-medium bg-red-200 rounded-[10px]" @endif>
-    <span @if ($indicator === 'true' && $current_date->gt($deadline_date)) class="text-red-800" @endif>{{ $yearFinalForm }}
-        {{ $monthFinalForm }} {{ $dayFinalForm }}</span>
+    <small @if ($indicator === 'true' && $current_date->gt($deadline_date)) class="text-red-800" @endif>{{ $yearFinalForm }}
+        {{ $monthFinalForm }} {{ $dayFinalForm }}</small>
 </div>

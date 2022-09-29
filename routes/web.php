@@ -22,6 +22,8 @@ Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->
 Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
 Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class,'show'])->name('knjige.show');
 
+Route::post('/search', [\App\Http\Controllers\SearchController::class, 'search']);
+
 Route::middleware(['auth'])->group(function () {
 
     //User Side
@@ -34,6 +36,23 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/otkazi/{book}', [\App\Http\Controllers\UserReservationController::class, 'otkazi'])->name('rezervacija.otkazi');
 
     Route::middleware(['staff'])->group(function (){
+
+
+        //Book Records
+
+        Route::get('/book/{id}/issuedbooks', [\App\Http\Controllers\BookRecords::class, 'issuedBooks'])->name('book.issued');
+        Route::get('/book/{id}/returnedbooks', [\App\Http\Controllers\BookRecords::class, 'returnedBooks'])->name('book.returned');
+        Route::get('/book/{id}/breachedbooks', [\App\Http\Controllers\BookRecords::class, 'breachedBooks'])->name('book.breached');
+        Route::get('/book/{id}/reservedbooks', [\App\Http\Controllers\BookRecords::class, 'reservedBooks'])->name('book.reserved');
+        Route::get('/book/{id}/archivedreservations', [\App\Http\Controllers\BookRecords::class, 'archivedReservations'])->name('book.archivedReservations');
+
+        //Student Records
+
+        Route::get('/student/{id}/issuedbooks', [\App\Http\Controllers\StudentRecords::class, 'issuedBooks'])->name('student.issued');
+        Route::get('/student/{id}/returnedbooks', [\App\Http\Controllers\StudentRecords::class, 'returnedBooks'])->name('student.returned');
+        Route::get('/student/{id}/breachedbooks', [\App\Http\Controllers\StudentRecords::class, 'breachedBooks'])->name('student.breached');
+        Route::get('/student/{id}/reservedbooks', [\App\Http\Controllers\StudentRecords::class, 'reservedBooks'])->name('student.reserved');
+        Route::get('/student/{id}/archivedreservations', [\App\Http\Controllers\StudentRecords::class, 'archivedReservations'])->name('student.archivedReservations');
 
 
         // Activities
@@ -74,7 +93,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Issue book
         Route::prefix('actions/issues')->name('books.issues')->group(function () {
-            Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index']);
+            Route::get('/{book}/issue', [\App\Http\Controllers\IssueBookController::class, 'index'])->name('.issuebook');
             Route::get('/', [\App\Http\Controllers\IssueBookController::class, 'issues'])->name('.issues');
             Route::get('/returned', [\App\Http\Controllers\IssueBookController::class, 'returned'])->name('.returned');
             Route::get('/breached', [\App\Http\Controllers\IssueBookController::class, 'breachedDeadline'])->name('.breached');

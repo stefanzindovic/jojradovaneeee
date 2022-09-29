@@ -108,7 +108,7 @@
                                                     Izmijeni
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{{ route('books.issues.returnmultiple', $book->id) }}">
+                                            <li><a class="dropdown-item" href="{{ route('books.issues.writeoffmultiple', $book->id) }}">
                                                     <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
                                                         <path
@@ -117,7 +117,7 @@
                                                     Otpiši
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="{{ route('books.issues', $book->id) }}">
+                                            <li><a class="dropdown-item" href="{{route('books.issues.issuebook', $book->id)}}">
                                                     <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                                                         <path fill-rule="evenodd"
                                                             d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z" />
@@ -125,7 +125,7 @@
                                                     Izdaj
                                                 </a>
                                             </li>
-                                            <li><a class="dropdown-item" href="#">
+                                            <li><a class="dropdown-item" href="{{route('books.issues.returnmultiple', $book->id)}}">
                                                     <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                                                         <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z" />
                                                         <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z" />

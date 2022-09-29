@@ -25,7 +25,7 @@
                                                                value="{{ old('action_start', \Carbon\Carbon::now()->format('Y-m-d')) }}"
                                                                min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" class="form-control">
                                                         @error('action_start')
-                                                        <p class="invalid-feedback" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                                        <p class="invalid-feedback" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                                                             {{ $message }}</p>
                                                         @enderror
                                                         <div id="actionStartValidation"></div>

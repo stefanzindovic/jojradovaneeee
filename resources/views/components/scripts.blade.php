@@ -36,9 +36,6 @@
 <!-- Github buttons -->
 <script async defer src="{{ asset('dashboardfiles/assets/js/buttons.js') }}"></script>
 
-<!-- Volt JS -->
-<script src="{{ asset('dashboardfiles/assets/js/volt.js') }}"></script>
-
 <script src="{{ asset('dashboardfiles/assets/js/dashboard.js') }}"></script>
 
 <!-- User side filters JS -->

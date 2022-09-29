@@ -46,16 +46,20 @@
                                     <label for="name" class="form-label">Naziv autora</label>
                                     <input name="full_name" value="{{$author->full_name}}" placeholder="Ime i prezime" type="text" class="form-control" id="authorName">
                                     @error('full_name')
-                                    <div  class="invalid-feedback">{{ $message }}</div>
+                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
+                                        {{ $message }}</p>
                                     @enderror
+                                    <div id="authorNameValidationMessageByJs"></div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="content" class="form-label">Opis</label>
                                 <textarea name="bio" placeholder="Opis" type="text" class="form-control" id="authorBio">{{$author->bio}}</textarea>
                                 @error('bio')
-                                <div class="text-red">{{ $message }}</div>
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
+                                    {{ $message }}</p>
                                 @enderror
+                                <div id="authorBioValidationMessageByJs"></div>
                             </div>
                         </div>
                     </div>
@@ -65,7 +69,7 @@
                 <div class="col">
                     <div class="float-end">
                         <button class="btn btn-outline-danger" type="reset">Poništi</button>
-                        <button type="submit" class="btn btn-primary">Ažuriraj</button>
+                        <button type="submit" id="saveAuthorBtn" class="btn btn-primary">Ažuriraj</button>
                     </div>
                 </div>
             </div>

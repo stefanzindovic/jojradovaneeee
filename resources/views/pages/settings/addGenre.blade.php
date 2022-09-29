@@ -17,7 +17,7 @@
                                 <label for="name" class="form-label">Naziv</label>
                                 <input name="title" value="{{old('title')}}" placeholder="Naziv" type="text" class="form-control" id="genreTitle">
                                 @error('title')
-                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i> {{ $message }}</p>
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i> {{ $message }}</p>
                                 @enderror
                                 <div id="genreTitleValidationMessageByJs"></div>
                             </div>

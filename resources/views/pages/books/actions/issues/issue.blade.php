@@ -55,7 +55,7 @@
                             @endforeach
                         </select>
                         @error('student_id')
-                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
                             {{ $message }}</p>
                         @enderror
                         <div id="studentIdValidation"></div>
@@ -73,7 +73,7 @@
                                     onchange="funkcijaDatumVracanja();" />
                                 @error('action_start')
                                 <p style="color:red;" id="errorMessageByLaravel"><i
-                                        class="fa fa-times  mr-[5px] mt-[10px]"></i>
+                                        class="fa fa-times"></i>
                                     {{ $message }}</p>
                                 @enderror
                                 <div id="actionStartValidation"></div>

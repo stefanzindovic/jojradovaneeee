@@ -18,17 +18,17 @@ jQuery(document).ready(function() {
         // Name validation
         if(nameInput.val() === null || nameInput.val() === undefined ||nameInput.val() === false || nameInput.val() === '') {
             setTimeout(function () {
-                nameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>');
+                nameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
             }, 200);
             e.preventDefault();
         } else if(nameInput.val().length < 4 || nameInput.val().length > 50) {
             setTimeout(function () {
-                nameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</p>');
+                nameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</small>');
             }, 200);
             e.preventDefault();
         } else if (!/^([a-zA-Z0-9\s])+$/.test(nameInput.val())) {
             setTimeout(function () {
-                nameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Vrijednost polja nije u korektnom formatu.</p>');
+                nameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja nije u korektnom formatu.</small>');
             }, 200);
             return e.preventDefault();
         } else {
@@ -40,17 +40,17 @@ jQuery(document).ready(function() {
         // JMBG validation
         if(jmbgInput.val() === null || jmbgInput.val() === undefined ||jmbgInput.val() === false || jmbgInput.val() === '') {
             setTimeout(function () {
-                jmbgValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>');
+                jmbgValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
             }, 200);
             e.preventDefault();
         } else if(jmbgInput.val().length < 13 || jmbgInput.val().length > 13) {
             setTimeout(function () {
-                jmbgValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan JMBG.</p>');
+                jmbgValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan JMBG.</small>');
             }, 200);
             e.preventDefault();
         } else if (!/^([0-9])+$/.test(jmbgInput.val())) {
             setTimeout(function () {
-                jmbgValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validan JMBG.</p>');
+                jmbgValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validan JMBG.</small>');
             }, 200);
             return e.preventDefault();
         } else {
@@ -62,17 +62,17 @@ jQuery(document).ready(function() {
         // Username validation
         if(usernameInput.val() === null || usernameInput.val() === undefined ||usernameInput.val() === false || usernameInput.val() === '') {
             setTimeout(function () {
-                usernameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>');
+                usernameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
             }, 200);
             e.preventDefault();
         } else if(usernameInput.val().length < 3 || usernameInput.val().length > 16) {
             setTimeout(function () {
-                usernameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje može sadržati od 4 do 18 karaktera.</p>');
+                usernameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje može sadržati od 4 do 18 karaktera.</small>');
             }, 200);
             e.preventDefault();
         } else if (!/^([a-z0-9])+$/.test(usernameInput.val())) {
             setTimeout(function () {
-                usernameValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Možete koristiti samo velika i mala slova.</p>');
+                usernameValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Možete koristiti samo velika i mala slova.</small>');
             }, 200);
             return e.preventDefault();
         } else {
@@ -84,12 +84,12 @@ jQuery(document).ready(function() {
         // Email validation
         if(emailInput.val() === null || emailInput.val() === undefined ||emailInput.val() === false || emailInput.val() === '') {
             setTimeout(function () {
-                emailValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>');
+                emailValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
             }, 200);
             e.preventDefault();
         } else if (!/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(emailInput.val())) {
             setTimeout(function () {
-                emailValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Unesite validnu e-mail adresu.</p>');
+                emailValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Unesite validnu e-mail adresu.</small>');
             }, 200);
             return e.preventDefault();
         } else {
@@ -103,17 +103,17 @@ jQuery(document).ready(function() {
         if(passwordInput.length > 0) {
             if(passwordInput.val() === null || passwordInput.val() === undefined ||passwordInput.val() === false || passwordInput.val() === '') {
                 setTimeout(function () {
-                    passwordValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Polje ne može biti prazno.</p>');
+                    passwordValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
                 }, 200);
                 e.preventDefault();
             } else if (passwordInput.val().length < 8 || passwordInput.val().length > 24) {
                 setTimeout(function () {
-                    passwordValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Lozinka može sadržati između 8 i 24 karaktera.</p>');
+                    passwordValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Lozinka može sadržati između 8 i 24 karaktera.</small>');
                 }, 200);
                 return e.preventDefault();
             }else if (passwordInput.val() !== passwordInputConfirm.val()) {
                 setTimeout(function () {
-                    passwordValidationMessage.css({"display": "block"}).html('<p class="text-red-500 align-middle"><i class="fa fa-times text-red-500 mr-[5px] mt-[10px]"></i> Potvrda lozinke nije uspjela. Pokušajte ponovo.</p>');
+                    passwordValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Potvrda lozinke nije uspjela. Pokušajte ponovo.</small>');
                 }, 200);
                 return e.preventDefault();
             } else {

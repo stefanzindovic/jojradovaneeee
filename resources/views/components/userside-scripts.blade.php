@@ -12,8 +12,8 @@
 
 <script src="{{ asset('userside/js/main.js') }}"></script>
 
-<script src="{{ asset('userside/js/main.js') }}"></script>
 <script src="{{ asset('assets/js/cropper.min.js') }}"></script>
+
 
 
 <script src="{{ asset('userside/vendor/notyf/notyf.min.js') }}"></script>
