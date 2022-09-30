@@ -113,6 +113,10 @@ class GenreController extends Controller
     public function destroy(Genre $genre): RedirectResponse
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+        $genre->loadMissing(['books']);
+        if ($genre->books->isNotEmpty()) {
+            return to_route('settings.genres.index')->with('errorMessage', 'U biblioteci postoje knjige koje pripadaju ovom žanru.');
+        }
 
         try {
             $genre->delete();
