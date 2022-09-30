@@ -323,6 +323,7 @@ class BookController extends Controller
 
     public function displayActionDetails(Book $book, BookAction $action)
     {
+        $action->loadMissing(['status']);
         return view('..pages.books.actions.action', compact('book', 'action'));
     }
 }

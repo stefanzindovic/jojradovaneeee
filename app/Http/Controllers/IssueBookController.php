@@ -168,7 +168,7 @@ class IssueBookController extends Controller
 
     public function returnMultiple(Book $book)
     {
-        $books = Book::issuedBooks()->where('book_id',$book->id);
+        $books = Book::issuedBooks()->where('book_id', $book->id);
         $book = Book::findOrFail($book->id);
 
         return view('pages.books.actions.issues.returnMultiple', compact('books', 'book'));
@@ -177,10 +177,52 @@ class IssueBookController extends Controller
     public function returnMultipleBooks(HttpRequest $request)
     {
 
-        foreach ($request->id as $id){
-            try {
-                $book = Book::issuedBook($id);
-                $policy = Policy::findOrFail(3);
+        try {
+            foreach ($request->id as $id) {
+                $book = Book::bookIssue($id);
+                $book = $book[0];
+
+                // Check if targeted book is issued
+                $allowedStatuses = [1, 7];
+
+                if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                    return back()->with('errorMessage', 'Ova knjiga nije izdata.');
+                }
+
+                // Genreate action model for returned book
+                $bookActionModel = new BookAction();
+                $bookActionModel->book()->associate($book);
+                $bookActionModel->librarian()->associate(Auth::user());
+                $bookActionModel->status()->associate(9);
+                $bookActionModel->action_start = date('Y-m-d');
+                $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+                $bookActionModel->action_addons = $book->activeAction->action_start;
+                $bookActionModel->save();
+            }
+
+
+            return back()->with('successMessage', 'Knjiga/e su uspješno vraćene.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function writeOffMultiple(Book $book, HttpRequest $request)
+    {
+        $books = Book::issuedBookWithBreachedDeadline($book->id);
+        $book = Book::findOrFail($book->id);
+
+        return view('pages.books.actions.issues.writeoffmultiple', compact('books', 'book'));
+    }
+
+    public function writeOffMultipleBooks(HttpRequest $request)
+    {
+        try {
+            $policy = Policy::findOrFail(3);
+            foreach ($request->id as $id) {
+                $book = Book::bookIssue($id);
+                $book = $book[0];
 
                 // Check if targeted book is issued
                 $allowedStatuses = [1, 7];
@@ -203,25 +245,13 @@ class IssueBookController extends Controller
                 $bookActionModel->action_deadline = $book->activeAction->action_deadline;
                 $bookActionModel->action_addons = $book->activeAction->action_start;
                 $bookActionModel->save();
-
-                return back()->with('successMessage', 'Knjiga/e su uspješno vraćene.');
-            } catch (\Throwable $th) {
-                dd($th);
-                return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
             }
+
+
+            return back()->with('successMessage', 'Knjiga/e su uspješno otpisane.');
+        } catch (\Throwable $th) {
+            dd($th);
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
-    }
-
-    public function writeOffMultiple(Book $book, HttpRequest $request)
-    {
-        $books = Book::issuedBookWithBreachedDeadline($book->id);
-        $book = Book::findOrFail($book->id);
-
-        return view('pages.books.actions.issues.writeoffmultiple', compact('books','book'));
-    }
-
-    public function writeOffMultipleBooks(HttpRequest $request)
-    {
-//        return view('pages.books.actions.issues.writeoffmultiple');
     }
 }
