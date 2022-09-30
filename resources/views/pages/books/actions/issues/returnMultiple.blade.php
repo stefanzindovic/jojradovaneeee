@@ -84,19 +84,17 @@
         });
     </script>
     <script>
-        $("#checkbox").change(function() {
-            var ischecked = $(this).is(':checked');
-            if (ischecked) {
+        $("input#checkbox").click(function() {
+            if ($(this).is(':checked')) {
                 $('#submitbtn').removeAttr('disabled')
             } else {
                 $('#submitbtn').attr('disabled', true)
             }
         });
 
-        $("#checkAll").click(function() {
-            $('#checkbox').not(this).prop('checked', this.checked);
-            var ischecked = $(this).is(':checked');
-            if (ischecked) {
+        $('#checkAll').click(function () {
+            $('input#checkbox').prop('checked', this.checked);
+            if ($(this).is(':checked')) {
                 $('#submitbtn').removeAttr('disabled')
             } else {
                 $('#submitbtn').attr('disabled', true)
