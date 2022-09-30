@@ -1,12 +1,12 @@
 @extends('app')
 
 @section('page_title')
-    Vrati Knjigu
+    Vrati Knjigu | {{$book->title}}
 @endsection
 
 
 @section('page_content')
-    <form class="mb-0" id="multiForma" action="#" method="POST">
+    <form class="mb-0" id="multiForma" action="{{route('books.issues.returnmultiplebooks')}}" method="POST">
         @csrf
         @method('PATCH')
         <div class="row bg-white py-2 px-2 mx-1 rounded">
@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th>
-                                    <input type="checkbox" id="checkAll">
+                                    @if(!$books->isEmpty()) <input type="checkbox" id="checkAll" class="form-check-input"> @endif
                                 </th>
                                 <th>Izdato učeniku</th>
                                 <th>Datum izdavanja</th>
@@ -28,7 +28,8 @@
                         <tbody class="align-middle">
                             @foreach ($books as $book)
                                 <tr>
-                                    <td><input type="checkbox" id="checkAll"></td>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$book->id}}" class="form-check-input"></td>
+
                                     <td>{{ $book->student->name }}</td>
                                     <td> {{ \Carbon\Carbon::parse($book->activeAction->action_start)->format('d.m.Y') }}
                                     </td>
