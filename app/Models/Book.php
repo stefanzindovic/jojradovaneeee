@@ -86,6 +86,15 @@ class Book extends Model
         })->where('book_id', $id)->orderBy('id', 'desc')->get();
     }
 
+    public static function bookIssue($id)
+    {
+        return BooksUnderAction::with(['activeAction' => function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        }, 'book', 'student'])->whereHas('activeAction', function ($query) {
+            $query->where('action_status_id', 1)->orWhere('action_status_id', 7);
+        })->where('id', $id)->orderBy('id', 'desc')->get();
+    }
+
     public static function writtenOffBooks()
     {
         return BooksUnderAction::with(['activeAction' => function ($query) {
