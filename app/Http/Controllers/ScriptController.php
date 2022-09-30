@@ -111,6 +111,9 @@ class ScriptController extends Controller
     public function destroy(Script $script): RedirectResponse
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+        if ($script->books->isNotEmpty()) {
+            return to_route('settings.scripts.index')->with('errorMessage', 'U biblioteci se nalaze knjige napisane ovim pismom.');
+        }
 
         try {
             $script->delete();
