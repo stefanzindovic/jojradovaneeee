@@ -8,6 +8,7 @@ use App\Models\BookActionStatus;
 use App\Models\BooksUnderAction;
 use App\Models\Policy;
 use App\Models\User;
+use http\Env\Request;
 use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Auth;
@@ -165,15 +166,62 @@ class IssueBookController extends Controller
         }
     }
 
-    public function returnMultiple(Book $book, HttpRequest $request)
+    public function returnMultiple(Book $book)
     {
-        $books = Book::issuedBook($book->id);
+        $books = Book::issuedBooks()->where('book_id',$book->id);
+        $book = Book::findOrFail($book->id);
 
-        return view('pages.books.actions.issues.returnMultiple', compact('books'));
+        return view('pages.books.actions.issues.returnMultiple', compact('books', 'book'));
+    }
+
+    public function returnMultipleBooks(HttpRequest $request)
+    {
+
+        foreach ($request->id as $id){
+            try {
+                $book = Book::issuedBook($id);
+                $policy = Policy::findOrFail(3);
+
+                // Check if targeted book is issued
+                $allowedStatuses = [1, 7];
+
+                if (!in_array($book->activeAction->action_status_id, $allowedStatuses)) {
+                    return back()->with('errorMessage', 'Ova knjiga nije izdata.');
+                }
+
+                // Check if targeted book's deadline is long enough to be written off
+                if (\Carbon\Carbon::parse($book->activeAction->action_deadline)->gt(\Carbon\Carbon::now()) || \Carbon\Carbon::parse($book->activeAction->action_deadline)->diffInDays(null, false) < $policy->value) {
+                    return back()->with('errorMessage', 'Prekoračenje nije dovoljno dugo da bi knjiga mogla biti otpisana.');
+                }
+
+                // Genreate action model for returned book
+                $bookActionModel = new BookAction();
+                $bookActionModel->book()->associate($book);
+                $bookActionModel->librarian()->associate(Auth::user());
+                $bookActionModel->status()->associate(8);
+                $bookActionModel->action_start = date('Y-m-d');
+                $bookActionModel->action_deadline = $book->activeAction->action_deadline;
+                $bookActionModel->action_addons = $book->activeAction->action_start;
+                $bookActionModel->save();
+
+                return back()->with('successMessage', 'Knjiga/e su uspješno vraćene.');
+            } catch (\Throwable $th) {
+                dd($th);
+                return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+            }
+        }
     }
 
     public function writeOffMultiple(Book $book, HttpRequest $request)
     {
-        return view('pages.books.actions.issues.writeoffmultiple');
+        $books = Book::issuedBookWithBreachedDeadline($book->id);
+        $book = Book::findOrFail($book->id);
+
+        return view('pages.books.actions.issues.writeoffmultiple', compact('books','book'));
+    }
+
+    public function writeOffMultipleBooks(HttpRequest $request)
+    {
+//        return view('pages.books.actions.issues.writeoffmultiple');
     }
 }

@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    Otpiši knjigu
+    Otpiši knjigu | {{$book->title}}
 @endsection
 
 
@@ -15,7 +15,9 @@
                     <table id="myTableMulti" class="table" style="width:100%">
                         <thead>
                         <tr>
-                            <input type="checkbox" id="checkAll">
+                            <th>
+                                @if(!$books->isEmpty()) <input type="checkbox" id="checkAll" class="form-check-input"> @endif
+                            </th>
                             <th>Izdato učeniku</th>
                             <th>Datum izdavanja</th>
                             <th>Trenutno zadržavanje</th>
@@ -24,14 +26,26 @@
                         </tr>
                         </thead>
                         <tbody class="align-middle">
-                            <tr>
-                                <td><input type="checkbox" id="checkAll"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                            @foreach($books as $book)
+                                <tr>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$book->id}}" class="form-check-input"></td>
+                                    <td>{{ $book->student->name }}</td>
+                                    <td> {{ \Carbon\Carbon::parse($book->activeAction->action_start)->format('d.m.Y') }}
+                                    </td>
+                                    <td>
+                                        <x-current-holding start_date="{{ $book->activeAction->action_start }}"
+                                                           deadline_date="{{ $book->activeAction->action_deadline }}">
+                                        </x-current-holding>
+                                    </td>
+                                    <td>
+                                        <x-breached-days start_date="{{ $book->activeAction->action_start }}"
+                                                         deadline_date="{{ $book->activeAction->action_deadline }}">
+                                        </x-breached-days>
+                                    </td>
+                                    <td>{{ $book->activeAction->librarian->name }}</td>
+
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
