@@ -111,7 +111,9 @@ class PublishersController extends Controller
     public function destroy(Publishers $publisher): RedirectResponse
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
-
+        if ($publisher->books->isNotEmpty()) {
+            return to_route('settings.publishers.index')->with('errorMessage', 'U biblioteci se nalaze knjige ovog izdavača.');
+        }
         try {
             $publisher->delete();
 
