@@ -112,6 +112,9 @@ class FormatController extends Controller
     public function destroy(Format $format): RedirectResponse
     {
         //TODO: Add check if this genre is used in some of existing books before delete action (if exists, return error message)
+        if ($format->books->isNotEmpty()) {
+            return to_route('settings.formats.index')->with('errorMessage', 'U biblioteci se nalaze knjige u ovom formatu.');
+        }
 
         try {
             $format->delete();
