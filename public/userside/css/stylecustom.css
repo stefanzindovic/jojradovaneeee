@@ -3382,7 +3382,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-danger:hover {
-    color: #fff;
+    color: #fff; !important;
     background-color: #f5365c;
     border-color: #f5365c;
 }
@@ -24629,3 +24629,94 @@ input.datetimepicker[data-color="yellow"] + .bootstrap-datetimepicker-widget tab
         width: 100%;
     }
 }
+
+
+
+.thumbnail_images ul {
+    list-style: none;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 10px
+}
+
+.thumbnail_images ul li {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid #eee;
+    cursor: pointer;
+    transition: all 0.5s
+}
+
+.thumbnail_images ul li:hover {
+    border: 2px solid #000
+}
+
+.main_image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 350px;
+    width: 100%;
+    overflow: hidden
+}
+
+.thumbnail_image {
+    height: 70px;
+}
+@media (max-width: 992px) {
+    .thumbnail_image {
+        height: 50px;
+    }
+}
+
+@media (max-width: 422px) {
+    .thumbnail_image {
+        height: 35px;
+    }
+}
+
+.categories-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .categories {
+        display: none;
+    }
+    .knjige {
+        justify-content: center;
+    }
+
+    .categories-mobile {
+        display: block !important;
+    }
+}
+
+
+.checkbox {
+    border: 1px solid blue;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+}
+
+.checkbox:after {
+     display: block;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%) scale(0);
+     width: 12px;
+     height: 12px;
+     background-color: blue;
+     border-radius: 3px;
+     transition: 0.3s;
+ }
+
+
+
+

@@ -92,7 +92,7 @@ class LibrarianController extends Controller
 
             $model->save();
 
-            return to_route('librarians.index')->with('successMessage', 'Novi bibliographer je dodan na spisak.');
+            return to_route('librarians.index')->with('successMessage', 'Novi bibliotekar je dodan na spisak.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
@@ -185,6 +185,8 @@ class LibrarianController extends Controller
                         $genericName
                     );
                 }
+            }else{
+                $genericName = 'profile-picture-placeholder.jpg';
             }
 
             // update category in db

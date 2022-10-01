@@ -8,5 +8,5 @@
 
 <!-- Template Main CSS File -->
 <link href="{{asset('userside/css/style.css')}}" rel="stylesheet">
-<link href="{{asset('userside/css/dashboard.css')}}" rel="stylesheet">
+<link href="{{asset('userside/css/stylecustom.css')}}" rel="stylesheet">
 <link href="{{asset('userside/vendor/notyf/notyf.min.css')}}" rel="stylesheet">

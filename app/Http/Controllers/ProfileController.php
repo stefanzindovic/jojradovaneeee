@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -11,11 +12,13 @@ class ProfileController extends Controller
 {
     public function show()
     {
+        if (Auth::user()->role->id != 3) return abort(401);
         return view('pages.userside.profil');
     }
 
     public function edit()
     {
+        if (Auth::user()->role->id != 3) return abort(401);
         return view('pages.userside.edit');
     }
 
@@ -26,7 +29,7 @@ class ProfileController extends Controller
         if (!$student->is_active) return abort(404);
 
         $input = $request->validate([
-            'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:2|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:2|max:50',
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', Rule::unique('users', 'username')->ignore($student->id)],
             'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($student->id)],
             'picture' => 'sometimes|nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
@@ -34,7 +37,7 @@ class ProfileController extends Controller
 
         if(!empty($request->input('password'))) {
             $request->validate([
-                'password' => ['sometimes','confirmed', Rules\Password::defaults(), 'min:8', 'max:24']]);
+                'password' => ['sometimes','required', 'min:8', 'max:24', 'confirmed']]);
             $input['password'] = bcrypt($request['password']);
         }
 
@@ -62,6 +65,8 @@ class ProfileController extends Controller
                         $genericName
                     );
                 }
+            }else{
+                $genericName = 'profile-picture-placeholder.jpg';
             }
 
             // update category in db

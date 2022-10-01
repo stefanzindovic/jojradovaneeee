@@ -51,7 +51,7 @@ class CategoryController extends Controller
         ]);
 
         // upload image if image exists
-        $genericName = 'profile-picture-placeholder.jpg';
+        $genericName = 'placeholder.png';
         if ($request->hasFile('picture')) {
             $uploadedFile = $request->file('picture');
             $genericName = trim(strtolower(time() . $uploadedFile->getClientOriginalName()));
@@ -137,6 +137,8 @@ class CategoryController extends Controller
                         $genericName
                     );
                 }
+            }else{
+                $genericName = 'placeholder.png';
             }
 
             // update category in db

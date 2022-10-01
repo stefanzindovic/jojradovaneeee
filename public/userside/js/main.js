@@ -34,30 +34,21 @@ let form = $('#searchForm');
 let imageurl = "";
 
 function search(){
-    if ($("#SearchBar").val().length < 3){
-        $("#searchBoxResults").fadeOut();
-    }
-    else {
+    if ($("#SearchBar").val().length >= 3){
+
         setTimeout(function () {
-            // send request to /search
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
 
             $.ajax({
                 type: "POST",
                 url: "/search",
+                headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
                 data: form.serialize(),
                 success:function(data){
                     setTimeout(function () {
-
                         knjige.empty()
                         imageurl = "";
-
-                        if(data.books != null && $("#SearchBar").val().length >= 3){
+                        if($("#SearchBar").val().length >= 3 && data.books[0] != null){
                             $("#searchBoxResults").fadeIn();
                             $.each(data.books, function (k, book) {
                                 if(book.picture === 'book-placeholder.png'){
@@ -78,6 +69,8 @@ function search(){
                                                 </li>
                                 `).show('slow');
                             })
+                        }else {
+                            $("#searchBoxResults").fadeOut();
                         }
 
 
@@ -89,81 +82,11 @@ function search(){
 }
 
 
-
-// $("#SearchBar").focusout( function (){
-//    $("#searchBoxResults").hide()
-// });
-
-var cropperFunction = function (e) {
-    var cropperOverlay = document.getElementById("cropper-wrapper");
-    var cropperPreview = document.getElementById("cropper-preview");
-    var croppedOutput = document.getElementById("image-output");
-    var cropperCropBtn = document.getElementById("cropper-crop-btn");
-    var cropperCancleBtn = document.getElementById("cropper-cancle-btn");
-    var form = document.getElementById("form");
-
-    var cropper;
-
-    // load cropper overlay and crop image
-    if (e.target.files && e.target.files[0]) {
-        console.log(e.target.files[0].type)
-        if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpg' || e.target.files[0].type === 'image/gif') {
-            // file reader API
-            var reader = new FileReader();
-            reader.readAsDataURL(e.target.files[0]);
-            reader.onload = function (e) {
-                // setup cropper
-                cropperPreview.src = e.target.result;
-                cropper = new Cropper(cropperPreview);
-                cropperOverlay.style.display = "block";
-            };
-        }
-
-        // save cropped data
-        cropperCropBtn.addEventListener("click", function (e) {
-            // get cropped data from cropper && display cropped image into output block
-            cropper.getCroppedCanvas().toBlob((blob) => {
-                var file = new File([blob], Date.now(), {type: blob.type});
-                var container = new DataTransfer();
-
-                container.items.add(file);
-
-                var input = document.createElement("input");
-                input.name = "picture";
-                input.type = "file";
-                input.files = container.files;
-                input.classList.add("visually-hidden");
-                form.appendChild(input);
-
-                croppedOutput.style.display = "block";
-                croppedOutput.src = URL.createObjectURL(blob);
-                var imageStudent = document.getElementById("image-output");
-                var addPhotoText = document.getElementById("addphototext");
-                imageStudent.style.display = "block";
-                addPhotoText.style.display = "none";
-                imageStudent.src = URL.createObjectURL(blob);
-            });
-
-            // destroy cropper and cropper overlay
-            cropper.destroy();
-            cropper = null;
-            cropperOverlay.style.display = "none";
-            var placeholder = document.getElementById("addphototext");
-            croppedOutput.removeAttribute("hidden");
-
-            placeholder.style.display = "none";
-            $('input[type="file"]').val("");
-        });
-
-        // reject cropped data
-        cropperCancleBtn.addEventListener("click", function (e) {
-            cropper.destroy();
-            cropper = null;
-            cropperOverlay.style.display = "none";
-            $('input[type="file"]').val("");
-        });
-    }
-};
+if (!isMobile) {
+    $("#SearchBar").focusout(function () {
+        $("#searchBoxResults").hide()
+    });
+}
 
 function checkPasswordMatch() {
     var password = $("#password").val();

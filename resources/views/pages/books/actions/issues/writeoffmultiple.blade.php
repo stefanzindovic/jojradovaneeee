@@ -30,8 +30,7 @@
                         <tbody class="align-middle">
                             @foreach ($books as $book)
                                 <tr>
-                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{ $book->id }}"
-                                            class="form-check-input"></td>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{ $book->id }}" class="form-check-input"></td>
                                     <td>{{ $book->student->name }}</td>
                                     <td> {{ \Carbon\Carbon::parse($book->activeAction->action_start)->format('d.m.Y') }}
                                     </td>
@@ -89,19 +88,17 @@
     </script>
 
     <script>
-        $("#checkbox").change(function() {
-            var ischecked = $(this).is(':checked');
-            if (ischecked) {
+        $("input#checkbox").click(function() {
+            if ($(this).is(':checked')) {
                 $('#submitbtn').removeAttr('disabled')
             } else {
                 $('#submitbtn').attr('disabled', true)
             }
         });
 
-        $("#checkAll").click(function() {
-            $('#checkbox').not(this).prop('checked', this.checked);
-            var ischecked = $(this).is(':checked');
-            if (ischecked) {
+        $('input#checkAll').click(function () {
+            $('input#checkbox').prop('checked', this.checked);
+            if ($(this).is(':checked')) {
                 $('#submitbtn').removeAttr('disabled')
             } else {
                 $('#submitbtn').attr('disabled', true)

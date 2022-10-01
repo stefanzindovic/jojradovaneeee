@@ -8,7 +8,7 @@
     <title>Registruj se</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" href="{{asset('userside/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('userside/css/stylecustom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
 </head>
