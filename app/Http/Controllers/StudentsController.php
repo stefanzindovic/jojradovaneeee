@@ -180,6 +180,9 @@ class StudentsController extends Controller
                     );
                 }
             }
+            else{
+                $genericName = 'profile-picture-placeholder.jpg';
+            }
 
             // update category in db
             $student->name = $input['name'];

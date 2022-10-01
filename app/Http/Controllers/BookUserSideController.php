@@ -13,7 +13,8 @@ class BookUserSideController extends Controller
 {
     public function index()
     {
-        return view('pages.userside.index');
+        $books = Book::get()->shuffle()->take(3);
+        return view('pages.userside.index', compact('books'));
     }
 
     public function indexKnjige(Request $request)

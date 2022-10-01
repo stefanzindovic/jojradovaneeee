@@ -8,7 +8,7 @@
     <title>Prijavi se</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" href="{{asset('userside/css/dashboard.css')}}">
+    <link rel="stylesheet" href="{{asset('userside/css/stylecustom.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/nucleo/css/nucleo.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}">
 </head>
@@ -46,6 +46,11 @@
                                     </div>
                                     <input name="email" class="form-control" placeholder="Email" type="email">
                                 </div>
+                                @error('email')
+                                <div class="mb-2">
+                                    <small class="text-danger font-weight-700">{{$message}}</small>
+                                </div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <div class="input-group input-group-merge input-group-alternative">
@@ -54,6 +59,11 @@
                                     </div>
                                     <input name="password" class="form-control" placeholder="Šifra" type="password">
                                 </div>
+                                @error('password')
+                                <div class="mb-2">
+                                    <small class="text-danger font-weight-700">{{$message}}</small>
+                                </div>
+                                @enderror
                             </div>
                             <div class="custom-control custom-control-alternative custom-checkbox">
                                 <input class="custom-control-input" name="remember" id="remember_me" type="checkbox">

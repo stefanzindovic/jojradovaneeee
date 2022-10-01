@@ -33,7 +33,7 @@
                                 @foreach($pending as $pendingRes)
                                     <tr>
                                         <th scope="row">
-                                            <div class="media align-items-center">
+                                            <div class="media align-items-center mb-1 mt-1">
                                                 <a href="#" class="avatar mr-3">
                                                     <img alt="Image placeholder" src="@if ($pendingRes->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $pendingRes->book->picture) }} @endif">
                                                 </a>
@@ -64,7 +64,7 @@
                                 @foreach($active as $activeRes)
                                     <tr>
                                         <th scope="row">
-                                            <div class="media align-items-center">
+                                            <div class="media align-items-center mb-1 mt-1">
                                                 <a href="#" class="avatar mr-3">
                                                     <img alt="Image placeholder" src="@if ($activeRes->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $activeRes->book->picture) }} @endif">
                                                 </a>
@@ -89,7 +89,7 @@
                                     @if ($reservation->activeAction->action_status_id != 7)
                                     <tr>
                                         <th scope="row">
-                                            <div class="media align-items-center">
+                                            <div class="media align-items-center mb-1 mt-1">
                                                 <a href="#" class="avatar mr-3">
                                                     <img alt="Image placeholder" src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif">
                                                 </a>
@@ -137,7 +137,7 @@
                                     @if($reservation->activeAction->action_status_id == 7)
                                         <tr>
                                             <th scope="row">
-                                                <div class="media align-items-center">
+                                                <div class="media align-items-center mb-1 mt-1">
                                                     <a href="#" class="avatar mr-3">
                                                         <img alt="Image placeholder" src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif">
                                                     </a>
