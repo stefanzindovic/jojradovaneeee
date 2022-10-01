@@ -18,10 +18,10 @@
                                     <div class="col-md-3">
                                         <h3 class="text-primary">KATEGORIJE</h3>
                                         <div class="scroll" style="min-height: 250px;max-height: 350px;">
-                                            <ul class="list-group">
+                                            <ul class="list-group" style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
                                                 @if ($categories->isNotEmpty())
                                                     @foreach ($categories as $category)
-                                                        <li class="label list-group-item">
+                                                        <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox"
                                                                 name="category_id[{{ $category->title }}]"
                                                                 onChange="this.form.submit()" class="me-2 categoryFilterId"
@@ -40,9 +40,10 @@
                                             <ul class="list-group">
                                                 @if ($genres->isNotEmpty())
                                                     @foreach ($genres as $genre)
-                                                        <li class="label list-group-item">
+                                                        <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox" class="me-2"
                                                                 name="genre_id[{{ $genre->title }}]"
+                                                                   class="form-input"
                                                                 onChange="this.form.submit()" value="{{ $genre->id }}"
                                                                 @if (request()->filled('genre_id.' . $genre->title)) checked @endif>
                                                             {{ $genre->title }}
@@ -61,7 +62,7 @@
                                                     <div class="col-auto">
                                                         <div class="card" style="width: 18rem;height: auto">
                                                             <a href="{{ route('knjige.show', $book->id) }}">
-                                                                <img style="object-fit: cover;height: 100%; width: 100%"
+                                                                <img style="object-fit: cover;height: 350px; width: 100%"
                                                                     src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
                                                                     class="book-image" alt="...">
                                                             </a>
@@ -73,8 +74,11 @@
                                                                     {!! Str::limit($book->description, 80) !!}
                                                                 </div>
                                                                 <div class="d-grid gap-2">
-                                                                    <a href="{{ route('rezervacija.knjige', $book->id) }}"
-                                                                        class="btn btn-premium">Rezerviši</a>
+                                                                    @if($book->calcNumberOfAvailableCopies($book->id) < 1)
+                                                                        <button disabled class="btn btn-premium">Trenutno nedostupno</button>
+                                                                    @else
+                                                                        <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -84,13 +88,10 @@
                                                 Nema rezultata.
                                             @endif
                                         </div>
-{{--                                        <div class="row">--}}
-
-{{--                                            {{ $books->links() }}--}}
-
-{{--                                        </div>--}}
+                                            <div class="row">
+                                                @if (!request('genre_id') && !request('category_id')) {{$books->links()}} @endif
+                                            </div>
                                     </div>
-
                                 </div>
                             </div>
                         </form>

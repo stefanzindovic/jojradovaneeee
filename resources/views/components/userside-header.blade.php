@@ -1,7 +1,7 @@
 <header id="header" class="header fixed-top">
     <div class="container-xxl  d-flex align-items-center justify-content-between">
 
-        <a href="/" class="logo d-flex align-items-center">
+        <a href="/" class="logo d-flex align-items-center" style="margin-left: -12px;">
             <div id="icon-container" style="max-width: 50px;margin: 0;padding: 0" ></div>
             <span style="font-size: 24px !important;">Biblioteka</span>
         </a>

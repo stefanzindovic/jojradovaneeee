@@ -34,30 +34,21 @@ let form = $('#searchForm');
 let imageurl = "";
 
 function search(){
-    if ($("#SearchBar").val().length < 3){
-        $("#searchBoxResults").fadeOut();
-    }
-    else {
+    if ($("#SearchBar").val().length >= 3){
+
         setTimeout(function () {
-            // send request to /search
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
 
 
             $.ajax({
                 type: "POST",
                 url: "/search",
+                headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
                 data: form.serialize(),
                 success:function(data){
                     setTimeout(function () {
-
                         knjige.empty()
                         imageurl = "";
-
-                        if(data.books != null && $("#SearchBar").val().length >= 3){
+                        if($("#SearchBar").val().length >= 3 && data.books[0] != null){
                             $("#searchBoxResults").fadeIn();
                             $.each(data.books, function (k, book) {
                                 if(book.picture === 'book-placeholder.png'){
@@ -78,6 +69,8 @@ function search(){
                                                 </li>
                                 `).show('slow');
                             })
+                        }else {
+                            $("#searchBoxResults").fadeOut();
                         }
 
 
@@ -89,10 +82,11 @@ function search(){
 }
 
 
-
-// $("#SearchBar").focusout( function (){
-//    $("#searchBoxResults").hide()
-// });
+if (!isMobile) {
+    $("#SearchBar").focusout(function () {
+        $("#searchBoxResults").hide()
+    });
+}
 
 var cropperFunction = function (e) {
     var cropperOverlay = document.getElementById("cropper-wrapper");

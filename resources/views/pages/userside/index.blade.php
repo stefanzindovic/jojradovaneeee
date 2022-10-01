@@ -39,17 +39,48 @@
                     <p>Preporučujemo</p>
                 </header>
 
-                <div class="row">
+                <div class="row d-flex justify-content-center">
 
-
-                    <div class="d-flex justify-content-center">
-                        <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
-                            <div class="box">
-                                <div id="404error" class="img-fluid pb-2" alt=""></div>
-                                <h3>Trenutno nema dostupnih knjiga</h3>
+                    @if(empty($books))
+                        <div class="d-flex justify-content-center">
+                            <div class="col-lg-4 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
+                                <div class="box">
+                                    <div id="404error" class="img-fluid pb-2" alt=""></div>
+                                    <h3>Trenutno nema dostupnih knjiga</h3>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="row d-flex justify-content-center">
+                            @foreach($books as $book)
+                                <div class="col-auto">
+                                    <div class="card" style="width: 18rem;height: auto">
+                                        <a href="{{ route('knjige.show', $book->id) }}">
+                                            <img style="object-fit: cover;height: 350px; width: 100%"
+                                                 src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
+                                                 class="book-image" alt="...">
+                                        </a>
+                                        <div class="card-body">
+                                            <h2 class="card-title"><a
+                                                    href="{{ route('knjige.show', $book->id) }}">{{ $book->title }}</a>
+                                            </h2>
+                                            <div class="card-text" style="min-height: 120px">
+                                                {!! Str::limit($book->description, 80) !!}
+                                            </div>
+                                            <div class="d-grid gap-2">
+                                                @if($book->calcNumberOfAvailableCopies($book->id) < 1)
+                                                    <button disabled class="btn btn-premium">Trenutno nedostupno</button>
+                                                @else
+                                                    <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
+                                                @endif
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endforeach
+                        </div>
+                    @endif
 
 
                 </div>
