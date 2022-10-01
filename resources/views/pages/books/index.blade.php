@@ -23,12 +23,8 @@
                     <thead>
                         <tr>
                             <th>Naziv knjige</th>
-                            <th>Autor</th>
                             <th>Kategorija</th>
-                            <th>Na raspolaganju</th>
-                            <th>Rezervisano</th>
-                            <th>Izdato</th>
-                            <th>U prekoračenju</th>
+                            <th>Stanje</th>
                             <th>Ukupna količina</th>
                             <th>Akcija</th>
                         </tr>
@@ -36,45 +32,36 @@
                     <tbody class="align-middle">
                         @foreach ($books as $book)
                             <tr style="white-space: pre-line;">
-                                <td class="">
-                                    <img style="width: 35px; height: 35px;" class="Image"
-                                        src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
-                                        alt="" />
-                                    <a href="{{ route('books.show', $book->id) }}">
-                                        <span class="font-medium text-center">{{ $book->title }}</span>
+                                <td>
+                                    <a href="{{ route('books.show', $book->id) }}" class="d-flex align-items-center">
+                                        <img style="width: 35px; height: 35px;" class="Image pe-2"
+                                             src="@if ($book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->picture) }} @endif"
+                                             alt="" />
+                                        <div class="d-block"><span class="fw-bold">{{ $book->title }}</span>
+                                            <div class="small text-gray"><span class="__cf_email__">
+                                                     @foreach ($book->authors->take(3) as $author)
+                                                        {{ $author->full_name }}@if(!$loop->last), @endif
+                                                    @endforeach
+                                                </span>
+                                            </div>
+                                        </div>
                                     </a>
                                 </td>
-                                <td style="white-space:pre-line ;">
-                                    <p class="text-center">
-                                        @foreach ($book->authors as $author)
-                                            {{ $author->full_name }} @if (!$loop->last)
-                                                ,
-                                            @endif
-                                        @endforeach
-                                    </p>
+                                <td>
+                                    <div class="small text-gray text-center">
+                                        <span class="__cf_email__">
+                                            @foreach ($book->categories as $category)
+                                                {{ $category->title }}@if(!$loop->last), @endif
+                                            @endforeach
+                                        </span>
+                                    </div>
                                 </td>
-                                <td style="white-space: pre-line;">
-                                    <p class="text-center">
-                                        @foreach ($book->categories as $category)
-                                            {{ $category->title }}
-                                            @if (!$loop->last)
-                                                ,
-                                            @endif
-                                        @endforeach
-                                    </p>
-                                </td>
-                                <td class="text-center">
-                                    {{ $book->total_copies - ((($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0) + ($writtenOffBooks[$book->id] ?? 0) + ($issuedBooksCount[$book->id] ?? 0)) }}
-                                </td>
-                                <td class="text-center">
-                                    <a
-                                        href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ ($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0 }}</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a>
-                                </td>
-                                <td class="text-center">
-                                    <a href="{{ route('books.issues.breached', ['books' => $book->id]) }}">{{ $booksWithBreachedDeadlines[$book->id] ?? 0 }}</a>
+                                <td class="small">
+                                    Na raspolaganju:
+                                    {{ $book->total_copies - ((($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0) + ($writtenOffBooks[$book->id] ?? 0) + ($issuedBooksCount[$book->id] ?? 0)) }}<br>
+                                    Rezervisano: <a  class="text-purple" href="{{ route('books.reservations', ['books' => $book->id]) }}">{{ ($reservedBooksPendingCount[$book->id] ?? 0) + ($reservedBooksActiveCount[$book->id] ?? 0) ?? 0 }}</a><br>
+                                    Izdato:  <a class="text-purple" href="{{ route('books.issues.issues', ['books' => $book->id]) }}">{{ $issuedBooksCount[$book->id] ?? 0 }}</a><br>
+                                    U prekoračenju: <a class="text-purple" href="{{ route('books.issues.breached', ['books' => $book->id]) }}">{{ $booksWithBreachedDeadlines[$book->id] ?? 0 }}</a>
                                 </td>
                                 <td class="text-center">
                                     {{ $book->total_copies - ($writtenOffBooks[$book->id] ?? 0) }}

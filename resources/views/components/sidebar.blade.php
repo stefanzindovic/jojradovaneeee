@@ -4,8 +4,8 @@
 
 
 <nav class="navbar navbar-dark bg-transparent-1 px-3 col-12 d-lg-none">
-    <a class="navbar-brand me-lg-5" href="/">
-        <img class="navbar-brand-dark" src="{{ asset('imgs/booklogo.png') }}" alt="Volt logo" />
+    <a class="navbar-brand me-lg-5" href="{{route('dashboard')}}">
+        <img src="{{asset('imgs/books.png')}}" height="15" alt="Intelecto">
     </a>
     <div class="d-flex align-items-center">
         <button class="navbar-toggler d-lg-none collapsed" type="button" data-bs-toggle="collapse"
@@ -51,16 +51,12 @@
             </div>
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
-            <li class="nav-item">
-                <a href="{{ route('dashboard') }}" class="nav-link d-flex align-items-center">
+            <li class="nav-item  @if (url()->current() == route('dashboard')) active @endif ">
+                <a href="{{ route('dashboard') }}" class="nav-link ri-align-vertically">
                     <span class="sidebar-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                            class="icon icon-xs me-2" viewBox="0 0 16 16">
-                            <path
-                                d="M8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
-                        </svg>
+                       <img src="{{asset('imgs/Intelectologo.svg')}}" height="25" class="icon"  alt="Intelecto">
                     </span>
-                    <span class="mt-1 ms-1 sidebar-text">Online Biblioteka</span>
+                    <span class="sidebar-text" style="font-size: 20px;top: 3px">Intelecto</span>
                 </a>
             </li>
             <li id="separator" role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
@@ -152,46 +148,6 @@
                     <span>
                     </span>
                 </a>
-            </li>
-            <li class="nav-item">
-                <span class="nav-link  collapsed  d-flex justify-content-between align-items-center"
-                    data-bs-toggle="collapse" data-bs-target="#pages">
-                    <span>
-                        <span class="sidebar-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                fill="currentColor" class="icon icon-xs me-2" viewBox="0 0 16 16">
-                                <path
-                                    d="M0 10.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5zM12 0H4a2 2 0 0 0-2 2v7h1V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v7h1V2a2 2 0 0 0-2-2zm2 12h-1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2H2v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-2z" />
-                            </svg>
-                        </span>
-                        <span class="sidebar-text">Pages</span>
-                    </span>
-                    <span class="link-arrow">
-                        <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </span>
-                <div class="multi-level collapse " role="list" id="pages" aria-expanded="false">
-                    <ul class="flex-column nav">
-                        <li class="nav-item">
-
-                            <a class="nav-link" href="/">
-                                <span class="sidebar-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd"
-                                            d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z" />
-                                    </svg>
-                                </span>
-                                <span class="sidebar-text">Home</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li id="separator1" role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
 

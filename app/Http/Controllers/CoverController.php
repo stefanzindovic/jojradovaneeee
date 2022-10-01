@@ -109,6 +109,9 @@ class CoverController extends Controller
      */
     public function destroy(Cover $cover): RedirectResponse
     {
+        if ($cover->books->isNotEmpty()) {
+            return to_route('settings.covers.index')->with('errorMessage', 'U biblioteci se nalaze knjige sa ovim povezom.');
+        }
         try {
             $cover->delete();
 

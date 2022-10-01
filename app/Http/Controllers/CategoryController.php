@@ -163,6 +163,10 @@ class CategoryController extends Controller
     public function destroy(Category $category): RedirectResponse
     {
         //TODO: Add check if this category is used in some of existing books before delete action (if exists, return error message)
+        $category->loadMissing(['books']);
+        if ($category->books->isNotEmpty()) {
+            return to_route('settings.categories.index')->with('errorMessage', 'U biblioteci postoje knjige koje pripadaju ovoj kategoriji.');
+        }
 
         try {
             $uploadPath = 'uploads/categories/';

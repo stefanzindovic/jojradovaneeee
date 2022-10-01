@@ -164,7 +164,10 @@ class AuthorController extends Controller
     public function destroy(Author $author): RedirectResponse
     {
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
-
+        $author->loadMissing(['books']);
+        if ($author->books->isNotEmpty()) {
+            return to_route('authors.index')->with('errorMessage', 'U biblioteci se nalaze knjige ovog autora.');
+        }
         try {
             $uploadPath = 'uploads/authors/';
 

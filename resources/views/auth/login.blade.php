@@ -79,7 +79,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <a href="#" class="text-gray"><small>Zaboravili ste šifru?</small></a>
+                        <a href="{{route('password.confirm')}}" class="text-gray"><small>Zaboravili ste šifru?</small></a>
                     </div>
                     <div class="col-6 text-right">
                         <a href="{{route('register')}}" class="text-gray"><small>Registrujte se</small></a>

@@ -109,6 +109,10 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language): RedirectResponse
     {
+        if ($language->books->isNotEmpty()) {
+            return to_route('settings.languages.index')->with('errorMessage', 'U biblioteci se nalaze knjige na ovom jeziku.');
+        }
+
         try {
             $language->delete();
 

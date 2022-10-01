@@ -7,10 +7,10 @@
 @section('interaction')
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group ms-2 me-2">
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Otpiši</a>
+            <a href="{{ route('books.issues.writeoffmultiple', $book->id) }}" type="button" class="btn btn-sm btn-outline-primary">Otpiši</a>
             <a href="{{ route('books.issues.issue', $book->id) }}" type="button"
                 class="btn btn-sm btn-outline-primary">Izdaj</a>
-            <a href="#" type="button" class="btn btn-sm btn-outline-primary">Vrati</a>
+            <a href="{{route('books.issues.returnmultiple', $book->id)}}" type="button" class="btn btn-sm btn-outline-primary">Vrati</a>
             <a href="{{ route('books.reservations.reservePage', $book->id) }}" type="button"
                 class="btn btn-sm btn-outline-primary">Rezerviši</a>
             <div class="dropdown pt-2 ps-4">

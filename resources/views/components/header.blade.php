@@ -4,10 +4,17 @@
 
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
-                <img src="{{asset('imgs/Intelecto.png')}}" height="28">
+{{--                Search--}}
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
+                <li class="nav-item dropdown ms-lg-3">
+                    <a class="nav-link" href="{{route('activities')}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="text-gray-900" viewBox="0 0 16 16">
+                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+                        </svg>
+                    </a>
+                </li>
                 <li class="dropdown nav-item mt-1">
                     <a class="nav-link text-dark unread dropdown-toggle" data-unread-notifications="true" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
                         <svg class="icon text-gray-900" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
