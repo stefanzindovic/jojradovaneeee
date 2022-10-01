@@ -145,8 +145,9 @@ var cropperFunction = function (e) {
             reader.onload = function (e) {
                 // setup cropper
                 cropperPreview.src = e.target.result;
-                cropper = new Cropper(cropperPreview);
+                var options = {aspectRatio: 1,};
                 cropperOverlay.style.display = "block";
+                cropper = new Cropper(cropperPreview, options);
             };
         }
 
@@ -154,6 +155,7 @@ var cropperFunction = function (e) {
         cropperCropBtn.addEventListener("click", function (e) {
             // get cropped data from cropper && display cropped image into output block
             cropper.getCroppedCanvas().toBlob((blob) => {
+                $('input[type="file"]').val("");
                 var file = new File([blob], Date.now(), {type: blob.type});
                 var container = new DataTransfer();
 

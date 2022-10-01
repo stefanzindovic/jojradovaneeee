@@ -11,24 +11,19 @@
         <form id="myForm" method="POST" action="{{ route('settings.categories.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-md-4 mb-3">
-                    <label for="upload-picture" class="form-label">Izaberi fotografiju</label>
-                    <label class="border border-gray-300 rounded d-flex justify-content-center">
-                        <div id="empty-cover-art" class="overflow-hidden">
-                            <div class="">
-                                <img id="image-output" class="w-80">
-                                <div id="addphototext" class="text-center pb-lg-12">
-                                    <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
-                                        <polyline points="21 15 16 10 5 21"></polyline>
-                                    </svg>
-                                    <span class="mt-2">Add photo</span>
-                                </div>
+                <div class="col-sm-4 d-flex justify-content-center">
+                    <div class="div">
+                        <label for="upload-picture" class="form-label">Izaberi fotografiju</label>
+                        <label class="border border-gray-300 d-flex justify-content-center relative" style="max-height: 350px;max-width: 350px">
+                            <div id="empty-cover-art" class="overflow-hidden">
+                                <img src="{{asset('imgs/placeholder.png')}}" style="object-fit: fill;min-height: 350px;width: 350px" class="w-full h-full" id="image-output" alt="Avatar">
                                 <input onchange="cropperFunction(event)" id="upload-picture" value="" name="picture-raw" type="file" class="d-none" :accept="accept">
                             </div>
+                        </label>
+                        <div class="text-center">
+                            <a class="btn btn-outline-danger btn-sm pt-2 pb-2" onclick="$('#image-output'). attr('src','/imgs/placeholder.png');$('[name=\'picture\']').remove()">Ukloni fotografiju</a>
                         </div>
-                    </label>
+                    </div>
                 </div>
                 <div class="col-md-8">
                     <div class="row">
