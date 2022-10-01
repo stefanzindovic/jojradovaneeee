@@ -24676,3 +24676,47 @@ input.datetimepicker[data-color="yellow"] + .bootstrap-datetimepicker-widget tab
         height: 35px;
     }
 }
+
+.categories-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .categories {
+        display: none;
+    }
+    .knjige {
+        justify-content: center;
+    }
+
+    .categories-mobile {
+        display: block !important;
+    }
+}
+
+
+.checkbox {
+    border: 1px solid blue;
+    border-radius: 3px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    position: relative;
+}
+
+.checkbox:after {
+     display: block;
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%) scale(0);
+     width: 12px;
+     height: 12px;
+     background-color: blue;
+     border-radius: 3px;
+     transition: 0.3s;
+ }
+
+
+
+
