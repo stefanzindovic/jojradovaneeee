@@ -47,7 +47,7 @@ class StudentsController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([a-zA-Z\s!ŠšĐđŽžČčĆć])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', 'unique:users,jmbg'],
             'username' => ['required', 'regex:/^([a-z0-9])+$/', 'min:4', 'max:18', 'unique:users,username'],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
@@ -148,7 +148,7 @@ class StudentsController extends Controller
         if (!$student->is_active) return abort(404);
 
         $input = $request->validate([
-            'name' => 'required|regex: /^([a-zA-Z\s!ŠšĐđŽžČčĆć])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', Rule::unique('users', 'jmbg')->ignore($student->id)],
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', Rule::unique('users', 'username')->ignore($student->id)],
             'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($student->id)],
