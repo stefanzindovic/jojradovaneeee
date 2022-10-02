@@ -43,7 +43,7 @@ class PublishersController extends Controller
     public function store(StorePublishersRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
         ]);
 
         try {
@@ -89,7 +89,7 @@ class PublishersController extends Controller
     public function update(UpdatePublishersRequest $request, Publishers $publisher): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
         ]);
 
         try {

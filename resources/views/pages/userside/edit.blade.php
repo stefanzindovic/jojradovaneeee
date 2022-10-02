@@ -31,7 +31,7 @@
                                                 <label class="border border-gray-300 rounded d-flex justify-content-center flex-column" style="height: 150px;width: 150px;">
                                                     <div id="empty-cover-art" class="overflow-hidden">
                                                         <div class="text-center">
-                                                            <img src="{{ Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . Auth::user()->picture) : asset('storage/uploads/librarians/' . Auth::user()->picture)) : asset('imgs/' . Auth::user()->picture) }}" style="object-fit: fill;" id="image-output" width="150px" height="150px">
+                                                            <img src="{{ Auth::user()->picture !== 'profile-picture-placeholder.jpg' ? (Auth::user()->role_id == 3 ? asset('storage/uploads/students/' . Auth::user()->picture) : asset('storage/uploads/librarians/' . Auth::user()->picture)) : asset('imgs/' . Auth::user()->picture) }}" style="object-fit: fill;cursor: pointer" id="image-output" width="150px" height="150px">
                                                             @if(Auth::user()->picture == null)
                                                                 <div id="addphototext" class="text-center pb-lg-12">
                                                                     <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
