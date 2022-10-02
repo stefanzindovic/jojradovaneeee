@@ -42,7 +42,7 @@ class CoverController extends Controller
     public function store(StoreCoverRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z0-9\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {
@@ -88,7 +88,7 @@ class CoverController extends Controller
     public function update(UpdateCoverRequest $request, Cover $cover): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z0-9\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {

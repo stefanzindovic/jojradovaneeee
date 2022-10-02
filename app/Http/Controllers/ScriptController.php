@@ -42,7 +42,7 @@ class ScriptController extends Controller
     public function store(StoreScriptRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9-_.,\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z0-9-_.,\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {
@@ -88,7 +88,7 @@ class ScriptController extends Controller
     public function update(UpdateScriptRequest $request, Script $script): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9-_.,\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z0-9-_.,\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {

@@ -1,28 +1,48 @@
 jQuery(document).ready(function () {
-    const titleInput = jQuery('#genreTitle');
-    const saveGenreBtn = jQuery('#saveGenreBtn');
-    const titleValidationMessage = jQuery('#genreTitleValidationMessageByJs');
+    const titleInput = jQuery("#genreTitle");
+    const saveGenreBtn = jQuery("#saveGenreBtn");
+    const titleValidationMessage = jQuery("#genreTitleValidationMessageByJs");
 
-    saveGenreBtn.on('click', function(e) {
+    saveGenreBtn.on("click", function (e) {
         // check if title is empty
-        if(titleInput.val() === null || titleInput.val() === undefined ||titleInput.val() === false || titleInput.val() === '') {
+        if (
+            titleInput.val() === null ||
+            titleInput.val() === undefined ||
+            titleInput.val() === false ||
+            titleInput.val() === ""
+        ) {
             setTimeout(function () {
-                titleValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>');
+                titleValidationMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Polje ne može biti prazno.</small>'
+                    );
             }, 200);
             e.preventDefault();
-        } else if(titleInput.val().length < 4 || titleInput.val().length > 50) {
+        } else if (
+            titleInput.val().length < 4 ||
+            titleInput.val().length > 50
+        ) {
             setTimeout(function () {
-                titleValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</small>');
+                titleValidationMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja može sadržati od 4 do 50 karaktera.</small>'
+                    );
             }, 200);
             e.preventDefault();
-        } else if (!/^([a-zA-Z0-9-,\s])+$/.test(titleInput.val())) {
+        } else if (!/^([a-zA-Z0-9-,\sŠšĐđŽžČčĆć])+$/.test(titleInput.val())) {
             setTimeout(function () {
-                titleValidationMessage.css({"display": "block"}).html('<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja nije u korektnom formatu.</small>');
+                titleValidationMessage
+                    .css({ display: "block" })
+                    .html(
+                        '<small class="text-red-500 align-middle"><i class="fa fa-times text-red"></i> Vrijednost polja nije u korektnom formatu.</small>'
+                    );
             }, 200);
             return e.preventDefault();
         }
         setTimeout(function () {
-            titleValidationMessage.css({"display": "none"});
+            titleValidationMessage.css({ display: "none" });
         });
     });
 });
