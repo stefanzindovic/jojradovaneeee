@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Author;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Http\Requests\UpdateAuthorRequest;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -178,6 +179,32 @@ class AuthorController extends Controller
             }
 
             $author->delete();
+
+            return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+        try {
+            foreach ($request->id as $author){
+                $author = Author::findOrFail($author);
+                if ($author->books->isNotEmpty()) {
+                    return to_route('authors.index')->with('errorMessage', 'U biblioteci se nalaze knjige ovog autora.');
+                }
+                $author->loadMissing(['books']);
+                $uploadPath = 'uploads/authors/';
+
+                // remove old icon from storage
+                $oldIconPath = $uploadPath . $author->picture;
+                if (Storage::disk('public')->exists($oldIconPath)) {
+                    Storage::disk('public')->delete($oldIconPath);
+                }
+
+                $author->delete();
+            }
 
             return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');
         } catch (\Exception $e) {
