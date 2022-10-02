@@ -5,7 +5,7 @@ Date::setLocale('sr');
 @endphp --}}
 
 {{-- @extends('app') --}}
-{{-- 
+{{--
 @section('page_title')
     Kontrolna tabla
 @endsection --}}
@@ -171,182 +171,219 @@ Date::setLocale('sr');
                         <div class="list-group list-group-flush list-group-timeline">
                             @if ($activities->count() > 0)
                                 @foreach ($activities as $activity)
-                                    <div class="activity-card flex flex-row mb-[30px]">
-                                        <div class="w-[60px] h-[60px]">
-                                            @if ($activity->action_status_id == 1 || $activity->action_status_id == 3 || $activity->action_status_id == 4 || $activity->action_status_id == 7 || $activity->action_status_id == 8)
-                                                <img class="rounded-full"
-                                                    src="{{ $activity->librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $activity->librarian->picture) : asset('imgs/' . $activity->librarian->picture) }}"
-                                                    alt="">
-                                            @elseif($activity->action_status_id == 2 || $activity->action_status_id == 9)
-                                                <img class="rounded-full"
-                                                    src="{{ $activity->book->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $activity->book->student->picture) : asset('imgs/' . $activity->book->student->picture) }}"
-                                                    alt="">
-                                            @elseif($activity->action_status_id == 5 || $activity->action_status_id == 6)
-                                                <img class="rounded-full"
-                                                    src="{{ $activity->book->book->picture !== 'book-placeholder.png' ? asset('storage/uploads/books/' . $activity->book->book->picture) : asset('imgs/' . $activity->book->book->picture) }}"
-                                                    alt="">
-                                            @endif
-                                        </div>
-                                        <div class="ml-[15px] mt-[5px] flex flex-col">
-                                            <div class="text-gray-500 mb-[5px]">
-                                                <p class="uppercase">
-                                                    {{ strtoupper($activity->status->name) }}
-                                                    <span class="inline lowercase">
-                                                        -
-                                                        {{ \Carbon\Carbon::parse($activity->created_at)->diffForHumans() }}
-                                                    </span>
-                                                </p>
+                                    <div class="list-group-item border-0">
+                                        <div class="row ps-lg-1">
+                                            <div class="col-auto z-0">
+                                                <div class="icon-shape icon-xs icon-shape-success rounded">
+                                                    <img src="{{ $activity->librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $activity->librarian->picture) : asset('imgs/' . $activity->librarian->picture) }}"
+                                                         alt="">
+                                                </div>
                                             </div>
-                                            @if ($activity->action_status_id === 1)
-                                                <div class="">
-                                                    <p>
-                                                        <a href="{{ route('librarians.show', $activity->librarian->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->librarian->name }}
+
+                                            <div class="col ms-n2 mb-3">
+                                                <h3 class="fs-6 fw-bold mb-1"> {{ strtoupper($activity->status->name) }}</h3>
+                                                @if ($activity->action_status_id === 1)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je izdao/la knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
                                                         </a>
-                                                        je izdala knjigu <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a> korisniku
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+                                                        korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>dana {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
+                                                    </p>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small"><a
+                                                                href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                class="link-purple">Pogledaj detalje >></a></span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 2)
+                                                    <p class="mb-0">
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
                                                         </a>
-                                                        dana <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        je rezervisao/la knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
+                                                        </a> za datum {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 2)
-                                                <div class="">
-                                                    <p>Korisnik
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="link-purple">Pogledaj detalje >></a>
+                                                        </span>
+                                                    </div>
+
+                                                @elseif ($activity->action_status_id === 3)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je odobrio rezervaciju knjige
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
+                                                        </a>
+                                                        korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
-                                                        </a> je zatražio rezervaciju knjige
-                                                        <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a>
-                                                        </span> za <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        </a>za {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 3)
-                                                <div class="">
-                                                    <p>
-                                                        <a href="{{ route('librarians.show', $activity->librarian->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->librarian->name }}
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small"><a
+                                                                href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                class="link-purple">Pogledaj detalje >></a></span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 4)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je odbio rezervaciju knjige
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
                                                         </a>
-                                                        je odobrio rezervaciju knjige <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a> korisniku
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+                                                        korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
-                                                        </a>
-                                                        za <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        </a>za {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 4)
-                                                <div class="">
-                                                    <p>
-                                                        <a href="{{ route('librarians.show', $activity->librarian->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->librarian->name }}
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a
+                                                                href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                class="link-purple">Pogledaj detalje >>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 5)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je izdao/la knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
                                                         </a>
-                                                        je odbio rezervaciju knjige <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a> korisnika
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+                                                        korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
-                                                        </a>
-                                                        za <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        </a>dana {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 5)
-                                                <div class="">
-                                                    <p>
-                                                        Rezervacija knjige <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a> koju je ponudio korisnik <a
-                                                            href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->book->student->name }}
-                                                        </a> za <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        je istekla.
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small"><a
+                                                                href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                class="link-purple">Pogledaj detalje >></a></span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 6)
+                                                    <p class="mb-0">
+                                                        Rezervacije knjige
+                                                        <a href="{{ route('knjige.show', $activity->book_id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
                                                         </a>
-                                                    </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 6)
-                                                <div class="">
-                                                    <p>
-                                                        Rezervacija knjige <span class="font-medium">{{ $activity->book->book->title }}
-                                                        </span> koju je ponudio korisnik <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                            class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->book->student->name }}
-                                                        </a> za <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        je otkazana.
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 7)
-                                                <div class="">
-                                                    <p>
-                                                        <a href="{{ route('librarians.show', $activity->librarian->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->librarian->name }}
-                                                        </a>
-                                                        je po rezervaciji izdao knjigu <a href="{{ route('books.show', $activity->book->book->id) }}"
-                                                            class="text-[#2196f3] hover:text-blue-600"><span class="font-medium">{{ $activity->book->book->title }}</a> korisniku
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+
+                                                        koju je podnio korisnik
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
                                                         </a>
-                                                        dana <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        za {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }} je istekla.
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 8)
-                                                <div class="">
-                                                    <p>
-                                                        <a href="{{ route('librarians.show', $activity->librarian->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->librarian->name }}
+                                                    <div class="d-flex align-items-center">
+                                                            <span class="small">
+                                                                <a
+                                                                    href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                    class="link-purple">Pogledaj detalje >>
+                                                                </a>
+                                                            </span>
+                                                    </div>
+
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="link-purple">Pogledaj detalje >></a>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 7)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je po rezervaciji izdao/la knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
                                                         </a>
-                                                        je po otpisao knjigu <a href="{{ route('books.show', $activity->book->book->id) }}" class="text-[#2196f3] hover:text-blue-600"><span
-                                                                class="font-medium">{{ $activity->book->book->title }}</a> koja je bila izdata korisniku
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
+                                                        korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>dana {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
+                                                    </p>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="link-purple">Pogledaj detalje >></a>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 8)
+                                                    <p class="mb-0"><a
+                                                            href="{{ route('librarians.show', $activity->librarian->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->librarian->name }}</a>
+                                                        je otpisao knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
+                                                        </a>
+                                                        koja je bila izdata korisniku
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>dana {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
+                                                    </p>
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a
+                                                                href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
+                                                                class="link-purple">Pogledaj detalje >>
+                                                            </a>
+                                                        </span>
+                                                    </div>
+                                                @elseif ($activity->action_status_id === 9)
+                                                    <p class="mb-0">
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                           class="link-purple">
                                                             {{ $activity->book->student->name }}
                                                         </a>
-                                                        dana <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
+                                                        je vratio/la knjigu
+                                                        <a href="{{ route('books.show', $activity->book->book->id) }}"
+                                                           class="link-purple">
+                                                            {{ $activity->book->book->title }}
+                                                        </a> dana {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                     </p>
-                                                </div>
-                                            @elseif ($activity->action_status_id === 9)
-                                                <div class="">
-                                                    <p>Korisnik
-                                                        <a href="{{ route('students.show', $activity->book->student->id) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            {{ $activity->book->student->name }}
-                                                        </a> je vratio knjigu
-                                                        <span class="font-medium">{{ $activity->book->book->title }}
-                                                        </span> dana <span class="font-medium">{{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}</span>
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="text-[#2196f3] hover:text-blue-600">
-                                                            pogledaj detaljnije >>
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                            @endif
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="small">
+                                                            <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}" class="link-purple">Pogledaj detalje >></a>
+                                                        </span>
+                                                    </div>
+                                                @endif
+
+                                            </div>
                                         </div>
                                     </div>
                                 @endforeach
-                                <div class="inline-block w-full mt-4">
-                                    <a href="{{ route('activities') }}"
-                                        class="btn-animation block text-center w-full px-4 py-2 text-sm tracking-wider text-gray-600 transition duration-300 ease-in border-[1px] border-gray-400 rounded hover:bg-gray-200 focus:outline-none focus:ring-[1px] focus:ring-gray-300">
-                                        Prikaži više
-                                    </a>
-                                </div>
                             @else
                                 Nema aktivnosti
                             @endif
@@ -355,10 +392,10 @@ Date::setLocale('sr');
                 </div>
             </div>
             <div class="col">
-                <h3 class="uppercase mb-[20px] text-left py-[30px] text-align-center">
-                    Statistika
-                </h3>
                 <div class="card">
+                    <div class="card-header">
+                        <h2 class="fs-5 fw-bold mb-0">Statistika</h2>
+                    </div>
                     <div class="card-body">
                         <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
 

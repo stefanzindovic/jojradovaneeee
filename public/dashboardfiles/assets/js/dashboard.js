@@ -1,5 +1,149 @@
 var notyf = new Notyf();
 
+
+let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
+
+if (!isMobile) {
+    $(window).resize(function() {
+        if ($(window).width() < 1048){
+            if($(".mobile-wrapper").is(":visible")){
+                $(".mobile-wrapper").hide();
+            }
+        } else {
+            $(".mobile-wrapper").show();
+        }
+    })
+}
+
+if ($(window).width() < 1048){
+    $(".mobile-wrapper").hide();
+} else {
+    $(".mobile-wrapper").show();
+}
+
+$(".nav-icon-btn").on('click', function (){
+    $(".mobile-wrapper").fadeIn()
+})
+
+$("#mobile-close-search-button").on('click', function (){
+    $(".mobile-wrapper").fadeOut()
+})
+
+
+let knjige = $("#searchBookList");
+let studenti = $("#searchStudentList")
+let bibliotekari = $("#searchLibrarianList")
+let autori = $("#searchAuthorList")
+let form = $('#searchForm');
+
+function search(){
+    if ($("#SearchBar").val().length >= 3){
+
+        setTimeout(function () {
+
+
+            $.ajax({
+                type: "POST",
+                url: "/searchstaff",
+                headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+                data: form.serialize(),
+                success:function(data){
+                    setTimeout(function () {
+                        knjige.empty()
+                        studenti.empty()
+                        bibliotekari.empty()
+                        autori.empty()
+                        if($("#SearchBar").val().length >= 3){
+                            $("#searchBoxResults").fadeIn();
+                            $.each(data.books, function (k, book) {
+                                knjige.append(`
+                                                <a href="/books/${book.id}">
+                                                    <li class="list-group-item mb-2" style="border:0">
+                                                        <span class="name mb-0 text-purple">${book.title}</span>
+                                                    </li>
+                                                </a>
+                                `).show('slow');
+                            })
+                            $.each(data.students, function (k, student) {
+                                studenti.append(`
+                                                <a href="/students/${student.id}">
+                                                    <li class="list-group-item mb-2" style="border:0">
+                                                        <span class="name mb-0 text-purple">${student.name}</span>
+                                                    </li>
+                                                </a>
+                                `).show('slow');
+                            })
+                            $.each(data.librarians, function (k, librarian) {
+                                bibliotekari.append(`
+                                                <a href="/librarians/${librarian.id}">
+                                                    <li class="list-group-item mb-2" style="border:0">
+                                                        <span class="name mb-0 text-purple">${librarian.name}</span>
+                                                    </li>
+                                                </a>
+                                `).show('slow');
+                            })
+                            $.each(data.authors, function (k, author) {
+                                autori.append(`
+                                                <a href="/authors/${author.id}">
+                                                    <li class="list-group-item mb-2" style="border:0">
+                                                        <span class="name mb-0 text-purple">${author.full_name}</span>
+                                                    </li>
+                                                </a>
+                                `).show('slow');
+                            })
+                        }else {
+                            $("#searchBoxResults").fadeOut();
+                        }
+
+
+                    },300)
+                },
+            });
+        }, 300);
+    }
+}
+
+
+if (!isMobile) {
+    $(document).click(function() {
+        $("#searchBoxResults").hide()
+    });
+}
+
+$("input#bookFilter").change(function() {
+    if(!this.checked) {
+        $("#bookList").hide()
+    }else{
+        $("#bookList").show()
+    }
+});
+
+$("input#studentFilter").change(function() {
+    if(!this.checked) {
+        $("#studentList").hide()
+    }else{
+        $("#studentList").show()
+    }
+});
+
+$("input#librarianFilter").change(function() {
+    if(!this.checked) {
+        $("#librarianList").hide()
+    }else{
+        $("#librarianList").show()
+    }
+});
+
+$("input#authorFilter").change(function() {
+    if(!this.checked) {
+        $("#authorList").hide()
+    }else{
+        $("#authorList").show()
+    }
+});
+
+
+
 $(window).on("load", function () {
     $("#layout").fadeOut();
 });
