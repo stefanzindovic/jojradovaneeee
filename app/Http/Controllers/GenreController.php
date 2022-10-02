@@ -44,7 +44,7 @@ class GenreController extends Controller
     public function store(StoreGenreRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50'
+            'title' => 'required|regex: /^([A-Za-z0-9-,\sŠšĐđŽžČčĆć])+$/|min:4|max:50'
         ]);
 
         try {
@@ -91,7 +91,7 @@ class GenreController extends Controller
     public function update(UpdateGenreRequest $request, Genre $genre): RedirectResponse
     {
         $input = $request->validate([
-            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50'
+            'title' => 'required|regex: /^([A-Za-z0-9-,\sŠšĐđŽžČčĆć])+$/|min:4|max:50'
         ]);
 
         try {
