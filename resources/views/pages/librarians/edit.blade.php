@@ -54,14 +54,9 @@
                         <div class="col-md-6 mb-3">
                             <label for="role_id" class="form-label">Tip korisnika</label>
                             <select name="role_id" id="role_id" class="form-control">
-                                <option value="1" @if ($librarian->role_id == 1) selected @endif>
-                                    Administrator
-                                </option>
-                                <option value="2" @if ($librarian->role_id == 2) selected @endif>
-                                    Bibliotekar
-                                </option>
-                                <option value="3" @if ($librarian->role_id == 3) selected @endif>
-                                    Učenik
+                                <option value="{{ $librarian->role->id }}"
+                                    @if ($librarian->role_id == 1) selected @endif>
+                                    {{ $librarian->role->name }}
                                 </option>
                             </select>
                         </div>
@@ -85,7 +80,8 @@
                             value="{{ old('email', $librarian->email) }}" class="form-control"
                             onkeydown="clearErrorsEmailUcenikEdit()">
                         @error('email')
-                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i> {{ $message }}</p>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i> {{ $message }}
+                            </p>
                         @enderror
                         <div id="librarianEmailValidationMessage"></div>
                     </div>

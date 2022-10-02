@@ -10,9 +10,10 @@ use Illuminate\Http\Request;
 
 class ActivityController extends Controller
 {
+
     public function dashboard()
     {
-        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->take(3)->get();
+        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->where('is_active', true)->orderBy('created_at', 'desc')->take(6)->get();
         $reservations = Book::pendingReservedBooksPaginate(4);
         $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery', 'booksUnderActions'])->get();
         $issuedBooksCounter = Book::issuedBooks()->count();
@@ -34,7 +35,7 @@ class ActivityController extends Controller
         if ($request->has('book')) {
             $activities = BookAction::actionsByBook($request->book);
         } else {
-            $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->get();
+            $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->where('is_active', true)->orderBy('created_at', 'desc')->get();
         }
 
         return view('..pages.books.activities.activities', compact('activities'));

@@ -16,11 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 |
 */
+
 Auth::routes();
 
-Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->name('home');
-Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
-Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class,'show'])->name('knjige.show');
+Route::get('/', [\App\Http\Controllers\BookUserSideController::class, 'index'])->name('home');
+Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class, 'indexKnjige'])->name('knjige');
+Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class, 'show'])->name('knjige.show');
 
 Route::post('/searchweb', [\App\Http\Controllers\SearchController::class, 'searchweb']);
 
@@ -31,15 +32,15 @@ Route::middleware(['auth'])->group(function () {
 
 
     //User Side
-    Route::get('/profil', [\App\Http\Controllers\ProfileController::class,'show'])->name('profil');
+    Route::get('/profil', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profil');
     Route::get('/profil/edit/', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profil.edit');
     Route::patch('/profil/{id}', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profil.update');
     Route::get('/rezervacije', [\App\Http\Controllers\UserReservationController::class, 'index'])->name('rezervacije.index');
     Route::get('/rezervisi/{id}', [\App\Http\Controllers\UserReservationController::class, 'create'])->name('rezervacija.knjige');
-    Route::post('/rezervisi/{book}',[\App\Http\Controllers\UserReservationController::class, 'rezervisi'])->name('rezervisi.knjigu');
+    Route::post('/rezervisi/{book}', [\App\Http\Controllers\UserReservationController::class, 'rezervisi'])->name('rezervisi.knjigu');
     Route::patch('/otkazi/{book}', [\App\Http\Controllers\UserReservationController::class, 'otkazi'])->name('rezervacija.otkazi');
 
-    Route::middleware(['staff'])->group(function (){
+    Route::middleware(['staff'])->group(function () {
 
 
         //Book Records
@@ -63,10 +64,10 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [\App\Http\Controllers\ActivityController::class, 'dashboard'])->name('dashboard');
         Route::get('/activities', [\App\Http\Controllers\ActivityController::class, 'activities'])->name('activities');
 
-        Route::get('/settings', function (){
+        Route::get('/settings', function () {
             return redirect('/settings/policies');
         });
-        Route::get('/actions', function (){
+        Route::get('/actions', function () {
             return redirect('/actions/issues');
         });
 
@@ -96,6 +97,7 @@ Route::middleware(['auth'])->group(function () {
         // Books CRUD
         Route::resource('/books', BookController::class);
         Route::get('/books/{book}/action/{action}', [\App\Http\Controllers\BookController::class, 'displayActionDetails'])->name('books.actions.details');
+        Route::delete('/books/action/{action}', [\App\Http\Controllers\BookController::class, 'archiveAction'])->name('books.actions.delete');
         Route::patch('/books/{book}/{gallery}', [\App\Http\Controllers\BookController::class, 'destroyPicture'])->name('books.picture.destroy');
 
         // Issue book
@@ -124,8 +126,5 @@ Route::middleware(['auth'])->group(function () {
             Route::patch('/{book}/issue', [\App\Http\Controllers\ReservationsController::class, 'issue'])->name('.issue');
             Route::patch('/{book}/cancel', [\App\Http\Controllers\ReservationsController::class, 'cancel'])->name('.cancel');
         });
-
     });
 });
-
-
