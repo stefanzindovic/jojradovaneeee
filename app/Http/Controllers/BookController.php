@@ -272,9 +272,9 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         try {
-            // Check if there is some actions used on this book before deleting it
-            if ($book->booksUnderActions()->count() > 0) {
-                return back()->with('errorMessage', 'Kopije ove knjige se nalaze u evidenciji biblioteke. Nije je moguće obrisati.');
+            // Check if there is some book copies that are under active action
+            if ($book->calcNumberOfAvailableCopies($book->id) < $book->total_copies - $book->writtenOffBook($book->id)->count()) {
+                return back()->with('errorMessage', 'Neke kopije ove knjige su pod aktivnostima u biblioteci.');
             }
 
             // Delete book multimedia
@@ -289,10 +289,19 @@ class BookController extends Controller
                 }
             }
             // delete book
+
+            Book::deleting(function () use ($book) {
+                foreach ($book->booksUnderActions as $bookUnderAction) {
+                    $bookUnderAction->actions()->delete();
+                }
+                $book->booksUnderActions()->delete();
+            });
+
             $book->delete();
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno obrisana.');
         } catch (\Throwable $th) {
+            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
