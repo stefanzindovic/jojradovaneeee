@@ -53,12 +53,6 @@
                         <div class="col-md-6 mb-3">
                             <label for="role_id" class="form-label">Tip korisnika</label>
                             <select readonly name="tip_korisnika" id="role_id" class="form-control">
-                                <option value="1" @if ($student->role_id == 1) selected @endif>
-                                    Administrator
-                                </option>
-                                <option value="2" @if ($student->role_id == 2) selected @endif>
-                                    Bibliotekar
-                                </option>
                                 <option value="3" @if ($student->role_id == 3) selected @endif>
                                     Učenik
                                 </option>

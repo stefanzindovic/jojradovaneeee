@@ -78,6 +78,7 @@
                             <table id="myTable" class="table" style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th hidden></th>
                                     <th>Naziv knjige</th>
                                     <th>Datum izdavanja</th>
                                     <th>Izdato učeniku</th>
@@ -89,6 +90,7 @@
                                 <tbody class="align-middle">
                                 @foreach ($books as $book)
                                     <tr>
+                                        <td hidden></td>
                                         <td class="">
                                             <img style="width: 35px; height: 35px;"
                                                  class="Image"

@@ -236,6 +236,36 @@ class LibrarianController extends Controller
         }
     }
 
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+            foreach ($request->id as $librarian){
+                $librarian = User::findOrFail($librarian);
+                if ($librarian->role->id == 3) return abort(404);
+                if (!$librarian->is_active) return abort(404);
+
+                if ($librarian->role->id == 1) {
+                    return back()->with('errorMessage', 'Ne možete obrisati administratora.');
+                }
+
+                if ($librarian->id == Auth::user()->id) {
+                    return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
+                }
+
+                if (Auth::user()->role_id != 1) {
+                    return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
+                }
+
+                $librarian->delete();
+            }
+
+            return to_route('librarians.index')->with('successMessage', 'Bibliotekar je obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
     public function resetPassword(Request $request, User $librarian)
     {
         $input = $request->validate([

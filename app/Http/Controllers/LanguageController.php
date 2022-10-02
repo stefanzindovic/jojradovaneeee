@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class LanguageController extends Controller
 {
@@ -117,6 +118,24 @@ class LanguageController extends Controller
             $language->delete();
 
             return to_route('settings.language.index')->with('successMessage', 'Jezik je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+            foreach ($request->id as $language){
+                $language = Language::findOrFail($language);
+                if ($language->books->isNotEmpty()) {
+                    return to_route('settings.languages.index')->with('errorMessage', 'U biblioteci se nalaze knjige na ovom jeziku.');
+                }
+                $language->delete();
+            }
+
+            return to_route('settings.language.index')->with('successMessage', 'Svi slobodni jezici su uspješno obirsani.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
         }

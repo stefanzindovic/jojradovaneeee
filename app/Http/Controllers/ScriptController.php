@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class ScriptController extends Controller
 {
@@ -117,6 +118,25 @@ class ScriptController extends Controller
 
         try {
             $script->delete();
+
+            return to_route('settings.scripts.index')->with('successMessage', 'Pismo je uspješno obrisano.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+            foreach ($request->id as $script){
+                $script = Script::findOrFail($script);
+                if ($script->books->isNotEmpty()) {
+                    return to_route('settings.scripts.index')->with('errorMessage', 'U biblioteci se nalaze knjige napisane ovim pismom.');
+                }
+
+                $script->delete();
+            }
 
             return to_route('settings.scripts.index')->with('successMessage', 'Pismo je uspješno obrisano.');
         } catch (\Exception $e) {

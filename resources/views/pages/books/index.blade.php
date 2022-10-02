@@ -17,21 +17,29 @@
 
 @section('page_content')
     <div class="row bg-white py-2 px-2 mx-1 rounded">
-        <div class="col">
-            <div class="table-responsive">
-                <table id="myTable" class="table" style="width:100%">
-                    <thead>
+        <form action="{{route('books.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="col">
+
+                <div class="table-responsive">
+                    <table id="myTable" class="table" style="width:100%">
+                        <thead>
                         <tr>
+                            <th>
+                                @if(!$books->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                            </th>
                             <th>Naziv knjige</th>
                             <th>Kategorija</th>
                             <th>Stanje</th>
                             <th>Ukupna količina</th>
                             <th>Akcija</th>
                         </tr>
-                    </thead>
-                    <tbody class="align-middle">
+                        </thead>
+                        <tbody class="align-middle">
                         @foreach ($books as $book)
                             <tr style="white-space: pre-line;">
+                                <td><input type="checkbox" id="checkbox" name="id[]" value="{{$book->id}}" class="form-check-input"></td>
                                 <td>
                                     <a href="{{ route('books.show', $book->id) }}" class="d-flex align-items-center">
                                         <img style="width: 35px; height: 35px;" class="Image pe-2"
@@ -90,7 +98,7 @@
                                                         <path
                                                             d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                                                         <path fill-rule="evenodd"
-                                                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                                              d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                                     </svg>
                                                     Izmijeni
                                                 </a>
@@ -107,7 +115,7 @@
                                             <li><a class="dropdown-item" href="{{route('books.issues.issuebook', $book->id)}}">
                                                     <svg class="dropdown-icon text-gray-400 me-2" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
                                                         <path fill-rule="evenodd"
-                                                            d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z" />
+                                                              d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z" />
                                                     </svg>
                                                     Izdaj
                                                 </a>
@@ -164,9 +172,10 @@
                                 </td>
                             </tr>
                         @endforeach
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 @endsection

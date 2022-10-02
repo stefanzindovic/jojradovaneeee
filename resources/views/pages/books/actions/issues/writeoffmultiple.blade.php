@@ -12,7 +12,7 @@
         <div class="row bg-white py-2 px-2 mx-1 rounded">
             <div class="col">
                 <div class="table-responsive">
-                    <table id="myTableMulti" class="table" style="width:100%">
+                    <table id="myTableMulti1" class="table" style="width:100%">
                         <thead>
                             <tr>
                                 <th>
@@ -59,50 +59,58 @@
 
 @section('scripts')
     <script>
-        $(document).ready(function() {
-            $('#myTableMulti').DataTable({
-                responsive: true,
-                buttons: [{
-                    text: 'Otpiši knjigu',
-                    attr: {
-                        id: 'submitbtn',
-                        disabled: true
-                    },
-                    className: 'btn btn-primary',
-                    action: function(e, dt, node, config) {
-                        $('form#multiForma').submit();
-                    }
-                }, ],
-                columnDefs: [{
-                    targets: 'no-sort',
-                    orderable: false
-                }],
-                dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'p>>",
-                language: {
-                    url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json",
-                },
-            });
-        });
-    </script>
-
-    <script>
         $("input#checkbox").click(function() {
-            if ($(this).is(':checked')) {
-                $('#submitbtn').removeAttr('disabled')
+            var checkbox = $('#myTableMulti1 tbody').find(':checkbox').length;
+            var checked = $('#myTableMulti1 tbody').find(':checked').length
+            console.log('checkbox', checkbox, 'checked', checked);
+            if (checkbox === checked) {
+                document.getElementById('checkAll').checked = true;
             } else {
-                $('#submitbtn').attr('disabled', true)
+                document.getElementById('checkAll').checked = false;
+            }
+            if ($(this).is(':checked')) {
+                $('#submitbtn2').removeAttr('disabled')
+            } else {
+                if (checked === 0) {
+                    $('#submitbtn2').attr('disabled', true)
+                }
             }
         });
 
-        $('input#checkAll').click(function () {
+        $('#checkAll').click(function () {
             $('input#checkbox').prop('checked', this.checked);
             if ($(this).is(':checked')) {
-                $('#submitbtn').removeAttr('disabled')
+                $('#submitbtn2').removeAttr('disabled')
             } else {
-                $('#submitbtn').attr('disabled', true)
+                $('#submitbtn2').attr('disabled', true)
             }
         });
+
+
+        $('#myTableMulti1').DataTable({
+            responsive: false,
+            buttons: [{
+                text: 'Otpiši knjigu',
+                attr: {
+                    id: 'submitbtn2',
+                    disabled: true
+                },
+                className: 'btn btn-primary',
+                action: function(e, dt, node, config) {
+                    $('form#multiForma').submit();
+                }
+            }, ],
+            columnDefs: [{
+                targets: 'no-sort',
+                orderable: false
+            }],
+            dom: "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'p>>",
+            language: {
+                url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json",
+            },
+        });
+
     </script>
 @endsection

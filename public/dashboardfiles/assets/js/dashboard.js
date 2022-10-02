@@ -161,6 +161,32 @@ $(document).ready(function (){
 
 });
 
+$("input#checkbox").click(function() {
+    var checkbox = $('#myTable tbody').find(':checkbox').length;
+    var checked = $('#myTable tbody').find(':checked').length
+    if (checkbox === checked) {
+        document.getElementById('checkAll').checked = true;
+    } else {
+        document.getElementById('checkAll').checked = false;
+    }
+    if ($(this).is(':checked')) {
+        $('#submitbtn').removeAttr('disabled')
+    } else {
+        if (checked === 0) {
+            $('#submitbtn').attr('disabled', true)
+        }
+    }
+});
+
+$('#checkAll').click(function () {
+    $('input#checkbox').prop('checked', this.checked);
+    if ($(this).is(':checked')) {
+        $('#submitbtn').removeAttr('disabled')
+    } else {
+        $('#submitbtn').attr('disabled', true)
+    }
+});
+
 var table = $("#myTable").DataTable({
     orderCellsTop: true,
     fixedHeader: true,
@@ -172,43 +198,23 @@ var table = $("#myTable").DataTable({
     language: {
         url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json'
     },
-    buttons: [
-        {
-            extend: 'copy',
-            exportOptions: {
-                columns: ':visible:not(:contains(Akcija))'
-            }
+    buttons: [{
+        text: 'Obriši',
+        attr: {
+            id: 'submitbtn',
+            disabled: true
         },
-        {
-            extend: 'excel',
-            exportOptions: {
-                columns: ':visible:not(:contains(Akcija))'
-            }
-        },
-        {
-            extend: 'csv',
-            exportOptions: {
-                columns: ':visible:not(:contains(Akcija))'
-            }
-        },
-        {
-            extend: 'print',
-            exportOptions: {
-                columns: ':visible:not(:contains(Akcija))'
-            }
-        },
-        {
-            extend: 'pdf',
-            exportOptions: {
-                columns: ':visible:not(:contains(Akcija))'
-            }
+        className: 'btn btn-primary',
+        action: function(e, dt, node, config) {
+            $('form#multiDeleteForm').submit();
         }
-    ],
+    }, ]
 
 });
 
+
 $('#myTable thead tr').clone(true).appendTo( '#myTable thead' );
-$('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").each( function (i) {
+$('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").slice(1).each( function (i) {
 
         var title = $(this).text();
         if(title != 'Akcija'){
@@ -226,6 +232,7 @@ $('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").each( f
     }
 );
 
+$(document.querySelectorAll('.checkbox')[1]).css('display', 'none')
 
 
 

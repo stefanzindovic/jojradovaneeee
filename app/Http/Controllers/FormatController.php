@@ -9,6 +9,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class FormatController extends Controller
 {
@@ -120,6 +121,26 @@ class FormatController extends Controller
             $format->delete();
 
             return to_route('settings.formats.index')->with('successMessage', 'Format je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+
+            foreach ($request->id as $format){
+                $format = Format::findOrFail($format);
+                if ($format->books->isNotEmpty()) {
+                    return to_route('settings.formats.index')->with('errorMessage', 'U biblioteci se nalaze knjige u ovom formatu.');
+                }
+
+                $format->delete();
+            }
+
+            return to_route('settings.formats.index')->with('successMessage', 'Svi slobodni formati su uspješno obirsani.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }

@@ -36,7 +36,7 @@ class BookAction extends Model
             $query->where('book_id', $id);
         }])->whereHas('book', function ($query) use ($id) {
             $query->where('book_id', $id);
-        })->take(
+        })->where('is_active', true)->take(
             $paginate
         )->orderBy('created_at', 'desc')->get();
     }
@@ -47,6 +47,6 @@ class BookAction extends Model
             $query->where('book_id', $id);
         }])->whereHas('book', function ($query) use ($id) {
             $query->where('book_id', $id);
-        })->orderBy('created_at', 'desc')->get();
+        })->where('is_active', true)->orderBy('created_at', 'desc')->get();
     }
 }
