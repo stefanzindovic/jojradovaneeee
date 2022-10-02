@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
                     );
             }, 200);
             return e.preventDefault();
-        } else if (!/^([a-zA-Z0-9-,\s])+$/.test(title.val())) {
+        } else if (!/^([a-zA-Z0-9-,\sŠšĐđŽžČčĆć])+$/.test(title.val())) {
             setTimeout(function () {
                 titleValidationMessage
                     .css({ display: "block" })

@@ -22,9 +22,13 @@ Route::get('/', [\App\Http\Controllers\BookUserSideController::class,'index'])->
 Route::get('/knjige', [\App\Http\Controllers\BookUserSideController::class,'indexKnjige'])->name('knjige');
 Route::get('/knjige/{id}', [\App\Http\Controllers\BookUserSideController::class,'show'])->name('knjige.show');
 
-Route::post('/search', [\App\Http\Controllers\SearchController::class, 'search']);
+Route::post('/searchweb', [\App\Http\Controllers\SearchController::class, 'searchweb']);
 
 Route::middleware(['auth'])->group(function () {
+
+    //Search
+    Route::post('/searchstaff', [\App\Http\Controllers\SearchController::class, 'searchstaff']);
+
 
     //User Side
     Route::get('/profil', [\App\Http\Controllers\ProfileController::class,'show'])->name('profil');
@@ -61,6 +65,9 @@ Route::middleware(['auth'])->group(function () {
 
         Route::get('/settings', function (){
             return redirect('/settings/policies');
+        });
+        Route::get('/actions', function (){
+            return redirect('/actions/issues');
         });
 
         // Settings
