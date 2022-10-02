@@ -115,11 +115,17 @@
         </div>
         <div class="col-md-10">
             <div class="row bg-white py-2 px-2 mx-1 rounded">
-                <div class="col">
+                <form action="{{route('publisher.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col">
                     <div class="table-responsive">
                         <table id="myTable" class="table" style="width:100%">
                             <thead>
                             <tr>
+                                <th>
+                                    @if(!$publishers->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                                </th>
                                 <th>Naziv izdavača</th>
                                 <th>Akcija</th>
                             </tr>
@@ -127,6 +133,7 @@
                             <tbody class="align-middle">
                             @foreach ($publishers as $publisher)
                                 <tr>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$publisher->id}}" class="form-check-input"></td>
                                     <td>{{ $publisher->name }}</td>
                                     <td>
                                         <div class="dropdown">
@@ -183,6 +190,7 @@
                         </table>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

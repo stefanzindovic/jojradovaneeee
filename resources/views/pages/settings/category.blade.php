@@ -116,11 +116,17 @@
         </div>
         <div class="col-md-10">
             <div class="row bg-white py-2 px-2 mx-1 rounded">
-                <div class="col">
+                <form action="{{route('category.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col">
                     <div class="table-responsive" style="width: 100%;">
                         <table id="myTable" class="table" style="width:100%">
                             <thead>
                             <tr>
+                                <th>
+                                    @if(!$categories->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                                </th>
                                 <th>Naziv kategorije</th>
                                 <th>Opis</th>
                                 <th>Akcija</th>
@@ -129,6 +135,7 @@
                             <tbody class="align-middle">
                             @foreach ($categories as $category)
                                 <tr>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$category->id}}" class="form-check-input"></td>
                                     <td>
                                         @if (!$category->picture == null)
                                             <img class="profpic rounded-circle" src="{{$category->picture !== 'placeholder.png' ? asset('storage/uploads/categories/' . $category->picture) : asset('imgs/' . $category->picture)}}" alt="Ikonica" />
@@ -191,6 +198,7 @@
                         </table>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

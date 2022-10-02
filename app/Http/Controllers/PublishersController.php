@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class PublishersController extends Controller
 {
@@ -118,6 +119,25 @@ class PublishersController extends Controller
             $publisher->delete();
 
             return to_route('settings.publishers.index')->with('successMessage', 'Izdavač je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+            foreach ($request->id as $publisher){
+                $publisher = Publishers::findOrFail($publisher);
+                if ($publisher->books->isNotEmpty()) {
+                    return to_route('settings.publishers.index')->with('errorMessage', 'U biblioteci se nalaze knjige ovog izdavača.');
+                }
+
+                $publisher->delete();
+            }
+
+            return to_route('settings.publishers.index')->with('successMessage', 'Svi slobodni izdavači su uspješno obrisani.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }

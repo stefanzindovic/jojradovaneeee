@@ -11,6 +11,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class GenreController extends Controller
 {
@@ -122,6 +123,26 @@ class GenreController extends Controller
             $genre->delete();
 
             return to_route('settings.genres.index')->with('successMessage', 'Žanr je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+
+        try {
+            foreach ($request->id as $genre){
+                $genre = Genre::findOrFail($genre);
+                $genre->loadMissing(['books']);
+                if ($genre->books->isNotEmpty()) {
+                    return to_route('settings.genres.index')->with('errorMessage', 'U biblioteci postoje knjige koje pripadaju ovom žanru.');
+                }
+                $genre->delete();
+            }
+
+            return to_route('settings.genres.index')->with('successMessage', 'Svi slobodni žanrovi su uspješno obrisani.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
