@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li id="separator" role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
-            <li class="nav-item  @if (url()->current() == route('dashboard')) active @endif ">
+            <li class="nav-item  @if (request()->routeIs('dashboard.*')) active @endif ">
 
                 <a href="{{ route('dashboard') }}" class="nav-link">
                     <span class="sidebar-icon">
@@ -75,7 +75,7 @@
                     <span class="sidebar-text">Dashboard</span>
                 </a>
             </li>
-            <li class="nav-item  @if (url()->current() == route('librarians.index')) active @endif ">
+            <li class="nav-item  @if (request()->routeIs('librarians.*')) active @endif ">
                 <a href="{{ route('librarians.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -90,7 +90,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item @if (url()->current() == route('students.index')) active @endif">
+            <li class="nav-item @if (request()->routeIs('students.*')) active @endif">
                 <a href="{{ route('students.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -120,7 +120,7 @@
                     <span class="sidebar-text">Knjige</span>
                 </a>
             </li>
-            <li class="nav-item  @if (url()->current() == route('authors.index')) active @endif ">
+            <li class="nav-item  @if (request()->routeIs('authors.*')) active @endif ">
                 <a href="{{ route('authors.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -135,7 +135,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item  @if (url()->current() == route('books.issues.issues')) active @endif ">
+            <li class="nav-item  @if (request()->routeIs('books.issues.*')) active @endif ">
                 <a href="{{ route('books.issues.issues') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -151,7 +151,7 @@
             </li>
             <li id="separator1" role="separator" class="dropdown-divider mt-2 mb-3 border-gray-700"></li>
 
-            <li class="nav-item  @if (url()->current() == route('settings.policies.index')) active @endif ">
+            <li class="nav-item  @if (request()->routeIs('settings.policies.*')) active @endif ">
                 <a href="{{ route('settings.policies.index') }}" class="nav-link">
                     <span class="sidebar-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
