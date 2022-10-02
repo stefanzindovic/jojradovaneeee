@@ -20,22 +20,27 @@
                                         <div class="accordion accordion-flush" id="accordionFlushExample">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="flush-headingOne">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                        aria-expanded="false" aria-controls="flush-collapseOne">
                                                         Kategorije
                                                     </button>
                                                 </h2>
-                                                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingOne"
+                                                    data-bs-parent="#accordionFlushExample">
                                                     <div class="scroll" style="min-height: 250px;max-height: 350px;">
-                                                        <ul class="list-group" style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
+                                                        <ul class="list-group"
+                                                            style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
                                                             @if ($categories->isNotEmpty())
                                                                 @foreach ($categories as $category)
-                                                                    <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
+                                                                    <li class="label list-group-item m-2"
+                                                                        style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                                         <input type="checkbox"
-                                                                               name="category_id[{{ $category->title }}]"
-                                                                               onChange="this.form.submit()" class="me-2 categoryFilterId"
-                                                                               value="{{ $category->id }}"
-                                                                               class="checkbox"
-                                                                               @if (request()->filled('category_id.' . $category->title)) checked @endif>
+                                                                            name="category_id[{{ $category->title }}]"
+                                                                            onChange="this.form.submit()"
+                                                                            class="me-2 categoryFilterId"
+                                                                            value="{{ $category->id }}" class="checkbox">
                                                                         {{ $category->title }}
                                                                     </li>
                                                                 @endforeach
@@ -48,23 +53,25 @@
                                             </div>
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="flush-headingTwo">
-                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                                    <button class="accordion-button collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo"
+                                                        aria-expanded="false" aria-controls="flush-collapseTwo">
                                                         Žanrovi
                                                     </button>
                                                 </h2>
-                                                <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                                                <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingTwo"
+                                                    data-bs-parent="#accordionFlushExample">
                                                     <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                                         <ul class="list-group">
                                                             @if ($genres->isNotEmpty())
                                                                 @foreach ($genres as $genre)
-                                                                    <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
+                                                                    <li class="label list-group-item m-2"
+                                                                        style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                                         <input type="checkbox" class="me-2"
-                                                                               name="genre_id[{{ $genre->title }}]"
-                                                                               class="form-input"
-                                                                               onChange="this.form.submit()" value="{{ $genre->id }}"
-                                                                               @if (request()->filled('genre_id.' . $genre->title)) checked @endif>
-                                                                        {{ $genre->title }}
-                                                                    </li>
+                                                                            name="genre_id[{{ $genre->title }}]"
+                                                                            class="form-input" onChange="this.form.submit()"
+                                                                            </li>
                                                                 @endforeach
                                                             @else
                                                                 Nema žanrova.
@@ -81,13 +88,13 @@
                                             <ul class="list-group" style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
                                                 @if ($categories->isNotEmpty())
                                                     @foreach ($categories as $category)
-                                                        <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
+                                                        <li class="label list-group-item m-2"
+                                                            style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox"
-                                                                   name="category_id[{{ $category->title }}]"
-                                                                   onChange="this.form.submit()" class="me-2 categoryFilterId"
-                                                                   value="{{ $category->id }}"
-                                                                   class="checkbox"
-                                                                   @if (request()->filled('category_id.' . $category->title)) checked @endif>
+                                                                name="category_id[{{ $category->title }}]"
+                                                                onChange="this.form.submit()" class="me-2 categoryFilterId"
+                                                                value="{{ $category->id }}" class="checkbox"
+                                                                @if (request()->filled('category_id.' . $category->title)) checked @endif>
                                                             {{ $category->title }}
                                                         </li>
                                                     @endforeach
@@ -101,10 +108,10 @@
                                             <ul class="list-group">
                                                 @if ($genres->isNotEmpty())
                                                     @foreach ($genres as $genre)
-                                                        <li class="label list-group-item m-2" style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
+                                                        <li class="label list-group-item m-2"
+                                                            style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox" class="me-2"
-                                                                name="genre_id[{{ $genre->title }}]"
-                                                                   class="form-input"
+                                                                name="genre_id[{{ $genre->title }}]" class="form-input"
                                                                 onChange="this.form.submit()" value="{{ $genre->id }}"
                                                                 @if (request()->filled('genre_id.' . $genre->title)) checked @endif>
                                                             {{ $genre->title }}
@@ -135,10 +142,12 @@
                                                                     {!! Str::limit($book->description, 80) !!}
                                                                 </div>
                                                                 <div class="d-grid gap-2">
-                                                                    @if($book->calcNumberOfAvailableCopies($book->id) < 1)
-                                                                        <button disabled class="btn btn-premium">Trenutno nedostupno</button>
+                                                                    @if ($book->calcNumberOfAvailableCopies($book->id) < 1)
+                                                                        <button disabled class="btn btn-premium">Trenutno
+                                                                            nedostupno</button>
                                                                     @else
-                                                                        <a href="{{route('rezervacija.knjige', $book->id)}}" class="btn btn-premium">Rezerviši</a>
+                                                                        <a href="{{ route('rezervacija.knjige', $book->id) }}"
+                                                                            class="btn btn-premium">Rezerviši</a>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -149,9 +158,11 @@
                                                 Nema rezultata.
                                             @endif
                                         </div>
-                                            <div class="row">
-                                                @if (!request('genre_id') && !request('category_id')) {{$books->links()}} @endif
-                                            </div>
+                                        <div class="row">
+                                            @if (!request('genre_id') && !request('category_id'))
+                                                {{ $books->links() }}
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
                             </div>
