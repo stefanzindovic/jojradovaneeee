@@ -70,8 +70,9 @@
                                                                         style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                                         <input type="checkbox" class="me-2"
                                                                             name="genre_id[{{ $genre->title }}]"
-                                                                            class="form-input" onChange="this.form.submit()"
-                                                                            </li>
+                                                                            class="form-input"
+                                                                            onChange="this.form.submit()">
+                                                                    </li>
                                                                 @endforeach
                                                             @else
                                                                 Nema žanrova.
