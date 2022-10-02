@@ -27,7 +27,6 @@
                             <label for="bibliotekari">Izaberite knjigu</label>
                             <select class="form-control" id="knjige" name="librarian_id" multiple>
                                 <option value="1">Na Drini ćuprija</option>
-
                             </select>
                         </div>
                         <div class="col-md-3 pb-1">
