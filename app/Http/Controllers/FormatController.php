@@ -42,7 +42,7 @@ class FormatController extends Controller
     public function store(StoreFormatRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9-_.\s])+$/|min:2|max:25'
+            'name' => 'required|regex: /^([A-Za-z0-9-_.\sŠšĐđŽžČčĆć])+$/|min:2|max:25'
         ]);
 
         try {
@@ -89,7 +89,7 @@ class FormatController extends Controller
     public function update(UpdateFormatRequest $request, Format $format): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z0-9-_.\s])+$/|min:2|max:25'
+            'name' => 'required|regex: /^([A-Za-z0-9-_.\sŠšĐđŽžČčĆć])+$/|min:2|max:25'
         ]);
 
         try {

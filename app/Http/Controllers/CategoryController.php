@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
+            'title' => 'required|regex: /^([A-Za-z0-9-,\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
             'description' => 'nullable|min:10|max:512',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
@@ -110,7 +110,7 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $input = $request->validate([
-            'title' => 'required|regex: /^([A-Za-z0-9-,\s])+$/|min:4|max:50',
+            'title' => 'required|regex: /^([A-Za-z0-9-,\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
             'description' => 'nullable|min:10|max:512',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
@@ -137,7 +137,7 @@ class CategoryController extends Controller
                         $genericName
                     );
                 }
-            }else{
+            } else {
                 $genericName = 'placeholder.png';
             }
 

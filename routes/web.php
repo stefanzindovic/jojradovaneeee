@@ -66,6 +66,9 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/settings', function (){
             return redirect('/settings/policies');
         });
+        Route::get('/actions', function (){
+            return redirect('/actions/issues');
+        });
 
         // Settings
         Route::prefix('settings')->name('settings.')->group(function () {

@@ -43,7 +43,7 @@ jQuery(document).ready(function () {
                     );
             }, 200);
             e.preventDefault();
-        } else if (!/^([a-zA-Z0-9\s])+$/.test(nameInput.val())) {
+        } else if (!/^([a-zA-Z0-9\ŠšĐđŽžČčĆćs])+$/.test(nameInput.val())) {
             setTimeout(function () {
                 nameValidationMessage
                     .css({ display: "block" })

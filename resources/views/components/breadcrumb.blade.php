@@ -23,7 +23,7 @@
             $i = 0;
             $mode = 0;
             $done = 0;
-            
+
             if (isset($breadcrumbLCase[1]) && !isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1])) {
                 $mode = 1; //Users & books
             } elseif (isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[1]) && is_numeric($breadcrumbLCase[3])) {
@@ -31,7 +31,7 @@
             } elseif (isset($breadcrumbLCase[3]) && is_numeric($breadcrumbLCase[2])) {
                 $mode = 3; //settings
             }
-            
+
             switch ($mode) {
                 case 0:
                     break;
@@ -41,33 +41,33 @@
                             $user = \App\Models\User::findOrFail($breadcrumbLCase[1]);
                             $breadcrumbUCase[1] = $user->name;
                             break;
-            
+
                         case 'students':
                             $user = \App\Models\User::findOrFail($breadcrumbLCase[1]);
                             $breadcrumbUCase[1] = $user->name;
                             break;
-            
+
                         case 'books':
                             $book = \App\Models\Book::findOrFail($breadcrumbLCase[1]);
                             $breadcrumbUCase[1] = $book->title;
                             break;
-            
+
                         case 'authors':
                             $author = \App\Models\Author::findOrFail($breadcrumbLCase[1]);
                             $breadcrumbUCase[1] = $author->full_name;
                             break;
                     }
                     break;
-            
+
                 case 2:
                     $book = \App\Models\Book::findOrFail($breadcrumbLCase[1]);
                     $action = \App\Models\BookAction::findOrFail($breadcrumbLCase[3]);
                     $action = $action->status;
-            
+
                     $breadcrumbUCase[1] = $book->title;
                     $breadcrumbUCase[3] = $action->name;
                     break;
-            
+
                 case 3:
                     switch ($breadcrumbLCase[1]) {
                         case 'categories':
@@ -106,46 +106,72 @@
                     }
                     break;
             }
-            
+
             //=================================================
             //  If any words dont appear as they should be in the
             //  breadcrumb down in array $seperateThese put it like this
             // '(exactly how the words appear)|(how they should appear)',
             //=================================================
-            
+
             $seperateThese = [
                 //'Izdateknjige|Izdate Knjige',
                 //'Vraceneknjige|Vracene Knjige',
                 //'Rezervacijearhiva|Arhivirane Rezervacije',
-                'Izdata|Issued',
-                'Rezervisana|Reserved',
-                'Rezervacija odobrena|Reservation approved',
-                'Rezervacija odbijena|Reservation denied',
-                'Rezervacija istekla|Reservation expired',
-                'Rezervacija otkazana|Reservation canceled',
-                'Izdata po rezervaciji|Issued via reservation',
-                'Otpisana|Signed off',
-                'Vraćena|Returned',
+                //'Izdata|Issued',
+                //'Rezervisana|Reserved',
+               // 'Rezervacija odobrena|Reservation approved',
+                //'Rezervacija odbijena|Reservation denied',
+                //'Rezervacija istekla|Reservation expired',
+                //'Rezervacija otkazana|Reservation canceled',
+                //'Izdata po rezervaciji|Issued via reservation',
+               // 'Otpisana|Signed off',
+                //'Vraćena|Returned',
+                'Books|Knjige',
+                'Authors|Autori',
+                'Edit|Izmjeni',
+                'Create|Kreiraj',
+                'Librarians|Bibliotekari',
+                'Students|Učenici',
+                'Writeoffmultiple|Otpiši',
+                'Returnmultiple|Vrati',
+                'Reserve|Rezerviši',
+                'Issues|Izdavanja',
+                'Returned|Vraćene',
+                'Breached|Prekoračenja',
+                'Reservations|Rezervacije',
+                'Archived|Arhivirane',
+                'Settings|Podešavanja',
+                'Policies|Polisa',
+                'Categories|Kategorije',
+                'Genres|Žanrovi',
+                'Publishers|Izdavači',
+                'Covers|Povezi',
+                'Formats|Formati',
+                'Scripts|Pisma',
+                'Languages|Jezici',
+                'Activities|Aktivnosti',
+                'Action|Akcija',
+                'Actions|Akcije',
             ];
-            
+
             foreach ($breadcrumbUCase as $key => $crumb) {
-                if ($breadcrumbLCase[0] == 'actions' && $done != 1) {
+                if ($breadcrumbLCase[0] == 'actions' && $done != 1 && isset($breadcrumbUCase[3])) {
                     $breadcrumbUrl = $breadcrumbUrl . '/' . 'books';
                     $done = 1;
                 }
-            
-                if ($breadcrumbLCase[0] == 'actions' && $key < 2) {
+
+                if ($breadcrumbLCase[0] == 'actions' && $key < 2 && isset($breadcrumbUCase[3])) {
                 } else {
                     $breadcrumbUrl = $breadcrumbUrl . '/' . $breadcrumbLCase[$i];
                 }
-            
+
                 foreach ($seperateThese as $seperate) {
                     $temp = explode('|', $seperate);
                     if ($crumb == $temp[0]) {
                         $crumb = $temp[1];
                     }
                 }
-            
+
                 if ($breadcrumbLCase[0] == 'actions' && $key < 2 && isset($breadcrumbUCase[3])) {
                 } elseif ($breadcrumbLCase[0] != 'actions' && $mode == 3 && $key == 2) {
                     echo "<li class=\"breadcrumb-item active\" aria-current=\"page\">$crumb</li>";
