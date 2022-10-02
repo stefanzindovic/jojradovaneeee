@@ -51,7 +51,7 @@
             </div>
         </div>
         <ul class="nav flex-column pt-3 pt-md-0">
-            <li class="nav-item  @if (url()->current() == route('dashboard')) active @endif ">
+            <li class="nav-item">
                 <a href="{{ route('dashboard') }}" class="nav-link ri-align-vertically">
                     <span class="sidebar-icon">
                        <img src="{{asset('imgs/Intelectologo.svg')}}" height="25" class="icon"  alt="Intelecto">

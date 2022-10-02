@@ -4,7 +4,78 @@
 
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
-{{--                Search--}}
+                <div class="search-wrapper">
+                    <div class="nav-icon-wrapper d-lg-none">
+                        <a class="nav-icon-btn" style="top: 14px;left: -107px;position: absolute;cursor: pointer;">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="25" width="25"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg>
+                        </a>
+                    </div>
+                    <div class="search-overlay open" style="display: none;"></div>
+                    <div class="mobile-wrapper" style="">
+                        <form  onsubmit="event.preventDefault()" id="searchForm" class="form-inline my-2 my-lg-0 main-search d-lg-block">
+                            @csrf
+                            <a id="mobile-close-search-button" class="mobile-close-search d-lg-none" style="cursor:pointer;"><svg
+                                    xmlns="http://www.w3.org/2000/svg" width="6.495" height="10.328">
+                                    <g data-name="Group 268">
+                                        <path stroke="#fff" stroke-width="2"
+                                              d="M4.916 1.085a.292.292 0 01.413 0 .292.292 0 010 .413L1.702 5.125 5.331 8.75a.292.292 0 01-.413.413L1.085 5.33a.292.292 0 010-.413z"
+                                              data-name="Path 23"></path>
+                                    </g>
+                                </svg></a>
+                            <div class="input-group w-75">
+                                <input autocomplete="off" onkeyup="search()" id="SearchBar" name="searchWord" type="text" placeholder="Pretraži"
+                                       aria-label="Pretraži" aria-describedby="search-button"
+                                       class="form-control  "  style="box-shadow:none !important;border-top-right-radius:0.25rem!important;border-bottom-right-radius: 0.25rem!important;">
+                                <div class="dropdown ps-1" style="position: relative">
+                                    <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Filteri
+                                    </a>
+
+                                    <ul class="dropdown-menu" id="filters"  aria-labelledby="dropdownMenuLink">
+                                        <li><label class="dropdown-item"><input type="checkbox" checked class="form-check-input" id="bookFilter"> Knjige</label></li>
+                                        <li><label class="dropdown-item"><input type="checkbox" checked class="form-check-input" id="studentFilter"> Učenici</label></li>
+                                        <li><label class="dropdown-item"><input type="checkbox" checked class="form-check-input" id="librarianFilter"> Bibliotekari</label></li>
+                                        <li><label class="dropdown-item"><input type="checkbox" checked class="form-check-input" id="authorFilter"> Autori</label></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                        <!--Search by Petar-->
+                        <div class="search-results" id="searchBoxResults" style="display: none">
+                            <div class="products-list">
+                                <div id="bookList">
+                                    <small>Knjige</small>
+                                    <ul id="searchBookList" class="list-group">
+
+                                    </ul>
+                                    <hr>
+                                </div>
+                                <div id="studentList">
+                                    <small>Učenici</small>
+                                    <ul id="searchStudentList" class="list-group mb-1">
+
+                                    </ul>
+                                    <hr>
+                                </div>
+                                <div id="librarianList">
+                                    <small>Bibliotekari</small>
+                                    <ul id="searchLibrarianList" class="list-group">
+
+                                    </ul>
+                                    <hr>
+                                </div>
+                                <div id="authorList">
+                                    <small>Autori</small>
+                                    <ul id="searchAuthorList" class="list-group">
+
+                                    </ul>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!---->
+                </div>
             </div>
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
