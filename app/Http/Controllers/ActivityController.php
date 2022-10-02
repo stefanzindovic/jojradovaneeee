@@ -12,7 +12,7 @@ class ActivityController extends Controller
 {
     public function dashboard()
     {
-        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->take(6)->get();
+        $activities = BookAction::with(['status', 'book', 'originalBook', 'librarian'])->orderBy('created_at', 'desc')->take(3)->get();
         $reservations = Book::pendingReservedBooksPaginate(4);
         $books = Book::orderBy('id', 'desc')->with(['authors', 'categories', 'gallery', 'booksUnderActions'])->get();
         $issuedBooksCounter = Book::issuedBooks()->count();
