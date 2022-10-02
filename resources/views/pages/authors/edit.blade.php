@@ -24,7 +24,7 @@
                             <label class="border border-gray-300 rounded d-flex justify-content-center">
                                 <div id="empty-cover-art" class="overflow-hidden">
                                     <div class="text-center">
-                                        <img src="{{asset($author->picture)}}" style="object-fit: fill;" id="image-output" width="400px" height="400px" @if($author->picture == null) hidden @endif>
+                                        <img src="{{asset($author->picture)}}" style="object-fit: fill;cursor:pointer;cursor:pointer" id="image-output" width="400px" height="400px" @if($author->picture == null) hidden @endif>
                                         @if($author->picture == null)
                                             <div id="addphototext" class="text-center pb-lg-12">
                                                 <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">

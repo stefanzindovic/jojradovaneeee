@@ -54,7 +54,7 @@ class LibrarianController extends Controller
         }
 
         $input = $request->validate([
-            'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', 'unique:users,jmbg'],
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', 'unique:users,username'],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
@@ -154,7 +154,7 @@ class LibrarianController extends Controller
         }
 
         $input = $request->validate([
-            'name' => 'required|regex: /^([a-zA-Z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
             'jmbg' => ['required', 'numeric', 'digits:13', Rule::unique('users', 'jmbg')->ignore($librarian->id)],
             'username' => ['required', 'alpha_num', 'min:4', 'max:18', Rule::unique('users', 'username')->ignore($librarian->id)],
             'email' => ['required', 'email:rfc,dns', Rule::unique('users', 'email')->ignore($librarian->id)],

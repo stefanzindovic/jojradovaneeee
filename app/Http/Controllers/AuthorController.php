@@ -44,7 +44,7 @@ class AuthorController extends Controller
     public function store(StoreAuthorRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
+            'full_name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
             'bio' => 'nullable|min:10|max:500',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
@@ -113,7 +113,7 @@ class AuthorController extends Controller
     public function update(UpdateAuthorRequest $request, Author $author): RedirectResponse
     {
         $input = $request->validate([
-            'full_name' => 'required|regex: /^([a-zA-Z-._\s])+$/|min:4|max:50',
+            'full_name' => 'required|regex: /^([a-zA-Z\s!čćšđž])+$/|min:4|max:50',
             'bio' => 'nullable|min:10|max:500',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
