@@ -41,7 +41,7 @@ function search(){
 
             $.ajax({
                 type: "POST",
-                url: "/search",
+                url: "/searchweb",
                 headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
                 data: form.serialize(),
                 success:function(data){
@@ -83,7 +83,7 @@ function search(){
 
 
 if (!isMobile) {
-    $("#SearchBar").focusout(function () {
+    $(document).click(function () {
         $("#searchBoxResults").hide()
     });
 }

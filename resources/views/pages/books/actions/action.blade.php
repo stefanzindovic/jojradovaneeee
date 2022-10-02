@@ -5,8 +5,30 @@
 
 
 @section('interaction')
+    <form class="mb-0"
+          id="issueBook"
+          action="{{ route('books.reservations.issue', $book->id) }}"
+          method="POST">
+        @csrf
+        @method('PATCH')
+    </form>
+    <form class="mb-0"
+          id="returnBook"
+          action="{{ route('books.issues.return', $book->id) }}"
+          method="POST">
+        @csrf
+        @method('PATCH')
+    </form>
+    <form class="mb-0"
+          id="writeOffBook"
+          action="{{ route('books.issues.writeoff', $book->id) }}"
+          method="POST">
+        @csrf
+        @method('PATCH')
+    </form>
     <div class="btn-toolbar mb-2 mb-md-0">
         <div class="btn-group ms-2 me-2">
+
             <a href="{{ route('books.issues.writeoffmultiple', $book->id) }}" type="button"
                 class="btn btn-sm btn-outline-primary">Otpiši</a>
             <a href="{{ route('books.issues.issue', $book->id) }}" type="button"
