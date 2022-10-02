@@ -42,7 +42,7 @@ class LanguageController extends Controller
     public function store(StoreLanguageRequest $request): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {
@@ -88,7 +88,7 @@ class LanguageController extends Controller
     public function update(UpdateLanguageRequest $request, Language $language): RedirectResponse
     {
         $input = $request->validate([
-            'name' => 'required|regex: /^([A-Za-z\s])+$/|min:4|max:50',
+            'name' => 'required|regex: /^([A-Za-z\sŠšĐđŽžČčĆć])+$/|min:4|max:50',
         ]);
 
         try {

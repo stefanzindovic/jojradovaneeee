@@ -30,7 +30,7 @@ jQuery(document).ready(function () {
                     );
             }, 200);
             e.preventDefault();
-        } else if (!/^([a-zA-Z-._\s])+$/.test(nameInput.val())) {
+        } else if (!/^([a-zA-Z-._\sŠšĐđŽžČčĆć])+$/.test(nameInput.val())) {
             setTimeout(function () {
                 nameValidationMessage
                     .css({ display: "block" })
