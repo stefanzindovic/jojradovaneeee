@@ -332,7 +332,20 @@ class BookController extends Controller
 
     public function displayActionDetails(Book $book, BookAction $action)
     {
+        if ($action->is_active == false) return abort(404);
         $action->loadMissing(['status']);
         return view('..pages.books.actions.action', compact('book', 'action'));
+    }
+
+    public function archiveAction(BookAction $action)
+    {
+        try {
+            $action->is_active = false;
+            $action->update();
+
+            return to_route('activities')->with('successMessage', 'Zapis je uspješno arhiviran.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
     }
 }
