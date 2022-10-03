@@ -139,8 +139,18 @@
                 </div>
                 <div class="mb-4">
                     <label class="text-gray-400">BIBLIOTEKAR</label>
-                    <p class="p"><a class="link-info"
-                            href="{{ route('librarians.show', $action->librarian->id) }}">{{ $action->librarian->name }}</a>
+                    <p class="p">
+                        @if($action->librarian->id == 1)
+                            <a class="link-info"
+                               href="#">
+                                System
+                            </a>
+                            @else
+                            <a class="link-info"
+                               href="{{ route('librarians.show', $action->librarian->id) }}">
+                                {{ $action->librarian->name }}
+                            </a>
+                        @endif
                     </p>
                 </div>
                 <div class="mb-4">
