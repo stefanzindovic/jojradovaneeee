@@ -1830,3 +1830,10 @@ function pullDeleteFormatsModal(btn) {
         "/settings/formats/" + $(btn).attr("data-formats-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteCoversModal(btn) {
+    var modal = document.getElementById("deleteSingleCover");
+    modal.querySelector("form").action =
+        "/settings/covers/" + $(btn).attr("data-covers-id");
+    $(modal).modal("toggle");
+}
