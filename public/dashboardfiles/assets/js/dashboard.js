@@ -1795,3 +1795,10 @@ function pullDeleteCategoryModal(btn) {
         "/settings/categories/" + $(btn).attr("data-categories-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteGenresModal(btn) {
+    var modal = document.getElementById("deleteSingleGenre");
+    modal.querySelector("form").action =
+        "/settings/genres/" + $(btn).attr("data-genres-id");
+    $(modal).modal("toggle");
+}
