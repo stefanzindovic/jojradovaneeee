@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
         // Librarians
         Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
         Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
-        Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
+        Route::patch('/librarians/{librarian}/deletePicture', [\App\Http\Controllers\LibrarianController::class, 'deletePicture'])->name('librarians.deletePicture');
         Route::delete('librarian/destroymultiple', [\App\Http\Controllers\LibrarianController::class, 'destroyMultiple'])->name('librarians.destroyMultiple');
 
         // Books CRUD

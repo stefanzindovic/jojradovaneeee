@@ -137,6 +137,26 @@ class LibrarianController extends Controller
         return view('..pages.librarians.edit', compact('librarian'));
     }
 
+    public function deletePicture(User $librarian)
+    {
+        try {
+            // remove old icon from storage
+            $uploadPath = 'uploads/librarians/';
+
+            $oldIconPath = $uploadPath . $librarian->picture;
+            if (Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            $librarian->picture = 'profile-picture-placeholder.jpg';
+            $librarian->update();
+
+            return to_route('librarians.index')->with('successMessage', 'Fotografija uspješno uklonjena.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -185,8 +205,6 @@ class LibrarianController extends Controller
                         $genericName
                     );
                 }
-            } else {
-                $genericName = 'profile-picture-placeholder.jpg';
             }
 
             // update category in db
@@ -240,7 +258,7 @@ class LibrarianController extends Controller
     {
 
         try {
-            foreach ($request->id as $librarian){
+            foreach ($request->id as $librarian) {
                 $librarian = User::findOrFail($librarian);
                 if ($librarian->role->id == 3) return abort(404);
                 if (!$librarian->is_active) return abort(404);
