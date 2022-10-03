@@ -22,7 +22,8 @@
                                     style="object-fit: fill;cursor:pointer;min-height: 350px;width: 350px"
                                     class="w-full h-full" id="image-output" alt="Avatar">
                                 <input onchange="cropperFunction(event)" id="upload-picture" value=""
-                                    name="picture-raw" type="file" class="d-none" :accept="accept">
+                                    name="picture-raw" type="file" accept="image/*" class="d-none"
+                                    :accept="accept">
                             </div>
                         </label>
                         <div class="text-center">

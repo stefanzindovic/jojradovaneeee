@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-    Izmijeni autora {{$author->full_name}}
+    Izmijeni autora {{ $author->full_name }}
 @endsection
 
 
@@ -10,10 +10,8 @@
 @endsection
 
 @section('page_content')
-
     <div class="card card-body border-0 shadow mb-4">
-        <form id="myForm" method="POST" action="{{ route('authors.update', $author->id) }}"
-              enctype="multipart/form-data">
+        <form id="myForm" method="POST" action="{{ route('authors.update', $author->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
             <div class="row">
@@ -24,40 +22,53 @@
                             <label class="border border-gray-300 rounded d-flex justify-content-center">
                                 <div id="empty-cover-art" class="overflow-hidden">
                                     <div class="text-center">
-                                        <img src="{{asset($author->picture)}}" style="object-fit: fill;cursor:pointer;cursor:pointer" id="image-output" width="400px" height="400px" @if($author->picture == null) hidden @endif>
-                                        @if($author->picture == null)
+                                        <img src="{{ $author->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/authors/' . $author->picture) : asset('imgs/' . $author->picture) }}"
+                                            style="object-fit: fill;cursor:pointer;cursor:pointer" id="image-output"
+                                            width="400px" height="400px" @if ($author->picture == null) hidden @endif>
+                                        @if ($author->picture == null)
                                             <div id="addphototext" class="text-center pb-lg-12">
-                                                <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                                <svg class="h-100" xmlns="http://www.w3.org/2000/svg" width="40"
+                                                    height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                                                    <rect x="3" y="3" width="18" height="18"
+                                                        rx="2" ry="2"></rect>
                                                     <circle cx="8.5" cy="8.5" r="1.5"></circle>
                                                     <polyline points="21 15 16 10 5 21"></polyline>
                                                 </svg>
                                                 <span class="mt-2">Add photo</span>
                                             </div>
                                         @endif
-                                        <input onchange="cropperFunction(event)" id="upload-picture" value="" name="picture-raw" type="file" class="d-none" :accept="accept">
+                                        <input onchange="cropperFunction(event)" id="upload-picture" value=""
+                                            name="picture-raw" type="file" class="d-none" accept="image/*"
+                                            :accept="accept">
                                     </div>
                                 </div>
                             </label>
+                            <div class="text-center">
+                                <a class="btn btn-outline-danger btn-sm pt-2 pb-2"
+                                    onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni
+                                    fotografiju</a>
+                            </div>
                         </div>
                         <div class="col-8">
                             <div class=" mb-3">
                                 <div>
                                     <label for="name" class="form-label">Naziv autora</label>
-                                    <input name="full_name" value="{{$author->full_name}}" placeholder="Ime i prezime" type="text" class="form-control" id="authorName">
+                                    <input name="full_name" value="{{ $author->full_name }}" placeholder="Ime i prezime"
+                                        type="text" class="form-control" id="authorName">
                                     @error('full_name')
-                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
-                                        {{ $message }}</p>
+                                        <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
+                                            {{ $message }}</p>
                                     @enderror
                                     <div id="authorNameValidationMessageByJs"></div>
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="content" class="form-label">Opis</label>
-                                <textarea name="bio" placeholder="Opis" type="text" class="form-control" id="authorBio">{{$author->bio}}</textarea>
+                                <textarea name="bio" placeholder="Opis" type="text" class="form-control" id="authorBio">{{ $author->bio }}</textarea>
                                 @error('bio')
-                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
-                                    {{ $message }}</p>
+                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times text-red"></i>
+                                        {{ $message }}</p>
                                 @enderror
                                 <div id="authorBioValidationMessageByJs"></div>
                             </div>
@@ -80,10 +91,9 @@
 @section('scripts')
     <script>
         ClassicEditor
-            .create( document.querySelector( '#authorBio' ) )
-            .catch( error => {
-                console.error( error );
-            } );
+            .create(document.querySelector('#authorBio'))
+            .catch(error => {
+                console.error(error);
+            });
     </script>
-
 @endsection
