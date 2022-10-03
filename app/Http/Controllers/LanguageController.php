@@ -117,9 +117,9 @@ class LanguageController extends Controller
         try {
             $language->delete();
 
-            return to_route('settings.language.index')->with('successMessage', 'Jezik je uspješno obrisan.');
+            return to_route('settings.languages.index')->with('successMessage', 'Jezik je uspješno obrisan.');
         } catch (\Exception $e) {
-            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
@@ -127,7 +127,7 @@ class LanguageController extends Controller
     {
 
         try {
-            foreach ($request->id as $language){
+            foreach ($request->id as $language) {
                 $language = Language::findOrFail($language);
                 if ($language->books->isNotEmpty()) {
                     return to_route('settings.languages.index')->with('errorMessage', 'U biblioteci se nalaze knjige na ovom jeziku.');

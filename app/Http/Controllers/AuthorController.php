@@ -202,7 +202,7 @@ class AuthorController extends Controller
 
             return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');
         } catch (\Exception $e) {
-            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
@@ -228,7 +228,7 @@ class AuthorController extends Controller
 
             return to_route('authors.index')->with('successMessage', 'Autor je obrisan.');
         } catch (\Exception $e) {
-            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 }

@@ -17,6 +17,27 @@
 @endsection
 
 @section('page_content')
+    {{-- Modal --}}
+    <div class="modal fade" id="deleteSingleAuthor" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-md-5">
+                    <h2 class="h4 text-center">Brisanje</h2>
+                    <p class="text-center mb-4">Da li ste sigurni?</p>
+                    <form class="mb-0" action="" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger">Obriši</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row bg-white py-2 px-2 mx-1 rounded mb-5">
         <form action="{{ route('authors.destroyMultiple') }}" id="multiDeleteForm" method="POST">
             @csrf
@@ -85,8 +106,8 @@
                                             </li>
                                             <div role="separator" class="dropdown-divider my-1"></div>
                                             <li>
-                                                <a type="button" class="dropdown-item" data-bs-toggle="modal"
-                                                    href="{{ route('authors.destroy', $author->id) }}">
+                                                <a type="button" class="dropdown-item" data-author-id='{{ $author->id }}'
+                                                    href="#" onclick="pullDeleteAuthorModal(this)">
                                                     <svg class="dropdown-icon text-danger me-2"
                                                         xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                         viewBox="0 0 16 16">
@@ -97,32 +118,6 @@
                                                 </a>
                                             </li>
                                         </ul>
-                                        {{-- Modal --}}
-                                        <div class="modal fade" id="delete{{ $author->id }}" tabindex="-1" role="dialog"
-                                            aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header border-0">
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body px-md-5">
-                                                        <h2 class="h4 text-center">Brisanje</h2>
-                                                        <p class="text-center mb-4">Da li ste sigurni?</p>
-                                                        <form class="mb-0"
-                                                            action="{{ route('authors.destroy', $author->id) }}"
-                                                            method="post">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <div class="d-grid">
-                                                                <button type="submit"
-                                                                    class="btn btn-danger">Obriši</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                 </td>
                             </tr>

@@ -237,7 +237,7 @@ class StudentsController extends Controller
 
             return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
         } catch (\Exception $e) {
-            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
@@ -260,7 +260,7 @@ class StudentsController extends Controller
 
             return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
         } catch (\Exception $e) {
-            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
 
