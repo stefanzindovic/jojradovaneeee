@@ -136,8 +136,20 @@
                                     <div class="row ps-lg-1">
                                         <div class="col-auto z-0">
                                             <div class="icon-shape icon-xs icon-shape-success rounded">
-                                                <img src="{{ $activity->librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $activity->librarian->picture) : asset('imgs/' . $activity->librarian->picture) }}"
-                                                     alt="">
+                                                @if ($activity->action_status_id == 1 ||
+                                                    $activity->action_status_id == 3 ||
+                                                    $activity->action_status_id == 4 ||
+                                                    $activity->action_status_id == 7 ||
+                                                    $activity->action_status_id == 8)
+                                                    <img src="{{ $activity->librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $activity->librarian->picture) : asset('imgs/' . $activity->librarian->picture) }}"
+                                                         alt="">
+                                                @elseif($activity->action_status_id == 2 || $activity->action_status_id == 9)
+                                                    <img src="{{ $activity->book->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $activity->book->student->picture) : asset('imgs/' . $activity->book->student->picture) }}"
+                                                         alt="">
+                                                @elseif($activity->action_status_id == 5 || $activity->action_status_id == 6)
+                                                    <img src="{{ $activity->book->book->picture !== 'book-placeholder.png' ? asset('storage/uploads/books/' . $activity->book->book->picture) : asset('imgs/' . $activity->book->book->picture) }}"
+                                                         alt="">
+                                                @endif
                                             </div>
                                         </div>
 
