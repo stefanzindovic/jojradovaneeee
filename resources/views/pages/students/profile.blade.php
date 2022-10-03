@@ -95,7 +95,7 @@
             <div class="text-center p-0">
                 <div class="profile-cover rounded-top bg-gray-900"></div>
                 <div class="card-body pb-5">
-                    <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $student->picture) : asset('imgs/' . $student->picture)}}" alt="Profile Image">
+                    <img class="avatar-xl rounded-circle mx-auto mt-n7 mb-4" src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $student->picture) : asset('imgs/' . $student->picture)}}" alt="Profile Image">
                     <h4 class="h3">{{$student->name}}</h4>
                     <p class="text-gray mb-4">{{$student->email}}</p>
                     <a class="btn btn-sm btn-primary mt-2" href="mailto:{{$student->email}}"><i class="icon icon-xxs me-2 fas fa-envelope"></i>E-mail kontakt</a>
