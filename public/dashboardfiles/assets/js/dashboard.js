@@ -1802,3 +1802,10 @@ function pullDeleteGenresModal(btn) {
         "/settings/genres/" + $(btn).attr("data-genres-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteLanguageModal(btn) {
+    var modal = document.getElementById("deleteSingleLanguage");
+    modal.querySelector("form").action =
+        "/settings/languages/" + $(btn).attr("data-language-id");
+    $(modal).modal("toggle");
+}
