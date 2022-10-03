@@ -10,6 +10,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use TheSeer\Tokenizer\Exception;
 
@@ -162,7 +163,6 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category): RedirectResponse
     {
-        //TODO: Add check if this category is used in some of existing books before delete action (if exists, return error message)
         $category->loadMissing(['books']);
         if ($category->books->isNotEmpty()) {
             return to_route('settings.categories.index')->with('errorMessage', 'U biblioteci postoje knjige koje pripadaju ovoj kategoriji.');
@@ -178,6 +178,32 @@ class CategoryController extends Controller
             }
 
             $category->delete();
+
+            return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+        try {
+            foreach ($request->id as $category) {
+                $category = Category::findOrFail($category);
+                $category->loadMissing(['books']);
+                if ($category->books->isNotEmpty()) {
+                    return to_route('settings.categories.index')->with('errorMessage', 'U biblioteci postoje knjige koje pripadaju ovoj kategoriji.');
+                }
+                $uploadPath = 'uploads/categories/';
+
+                // remove old picture from storage
+                $oldpicturePath = $uploadPath . $category->picture;
+                if (Storage::disk('public')->exists($oldpicturePath)) {
+                    Storage::disk('public')->delete($oldpicturePath);
+                }
+
+                $category->delete();
+            }
 
             return to_route('settings.categories.index')->with('successMessage', 'Kategorija je uspješno obrisana.');
         } catch (\Exception $e) {

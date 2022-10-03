@@ -9,13 +9,14 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 
 class CoverController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return Application|Factory|Viewx
      */
     public function index(): View|Factory|Application
     {
@@ -116,6 +117,24 @@ class CoverController extends Controller
             $cover->delete();
 
             return to_route('settings.covers.index')->with('successMessage', 'Povez je uspješno obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+            foreach ($request->id as $cover){
+                $cover = Cover::findOrFail($cover);
+                if ($cover->books->isNotEmpty()) {
+                    return to_route('settings.covers.index')->with('errorMessage', 'U biblioteci se nalaze knjige sa ovim povezom.');
+                }
+                $cover->delete();
+            }
+
+            return to_route('settings.covers.index')->with('successMessage', 'Svi slobodni povezi su uspješno obrisani.');
         } catch (\Exception $e) {
             return back()->with('errorMessage', 'Nešto nije u red. Molimo vas da polušate ponovo.');
         }

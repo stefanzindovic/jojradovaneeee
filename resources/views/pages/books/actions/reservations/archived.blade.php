@@ -78,6 +78,7 @@
                             <table id="myTable" class="table" style="width:100%">
                                 <thead>
                                 <tr>
+                                    <th hidden></th>
                                     <th>Naziv knjige</th>
                                     <th>Datum rezervacije</th>
                                     <th>Rezervacija ističe</th>
@@ -88,6 +89,7 @@
                                 <tbody class="align-middle">
                                 @foreach ($reservations as $reservation)
                                     <tr>
+                                        <td hidden></td>
                                         <td class="">
                                             <img style="width: 35px; height: 35px;"
                                                  class="Image"

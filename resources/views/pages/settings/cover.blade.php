@@ -115,11 +115,17 @@
         </div>
         <div class="col-md-10">
             <div class="row bg-white py-2 px-2 mx-1 rounded">
-                <div class="col">
+                <form action="{{route('cover.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col">
                     <div class="table-responsive">
                         <table id="myTable" class="table" style="width:100%">
                             <thead>
                             <tr>
+                                <th>
+                                    @if(!$covers->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                                </th>
                                 <th>Naziv poveza</th>
                                 <th>Akcija</th>
                             </tr>
@@ -127,6 +133,7 @@
                             <tbody class="align-middle">
                             @foreach ($covers as $cover)
                                 <tr>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$cover->id}}" class="form-check-input"></td>
                                     <td>{{ $cover->name }}</td>
                                     <td>
                                         <div class="dropdown">
@@ -183,6 +190,7 @@
                         </table>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

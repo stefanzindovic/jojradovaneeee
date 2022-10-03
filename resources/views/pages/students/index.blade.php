@@ -21,11 +21,17 @@
 
 @section('page_content')
     <div class="row bg-white py-2 px-2 mx-1 rounded">
-        <div class="col">
+        <form action="{{route('students.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="col">
             <div class="table-responsive">
                 <table id="myTable" class="table" style="width:100%">
                     <thead>
                     <tr>
+                        <th>
+                            @if(!$students->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                        </th>
                         <th class="border-bottom">Ime i Prezime</th>
                         <th class="border-bottom">Tip korisnika</th>
                         <th class="border-bottom">Zadnji pristup sistemu</th>
@@ -35,6 +41,7 @@
                     <tbody class="align-middle">
                     @foreach ($students as $student)
                         <tr>
+                            <td><input type="checkbox" id="checkbox" name="id[]" value="{{$student->id}}" class="form-check-input"></td>
                             <td>
                                 <a href="{{route('students.show', $student->id)}}" class="d-flex align-items-center">
                                         <img src="{{$student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $student->picture) : asset('imgs/' . $student->picture)}}" class="avatar rounded-circle me-3" alt="Avatar">
@@ -112,6 +119,7 @@
                 </table>
             </div>
         </div>
+        </form>
     </div>
 
 @endsection

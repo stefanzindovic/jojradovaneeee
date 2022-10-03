@@ -223,6 +223,29 @@ class StudentsController extends Controller
         }
     }
 
+    public function destroyMultiple(Request $request)
+    {
+
+        try {
+
+            foreach ($request->id as $student){
+                $student = User::findOrFail($student);
+                if (!$student->is_active) return abort(404);
+                if ($student->role->id != 3) return abort(404);
+
+                if ($student->id == Auth::user()->id) {
+                    return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
+                }
+
+                $student->delete();
+            }
+
+            return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
+        } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Mo limo vas da polušate ponovo.');
+        }
+    }
+
     public function resetPassword(Request $request, User $student)
     {
         $input = $request->validate([

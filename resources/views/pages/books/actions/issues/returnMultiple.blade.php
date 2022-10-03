@@ -58,12 +58,40 @@
 
 @section('scripts')
     <script>
+        $("input#checkbox").click(function() {
+            var checkbox = $('#myTableMulti tbody').find(':checkbox').length;
+            var checked = $('#myTableMulti tbody').find(':checked').length
+            console.log('checkbox', checkbox, 'checked', checked);
+            if (checkbox === checked) {
+                document.getElementById('checkAll').checked = true;
+            } else {
+                document.getElementById('checkAll').checked = false;
+            }
+            if ($(this).is(':checked')) {
+                $('#submitbtn1').removeAttr('disabled')
+            } else {
+                if (checked === 0) {
+                    $('#submitbtn1').attr('disabled', true)
+                }
+            }
+        });
+
+        $('#checkAll').click(function () {
+            $('input#checkbox').prop('checked', this.checked);
+            if ($(this).is(':checked')) {
+                $('#submitbtn1').removeAttr('disabled')
+            } else {
+                $('#submitbtn1').attr('disabled', true)
+            }
+        });
+
+
         $('#myTableMulti').DataTable({
-            responsive: true,
+            responsive: false,
             buttons: [{
                 text: 'Vrati knjigu',
                 attr: {
-                    id: 'submitbtn',
+                    id: 'submitbtn1',
                     disabled: true
                 },
                 className: 'btn btn-primary',
@@ -82,23 +110,7 @@
                 url: "https://cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json",
             },
         });
-    </script>
-    <script>
-        $("input#checkbox").click(function() {
-            if ($(this).is(':checked')) {
-                $('#submitbtn').removeAttr('disabled')
-            } else {
-                $('#submitbtn').attr('disabled', true)
-            }
-        });
 
-        $('#checkAll').click(function () {
-            $('input#checkbox').prop('checked', this.checked);
-            if ($(this).is(':checked')) {
-                $('#submitbtn').removeAttr('disabled')
-            } else {
-                $('#submitbtn').attr('disabled', true)
-            }
-        });
     </script>
+
 @endsection

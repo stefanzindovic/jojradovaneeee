@@ -21,11 +21,17 @@
 
 @section('page_content')
     <div class="row bg-white py-2 px-2 mx-1 rounded">
-        <div class="col">
+        <form action="{{route('librarians.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="col">
             <div class="table-responsive">
                 <table id="myTable" class="table user-table table-hover align-items-center" style="width:100%">
                     <thead>
                     <tr>
+                        <th>
+                            @if(!$librarians->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                        </th>
                         <th>Ime i Prezime</th>
                         <th>Tip korisnika</th>
                         <th>Zadnji pristup sistemu</th>
@@ -35,7 +41,7 @@
                     <tbody class="align-middle">
                     @foreach ($librarians as $librarian)
                         <tr>
-
+                            <td><input type="checkbox" id="checkbox" name="id[]" value="{{$librarian->id}}" class="form-check-input"></td>
                             <td>
                                 <a href="{{route('librarians.show', $librarian->id)}}" class="d-flex align-items-center">
                                     <img src="{{$librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $librarian->picture) : asset('imgs/' . $librarian->picture)}}" class="avatar rounded-circle me-3" alt="Avatar">
@@ -116,5 +122,6 @@
                 </table>
             </div>
         </div>
+        </form>
     </div>
 @endsection

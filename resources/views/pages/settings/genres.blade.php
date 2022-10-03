@@ -115,11 +115,17 @@
         </div>
         <div class="col-md-10">
             <div class="row bg-white py-2 px-2 mx-1 rounded">
-                <div class="col table-responsive">
+                <form action="{{route('genre.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="col table-responsive">
                     <div class="table-responsive">
                         <table id="myTable" class="table" style="width:100%">
                             <thead>
                             <tr>
+                                <th>
+                                    @if(!$genres->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                                </th>
                                 <th>Naziv žanra</th>
                                 <th>Akcija</th>
                             </tr>
@@ -127,6 +133,7 @@
                             <tbody class="align-middle">
                             @foreach ($genres as $genre)
                                 <tr>
+                                    <td><input type="checkbox" id="checkbox" name="id[]" value="{{$genre->id}}" class="form-check-input"></td>
                                     <td>
                                         {{ $genre->title }}
                                     </td>
@@ -184,6 +191,7 @@
                         </table>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

@@ -18,10 +18,16 @@
 
 @section('page_content')
     <div class="row bg-white py-2 px-2 mx-1 rounded mb-5">
-        <div class="col">
+        <form action="{{route('authors.destroyMultiple')}}" id="multiDeleteForm" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="col">
             <table id="myTable" class="table" style="width:100%">
                 <thead>
                     <tr>
+                        <th>
+                            @if(!$authors->isEmpty())<input type="checkbox" id="checkAll" class="form-check-input checkbox"> @endif
+                        </th>
                         <th>Naziv autora</th>
                         <th>Opis</th>
                         <th>Akcija</th>
@@ -30,6 +36,7 @@
                 <tbody class="align-middle">
                     @foreach ($authors as $author)
                         <tr>
+                            <td><input type="checkbox" id="checkbox" name="id[]" value="{{$author->id}}" class="form-check-input"></td>
                             <td>
                                 <a href="{{ route('authors.show', $author->id) }}" class="d-flex align-items-center">
                                     <img src="{{ $author->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/authors/' . $author->picture) : asset('imgs/' . $author->picture) }}"
@@ -118,5 +125,6 @@
                 </tbody>
             </table>
         </div>
+        </form>
     </div>
 @endsection
