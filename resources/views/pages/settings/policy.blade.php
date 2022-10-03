@@ -114,7 +114,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label" for="value">Rok Rezervacije</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <p>Učenik/korisnik može rezervisati svoju knjigu i preuzeti je u predviđenom roku. Ukoliko rezervacija istekne, ista knjiga će se moći ponovo rezervisati ukoliko je ima na raspoloživom stanju.</p>
                                     <input type="hidden" id="reservationPolicyId" value="{{$policies[1]->id}}">
                                 </div>
                                 <div class="col-md-2">
@@ -137,7 +137,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label" for="value">Rok vraćanja</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <p>Vremenski period za vraćanje knjige, tokom ovog roka sva odgovornost za zadužene knjige je na učeniku/korisniku.</p>
                                     <input type="hidden" id="returnPolicyId" value="{{$policies[0]->id}}"></div>
                                 <div class="col-md-2">
                                     <div class="pt-3">
@@ -157,7 +157,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label" for="value">Rok konflikta</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <p>Naredna faza ima za cilj da sve učenike/korisnike koji nisu vratili svoje zadužene knjige obavijesti da ih moraju vratiti.</p>
                                     <input type="hidden" id="conflictPolicyId" value="{{$policies[2]->id}}">
                                 </div>
                                 <div class="col-md-2">
@@ -182,7 +182,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label" for="value">Broj aktivnih knjiga po učeniku</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <p>Ova performansa ograničava koliko knjiga učenik može da zaduži iz školske biblioteke. Bez obzira na broj uzetih knjiga učenik je dužan da poštuje rok za vraćanje istih.</p>
                                     <input type="hidden" id="maxBooksPerUserPolicyId" value="{{ $policies[3]->id }}">
                                 </div>
                                 <div class="col-md-2">
@@ -210,7 +210,7 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <label class="form-label" for="value">Više <b>istih</b> knjiga po korisniku</label>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores error illum, inventore itaque nemo neque, numquam omnis placeat porro quam quasi quidem veritatis. Consequuntur deleniti enim facere labore vel voluptates.</p>
+                                    <p>Ova funkcionalost je opciona, što znači da bibliotekar/ka može odlučiti da li želi da izda jednu knjigu više puta istom učeniku.</p>
                                     <input type="hidden" id="multipleBookCopiesPerUserPolicyId" value="{{ $policies[4]->id }}">
                                 </div>
                                 <div class="col-md-2">
