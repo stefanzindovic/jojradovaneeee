@@ -17,6 +17,27 @@
 @endsection
 
 @section('page_content')
+    {{-- Modal --}}
+    <div class="modal fade" id="deleteSingleScript" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-md-5">
+                    <h2 class="h4 text-center">Brisanje</h2>
+                    <p class="text-center mb-4">Da li ste sigurni?</p>
+                    <form class="mb-0" action="" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-danger">Obriši</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-2">
             <div class="mb-2">
@@ -193,7 +214,8 @@
                                                         <div role="separator" class="dropdown-divider my-1"></div>
                                                         <li>
                                                             <a type="button" class="dropdown-item"
-                                                                data-bs-toggle="modal" href="#delete{{ $script->id }}">
+                                                                data-script-id='{{ $script->id }}' href="#"
+                                                                onclick="pullDeleteScriptModal(this)">
                                                                 <svg class="dropdown-icon text-danger me-2"
                                                                     xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                                                                     viewBox="0 0 16 16">
@@ -204,33 +226,6 @@
                                                             </a>
                                                         </li>
                                                     </ul>
-                                                    {{-- Modal --}}
-                                                    <div class="modal fade" id="delete{{ $script->id }}"
-                                                        tabindex="-1" role="dialog" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header border-0">
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body px-md-5">
-                                                                    <h2 class="h4 text-center">Brisanje</h2>
-                                                                    <p class="text-center mb-4">Da li ste sigurni?</p>
-                                                                    <form class="mb-0"
-                                                                        action="{{ route('settings.scripts.destroy', $script->id) }}"
-                                                                        method="post">
-                                                                        @csrf
-                                                                        @method('DELETE')
-                                                                        <div class="d-grid">
-                                                                            <button type="submit"
-                                                                                class="btn btn-danger">Obriši</button>
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>

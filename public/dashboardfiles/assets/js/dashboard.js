@@ -1809,3 +1809,10 @@ function pullDeleteLanguageModal(btn) {
         "/settings/languages/" + $(btn).attr("data-language-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteScriptModal(btn) {
+    var modal = document.getElementById("deleteSingleScript");
+    modal.querySelector("form").action =
+        "/settings/scripts/" + $(btn).attr("data-script-id");
+    $(modal).modal("toggle");
+}
