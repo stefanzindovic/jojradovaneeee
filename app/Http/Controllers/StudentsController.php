@@ -179,8 +179,6 @@ class StudentsController extends Controller
                         $genericName
                     );
                 }
-            } else {
-                $genericName = 'profile-picture-placeholder.jpg';
             }
 
             // update category in db
@@ -194,6 +192,26 @@ class StudentsController extends Controller
 
             return to_route('students.index')->with('successMessage', 'Informacije o učeniku su izmijenjene.');
         } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function deletePicture(User $student)
+    {
+        try {
+            // remove old icon from storage
+            $uploadPath = 'uploads/students/';
+
+            $oldIconPath = $uploadPath . $student->picture;
+            if (Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            $student->picture = 'profile-picture-placeholder.jpg';
+            $student->update();
+
+            return to_route('students.index')->with('successMessage', 'Fotografija uspješno uklonjena.');
+        } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -228,7 +246,7 @@ class StudentsController extends Controller
 
         try {
 
-            foreach ($request->id as $student){
+            foreach ($request->id as $student) {
                 $student = User::findOrFail($student);
                 if (!$student->is_active) return abort(404);
                 if ($student->role->id != 3) return abort(404);

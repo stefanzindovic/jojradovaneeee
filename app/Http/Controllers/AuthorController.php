@@ -104,6 +104,26 @@ class AuthorController extends Controller
         return view('..pages.authors.edit', compact('author'));
     }
 
+    public function deletePicture(Author $author)
+    {
+        try {
+            // remove old icon from storage
+            $uploadPath = 'uploads/authors/';
+
+            $oldIconPath = $uploadPath . $author->picture;
+            if (Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            $author->picture = 'profile-picture-placeholder.jpg';
+            $author->update();
+
+            return to_route('authors.index')->with('successMessage', 'Fotografija uspješno uklonjena.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -189,7 +209,7 @@ class AuthorController extends Controller
     public function destroyMultiple(Request $request)
     {
         try {
-            foreach ($request->id as $author){
+            foreach ($request->id as $author) {
                 $author = Author::findOrFail($author);
                 if ($author->books->isNotEmpty()) {
                     return to_route('authors.index')->with('errorMessage', 'U biblioteci se nalaze knjige ovog autora.');
