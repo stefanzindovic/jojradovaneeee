@@ -72,7 +72,6 @@ class IssueBookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno izdata.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -111,7 +110,6 @@ class IssueBookController extends Controller
 
             return to_route('books.issues.issues')->with('successMessage', 'Kniga je uspješno vraćena.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -203,7 +201,6 @@ class IssueBookController extends Controller
 
             return back()->with('successMessage', 'Knjiga/e su uspješno vraćene.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -250,7 +247,6 @@ class IssueBookController extends Controller
 
             return back()->with('successMessage', 'Knjiga/e su uspješno otpisane.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
