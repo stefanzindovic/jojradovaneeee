@@ -68,7 +68,7 @@ class UserReservationController extends Controller
 
             $bookActionModel = new BookAction();
             $bookActionModel->book()->associate($bookUnderActionModel);
-            $bookActionModel->librarian()->associate(Auth::user());
+            $bookActionModel->librarian()->associate(1);
             $bookActionModel->status()->associate(2);
             $bookActionModel->action_start = $input['action_start'];
             $bookActionModel->action_deadline = \Carbon\Carbon::parse($input['action_start'])->addDays($policy->value);
