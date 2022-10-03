@@ -1823,3 +1823,10 @@ function pullDeletePublisherModal(btn) {
         "/settings/publishers/" + $(btn).attr("data-publishers-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteFormatsModal(btn) {
+    var modal = document.getElementById("deleteSingleFormat");
+    modal.querySelector("form").action =
+        "/settings/formats/" + $(btn).attr("data-formats-id");
+    $(modal).modal("toggle");
+}
