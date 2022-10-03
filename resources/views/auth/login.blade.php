@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Prijavi se</title>
+    <link rel="icon" href="{{asset('imgs/Intelectologo.svg')}}" type="image/svg+xml" sizes="32x32">
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <link rel="stylesheet" href="{{asset('userside/css/stylecustom.css')}}">
@@ -79,7 +80,7 @@
                 </div>
                 <div class="row mt-3">
                     <div class="col-6">
-                        <a href="{{route('password.confirm')}}" class="text-gray"><small>Zaboravili ste šifru?</small></a>
+                        <a href="{{route('password.request')}}" class="text-gray"><small>Zaboravili ste šifru?</small></a>
                     </div>
                     <div class="col-6 text-right">
                         <a href="{{route('register')}}" class="text-gray"><small>Registrujte se</small></a>
