@@ -29,7 +29,7 @@
                         </label>
                         <div class="text-center">
                             <a class="btn btn-outline-danger btn-sm pt-2 pb-2"
-                                onclick="$('#image-output'). attr('src','/imgs/placeholder.png');$('[name=\'picture\']').remove()">Ukloni
+                                onclick="$('#image-output'). attr('src','/imgs/placeholder.png');$('[name=\'picture\']').remove(); destroyImage();">Ukloni
                                 fotografiju</a>
                         </div>
                     </div>
@@ -78,4 +78,28 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function destroyImage() {
+            jQuery.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+
+            jQuery.ajax({
+                type: "POST",
+                url: "/settings/categories/{{ $category->id }}/deletePicture/",
+                data: jQuery("#myForm").serialize(),
+                success: function() {
+
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+
+                },
+            });
+        }
+    </script>
 @endsection

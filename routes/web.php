@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
             Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+            Route::patch('/categories/{category}/deletePicture', [\App\Http\Controllers\CategoryController::class, 'deletePicture']);
             Route::resource('/genres', \App\Http\Controllers\GenreController::class);
             Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
             Route::resource('/covers', \App\Http\Controllers\CoverController::class);
@@ -99,6 +100,7 @@ Route::middleware(['auth'])->group(function () {
         // Students
         Route::resource('/students', \App\Http\Controllers\StudentsController::class);
         Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
+        Route::patch('/students/{student}/destroyPicture', [\App\Http\Controllers\StudentsController::class, 'deletePicture'])->name('students.deletePicture');
         Route::delete('student/destroymultiple', [\App\Http\Controllers\StudentsController::class, 'destroyMultiple'])->name('students.destroyMultiple');
 
         // Librarians

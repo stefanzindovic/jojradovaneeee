@@ -101,6 +101,26 @@ class CategoryController extends Controller
         return view('..pages.settings.editCategory', compact('category'));
     }
 
+    public function deletePicture(Category $category)
+    {
+        try {
+            // remove old icon from storage
+            $uploadPath = 'uploads/categories/';
+
+            $oldIconPath = $uploadPath . $category->picture;
+            if (Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            $category->picture = 'placeholder.png';
+            $category->update();
+
+            return to_route('authors.index')->with('successMessage', 'Fotografija uspješno uklonjena.');
+        } catch (\Throwable $th) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -138,8 +158,6 @@ class CategoryController extends Controller
                         $genericName
                     );
                 }
-            } else {
-                $genericName = 'placeholder.png';
             }
 
             // update category in db
