@@ -83,6 +83,7 @@ Route::middleware(['auth'])->group(function () {
         Route::prefix('settings')->name('settings.')->group(function () {
             Route::resource('/policies', \App\Http\Controllers\PolicyController::class);
             Route::resource('/categories', \App\Http\Controllers\CategoryController::class);
+            Route::patch('/categories/{category}/deletePicture', [\App\Http\Controllers\CategoryController::class, 'deletePicture']);
             Route::resource('/genres', \App\Http\Controllers\GenreController::class);
             Route::resource('/publishers', \App\Http\Controllers\PublishersController::class);
             Route::resource('/covers', \App\Http\Controllers\CoverController::class);
@@ -94,16 +95,18 @@ Route::middleware(['auth'])->group(function () {
         // Authors
         Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
         Route::delete('author/destroymultiple', [\App\Http\Controllers\AuthorController::class, 'destroyMultiple'])->name('authors.destroyMultiple');
+        Route::patch('authors/{author}/destroyPicture', [\App\Http\Controllers\AuthorController::class, 'deletePicture'])->name('authors.destroyPicture');
 
         // Students
         Route::resource('/students', \App\Http\Controllers\StudentsController::class);
         Route::patch('/students/password/{student}', [\App\Http\Controllers\StudentsController::class, 'resetPassword'])->name('students.password');
+        Route::patch('/students/{student}/destroyPicture', [\App\Http\Controllers\StudentsController::class, 'deletePicture'])->name('students.deletePicture');
         Route::delete('student/destroymultiple', [\App\Http\Controllers\StudentsController::class, 'destroyMultiple'])->name('students.destroyMultiple');
 
         // Librarians
         Route::resource('/librarians', \App\Http\Controllers\LibrarianController::class);
         Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
-        Route::patch('/librarians/password/{librarian}', [\App\Http\Controllers\LibrarianController::class, 'resetPassword'])->name('librarians.password');
+        Route::patch('/librarians/{librarian}/deletePicture', [\App\Http\Controllers\LibrarianController::class, 'deletePicture'])->name('librarians.deletePicture');
         Route::delete('librarian/destroymultiple', [\App\Http\Controllers\LibrarianController::class, 'destroyMultiple'])->name('librarians.destroyMultiple');
 
         // Books CRUD

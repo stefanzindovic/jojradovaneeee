@@ -22,12 +22,13 @@
                                     style="object-fit: fill;cursor:pointer;min-height: 350px;width: 350px"
                                     class="w-full h-full" id="image-output" alt="Avatar">
                                 <input onchange="cropperFunction(event)" id="upload-picture" value=""
-                                    name="picture-raw" type="file" class="d-none" :accept="accept">
+                                    name="picture-raw" type="file" class="d-none" accept="image/*"
+                                    :accept="accept">
                             </div>
                         </label>
                         <div class="text-center">
                             <a class="btn btn-outline-danger btn-sm pt-2 pb-2"
-                                onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni
+                                onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove(); destroyImage();">Ukloni
                                 fotografiju</a>
                         </div>
                     </div>
@@ -109,4 +110,28 @@
             </div>
         </form>
     </div>
+
+    <script>
+        function destroyImage() {
+            jQuery.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+
+            jQuery.ajax({
+                type: "POST",
+                url: "/librarians/{{ $librarian->id }}/deletePicture/",
+                data: jQuery("#myForm").serialize(),
+                success: function() {
+
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+
+                },
+            });
+        }
+    </script>
 @endsection

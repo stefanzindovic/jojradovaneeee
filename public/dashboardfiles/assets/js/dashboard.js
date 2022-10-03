@@ -1,5 +1,23 @@
-var notyf = new Notyf();
+var modal = `
+<div class="modal fade" id="submitReq" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body px-md-5">
+                <h2 class="h4 text-center">Brisanje</h2>
+                <p class="text-center mb-4">Da li ste sigurni?</p>
+                <div class="d-grid">
+                    <button onclick="$('form#multiDeleteForm').submit();" type="button" class="btn btn-danger">Obriši</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+`;
 
+document.getElementsByTagName('body')[0].innerHTML += modal;
 
 let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
@@ -202,11 +220,12 @@ var table = $("#myTable").DataTable({
         text: 'Obriši',
         attr: {
             id: 'submitbtn',
-            disabled: true
+            disabled: true,
         },
         className: 'btn btn-primary',
         action: function(e, dt, node, config) {
-            $('form#multiDeleteForm').submit();
+            // $('form#multiDeleteForm').submit();
+            $('#submitReq').modal('toggle');
         }
     }, ]
 
@@ -215,6 +234,7 @@ var table = $("#myTable").DataTable({
 
 $('#myTable thead tr').clone(true).appendTo( '#myTable thead' );
 $('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").slice(1).each( function (i) {
+    i += 1;
 
         var title = $(this).text();
         if(title != 'Akcija'){

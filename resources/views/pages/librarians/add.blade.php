@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page_title')
-   Novi bibliotekar
+    Novi bibliotekar
 @endsection
 
 @section('page_content')
@@ -14,14 +14,21 @@
                 <div class="col-sm-4 d-flex justify-content-center">
                     <div class="div">
                         <label for="upload-picture" class="form-label">Izaberi fotografiju</label>
-                        <label class="border border-gray-300 d-flex justify-content-center relative" style="max-height: 350px;max-width: 350px">
+                        <label class="border border-gray-300 d-flex justify-content-center relative"
+                            style="max-height: 350px;max-width: 350px">
                             <div id="empty-cover-art" class="overflow-hidden">
-                                <img src="{{asset('imgs/profile-picture-placeholder.jpg')}}" style="object-fit: fill;cursor:pointer;min-height: 350px;width: 350px" class="w-full h-full" id="image-output" alt="Avatar">
-                                <input onchange="cropperFunction(event)" id="upload-picture" value="" name="picture-raw" type="file" class="d-none" :accept="accept">
+                                <img src="{{ asset('imgs/profile-picture-placeholder.jpg') }}"
+                                    style="object-fit: fill;cursor:pointer;min-height: 350px;width: 350px"
+                                    class="w-full h-full" id="image-output" alt="Avatar">
+                                <input onchange="cropperFunction(event)" id="upload-picture" value=""
+                                    name="picture-raw" type="file" class="d-none" accept="image/*"
+                                    :accept="accept">
                             </div>
                         </label>
                         <div class="text-center">
-                            <a class="btn btn-outline-danger btn-sm pt-2 pb-2" onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni fotografiju</a>
+                            <a class="btn btn-outline-danger btn-sm pt-2 pb-2"
+                                onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni
+                                fotografiju</a>
                         </div>
                     </div>
                 </div>
@@ -31,10 +38,12 @@
                         <div class="col-md-12 mb-3">
                             <div>
                                 <label for="librarianName" class="form-label">Ime i prezime</label>
-                                <input minlength="4" maxlength="50" required type="text" placeholder="Ime i prezime" name="name" id="librarianName" value="{{ old('name')}}" class="form-control" onkeydown="clearErrorsNameUcenikEdit()"/>
+                                <input minlength="4" maxlength="50" required type="text" placeholder="Ime i prezime"
+                                    name="name" id="librarianName" value="{{ old('name') }}" class="form-control"
+                                    onkeydown="clearErrorsNameUcenikEdit()" />
                                 @error('name')
-                                <p style="color:red;" id="errorMessageByLaravel"><i
-                                        class="fa fa-times"></i> {{ $message }}</p>
+                                    <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i>
+                                        {{ $message }}</p>
                                 @enderror
                                 <div id="librarianNameValidationMessage"></div>
                             </div>
@@ -53,10 +62,12 @@
 
                         <div class="col-md-6 mb-3">
                             <label for="librarianJmbg" class="form-label">JMBG</label>
-                            <input minlength="13" maxlength="13" required type="text" placeholder="JMBG" name="jmbg" id="librarianJmbg" value="{{old('jmbg')}}" class="form-control" onkeydown="clearErrorsJmbgUcenikEdit()">
+                            <input minlength="13" maxlength="13" required type="text" placeholder="JMBG" name="jmbg"
+                                id="librarianJmbg" value="{{ old('jmbg') }}" class="form-control"
+                                onkeydown="clearErrorsJmbgUcenikEdit()">
                             @error('jmbg')
-                            <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times"></i> {{ $message }}</p>
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i> {{ $message }}
+                                </p>
                             @enderror
                             <div id="librarianJmbgValidationMessage"></div>
                         </div>
@@ -64,20 +75,22 @@
 
                     <div class="mb-3">
                         <label for="librarianEmail" class="form-label">Email</label>
-                        <input required type="email" name="email" id="librarianEmail"  placeholder="E-mail" value="{{ old('email') }}" class="form-control" onkeydown="clearErrorsEmailUcenikEdit()">
+                        <input required type="email" name="email" id="librarianEmail" placeholder="E-mail"
+                            value="{{ old('email') }}" class="form-control" onkeydown="clearErrorsEmailUcenikEdit()">
                         @error('email')
-                        <p style="color:red;" id="errorMessageByLaravel"><i
-                                class="fa fa-times"></i> {{ $message }}</p>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i> {{ $message }}</p>
                         @enderror
                         <div id="librarianEmailValidationMessage"></div>
                     </div>
 
                     <div class="mb-3">
                         <label for="librarianUsername" class="form-label">Korisničko ime</label>
-                        <input minlength="4" maxlength="18" required type="text" placeholder="Korisničko ime" name="username" id="librarianUsername" value="{{old('username')}}" class="form-control" onkeydown="clearErrorsUsernameUcenikEdit()">
+                        <input minlength="4" maxlength="18" required type="text" placeholder="Korisničko ime"
+                            name="username" id="librarianUsername" value="{{ old('username') }}" class="form-control"
+                            onkeydown="clearErrorsUsernameUcenikEdit()">
                         @error('username')
-                        <p style="color:red;" id="errorMessageByLaravel"><i
-                                class="fa fa-times"></i> {{ $message }}</p>
+                            <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i> {{ $message }}
+                            </p>
                         @enderror
                         <div id="librarianUsernameValidationMessage"></div>
                     </div>
@@ -85,17 +98,21 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="librarianPassword" class="form-label">Šifra</label>
-                            <input minlength="8" maxlength="24" required type="password" placeholder="********" name="password" id="librarianPassword" required minlength="8" maxlength="24" class="form-control"/>
+                            <input minlength="8" maxlength="24" required type="password" placeholder="********"
+                                name="password" id="librarianPassword" required minlength="8" maxlength="24"
+                                class="form-control" />
                             @error('password')
-                            <p style="color:red;" id="errorMessageByLaravel"><i
-                                    class="fa fa-times"></i> {{ $message }}</p>
+                                <p style="color:red;" id="errorMessageByLaravel"><i class="fa fa-times"></i>
+                                    {{ $message }}</p>
                             @enderror
                             <div id="librarianPasswordValidationMessage"></div>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="librarianPasswordConfirm" class="form-label">Ponovi šifru</label>
-                            <input minlength="8" maxlength="24" required type="password" placeholder="********" name="password_confirmation" id="librarianPasswordConfirm" required minlength="8" maxlength="24" class="form-control"/>
+                            <input minlength="8" maxlength="24" required type="password" placeholder="********"
+                                name="password_confirmation" id="librarianPasswordConfirm" required minlength="8"
+                                maxlength="24" class="form-control" />
                         </div>
                     </div>
                 </div>
