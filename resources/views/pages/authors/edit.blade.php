@@ -22,7 +22,7 @@
                             <label class="border border-gray-300 rounded d-flex justify-content-center">
                                 <div id="empty-cover-art" class="overflow-hidden">
                                     <div class="text-center">
-                                        <img src="{{ $author->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $author->picture) : asset('imgs/' . $author->picture) }}"
+                                        <img src="{{ $author->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/authors/' . $author->picture) : asset('imgs/' . $author->picture) }}"
                                             style="object-fit: fill;cursor:pointer;cursor:pointer" id="image-output"
                                             width="400px" height="400px" @if ($author->picture == null) hidden @endif>
                                         @if ($author->picture == null)
@@ -44,6 +44,11 @@
                                     </div>
                                 </div>
                             </label>
+                            <div class="text-center">
+                                <a class="btn btn-outline-danger btn-sm pt-2 pb-2"
+                                    onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni
+                                    fotografiju</a>
+                            </div>
                         </div>
                         <div class="col-8">
                             <div class=" mb-3">
