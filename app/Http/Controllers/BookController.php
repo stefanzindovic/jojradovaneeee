@@ -302,7 +302,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno obrisana.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -342,7 +341,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjige su uspješno obrisane.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
