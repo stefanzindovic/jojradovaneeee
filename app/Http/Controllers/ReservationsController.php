@@ -78,7 +78,6 @@ class ReservationsController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno rezervisana.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -107,7 +106,7 @@ class ReservationsController extends Controller
 
             return to_route('books.reservations')->with('successMessage', 'Rezervacija je odobrena.');
         } catch (\Throwable $th) {
-            dd($th);
+
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -137,7 +136,7 @@ class ReservationsController extends Controller
 
             return to_route('books.reservations')->with('successMessage', 'Knjiga je uspješno izdata po rezervaciji.');
         } catch (\Throwable $th) {
-            dd($th);
+
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -166,7 +165,7 @@ class ReservationsController extends Controller
 
             return to_route('books.reservations')->with('successMessage', 'Knjiga je uspješno izdata po rezervaciji.');
         } catch (\Throwable $th) {
-            dd($th);
+
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -195,7 +194,6 @@ class ReservationsController extends Controller
 
             return to_route('books.reservations')->with('successMessage', 'Rezervacija je odbijena.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -213,5 +211,4 @@ class ReservationsController extends Controller
         $students = User::where('role_id', 3)->get();
         return view('..pages.books.actions.reservations.reserve', compact('book', 'students'));
     }
-
 }

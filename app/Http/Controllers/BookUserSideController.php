@@ -82,10 +82,10 @@ class BookUserSideController extends Controller
             $books = $books->unique(strict: true, key: 'id');
         }
 
-        $categories = Category::all();
-        $genres = Genre::all();
+        $categories_list = Category::all();
+        $genres_list = Genre::all();
 
-        return view('pages.userside.books', compact('books', 'categories', 'genres'));
+        return view('pages.userside.books', compact('books', 'categories_list', 'genres_list'));
     }
 
     public function show($id)

@@ -301,7 +301,6 @@ class LibrarianController extends Controller
             $librarian->update();
             return back()->with('successMessage', 'Lozinka je uspješno izmijenjena.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }

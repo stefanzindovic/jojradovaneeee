@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Auth;
 class UserReservationController extends Controller
 {
 
-    public function index(HttpRequest $request){
+    public function index(HttpRequest $request)
+    {
         if ($request->has('books')) {
             $pending = Book::pendingReservedBook($request->books)->where('student_id', Auth::user()->id);
             $active = Book::activeReservedBook($request->books)->where('student_id', Auth::user()->id);
@@ -29,16 +30,18 @@ class UserReservationController extends Controller
             $reservations = Book::archivedReservations()->where('student_id', Auth::user()->id);
         }
 
-        return view('pages.userside.reservations', compact('active','pending','reservations'));
+        return view('pages.userside.reservations', compact('active', 'pending', 'reservations'));
     }
 
-    public function create($id){
+    public function create($id)
+    {
         $policy = Policy::findOrFail(1);
         $book = Book::findOrFail($id);
-        return view('pages.userside.create', compact('book','policy'));
+        return view('pages.userside.create', compact('book', 'policy'));
     }
 
-    public function rezervisi(Book $book, HttpRequest $request){
+    public function rezervisi(Book $book, HttpRequest $request)
+    {
         // reserve book for student
         $input = $request->validate([
             'action_start' => 'required|after_or_equal:' . \Carbon\Carbon::now()->format('Y-m-d'),
@@ -73,12 +76,12 @@ class UserReservationController extends Controller
 
             return to_route('knjige')->with('successMessage', 'Knjiga je uspješno rezervisana.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da pokušate ponovo.');
         }
     }
 
-    public function otkazi(BooksUnderAction $book){
+    public function otkazi(BooksUnderAction $book)
+    {
         // decline pending reservation
         try {
 
@@ -101,7 +104,6 @@ class UserReservationController extends Controller
 
             return to_route('rezervacije.index')->with('successMessage', 'Rezervacija je otkazana.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
