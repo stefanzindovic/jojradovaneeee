@@ -1788,3 +1788,10 @@ function pullDeleteLibrarianModal(btn) {
         "/librarians/" + $(btn).attr("data-librarian-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteCategoryModal(btn) {
+    var modal = document.getElementById("deleteSingleCategory");
+    modal.querySelector("form").action =
+        "/settings/categories/" + $(btn).attr("data-categories-id");
+    $(modal).modal("toggle");
+}
