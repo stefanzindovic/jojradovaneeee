@@ -46,7 +46,7 @@ class AuthorController extends Controller
     {
         $input = $request->validate([
             'full_name' => 'required|regex: /^([a-zA-Z\s!ČčĆćŠšĐđŽž])+$/|min:4|max:50',
-            'bio' => 'nullable|min:10|max:500',
+            'bio' => 'nullable|min:10|max:2500',
             'picture' => 'nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 

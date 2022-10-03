@@ -52,7 +52,7 @@ jQuery(document).ready(function () {
             bioInput.val() !== "" &&
             bioInput.val().length > 0
         ) {
-            if (bioInput.val().length < 10 || bioInput.val().length > 500) {
+            if (bioInput.val().length < 10 || bioInput.val().length > 2500) {
                 setTimeout(function () {
                     bioValidationMessage
                         .css({ display: "block" })
