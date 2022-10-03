@@ -130,7 +130,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Nova knjiga je dodana na spisak.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -259,7 +258,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Informacije o knjizi uspješno izmijenjene.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -302,7 +300,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjiga je uspješno obrisana.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
@@ -310,7 +307,7 @@ class BookController extends Controller
     public function destroyMultiple(HttpRequest $request)
     {
         try {
-            foreach ($request->id as $book){
+            foreach ($request->id as $book) {
                 $book = Book::findOrFail($book);
                 // Check if there is some book copies that are under active action
                 if ($book->calcNumberOfAvailableCopies($book->id) < $book->total_copies - $book->writtenOffBook($book->id)->count()) {
@@ -342,7 +339,6 @@ class BookController extends Controller
 
             return to_route('books.index')->with('successMessage', 'Knjige su uspješno obrisane.');
         } catch (\Throwable $th) {
-            dd($th);
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }
