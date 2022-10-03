@@ -215,6 +215,7 @@ var table = $("#myTable").DataTable({
 
 $('#myTable thead tr').clone(true).appendTo( '#myTable thead' );
 $('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").slice(1).each( function (i) {
+    i += 1;
 
         var title = $(this).text();
         if(title != 'Akcija'){
