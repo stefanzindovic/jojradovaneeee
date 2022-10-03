@@ -17,191 +17,203 @@ var modal = `
 </div>
 `;
 
-document.getElementsByTagName('body')[0].innerHTML += modal;
+document.getElementsByTagName("body")[0].innerHTML += modal;
 
 let isMobile = window.matchMedia("only screen and (max-width: 760px)").matches;
 
 if (!isMobile) {
-    $(window).resize(function() {
-        if ($(window).width() < 1048){
-            if($(".mobile-wrapper").is(":visible")){
+    $(window).resize(function () {
+        if ($(window).width() < 1048) {
+            if ($(".mobile-wrapper").is(":visible")) {
                 $(".mobile-wrapper").hide();
             }
         } else {
             $(".mobile-wrapper").show();
         }
-    })
+    });
 }
 
-if ($(window).width() < 1048){
+if ($(window).width() < 1048) {
     $(".mobile-wrapper").hide();
 } else {
     $(".mobile-wrapper").show();
 }
 
-$(".nav-icon-btn").on('click', function (){
-    $(".mobile-wrapper").fadeIn()
-})
+$(".nav-icon-btn").on("click", function () {
+    $(".mobile-wrapper").fadeIn();
+});
 
-$("#mobile-close-search-button").on('click', function (){
-    $(".mobile-wrapper").fadeOut()
-})
-
+$("#mobile-close-search-button").on("click", function () {
+    $(".mobile-wrapper").fadeOut();
+});
 
 let knjige = $("#searchBookList");
-let studenti = $("#searchStudentList")
-let bibliotekari = $("#searchLibrarianList")
-let autori = $("#searchAuthorList")
-let form = $('#searchForm');
+let studenti = $("#searchStudentList");
+let bibliotekari = $("#searchLibrarianList");
+let autori = $("#searchAuthorList");
+let form = $("#searchForm");
 
-function search(){
-    if ($("#SearchBar").val().length >= 3){
-
+function search() {
+    if ($("#SearchBar").val().length >= 3) {
         setTimeout(function () {
-
-
             $.ajax({
                 type: "POST",
                 url: "/searchstaff",
-                headers: {'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')},
+                headers: {
+                    "X-CSRF-Token": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
                 data: form.serialize(),
-                success:function(data){
+                success: function (data) {
                     setTimeout(function () {
-                        knjige.empty()
-                        studenti.empty()
-                        bibliotekari.empty()
-                        autori.empty()
-                        if($("#SearchBar").val().length >= 3){
+                        knjige.empty();
+                        studenti.empty();
+                        bibliotekari.empty();
+                        autori.empty();
+                        if ($("#SearchBar").val().length >= 3) {
                             $("#searchBoxResults").fadeIn();
                             $.each(data.books, function (k, book) {
-                                knjige.append(`
+                                knjige
+                                    .append(
+                                        `
                                                 <a href="/books/${book.id}">
                                                     <li class="list-group-item mb-2" style="border:0">
                                                         <span class="name mb-0 text-purple">${book.title}</span>
                                                     </li>
                                                 </a>
-                                `).show('slow');
-                            })
+                                `
+                                    )
+                                    .show("slow");
+                            });
                             $.each(data.students, function (k, student) {
-                                studenti.append(`
+                                studenti
+                                    .append(
+                                        `
                                                 <a href="/students/${student.id}">
                                                     <li class="list-group-item mb-2" style="border:0">
                                                         <span class="name mb-0 text-purple">${student.name}</span>
                                                     </li>
                                                 </a>
-                                `).show('slow');
-                            })
+                                `
+                                    )
+                                    .show("slow");
+                            });
                             $.each(data.librarians, function (k, librarian) {
-                                bibliotekari.append(`
+                                bibliotekari
+                                    .append(
+                                        `
                                                 <a href="/librarians/${librarian.id}">
                                                     <li class="list-group-item mb-2" style="border:0">
                                                         <span class="name mb-0 text-purple">${librarian.name}</span>
                                                     </li>
                                                 </a>
-                                `).show('slow');
-                            })
+                                `
+                                    )
+                                    .show("slow");
+                            });
                             $.each(data.authors, function (k, author) {
-                                autori.append(`
+                                autori
+                                    .append(
+                                        `
                                                 <a href="/authors/${author.id}">
                                                     <li class="list-group-item mb-2" style="border:0">
                                                         <span class="name mb-0 text-purple">${author.full_name}</span>
                                                     </li>
                                                 </a>
-                                `).show('slow');
-                            })
-                        }else {
+                                `
+                                    )
+                                    .show("slow");
+                            });
+                        } else {
                             $("#searchBoxResults").fadeOut();
                         }
-
-
-                    },300)
+                    }, 300);
                 },
             });
         }, 300);
     }
 }
 
-
 if (!isMobile) {
-    $(document).click(function() {
-        $("#searchBoxResults").hide()
+    $(document).click(function () {
+        $("#searchBoxResults").hide();
     });
 }
 
-$("input#bookFilter").change(function() {
-    if(!this.checked) {
-        $("#bookList").hide()
-    }else{
-        $("#bookList").show()
+$("input#bookFilter").change(function () {
+    if (!this.checked) {
+        $("#bookList").hide();
+    } else {
+        $("#bookList").show();
     }
 });
 
-$("input#studentFilter").change(function() {
-    if(!this.checked) {
-        $("#studentList").hide()
-    }else{
-        $("#studentList").show()
+$("input#studentFilter").change(function () {
+    if (!this.checked) {
+        $("#studentList").hide();
+    } else {
+        $("#studentList").show();
     }
 });
 
-$("input#librarianFilter").change(function() {
-    if(!this.checked) {
-        $("#librarianList").hide()
-    }else{
-        $("#librarianList").show()
+$("input#librarianFilter").change(function () {
+    if (!this.checked) {
+        $("#librarianList").hide();
+    } else {
+        $("#librarianList").show();
     }
 });
 
-$("input#authorFilter").change(function() {
-    if(!this.checked) {
-        $("#authorList").hide()
-    }else{
-        $("#authorList").show()
+$("input#authorFilter").change(function () {
+    if (!this.checked) {
+        $("#authorList").hide();
+    } else {
+        $("#authorList").show();
     }
 });
-
-
 
 $(window).on("load", function () {
     $("#layout").fadeOut();
 });
 
-$(document).ready(function (){
-    $("#search").focus(function (){
-        if($(window).width() < 991){
-            $("#userinfo").hide()
-            $("#search").addClass('d-flex justify-content-center')
-        }
-    }).focusout(function() {
-        $("#userinfo").show()
-        $("#search").removeClass('d-flex justify-content-center')
-    });
-
+$(document).ready(function () {
+    $("#search")
+        .focus(function () {
+            if ($(window).width() < 991) {
+                $("#userinfo").hide();
+                $("#search").addClass("d-flex justify-content-center");
+            }
+        })
+        .focusout(function () {
+            $("#userinfo").show();
+            $("#search").removeClass("d-flex justify-content-center");
+        });
 });
 
-$("input#checkbox").click(function() {
-    var checkbox = $('#myTable tbody').find(':checkbox').length;
-    var checked = $('#myTable tbody').find(':checked').length
+$("input#checkbox").click(function () {
+    var checkbox = $("#myTable tbody").find(":checkbox").length;
+    var checked = $("#myTable tbody").find(":checked").length;
     if (checkbox === checked) {
-        document.getElementById('checkAll').checked = true;
+        document.getElementById("checkAll").checked = true;
     } else {
-        document.getElementById('checkAll').checked = false;
+        document.getElementById("checkAll").checked = false;
     }
-    if ($(this).is(':checked')) {
-        $('#submitbtn').removeAttr('disabled')
+    if ($(this).is(":checked")) {
+        $("#submitbtn").removeAttr("disabled");
     } else {
         if (checked === 0) {
-            $('#submitbtn').attr('disabled', true)
+            $("#submitbtn").attr("disabled", true);
         }
     }
 });
 
-$('#checkAll').click(function () {
-    $('input#checkbox').prop('checked', this.checked);
-    if ($(this).is(':checked')) {
-        $('#submitbtn').removeAttr('disabled')
+$("#checkAll").click(function () {
+    $("input#checkbox").prop("checked", this.checked);
+    if ($(this).is(":checked")) {
+        $("#submitbtn").removeAttr("disabled");
     } else {
-        $('#submitbtn').attr('disabled', true)
+        $("#submitbtn").attr("disabled", true);
     }
 });
 
@@ -214,47 +226,49 @@ var table = $("#myTable").DataTable({
         "<'row'<'col-sm-12'tr>>" +
         "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'p>>",
     language: {
-        url: '//cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json'
+        url: "//cdn.datatables.net/plug-ins/1.12.1/i18n/sr-SP.json",
     },
-    buttons: [{
-        text: 'Obriši',
-        attr: {
-            id: 'submitbtn',
-            disabled: true,
+    buttons: [
+        {
+            text: "Obriši",
+            attr: {
+                id: "submitbtn",
+                disabled: true,
+            },
+            className: "btn btn-primary",
+            action: function (e, dt, node, config) {
+                // $('form#multiDeleteForm').submit();
+                $("#submitReq").modal("toggle");
+            },
         },
-        className: 'btn btn-primary',
-        action: function(e, dt, node, config) {
-            // $('form#multiDeleteForm').submit();
-            $('#submitReq').modal('toggle');
-        }
-    }, ]
-
+    ],
 });
 
-
-$('#myTable thead tr').clone(true).appendTo( '#myTable thead' );
-$('#myTable thead tr:eq(1) th').attr("colspan", "1").attr("rowspan","1").slice(1).each( function (i) {
-    i += 1;
+$("#myTable thead tr").clone(true).appendTo("#myTable thead");
+$("#myTable thead tr:eq(1) th")
+    .attr("colspan", "1")
+    .attr("rowspan", "1")
+    .slice(1)
+    .each(function (i) {
+        i += 1;
 
         var title = $(this).text();
-        if(title != 'Akcija'){
-            $(this).html( '<input type="text" class="form-control" style="width: 100%" placeholder="Pretraži '+title+'" />' );
+        if (title != "Akcija") {
+            $(this).html(
+                '<input type="text" class="form-control" style="width: 100%" placeholder="Pretraži ' +
+                    title +
+                    '" />'
+            );
 
-            $( 'input', this ).on( 'keyup change', function () {
-                if ( table.column(i).search() !== this.value ) {
-                    table
-                        .column(i)
-                        .search( this.value )
-                        .draw();
+            $("input", this).on("keyup change", function () {
+                if (table.column(i).search() !== this.value) {
+                    table.column(i).search(this.value).draw();
                 }
-            } );
-        } else $(this).text('');
-    }
-);
+            });
+        } else $(this).text("");
+    });
 
-$(document.querySelectorAll('.checkbox')[1]).css('display', 'none')
-
-
+$(document.querySelectorAll(".checkbox")[1]).css("display", "none");
 
 function funkcijaDatumVracanja(policyValue) {
     var selectedDate = new Date($("#datumIzdavanja").val());
@@ -308,15 +322,20 @@ var cropperFunction = function (e) {
 
     // load cropper overlay and crop image
     if (e.target.files && e.target.files[0]) {
-        console.log(e.target.files[0].type)
-        if(e.target.files[0].type === 'image/jpeg' || e.target.files[0].type === 'image/png' || e.target.files[0].type === 'image/jpg' || e.target.files[0].type === 'image/gif') {
+        console.log(e.target.files[0].type);
+        if (
+            e.target.files[0].type === "image/jpeg" ||
+            e.target.files[0].type === "image/png" ||
+            e.target.files[0].type === "image/jpg" ||
+            e.target.files[0].type === "image/gif"
+        ) {
             // file reader API
             var reader = new FileReader();
             reader.readAsDataURL(e.target.files[0]);
             reader.onload = function (e) {
                 // setup cropper
                 cropperPreview.src = e.target.result;
-                var options = {aspectRatio: 1,};
+                var options = { aspectRatio: 1 };
                 cropperOverlay.style.display = "block";
                 cropper = new Cropper(cropperPreview, options);
             };
@@ -327,7 +346,7 @@ var cropperFunction = function (e) {
             // get cropped data from cropper && display cropped image into output block
             cropper.getCroppedCanvas().toBlob((blob) => {
                 $('input[type="file"]').val("");
-                var file = new File([blob], Date.now(), {type: blob.type});
+                var file = new File([blob], Date.now(), { type: blob.type });
                 var container = new DataTransfer();
 
                 container.items.add(file);
@@ -373,7 +392,7 @@ function checkPasswordMatch() {
     var password = $("#password").val();
     var confirmPassword = $("#password_confirm").val();
 
-    if(password.length > 8 || confirmPassword.length >= 8){
+    if (password.length > 8 || confirmPassword.length >= 8) {
         if (password != confirmPassword) {
             $(".invalid-feedback").html(" Lozinke se ne poklapaju!");
             $(".invalid-feedback").addClass("d-flex");
@@ -384,9 +403,10 @@ function checkPasswordMatch() {
             $("#submitDugme").prop("disabled", false);
             return true;
         }
-    }
-    else{
-        $(".invalid-feedback").html("Lozinka treba da sadrži više od 8 karaktera!");
+    } else {
+        $(".invalid-feedback").html(
+            "Lozinka treba da sadrži više od 8 karaktera!"
+        );
         $(".invalid-feedback").addClass("d-flex");
     }
 }
@@ -428,13 +448,13 @@ d.addEventListener("DOMContentLoaded", function (event) {
             document.querySelector("body").style.position = "relative";
             sidebar.classList.remove("contracted");
             localStorage.removeItem("sidebar", "contracted");
-            $('#separator').removeClass('w-45');
+            $("#separator").removeClass("w-45");
         });
         sidebar.addEventListener("hidden.bs.collapse", function () {
             document.querySelector("body").style.position = "relative";
             sidebar.classList.add("contracted");
             localStorage.setItem("sidebar", "contracted");
-            $('#separator').addClass('w-45');
+            $("#separator").addClass("w-45");
         });
     }
 
@@ -1676,8 +1696,8 @@ d.addEventListener("DOMContentLoaded", function (event) {
         if (localStorage.getItem("sidebar") === "contracted") {
             sidebar.classList.add("notransition");
             content.classList.add("notransition");
-            $('#separator').addClass('w-45');
-            $('#separator1').addClass('w-45');
+            $("#separator").addClass("w-45");
+            $("#separator1").addClass("w-45");
             sidebar.classList.add("contracted");
 
             setTimeout(function () {
@@ -1701,13 +1721,13 @@ d.addEventListener("DOMContentLoaded", function (event) {
             if (sidebar.classList.contains("contracted")) {
                 sidebar.classList.remove("contracted");
                 localStorage.removeItem("sidebar", "contracted");
-                $('#separator').removeClass('w-45');
-                $('#separator1').removeClass('w-45');
+                $("#separator").removeClass("w-45");
+                $("#separator1").removeClass("w-45");
             } else {
                 sidebar.classList.add("contracted");
                 localStorage.setItem("sidebar", "contracted");
-                $('#separator').addClass('w-45');
-                $('#separator1').addClass('w-45');
+                $("#separator").addClass("w-45");
+                $("#separator1").addClass("w-45");
             }
         });
 
@@ -1715,12 +1735,12 @@ d.addEventListener("DOMContentLoaded", function (event) {
             if (localStorage.getItem("sidebar") === "contracted") {
                 if (sidebar.classList.contains("contracted")) {
                     sidebar.classList.remove("contracted");
-                    $('#separator').removeClass('w-45');
-                    $('#separator1').removeClass('w-45');
+                    $("#separator").removeClass("w-45");
+                    $("#separator1").removeClass("w-45");
                 } else {
                     sidebar.classList.add("contracted");
-                    $('#separator').addClass('w-45');
-                    $('#separator1').addClass('w-45');
+                    $("#separator").addClass("w-45");
+                    $("#separator1").addClass("w-45");
                 }
             }
         });
@@ -1729,14 +1749,21 @@ d.addEventListener("DOMContentLoaded", function (event) {
             if (localStorage.getItem("sidebar") === "contracted") {
                 if (sidebar.classList.contains("contracted")) {
                     sidebar.classList.remove("contracted");
-                    $('#separator').removeClass('w-45');
-                    $('#separator1').removeClass('w-45');
+                    $("#separator").removeClass("w-45");
+                    $("#separator1").removeClass("w-45");
                 } else {
                     sidebar.classList.add("contracted");
-                    $('#separator').addClass('w-45');
-                    $('#separator1').addClass('w-45');
+                    $("#separator").addClass("w-45");
+                    $("#separator1").addClass("w-45");
                 }
             }
         });
     }
 });
+
+function pullDeleteBookModal(btn) {
+    var modal = document.getElementById("deleteSingleBook");
+    modal.querySelector("form").action =
+        "/books/" + $(btn).attr("data-book-id");
+    $(modal).modal("toggle");
+}
