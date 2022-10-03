@@ -35,9 +35,10 @@ class ProfileController extends Controller
             'picture' => 'sometimes|nullable|mimes:jpg,jpeg,png,svg,bim,webp,gif|max:5120',
         ]);
 
-        if(!empty($request->input('password'))) {
+        if (!empty($request->input('password'))) {
             $request->validate([
-                'password' => ['sometimes','required', 'min:8', 'max:24', 'confirmed']]);
+                'password' => ['sometimes', 'required', 'min:8', 'max:24', 'confirmed']
+            ]);
             $input['password'] = bcrypt($request['password']);
         }
 
@@ -65,8 +66,6 @@ class ProfileController extends Controller
                         $genericName
                     );
                 }
-            }else{
-                $genericName = 'profile-picture-placeholder.jpg';
             }
 
             // update category in db
@@ -79,6 +78,26 @@ class ProfileController extends Controller
 
             return to_route('profil')->with('successMessage', 'Informacije o učeniku su izmijenjene.');
         } catch (\Exception $e) {
+            return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
+        }
+    }
+
+    public function deletePicture(User $student)
+    {
+        try {
+            // remove old icon from storage
+            $uploadPath = 'uploads/students/';
+
+            $oldIconPath = $uploadPath . $student->picture;
+            if (Storage::disk('public')->exists($oldIconPath)) {
+                Storage::disk('public')->delete($oldIconPath);
+            }
+
+            $student->picture = 'profile-picture-placeholder.jpg';
+            $student->update();
+
+            return to_route('students.index')->with('successMessage', 'Fotografija uspješno uklonjena.');
+        } catch (\Throwable $th) {
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
         }
     }

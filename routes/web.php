@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [\App\Http\Controllers\ProfileController::class, 'show'])->name('profil');
     Route::get('/profil/edit/', [\App\Http\Controllers\ProfileController::class, 'edit'])->name('profil.edit');
     Route::patch('/profil/{id}', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profil.update');
+    Route::patch('/profil/{student}/deletePicture', [\App\Http\Controllers\ProfileController::class, 'deletePicture'])->name('profil.deletePicture');
     Route::get('/rezervacije', [\App\Http\Controllers\UserReservationController::class, 'index'])->name('rezervacije.index');
     Route::get('/rezervisi/{id}', [\App\Http\Controllers\UserReservationController::class, 'create'])->name('rezervacija.knjige');
     Route::post('/rezervisi/{book}', [\App\Http\Controllers\UserReservationController::class, 'rezervisi'])->name('rezervisi.knjigu');

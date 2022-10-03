@@ -231,8 +231,22 @@ class StudentsController extends Controller
             return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
         }
         //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
+        $activeBookCount = User::getIssuedBooks($student->id)->count();
+        $pendingReservationsCount = User::getPendingReservedBooks($student->id)->count();
+        $activeReservationsCount = User::getActiveReservedBooks($student->id)->count();
 
+        // dd(($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 0);
+        if (($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 0) {
+            return back()->with('errorMessage', 'Korisnik ima zaduzene knjige.');
+        }
         try {
+            User::deleting(function () use ($student) {
+                foreach ($student->booksUnderAction as $bookUnderAction) {
+                    $bookUnderAction->actions()->delete();
+                }
+                $student->booksUnderAction()->delete();
+            });
+
             $student->delete();
 
             return to_route('students.index')->with('successMessage', 'Učenik je obrisan.');
@@ -254,6 +268,22 @@ class StudentsController extends Controller
                 if ($student->id == Auth::user()->id) {
                     return back()->with('errorMessage', 'Ne možete obrisati samog sebe.');
                 }
+
+                //TODO: Add check if this author is used in some of existing books before delete action (if exists, return error message)
+                $activeBookCount = User::getIssuedBooks($student->id)->count();
+                $pendingReservationsCount = User::getPendingReservedBooks($student->id)->count();
+                $activeReservationsCount = User::getActiveReservedBooks($student->id)->count();
+                // dd(($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 0);
+                if (($activeBookCount + $pendingReservationsCount + $activeReservationsCount) > 0) {
+                    return back()->with('errorMessage', 'Korisnik ima zaduzene knjige.');
+                }
+
+                User::deleting(function () use ($student) {
+                    foreach ($student->booksUnderAction as $bookUnderAction) {
+                        $bookUnderAction->actions()->delete();
+                    }
+                    $student->booksUnderAction()->delete();
+                });
 
                 $student->delete();
             }

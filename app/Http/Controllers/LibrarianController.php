@@ -245,6 +245,10 @@ class LibrarianController extends Controller
             return back()->with('errorMessage', 'Nemate ovlaštenje potrebno za izvršenje ove akcije.');
         }
 
+        if ($librarian->bookActions->isNotEmpty()) {
+            return back()->with('errorMessage', 'Ovaj bibliotekar postoji u evidenciji aktivnosti biblioteke i nije ga moguce obrisati.');
+        }
+
         try {
             $librarian->delete();
 
@@ -259,7 +263,11 @@ class LibrarianController extends Controller
 
         try {
             foreach ($request->id as $librarian) {
+
                 $librarian = User::findOrFail($librarian);
+                if ($librarian->bookActions->isNotEmpty()) {
+                    return back()->with('errorMessage', 'Ovaj bibliotekar postoji u evidenciji aktivnosti biblioteke i nije ga moguce obrisati.');
+                }
                 if ($librarian->role->id == 3) return abort(404);
                 if (!$librarian->is_active) return abort(404);
 

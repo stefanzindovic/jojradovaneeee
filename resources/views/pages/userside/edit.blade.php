@@ -62,7 +62,7 @@
                                                 </label>
                                                 <div class="text-center">
                                                     <button type="button" class="btn btn-outline-danger btn-sm pt-2 pb-2"
-                                                        onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove()">Ukloni
+                                                        onclick="$('#image-output'). attr('src','/imgs/profile-picture-placeholder.jpg');$('[name=\'picture\']').remove(); destroyImage();">Ukloni
                                                         fotografiju</button>
                                                 </div>
                                             </div>
@@ -229,5 +229,29 @@
                 });
             }
         };
+    </script>
+
+    <script>
+        function destroyImage() {
+            jQuery.ajaxSetup({
+                headers: {
+                    "X-CSRF-TOKEN": jQuery('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+            });
+
+            jQuery.ajax({
+                type: "POST",
+                url: "/profil/{{ Auth::user()->id }}/deletePicture/",
+                data: jQuery("#myForm").serialize(),
+                success: function() {
+                    console.log(1);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(2);
+                },
+            });
+        }
     </script>
 @endsection
