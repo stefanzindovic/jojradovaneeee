@@ -24656,6 +24656,9 @@ input.datetimepicker[data-color="yellow"] + .bootstrap-datetimepicker-widget tab
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
     margin: 0;
     height: 350px;
     width: 100%;
