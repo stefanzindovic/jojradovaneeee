@@ -1774,3 +1774,10 @@ function pullDeleteAuthorModal(btn) {
         "/authors/" + $(btn).attr("data-author-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteStudentModal(btn) {
+    var modal = document.getElementById("deleteSingleStudent");
+    modal.querySelector("form").action =
+        "/students/" + $(btn).attr("data-student-id");
+    $(modal).modal("toggle");
+}
