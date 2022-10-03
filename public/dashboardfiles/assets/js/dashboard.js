@@ -1767,3 +1767,10 @@ function pullDeleteBookModal(btn) {
         "/books/" + $(btn).attr("data-book-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteAuthorModal(btn) {
+    var modal = document.getElementById("deleteSingleAuthor");
+    modal.querySelector("form").action =
+        "/authors/" + $(btn).attr("data-author-id");
+    $(modal).modal("toggle");
+}
