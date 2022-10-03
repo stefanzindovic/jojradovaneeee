@@ -1816,3 +1816,10 @@ function pullDeleteScriptModal(btn) {
         "/settings/scripts/" + $(btn).attr("data-script-id");
     $(modal).modal("toggle");
 }
+
+function pullDeletePublisherModal(btn) {
+    var modal = document.getElementById("deleteSinglePublisher");
+    modal.querySelector("form").action =
+        "/settings/publishers/" + $(btn).attr("data-publishers-id");
+    $(modal).modal("toggle");
+}
