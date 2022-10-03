@@ -94,6 +94,7 @@ Route::middleware(['auth'])->group(function () {
         // Authors
         Route::resource('/authors', \App\Http\Controllers\AuthorController::class);
         Route::delete('author/destroymultiple', [\App\Http\Controllers\AuthorController::class, 'destroyMultiple'])->name('authors.destroyMultiple');
+        Route::patch('authors/{author}/destroyPicture', [\App\Http\Controllers\AuthorController::class, 'deletePicture'])->name('authors.destroyPicture');
 
         // Students
         Route::resource('/students', \App\Http\Controllers\StudentsController::class);
