@@ -32,8 +32,8 @@
                                                     <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                                         <ul class="list-group"
                                                             style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
-                                                            @if ($categories->isNotEmpty())
-                                                                @foreach ($categories as $category)
+                                                            @if ($categories_list->isNotEmpty())
+                                                                @foreach ($categories_list as $category)
                                                                     <li class="label list-group-item m-2"
                                                                         style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                                         <input type="checkbox"
@@ -64,8 +64,8 @@
                                                     data-bs-parent="#accordionFlushExample">
                                                     <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                                         <ul class="list-group">
-                                                            @if ($genres->isNotEmpty())
-                                                                @foreach ($genres as $genre)
+                                                            @if ($genres_list->isNotEmpty())
+                                                                @foreach ($genres_list as $genre)
                                                                     <li class="label list-group-item m-2"
                                                                         style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                                         <input type="checkbox" class="me-2"
@@ -87,8 +87,8 @@
                                         <h3 class="text-primary">KATEGORIJE</h3>
                                         <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                             <ul class="list-group" style="box-shadow: 0 0 2rem 0 rgb(136 152 170 / 15%)">
-                                                @if ($categories->isNotEmpty())
-                                                    @foreach ($categories as $category)
+                                                @if ($categories_list->isNotEmpty())
+                                                    @foreach ($categories_list as $category)
                                                         <li class="label list-group-item m-2"
                                                             style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox"
@@ -107,8 +107,8 @@
                                         <h3 class="text-primary pt-5">ŽANROVI</h3>
                                         <div class="scroll" style="min-height: 250px;max-height: 350px;">
                                             <ul class="list-group">
-                                                @if ($genres->isNotEmpty())
-                                                    @foreach ($genres as $genre)
+                                                @if ($genres_list->isNotEmpty())
+                                                    @foreach ($genres_list as $genre)
                                                         <li class="label list-group-item m-2"
                                                             style="border:0;border:1px solid rgb(65, 84, 241);color:black;border-radius: 10px">
                                                             <input type="checkbox" class="me-2"
