@@ -1781,3 +1781,10 @@ function pullDeleteStudentModal(btn) {
         "/students/" + $(btn).attr("data-student-id");
     $(modal).modal("toggle");
 }
+
+function pullDeleteLibrarianModal(btn) {
+    var modal = document.getElementById("deleteSingleLibrarian");
+    modal.querySelector("form").action =
+        "/librarians/" + $(btn).attr("data-librarian-id");
+    $(modal).modal("toggle");
+}
