@@ -89,13 +89,13 @@
                                                     $activity->action_status_id == 7 ||
                                                     $activity->action_status_id == 8)
                                                     <img src="{{ $activity->librarian->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/librarians/' . $activity->librarian->picture) : asset('imgs/' . $activity->librarian->picture) }}"
-                                                         alt="">
+                                                        alt="">
                                                 @elseif($activity->action_status_id == 2 || $activity->action_status_id == 9)
                                                     <img src="{{ $activity->book->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $activity->book->student->picture) : asset('imgs/' . $activity->book->student->picture) }}"
-                                                         alt="">
+                                                        alt="">
                                                 @elseif($activity->action_status_id == 5 || $activity->action_status_id == 6)
                                                     <img src="{{ $activity->book->book->picture !== 'book-placeholder.png' ? asset('storage/uploads/books/' . $activity->book->book->picture) : asset('imgs/' . $activity->book->book->picture) }}"
-                                                         alt="">
+                                                        alt="">
                                                 @endif
                                             </div>
                                         </div>
@@ -214,7 +214,7 @@
                                             @elseif ($activity->action_status_id === 6)
                                                 <p class="mb-0">
                                                     Rezervacije knjige
-                                                    <a href="{{ route('knjige.show', $activity->book_id) }}"
+                                                    <a href="{{ route('knjige.show', $activity->book->student->id) }}"
                                                         class="link-purple">
                                                         {{ $activity->book->book->title }}
                                                     </a>
