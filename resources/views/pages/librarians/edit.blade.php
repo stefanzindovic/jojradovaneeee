@@ -123,7 +123,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "/librarians/{{ $librarian->id }}/deletePicture/",
+                url: "/librarians/{{ $librarian->id }}/deletePicture",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
 

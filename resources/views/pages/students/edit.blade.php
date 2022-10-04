@@ -120,7 +120,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "/students/{{ $student->id }}/destroyPicture/",
+                url: "/students/{{ $student->id }}/destroyPicture",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
 

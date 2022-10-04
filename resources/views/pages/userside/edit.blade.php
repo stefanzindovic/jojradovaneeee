@@ -243,7 +243,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "/profil/{{ Auth::user()->id }}/deletePicture/",
+                url: "/profil/{{ Auth::user()->id }}/deletePicture",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
 

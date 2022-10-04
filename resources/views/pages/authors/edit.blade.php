@@ -107,7 +107,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "/authors/{{ $author->id }}/destroyPicture/",
+                url: "/authors/{{ $author->id }}/destroyPicture",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
 

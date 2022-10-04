@@ -91,7 +91,7 @@
 
             jQuery.ajax({
                 type: "POST",
-                url: "/settings/categories/{{ $category->id }}/deletePicture/",
+                url: "/settings/categories/{{ $category->id }}/deletePicture",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
 
