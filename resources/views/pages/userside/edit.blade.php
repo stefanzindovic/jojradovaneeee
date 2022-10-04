@@ -246,11 +246,9 @@
                 url: "/profil/{{ Auth::user()->id }}/deletePicture/",
                 data: jQuery("#myForm").serialize(),
                 success: function() {
-                    console.log(1);
+
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
-                    console.log(2);
-                },
+                error: function(xhr, ajaxOptions, thrownError) {},
             });
         }
     </script>
