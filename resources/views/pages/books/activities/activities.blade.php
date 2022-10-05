@@ -214,7 +214,7 @@
                                             @elseif ($activity->action_status_id === 6)
                                                 <p class="mb-0">
                                                     Rezervacije knjige
-                                                    <a href="{{ route('knjige.show', $activity->book->student->id) }}"
+                                                    <a href="{{ route('books.show', $activity->book->student->id) }}"
                                                         class="link-purple">
                                                         {{ $activity->book->book->title }}
                                                     </a>
