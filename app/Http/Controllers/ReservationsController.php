@@ -163,7 +163,7 @@ class ReservationsController extends Controller
             $bookActionModel->action_addons = date('Y-m-d');
             $bookActionModel->save();
 
-            return to_route('books.reservations')->with('successMessage', 'Knjiga je uspješno izdata po rezervaciji.');
+            return to_route('books.reservations')->with('successMessage', 'Rezervacija knjige je uspješno ponistena.');
         } catch (\Throwable $th) {
 
             return back()->with('errorMessage', 'Nešto nije u redu. Molimo vas da polušate ponovo.');
