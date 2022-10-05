@@ -156,6 +156,7 @@
                                 @endforeach
                                 @foreach ($active as $reservation)
                                     <tr>
+                                        <th hidden></th>
                                         <td class="">
                                             <img style="width: 35px; height: 35px;" class="Image"
                                                 src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
