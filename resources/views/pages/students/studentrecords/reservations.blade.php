@@ -107,7 +107,7 @@
                                             <img style="width: 35px; height: 35px;" class="Image"
                                                 src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
                                                 alt="" />
-                                            <a href="{{ route('books.show', $reservation->id) }}">
+                                            <a href="{{ route('books.show', $reservation->book->id) }}">
                                                 <span class="fw-bold text-center">{{ $reservation->book->title }}</span>
                                             </a>
                                         </td>
@@ -161,7 +161,7 @@
                                             <img style="width: 35px; height: 35px;" class="Image"
                                                 src="@if ($reservation->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $reservation->book->picture) }} @endif"
                                                 alt="" />
-                                            <a href="{{ route('books.show', $reservation->id) }}">
+                                            <a href="{{ route('books.show', $reservation->book->id) }}">
                                                 <span class="fw-bold text-center">{{ $reservation->book->title }}</span>
                                             </a>
                                         </td>
