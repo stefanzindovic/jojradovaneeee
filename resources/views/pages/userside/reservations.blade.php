@@ -76,7 +76,7 @@
                                                             src="@if ($activeRes->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $activeRes->book->picture) }} @endif">
                                                     </a>
                                                     <div class="media-body">
-                                                        <a href="{{ route('knjige.show', $activeRes->book->id) }}"
+                                                        <a href="{{ route('knjige.show', $activeRes->id) }}"
                                                             target="_blank">
                                                             <span
                                                                 class="name mb-0 text-sm">{{ $activeRes->book->title }}</span>
