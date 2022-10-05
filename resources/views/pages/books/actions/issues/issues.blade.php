@@ -106,7 +106,7 @@
                                             <img style="width: 35px; height: 35px;" class="Image"
                                                 src="@if ($book->book->picture === 'book-placeholder.png') {{ asset('imgs/book-placeholder.png') }} @else {{ asset('storage/uploads/books/' . $book->book->picture) }} @endif"
                                                 alt="" />
-                                            <a href="{{ route('books.show', $book->book) }}">
+                                            <a href="{{ route('books.show', $book->book->id) }}">
                                                 <span class="fw-bold text-center">{{ $book->book->title }}</span>
                                             </a>
                                         </td>
