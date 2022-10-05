@@ -176,10 +176,17 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>dana
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif dana
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">
@@ -189,10 +196,17 @@
                                                 </div>
                                             @elseif ($activity->action_status_id === 2)
                                                 <p class="mb-0">
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif
                                                     je rezervisao/la knjigu
                                                     <a href="{{ route('books.show', $activity->book->book->id) }}"
                                                         class="link-purple">
@@ -217,10 +231,17 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>za
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif za
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">
@@ -239,10 +260,17 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>za
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif za
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">
@@ -263,10 +291,17 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>dana
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif dana
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">
@@ -298,13 +333,6 @@
                                                         </a>
                                                     </span>
                                                 </div>
-
-                                                <div class="d-flex align-items-center">
-                                                    <span class="small">
-                                                        <a href="{{ route('books.actions.details', [$activity->book->book->id, $activity->id]) }}"
-                                                            class="link-purple">Pogledaj detalje >></a>
-                                                    </span>
-                                                </div>
                                             @elseif ($activity->action_status_id === 7)
                                                 <p class="mb-0"><a
                                                         href="{{ route('librarians.show', $activity->librarian->id) }}"
@@ -316,10 +344,18 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>dana
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif
+                                                    dana
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">
@@ -339,10 +375,17 @@
                                                         {{ $activity->book->book->title }}
                                                     </a>
                                                     koja je bila izdata korisniku
-                                                    <a href="{{ route('students.show', $activity->book->student->id) }}"
-                                                        class="link-purple">
-                                                        {{ $activity->book->student->name }}
-                                                    </a>dana
+                                                    @if ($activity->book->student->role_id == 1 || $activity->student->role_id == 2)
+                                                        <a href="{{ route('librarians.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('students.show', $activity->book->student->id) }}"
+                                                            class="link-purple">
+                                                            {{ $activity->book->student->name }}
+                                                        </a>
+                                                    @endif dana
                                                     {{ \Carbon\Carbon::parse($activity->action_start)->format('d.m.Y') }}
                                                 </p>
                                                 <div class="d-flex align-items-center">

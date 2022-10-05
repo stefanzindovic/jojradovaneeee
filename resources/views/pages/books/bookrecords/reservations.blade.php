@@ -172,8 +172,13 @@
                                                 @else
                                                 src="{{ $reservation->student->picture !== 'profile-picture-placeholder.jpg' ? asset('storage/uploads/students/' . $reservation->student->picture) : asset('imgs/' . $reservation->student->picture) }}" @endif
                                                 alt="Profilna fotografija" />
-                                            <a href="{{ route('students.show', $reservation->student->id) }}"
-                                                class="fw-bold">{{ $reservation->student->name }}</a>
+                                            @if ($reservation->student->role_id == 1 || $reservation->student->role_id == 2)
+                                                <a href="{{ route('librarians.show', $reservation->student->id) }}"
+                                                    class="fw-bold">{{ $reservation->student->name }}</a>
+                                            @else
+                                                <a href="{{ route('students.show', $reservation->student->id) }}"
+                                                    class="fw-bold">{{ $reservation->student->name }}</a>
+                                            @endif
                                         </td>
                                         <td>
                                             <span class="text-middle">
